@@ -1,0 +1,374 @@
+/*Identidade Visual______________________________________________________________ */
+  nav{height:35px;transition:all 0.2s ease-in-out}nav a{height:100%;padding:0px 10px;transition:all 0.2s ease-in-out}
+  nav.Lite{background:#ff6600;color:white}
+    nav.Lite a.Atv{color: purple}
+    nav.Lite a:hover{background:purple;color: white;}
+    nav.Lite a:active{background:#470047}
+  nav.Dark{background:#ffffff38}
+    nav.Dark a.Atv{color: #ff6600}
+    nav.Dark a:hover{color:#ff6600;background:#2b2b2b}
+    nav.Dark a:active{background:#0c0c0c}
+  nav a:hover{transform: scale(1.08)}
+
+  #Home{transition:all 0.2s ease-in-out}#Home:hover{color:#ff6600;transform:scale(1.02)}
+
+  input,select,button,.baby{height:30px;margin:3px;border-radius:255px;font-size:14px;transition:all 0.2s ease;color: white;}
+  button>img, input>img, select>img{margin:0px 5px}
+    .Dark input,.Dark select{background:#ffffff21;}
+    .Dark input:hover,.Dark select:hover{background:#ffffff33;transform:scale(1.02)}
+    .Dark input:focus{background: #ffffff42;border:1px solid #ff00ff79;box-shadow:0 0 10px #ff00ff7c}
+    .Lite input,.Lite select{background:#ffffffb2;color: black;border:1px solid #b4b4b4}
+    .Lite input:hover,.Lite select:hover{background:white;transform:scale(1.02)}
+    .Lite input:focus{border:1px solid #ff00ff;box-shadow: 0 0 10px #ff00ff}
+
+  button,.baby{background:var(--Degrade);background-size:500%;padding: 3px 6px}
+  button:hover,.baby:hover{transform:scale(1.1);animation-name:BtnBaby;animation-duration:0.4s;animation-timing-function:ease-in-fas;animation-fill-mode:forwards;}
+  button:active,.baby:active{transform:scale(0.95)}
+
+  .Dark optgroup{color:#ffffff3f;background:#3d3d3d;font-size: 20px;}
+    .Dark option{color:white;background:#3d3d3d}
+  .Lite optgroup{color:#00000038;background:white;font-size: 20px;}
+    .Lite option{color:black;background:white}
+
+  table{text-align:center;width:100%;border-spacing:2px 8px}
+    th{height:25px;background:#373738}
+    table td:nth-child(4){font-size:10px;color:#777777}
+    table td:nth-child(8){background:#2f5000;font-size:13px;border-radius:255px}
+    table td:nth-child(8)>div>div>div:first-child{font-size:8px;margin-right:2px;}
+    td>div{display:flex;align-items:center;justify-content:center;}
+
+
+.Logo{width:50px;margin:4px 4px;}
+.ImgPerfil{width:35px;height:35px;margin:4px 4px}
+
+/*SVG's______________________________________________________________*/
+  svg{width:100%;height:100%}
+  #Header svg{width:30px;height:30px;fill:#ffffff93}
+
+
+
+  .MiniSvg svg{fill:orange}
+  .MiniSvg svg:hover{fill:#ff5100;filter:drop-shadow(0 0 5px #ff5100a2);transform:scale(1.2);transition: all 0.2s ease-in-out}
+
+  /**/ #ClearCRUD svg{width: 20px;height: 20px;fill: #ffa600}
+  /**/ #imgnotta svg,#imgnotta2 svg{fill: white;height: 15px;width: auto;margin-left: 5px}
+  /**/ form .Seta svg{fill: #ffffff4d;width: 15px;height: 15px;transform: rotate(90deg)}
+
+
+/*Páginas______________________________________________________________*/
+#PaiPages{overflow:hidden}
+#Pages{display:flex;transition:transform 0.3s ease-in-out}
+#Pages>div{width:100vw;height:100vh;padding:10px;overflow:scroll;}
+
+
+/*Css específico______________________________________________________________ */
+
+  /*Form Orcamento*/
+
+    #TotosOrcamentos > div > a{background: #747474; margin: 5px; height: 40px; width: 300px; padding: 6px;}
+    #TotosOrcamentos > div > a > div > input{width: 100px;background: #b4b4b4;color: #202020;}
+
+    .FormOrcamento{height:auto;padding:5px;animation:ShowForm 0.5s}
+      @keyframes ShowForm{from {opacity: 0;transform: scale(0.5)}to {opacity: 1;transform: scale(1.0)}}
+    .FormOrcamento.CloseForm{animation:NoneForm 0.5s forwards}
+      @keyframes NoneForm{from {opacity: 1;transform: scale(1.0)}to {opacity: 0;transform: scale(0.5)}}
+    .Dark .FormOrcamento{background:#ffffff11}
+    .Lite .FormOrcamento{background:#00000036}
+    .FormOrcamento input,.FormOrcamento select{width:100%}
+
+    .inptCor{width:80%;height:30px;border: 2px solid #ffffff2f}
+    .ListCor {list-style: none; top: 50px;background: #7c7c7c;}
+    .ListCor li{width:30px;height:30px;margin: 2px}
+    .ListCor li:hover{transform: scale(1.1)}
+
+    /*Naum sei*/ .FormOrcamento form {width:60%; height: auto; padding:50px 15px;}
+    /*Naum sei*/ .FormOrcamento .DivResult{width:40%; height: auto;}
+    /*Naum sei*/.inptFormOrc{display: flex; width: 100%; padding: 0px 8vw }
+    /*N deveria mais existir*/ form div[class*=Inpt]{display: flex;flex-flow: column;align-items: flex-start;margin: 4px;}
+    
+    .FormOrcamento .Rodape {border-top: 1px solid #ffffff3b;padding-top: 4px;}
+    .FormOrcamento .Rodape .HvrSVG div:nth-child(1){font-size: 9px; margin: 0px 3px 0px 5px;}
+    .FormOrcamento .Rodape .HvrSVG div:nth-child(2){font-size: 15px;}
+    .HvrSVG *{color:orange}
+    .HvrSVG:hover *{color:#ff5100;filter:drop-shadow(0 0 5px #ff5100a2);transform:scale(1.1);transition: all 0.2s ease-in-out}
+    
+    .Div-CRUD{width:95%;margin:10px 0px;padding:8px;animation: modal 0.7s;overflow-y:auto;overflow-x:hidden;background: #0b0b0b79}
+    
+   
+    
+    #CRUD input{font-size:12px;height: 25px;margin: 0}
+
+
+
+    .Maisss {width:30px; height: 30px;margin: 6px 0px;}
+    .Maisss > .btnMais{width: 15px;height: 15px;}
+    .Maisss > .btnMais svg{width: 15px;height: 15px;}
+
+    .IcnPt i{top:50%;transform:translateY(-50%) ; right:0px ; z-index: 99999999;}
+    .Svgqnt svg{width: 25px; height: 25px;}
+
+    .CanvasPlaca,.CanvasPlaca canvas{width: 90%;height: 250px; background:#b3b3b3}
+    .CanvasMedidas{background:#b3b3b3}
+    .Div-DivResult{width: 100%}
+
+    .Div-Preview{width: 100%;height: 300px;}
+    /*.Div-Preview canvas{height: 100%;width: 100%;}*/
+
+
+
+
+
+
+
+  /*Fundo Modal*/
+    #Fundo-Modal{position:fixed;top:0px;z-index:999999999;background:#0000001a;backdrop-filter:blur(10px);animation:FndoModal 0.5s}
+    #Fundo-Modal > div,#Alert{padding: 15px;box-shadow: 10px 10px 20px black;animation: modal 0.5s;}
+    #Fundo-Modal.Dark>div,.Dark #Alert{background:#1b1b1b}
+    #Fundo-Modal.Lite>div,.Lite #Alert{background:#ffffff}
+    #Fundo-Modal.Dark>#ModalNota{background:#ffffff;color:black}
+    #Fundo-Modal h1{font-size:25px}
+
+    #ModalLogin{width:300px;height:400px}
+    #ModalCadastro{width:70%}
+    #Modal-Item .Feed{width:400px;height:400px}
+    #Modal-Item .Stry{width:250px;height:440px}
+    #Modal-Info1,#Modal-Info2{padding:30px}
+    #InnerVazio input{position:absolute;width:200px}
+
+    #ModalNota>div{padding:5px 0px}
+    #Nota-Clnt>div>div>div{margin:0px 5px}
+    #ModalNota img{width:50px;height:50px}
+    .Start2 p{margin:1px 5px}
+    #LugarFotoNotta{margin-right:3px}
+
+    #TabelaNotinha{text-align: center;border-collapse: collapse;border: #d8d8d8 solid 1px;}
+    #TabelaNotinha tr{background: #5F009E;color: white;font-size: 13px;}
+    #TabelaNotinha td{background: #ffffff;color: black; padding: 3px;font-size: 13px;}
+    #TabelaNotinha tfoot > tr > th {background: #575757}
+    #TabelaNotinha td:nth-child(5){font-size: 13px;color:#4f4f4f;}
+    #TabelaNotinha td:nth-child(6){font-weight: bold}
+
+  /*Produtos Filter...*/
+    #resultfilter1{height:100%;width:90%;overflow-y:scroll}
+    .itemfilter button{height: 20px;}
+      .itemfilter{margin:8px 0px;overflow: hidden;}
+      .Dark .itemfilter{background: #ffffff13}
+      .Lite .itemfilter{background: #ffffff}
+      .Dark .itemfilter:hover{background:#ffffff25}
+      .Lite .itemfilter:hover{background:#e0e0e0}
+      .Dark .RstTitle{background:#00000086;padding:6px 3px;}
+      .Lite .RstTitle{background:purple;padding:6px 3px;color:white}
+      .Dark .RstValrFinal{color:#00e61f;font-size: 20px}
+      .Lite .RstValrFinal{color:#0b8000;font-size: 20px}
+      .RstValrFinal>div{font-size:12px;margin-right:4px}
+      .RstServ{margin-left: 6px}
+      #FotoItem img{width:95%;background: #d8d8d8}
+      .SVGFilt svg{width:40px;height:40px;fill:#00000065}
+    .RstValrM2{padding-right:8px;font-size:12px;}
+    .RstValrM2 div{font-size: 9px;margin: 0px 4px;}
+    .RstValrDesc{color: #ffffff51;padding-right: 8px;font-size: 14px;position: relative;}
+    .RstValrDesc svg{fill: red;height: 20px;width: 57px;z-index: 1;position: absolute;top: 0px;left: 0px;}
+    #FotoFilter,.SVGFilt{width:100px;height:80px;background:#d8d8d8}
+    #FotoFilter img{height: 100%;}
+    .PaddinDivFilt{padding: 1% 2%}
+
+  #Defaut-FiltProd{width: 400px;}
+
+/*Figurinhas_________________________________...*/
+
+.GrupKit{background: white; margin: 8px 0px;}
+#DivKitMot{margin: 20px}
+#DivKitMot img{width: 250px}
+#DivFigs img{transform: scale(0.98);transition:all 0.2s ease-in-out}
+#DivFigs img:hover{transform: scale(1.05)}
+#DivFigs img{z-index:9999;}
+#DivFigs img:hover{z-index:99;}
+.InptContFig{z-index:999;}
+.InptContFig:hover{z-index:99999;}
+.FigSelect{border:1px solid #48ff00;background: #1eff00ad;}
+.InptContFig input{width:35px;background:white;color:black;border:solid 1px black}
+.Numero{background:#ff087b;font-size:22px;top:0;right:0;z-index:99999}
+#FigSearch img{width:100px}
+#DivFigsNovas img{margin:3px}
+#KitMotos img{width:150px}
+.GrupKit input{color: black;}
+.imgFrente{z-index: 1;}
+
+
+/*Rolo Top_________________________________________*/
+
+
+
+.RoloTopFundo{background:#ffffff1c}
+.RolodeImg{overflow:hidden;flex-wrap:nowrap}
+
+.RoloTitle{font-size: 20px;}
+  .RolodeImg > div > div{margin: 20px 8px ; transition: all 0.2s ease-in-out} 
+  .RolodeImg > .Ct > div{margin: 10px 8px ; transition: all 0.2s ease-in-out}
+
+  .Rotate{transition: 0.2s ease-in-out;}
+  .Rotate{border: 1px solid #ff62ff00}
+  .Rotate:hover{border: 1px solid #ff62ff;box-shadow: 0 0 30px #ff00ffb9}
+  .Rotate:hover{transform: scale(1.08) rotate(2deg);z-index: 100;}
+
+  .RolodeImg .Fad{z-index: 9999;width: 50px;}
+    .Dark .RolodeImg .Fad{background:linear-gradient(to left,#131313e7,transparent)}
+    .Lite .RolodeImg .Fad{background:linear-gradient(to left,#777777af,transparent)}
+  .RolodeImg .Fad.flip{right:0px;transform:rotate(0deg)}
+  .RolodeImg .Fad.Flip{left: 0px;transform:rotate(180deg)}
+  .RolodeImg .Seta{background:#ccccccad;transition: all 0.2s ease-in-out}
+  .RolodeImg .Seta svg{transform:translate(3px);fill:#000000b9}
+  .RolodeImg .Seta svg:hover{fill:#ff5100;}
+  .RolodeImg .Seta:hover{transform: scale(1.2)}
+  .RolodeImg .Seta:hover{transform: scale(1.2)}
+  .RoloGrupImg{overflow-x: scroll}
+
+
+
+
+
+
+
+/*Outros...*/
+
+
+
+
+
+
+.Dark #Div-Prod{background:#303030;}
+#Div-Prod > div{margin: 9px 4px ; display: flex; flex-direction: column;}
+#Div-Prod > div > .Titleee{margin-left: 15px;}
+#Div-Prod > div > div > p{font-size: 9px ; margin: 0px;}
+#Div-Prod h3{font-size: 19px}
+#Div-Prod .Conteudo,.emBreve{
+  height:350px ; width:200px;
+  margin:4px ; padding-bottom:15px;
+  border-radius:20px;
+  background:linear-gradient(to top,#b3b3b3,#ffffff);
+  color:#575757;
+}
+.emBreve{
+  top: 35px;
+  background: #808080d7;
+  color: #ffffff;
+  font-size: 20px;
+}
+#Div-Prod .Conteudo img{height:160px}
+#Div-Prod .Opts img{width:25px;height:25px;}
+
+.RsutProduto > div > div{color:#440067;font-size:13px}
+.RsutProduto > div > div > div:first-child{color:#ff006a;font-size:11px}
+.RsutProduto > div > div > div:last-child{color:#ff006a;font-size:16px}
+
+#Div-Prod input{border:solid 1px #ff006a;width:95%;font-size:12px;color: black;}
+
+.inptProduto{display:flex;width:100%;padding:0px 2vw}
+
+#Div-Prod .Opts div{
+  background:#ff006a;margin:3px;padding:0px 3px;color:white;
+  transition:transform 0.1s ease-in-out;cursor:pointer;
+}
+#Div-Prod .Opts div:hover{transform: scale(1.1);background:#a0005d}
+#Div-Prod button{background: #ff006a}
+
+.tec{z-index:999;top:375px;left:25%;}
+
+
+
+#Rodape-List{
+  background:#202020;
+  height: 60px;
+  z-index:9999999;
+}
+#Rodape-List img{
+  height: 80%;
+  border-radius: 255px;
+  margin: 5px;
+  background: #ffffff;
+}
+
+#LimpaRodape{right:0;}
+
+.FxBt{position:fixed;bottom:0;left:0}
+
+#Exibe-Prod{height: 100px; background: yellowgreen}
+
+
+#GrupPlac svg{fill:#00e61f}
+
+
+#GbrtCAM canvas{width:280px}
+
+
+
+.ReturndasMedidas{top: 0px;left: 0px}
+.Rst-Laranja{color:#ff6200}
+.Rst-Roxo{color:#43006d}
+
+
+
+
+
+#BotarTextoMalvie{background: #ffffff;}
+#BotarTextoMalvie svg text {fill: #33CC33}
+#BotarTextoMalvie{width: 200px;height: 50px;}
+@font-face{font-family:"Malvie";font-variant:normal;font-style:normal;font-weight:normal;src:url("#FontID0") format(svg)}
+.MalvieTrial{fill:red ; font-weight:normal;font-size:6514.21px;font-family:'Malvie'}
+
+
+
+/*Tamanhos e Posições Muito Específcias______________________*/
+
+.ICON-ClearForm{width:17px; height:17px; top:12px; right:35px}
+
+.TrocaRsltCanv{top: 14px;right: 60px;}
+.Div-CRUD .MiniSvg{width: 20px; height: 20px;}
+
+
+/*MediaQuerer Ultimo________________________________________*/
+
+@media(max-width: 500px){
+  h1{font-size:25px;text-align:center}
+  .Titlee{width:100%;margin:0;margin-top:5px}
+  #Pesquisa{width: 90%;}
+  header{height: 100px;}
+  nav{overflow-x: scroll;overflow-y: hidden;}
+  nav::-webkit-scrollbar {display: none;}
+  .FormOrcamento form > h2{display: none;}
+  .FormOrcamento .DivResult > h2{display: flex; margin: 8px 0px;}
+  
+  .FormOrcamento form{width:100%; ;height: auto; padding: 5px 15px;}
+  .FormOrcamento .DivResult{width: 100%;}
+  #resultfilter1{width: 90%; margin-bottom: 8px;}
+  #Resumo{width: 100%}
+  #resultfilter1 button {width: 70%; margin: 5px auto;}
+
+  .Cnvs{width: 90%;}
+}
+
+.bot{
+  color:#ffee00;
+  color:#118f00;
+  color:#00d8d8;
+  color:#0004ff;
+  color:#ea00ff;
+  color:#f58bff;
+  color:#ff0000;
+  color:#ffffff;
+  color:#a1a1a1;
+  color:#5a5a5a;
+  color:#000000;
+
+  color:#ffee006b;
+  color:#118f006b;
+  color:#00d8d86b;
+  color:#0004ff6b;
+  color:#ea00ff6b;
+  color:#f58bff6b;
+  color:#ff00006b;
+  color:#ffffff6b;
+  color:#a1a1a16b;
+  color:#5a5a5a6b;
+  color:#0000006b;
+}
