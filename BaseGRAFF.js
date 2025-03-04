@@ -106,3 +106,25 @@ const CopyPresset = {
   Chave: 81987265401
   Nome: Alan Ferreira da Silva`
 }
+
+function Crecent(MM2){
+  /*Crescente:*/ var M = MM2
+    var D = {Min:0.06,Med:0.25,Max:1.00}
+    var V = {Min:1.70,Med:0.70,Max:0.00}
+      var crecent = M> D.Med? M>=D.Max? V.Max:
+      M< D.Med? V.Med: V.Med-((V.Med-V.Max)*((M-0.001)/D.Max)):
+      M<=D.Min? V.Min: V.Min-((V.Min-V.Med)*((M-0.001)/D.Med))
+
+  return crecent
+}
+
+function Crecent2(MM2){
+  /*Crescente:*/ var M = MM2
+    var D = {Min:0.05,Med:0.20,Max:0.50}
+    var V = {Min:2.10,Med:0.70,Max:0.00}
+      var crecent = M> D.Med? M>=D.Max? V.Max:
+      M< D.Med? V.Med: V.Med-((V.Med-V.Max)*((M-0.001)/D.Max)):
+      M<=D.Min? V.Min: V.Min-((V.Min-V.Med)*((M-0.001)/D.Med))
+
+  return crecent
+}
