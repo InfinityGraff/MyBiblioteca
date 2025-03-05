@@ -101,7 +101,7 @@ const  Inn_ = (e,Stg)=>$(e).innerHTML+= Stg
 const   Src = (e,Stg)=>$(e).src = Stg
 const    Txt= e=>e.innerText.trim()
 const   Inn = (e,Stg=null)=> Stg===null ? $(e).innerHTML : $(e).innerHTML = Stg
-const  $Name= (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
+const  $N= (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const Rx=arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
 
 //Retornos DOM Parentes_______________________________________________________________________________________________________
@@ -329,7 +329,7 @@ const TestPass=e=>((e!==""?1:0)+(e.length>= 8)?1:0)+((/[A-Z]/.test(e)&&e.length>
 const TestEmail=e=>ValidEmail.some(E=>e.endsWith(E))
 
 const CriaKina=(W,H,S)=>`polygon(${S}px 0%, ${W-S}px 0%, ${W}px ${S}px, ${W}px ${H-S}px, ${W-S}px ${H}px, ${S}px ${H}px, 0% ${H-S}px, 0% ${S}px)`
-function Read_Kina(){$$('.Kina').forEach(E=>{E.style.clipPath = CriaKina(E.offsetWidth,E.offsetHeight,$Name(E))})}
+function Read_Kina(){$$('.Kina').forEach(E=>{E.style.clipPath = CriaKina(E.offsetWidth,E.offsetHeight,$N(E))})}
 function Rfresh(){ console.log('Funções Atualizadas') ;Read_Kina()}
 
 //GABARITO
@@ -599,8 +599,8 @@ function Sugg(Val, Arry, Stg, list, Func) {
 
 
 
-function ClickSugg(eu,nome,id){$('input',Avo(eu)).value = nome ; $Name($('input',Avo(eu)),id)}
-function ClickSugg2(eu,nome,id){$('input',Avo(eu)).value = nome ; $Name($('input',Avo(eu)),id) ; None(Bzv(eu)) ; DispClick($('.sppns',Pai(eu.closest('.Bandj'))))}
+function ClickSugg(eu,nome,id){$('input',Avo(eu)).value = nome ; $N($('input',Avo(eu)),id)}
+function ClickSugg2(eu,nome,id){$('input',Avo(eu)).value = nome ; $N($('input',Avo(eu)),id) ; None(Bzv(eu)) ; DispClick($('.sppns',Pai(eu.closest('.Bandj'))))}
 
 
 // Upei na parte da Infinity
