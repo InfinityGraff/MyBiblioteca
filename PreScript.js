@@ -99,10 +99,10 @@ const  $Inn = (Stg,e=document)=>$$(Stg,e).map(e=>e.innerHTML)
 const Clear = e=>[e].flat().forEach(el=>$(el).value='')
 const  Inn_ = (e,Stg)=>$(e).innerHTML+= Stg
 const   Src = (e,Stg)=>$(e).src = Stg
-const    Txt= e=>e.innerText.trim()
+const   Txt = e=>e.innerText.trim()
 const   Inn = (e,Stg=null)=> Stg===null ? $(e).innerHTML : $(e).innerHTML = Stg
-const  $N= (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
-const Rx=arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
+const    $N = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
+const    Rx = arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
 
 //Retornos DOM Parentes_______________________________________________________________________________________________________
 const Parent=(e,n)=>Array(n).fill(0).reduce(p=>p.parentNode,e)
