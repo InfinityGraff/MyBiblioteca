@@ -101,7 +101,8 @@ const  Inn_ = (e,Stg)=>$(e).innerHTML+= Stg
 const   Src = (e,Stg)=>$(e).src = Stg
 const   Txt = e=>e.innerText.trim()
 const   Inn = (e,Stg=null)=> Stg===null ? $(e).innerHTML : $(e).innerHTML = Stg
-const    $N = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
+const    $Name = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
+const    Nm = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const    Rx = arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
 
 //Retornos DOM Parentes_______________________________________________________________________________________________________
