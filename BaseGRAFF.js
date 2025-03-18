@@ -101,6 +101,8 @@ const Ramos = [
     ['Serviço','Serviço','Pet Shop'],
   ]
 
+
+
 const CopyPresset = {
     Pix:`
   Chave: 81987265401
@@ -127,4 +129,27 @@ function Crecent2(MM2){
       M<=D.Min? V.Min: V.Min-((V.Min-V.Med)*((M-0.001)/D.Med))
 
   return crecent
+}
+
+const User={
+  '34$r4-34&-7eV79@7K':['(Baby)','Baby Massia','Img/Perfil_Baby.png'],
+  '32$r2-32&-6eV69@6K':['(Alan)','Allan MacLovin','Img/Perfil_Allan.png'],
+  '31$r1-31&-4eV49@4K':['(Lisa)','Lisa Caramelo','Img/Perfil_Lisa.png'],
+  '36$r6-36&-9eV99@9K':['(Segu)','Segunda Hippie','Img/Perfil_Segunda.png']
+}
+
+function CrypPass(senha) {
+  const Cryp = senha.split('').map((c,idx)=>{
+    if(/[0-9]/.test(c)){let N=parseInt(c)
+      N=N===9?0:N+(idx%2===1?4:1);return N.toString()}
+    else if(/[A-Za-z]/.test(c)){
+      let L=c.charCodeAt(0)+(idx%2===1?5:1)
+      if(L>90&&L<97)L-=26
+      else if(L>122)L-=26
+      return String.fromCharCode(L)}else{return c}})
+  var par = [] ; var imp = []
+  Cryp.forEach((e,idx)=>{idx%2===0?par.push(e):imp.push(e)})
+  const Par=par.reverse().flatMap(C=>[`3${C}$`,`r${C}-`,`3${C}&`])
+  const Imp=imp.reverse().flatMap(C=>[`-${C}e`,`V${C}9`,`@${C}K`])
+  return Par.concat(Imp).join('')
 }
