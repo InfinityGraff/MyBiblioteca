@@ -39,7 +39,7 @@ const IconLogin=(Clss,Cor1)=>`<svg class="${Clss}" xmlns="http://www.w3.org/2000
 // Template String__________________________________________________
 function NavPag(e,eu){Show(e,$$('#PAGES > div'));SS('#H_Nav a').Rmv('Atv');if(eu){S(eu).Add('Atv')}scrollToTop()}
 function ExieMais(E,Off){if(Off){MdalShow('#MdalLgin')}else{Show('#mmdal');Animar(E,$('#H_Lgin'))}}
-function MdalShow(e){ShowModal($('#FModal'),$(e));Rfresh()}
+function MdalShow(e){ShowModal($('#FModal'),$(e))}
 
 
 
