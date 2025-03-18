@@ -138,7 +138,7 @@ const User={
   '36$r6-36&-9eV99@9K':['(Segu)','Segunda Hippie','Img/Perfil_Segunda.png']
 }
 
-function CrypPass(senha) {
+function CrypPass(senha){
   const Cryp = senha.split('').map((c,idx)=>{
     if(/[0-9]/.test(c)){let N=parseInt(c)
       N=N===9?0:N+(idx%2===1?4:1);return N.toString()}
