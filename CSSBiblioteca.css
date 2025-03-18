@@ -1,6 +1,6 @@
 @keyframes BtnBaby{0%{background-position-x: 0%;}100%{background-position-x: 90%;}}
 @keyframes FndoModal {from {opacity: 0;} to {opacity: 1;}}  /*Pra remover pq atualizei pra a debaixo, mas tem App q ainda ta usando*/
-@keyframes FModal {from {opacity: 0;} to {opacity: 1;}}
+
 
 @keyframes modal{
   from { opacity: 0;transform: translate3d(0,-80px,0)}
@@ -97,6 +97,7 @@ h2{font-size:18px; color:var(--Laranja)}
 .noslt{user-select: none;-webkit-user-select: none;-moz-user-select: none;} /*NexBee*/
 .Link{text-decoration: underline;cursor: pointer}
 
+@keyframes FModal {from {opacity: 0;} to {opacity: 1;}}
 #FModal{position:fixed;top:0px; left:0px;width:100%;height:100%;z-index:999;background:#00000046;backdrop-filter:blur(10px);animation:FModal 0.5s;display: none;}
 #FModal > *{padding:15px; box-shadow: 10px 10px 20px black;animation: modal 0.5s}
 

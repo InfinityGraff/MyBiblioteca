@@ -330,7 +330,7 @@ const TestPass=e=>((e!==""?1:0)+(e.length>= 8)?1:0)+((/[A-Z]/.test(e)&&e.length>
 const TestEmail=e=>ValidEmail.some(E=>e.endsWith(E))
 
 const CriaKina=(W,H,S)=>`polygon(${S}px 0%, ${W-S}px 0%, ${W}px ${S}px, ${W}px ${H-S}px, ${W-S}px ${H}px, ${S}px ${H}px, 0% ${H-S}px, 0% ${S}px)`
-function Read_Kina(){$$('.Kina').forEach(E=>{E.style.clipPath = CriaKina(E.offsetWidth,E.offsetHeight,$N(E))})}
+function Read_Kina(){$$('.Kina').forEach(E=>{E.style.clipPath = CriaKina(E.offsetWidth,E.offsetHeight,Nm(E))})}
 function Rfresh(){ console.log('Funções Atualizadas') ;Read_Kina()}
 
 //GABARITO
@@ -600,8 +600,8 @@ function Sugg(Val, Arry, Stg, list, Func) {
 
 
 
-function ClickSugg(eu,nome,id){$('input',Avo(eu)).value = nome ; $N($('input',Avo(eu)),id)}
-function ClickSugg2(eu,nome,id){$('input',Avo(eu)).value = nome ; $N($('input',Avo(eu)),id) ; None(Bzv(eu)) ; DispClick($('.sppns',Pai(eu.closest('.Bandj'))))}
+function ClickSugg(eu,nome,id){$('input',Avo(eu)).value = nome ; Nm($('input',Avo(eu)),id)}
+function ClickSugg2(eu,nome,id){$('input',Avo(eu)).value = nome ; Nm($('input',Avo(eu)),id) ; None(Bzv(eu)) ; DispClick($('.sppns',Pai(eu.closest('.Bandj'))))}
 
 
 // Upei na parte da Infinity
