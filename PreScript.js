@@ -104,6 +104,7 @@ const   Inn = (e,Stg=null)=> Stg===null ? $(e).innerHTML : $(e).innerHTML = Stg
 const    $Name = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const    Nm = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const    Rx = arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
+const    Vll= e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
 
 //Retornos DOM Parentes_______________________________________________________________________________________________________
 const Parent=(e,n)=>Array(n).fill(0).reduce(p=>p.parentNode,e)
