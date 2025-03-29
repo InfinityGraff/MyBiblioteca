@@ -85,8 +85,7 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 .error{border: 2px solid red;}
 .error::placeholder {color: red}
 
-header{height:55px;padding:0px 10px}
-header.Lite{background: purple; color: white; fill: white;}
+
 h1{font-size:40px;font-family:var(--Bold)}
 h2{font-size:18px; color:var(--Laranja)}
 .Dark hr{border: 1px solid #ffffff2e;margin:4px 0px;}
