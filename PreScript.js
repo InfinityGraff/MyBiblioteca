@@ -105,7 +105,7 @@ const    $Name = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttri
 const    Nm = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const    Rx = arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
 const    Vll= e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
-const    llv=(e,v)=>e.tagName==='INPUT'? (e.type === 'checkbox' ? e.checked = !!v : e.value = v) : e.innerText = v
+const    llv=(e,v)=>{if(e.tagName === 'INPUT' && e.type === 'checkbox'){e.checked = typeof v === 'string' ? JSON.parse(v) : v;} else {e.value = v}}
 
 //Retornos DOM Parentes_______________________________________________________________________________________________________
 const Parent=(e,n)=>Array(n).fill(0).reduce(p=>p.parentNode,e)
