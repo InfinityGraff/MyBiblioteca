@@ -210,7 +210,8 @@ const RS =e=> `R$ ${Cm(e)}`
 const RS_HTML=e=>`<div class="Ct"><div>R$</div><div class="VVLR">${Cm(e)}</div></div>`
 const Tm_RS=e=>`<div class="Ct"><p class="RS">R$</p><a>${Cm(e)}</a></div>`
 const Porcent=(V1,V2)=>((V1-V2)/V1)*100
-const Num=e=>{const value = typeof e === 'number' ? e : parseFloat(e.replace(',', '.').replace('R$', '').trim()) ; return isNaN(value) ? 0 : value}
+const Num= e=>{const value = typeof e === 'number' ? e : parseFloat(e.replace(',', '.').replace('R$', '').trim()) ; return isNaN(value) ? 0 : value}
+const Num2=e=>isNaN(value = parseFloat(e.replace('R$ ','').replace(/\./g,'').replace(',','.'))) ? 0 : value
 const Pct =e=>`${(e*100).toFixed(2)}%`
 const Virg=e=>e.replace('.',',')
 const Zero=Num=>String(Num).padStart(3,'0')
@@ -557,25 +558,6 @@ function OrdenarRows(e,x,Cntd=null,order=null){ // se tiver 'Cntd' é conteudo, 
 }
 
 
-
-
-// Exibir Bandeija abaixo de uma Div Especifica
-function ShowBndj(div,svg){ // div, é o clicado
-  function PoseBndj(e){
-      const parent = e.dataset.pai ? $(e.dataset.pai) : Pai(e) // Pai pode ser propprio Pai, ou um Pai externo, com 'dataset="#bandeja"'
-      const rect = parent.getBoundingClientRect()
-      const cor = window.getComputedStyle(e).backgroundColor
-          if(!$('.Seta',e)){
-              e.innerHTML += `<a class="Seta traz none" style="height:12px;z-index:0">${svg.replace('""',`"fill:#ff7300"`)}</a>`
-              e.innerHTML += `<a class="Seta" style="height:10px;z-index:1">${svg.replace('""',`"fill:${cor}"`)}</a>`}
-      e.style.top  = `${rect.bottom+window.scrollY+10}px`
-      e.style.left = `${(rect.left+(rect.width/2))-(e.offsetWidth/2)+window.scrollX}px`
-  }
-  const e = $('.Bandj',div)
-  if (e.contains(event.target)){if(Tecla('ctrl')){e}else{return}}else{TogShow(e);PoseBndj(e)}
-  if(Tecla('ctrl')){Add(e,'Trav');Show($('.traz',e));ClickFora(div,()=>{Show(e)})}else{Rmv(e,'Trav');None($('.traz',e));ClickFora(div,()=>{None(e)})}
-}
-
 // Exibir Lista de Sugestões abaixo de uma Div Específica
 function SuggAntigo(Val,Arry,Stg,list,Func){
   if(Val){Show(list);list.innerHTML = Arry.filter(e=>a(e[Stg]).includes(a(Val)) || String(e['ID']).includes(Val)).map(e=>`<a class="ppt w100 Ct" onclick="${Func}(this,'${e[Stg]}',${e['ID']});None(Pai(this))"><p>${e['ID']}</p><p>${e[Stg]}</p></a>`).join('')}
@@ -651,4 +633,11 @@ function MaskNum2(e){ // Funciona Muito bem e não pretendo me Livrar dela tão 
       range.collapse(false); // false = final do conteúdo
       sel.removeAllRanges();
       sel.addRange(range);
+}
+
+function MaskR$(el){
+  let v = el.innerText.replace(/\D/g,'').padStart(3,'0')
+  let r = v.slice(0,-2), c = v.slice(-2)
+  el.innerText = `R$ ${parseInt(r).toLocaleString('pt-BR')},${c}`
+  CurEnd(el)
 }

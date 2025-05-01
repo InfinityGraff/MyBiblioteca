@@ -110,5 +110,5 @@ textarea{overflow:hidden;resize:none;padding: 10px;}
 .Notfi{top:-6px; right:-9px; width:15px; height:15px; background:red; border-radius:255px; z-index:10; text-align:center}
 
 .Bandj{position:absolute;top:0;left:0}
-.Seta{position:absolute; bottom:100%; left:50%; transform:translate(-50%,0%)}
+
 .Shdw{box-shadow: 0px 4px 6px #0000004d}
