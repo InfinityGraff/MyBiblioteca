@@ -260,8 +260,10 @@ const RmvClik=(e,Call)=>FazArry(e).forEach(e=>e.removeEventListener('click' ,Cal
 const ClickFora=(e,Call)=>{const H=(E)=>!e.contains(E.target) && (Call(),RmvClik(document,H));EvtClik(document,H)}
 const Copy=(area,stg)=>{area.value = stg ; area.select() ; document.execCommand('copy') ; console.log('Copiado')}
 
-
-
+//Controlador de Cursor__________________________________________________________________________________________________________
+const AplyRng = r=>(getSelection().removeAllRanges(),getSelection().addRange(r))
+const CurAll  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r)) // Seleciona Tudo
+const CurEnd  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r.collapse(false),r)) // vai pra o Fim da Linha
 
 function Tecla(key){
   const event = window.event
