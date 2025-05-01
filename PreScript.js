@@ -514,8 +514,8 @@ const OBS=(e,Call,p=null)=>new MutationObserver(()=>Call()).observe(e,{attribute
 // Reordenar Rows de Tabela por Ordem Crecente ou Decrecente
 function OrdenarRows(e,x,Cntd=null,order=null){ // se tiver 'Cntd' é conteudo, é por que o texto a ser coletado esta dentro de alguma tag especifica dentro do td, se não tiver ta no próprio td
     function AtualizaSetas(e,asc){
-      $$('th',e.closest('table')).forEach(th=>{const seta = $('a',th);if(seta){seta.style.opacity=0.5;seta.textContent='▼'}})
-        const Atual = SibQSl(e,'a') ; if(Atual){Atual.style.opacity=1;Atual.textContent=asc?'▼':'▲'}
+      $$('th',e.closest('table')).forEach(th=>{const seta = $('i',th);if(seta){seta.style.opacity=0.5;seta.textContent='▼'}})
+        const Atual = SibQSl(e,'i') ; if(Atual){Atual.style.opacity=1;Atual.textContent=asc?'▼':'▲'}
     }
     const table = e.closest('table')
     const tbody = $('tbody',table)
