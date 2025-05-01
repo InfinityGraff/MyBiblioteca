@@ -155,6 +155,10 @@ const Trc=(e,Add,Rmv)=>{FazArry(e).forEach(E=>{console.log(E) ; Add(E,Add);Rmv(E
 const DarkLite=e=>{TrcTog($(e),'Dark','Lite')}
 const Extrat_Clss=(div,Stg)=>[...div.classList].find(e=>e.startsWith(Stg))?.replace(Stg,'')||null //Passo (Div Class="col-Nome",'col-') Return 'None'
 
+const Add_N=e=>FazArry(e).forEach(el=>Add(el,'none'))
+const Rmv_N=e=>FazArry(e).forEach(el=>Rmv(el,'none'))
+const Tog_N=e=>FazArry(e).forEach(el=>Tog(el,'none'))
+
 const Contem=(e,Stg)=>e.classList.contains(Stg) // NEXBEE
 const Coten=(e,Clss)=>FazArry(Clss).some(E=>e.classList.contains(E))
 const Notem=(e,Stg)=>!e.classList.contains(Stg) // NEXBEE
@@ -212,7 +216,6 @@ const Virg=e=>e.replace('.',',')
 const Zero=Num=>String(Num).padStart(3,'0')
 const ParsMil=e=>parseFloat(Num($(e).value))*500
 
-
 //Funções Conversor de Strings_________________________________________________________________________________________________
 const LowCase=Arry=>Arry.filter(e=>e===e.toLowerCase())
 const UppCase=Arry=>Arry.filter(e=>e===e.toUpperCase())
@@ -221,13 +224,10 @@ const BrevData=Stg=> Stg.match(/\d{2}\/\d{2}\/\d{4}/) ? Stg.replace(/\/\d{4}$/,'
 const DMY=e=>e.split('-').reverse().join('/') // Muda String YYYY-MM-DD para DD/MM/YYYY
 const YMD=e=>e.split('/').reverse().join('-') // Muda String DD/MM/YYYY para YYYY-MM-DD
 
-
-
 const a=e=>e.toLowerCase()
 const A=e=>e.toUpperCase()
 
 // Funções de Validações_______________________________________________________________________________________________________
-
 const is=(e,stg)=> stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
 function is_Visivel(e){const r=e&&e.getBoundingClientRect();return!!(r&&r.bottom>=0&&r.right>=0&&r.top<=innerHeight&&r.left<=innerWidth)}
 const View_Vid=(e)=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].isIntersecting?'play':'pause']()).observe(v)})}
@@ -259,6 +259,9 @@ const RmvInpt=(e,Call)=>FazArry(e).forEach(e=>e.removeEventListener('input' ,Cal
 const RmvClik=(e,Call)=>FazArry(e).forEach(e=>e.removeEventListener('click' ,Call))
 const ClickFora=(e,Call)=>{const H=(E)=>!e.contains(E.target) && (Call(),RmvClik(document,H));EvtClik(document,H)}
 const Copy=(area,stg)=>{area.value = stg ; area.select() ; document.execCommand('copy') ; console.log('Copiado')}
+
+
+
 
 function Tecla(key){
   const event = window.event
