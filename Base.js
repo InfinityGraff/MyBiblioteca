@@ -1,1 +1,0 @@
-const ValidEmail=["@gmail.com","@yahoo.com","@yahoo.co.uk","@outlook.com","@hotmail.com","@live.com","@icloud.com","@me.com","@aol.com","@protonmail.com","@zoho.com","@mail.com","@gmx.com","@yandex.com"]

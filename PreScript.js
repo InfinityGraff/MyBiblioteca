@@ -1,5 +1,5 @@
 // Dia 22/03/2025
-// Dia 28/06/2025
+// Dia 28/06/2025 (HexRGB)
 
 function CSS_Prop(e,Obj){
   Object.assign(e.style,{
@@ -641,3 +641,8 @@ function MaskR$(el){
   el.innerText = `R$ ${parseInt(r).toLocaleString('pt-BR')},${c}`
   CurEnd(el)
 }
+
+
+const RgbToHex =rgb=>`#${rgb.replace(/^rgb\(|\s+|\)$/g,'').split(',').map(x=>parseInt(x).toString(16).padStart(2,'0')).join('')}`
+const hexToRGB =hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `rgb(${r},${g},${b})`}
+const hexToRGB2=hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `${r},${g},${b}`}
