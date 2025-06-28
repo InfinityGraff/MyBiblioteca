@@ -58,7 +58,7 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 .Grn{background: #008000}.CrCnz{color: #ffffff2f}
 .Red{background: #ff0000}
 .Blu{background: #0004ff}
-.Dark{background: var(--DegradeFundo);color: white}
+
 .Wht{color: #ffffff}
 .Blk{color: black;}
 .Pddn-X{padding: 0% 5%}
@@ -113,3 +113,26 @@ textarea{overflow:hidden;resize:none;padding: 10px;}
 .Bandj{position:absolute;top:0;left:0}
 
 .Shdw{box-shadow: 0px 4px 6px #0000004d}
+
+
+.n0  { display: none; }
+.n1  { display: none; }
+.n2  { display: none; }
+.n3  { display: none; }
+.n4  { display: none; }
+.n5  { display: none; }
+.n6  { display: none; }
+.n7  { display: none; }
+.n8  { display: none; }
+.n9  { display: none; }
+.n10 { display: none; }
+.n11 { display: none; }
+.n12 { display: none; }
+.n13 { display: none; }
+.n14 { display: none; }
+.n15 { display: none; }
+.n16 { display: none; }
+.n17 { display: none; }
+.n18 { display: none; }
+.n19 { display: none; }
+.n20 { display: none; }
