@@ -133,7 +133,7 @@ const IptFile=(div)=>// vc Cria a Função Upload(files) lá dentro do seu Index
         ondragleave="Rmv(this,'dragover')"
         ondrop="event.preventDefault();Rmv(this,'dragover');Promss_Src(event.dataTransfer.files).then(srcList=>{Upload('${div}',srcList)})">
         <span>+</span><p>Arraste arquivos ou clique aqui</p>
-        <input class="Abslt w100 h100 ppt Opacy" type="file" id="imagem" accept="image/*" multiple onchange="Rmv(Pai(this),'dragover');Promss_Imgs(this.files,$('${div}')).then(()=>{Upload('${div}')})">
+        <input class="Abslt w100 h100 ppt Opacy" type="file" id="imagem" accept="image/*" multiple onchange="Rmv(Pai(this),'dragover');Promss_Src(this.files).then(srcList=>{Upload('${div}',srcList)})">
     </div>
 `
 
