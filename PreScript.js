@@ -20,6 +20,7 @@ function VV_CSS(Srg){
   return Srg.map(s=>{const [k,v] = s.split(":") ; return map[k] ? `${map[k]}:${v}`:''}).filter(Boolean).join(";")
 }
 
+// Tentar remover essas 2, estão Inúteis
 //Retornos DOM Novos________________________________________________________________________________________________________________
 function S(s,c=document){
   const E = typeof s==='string'? c.querySelector(s) : s
