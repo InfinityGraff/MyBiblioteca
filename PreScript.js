@@ -364,17 +364,15 @@ function InptsVazio(e){$$(e).forEach(e=>{if(e.value.trim()===""){Add(e,'Error') 
 function CssFont(e,Stg){$(e).style.fontFamily=Stg}
 
 // Quando eu Upo Várias Imagens dentro de um input
-function Promss_Imgs(files,div){
+function Promss_Imgs2(files,div){
   const arry = []
   for (const file of files) {
       const reader = new FileReader()
       const promise = new Promise(r => {
           reader.onload = e => {
-              const img = document.createElement('img')
               const Div = document.createElement('div')
-              Div.classList.add('DivImgRsut')
-              Div.classList.add('Ct')
-              Div.classList.add('Rltv')
+              const img = document.createElement('img')
+              Div.classList.add('DivImgRsut','Ct','Rltv')
               img.src = e.target.result
               img.name = file.name
               Div.appendChild(img)
@@ -384,6 +382,8 @@ function Promss_Imgs(files,div){
       });arry.push(promise)
   };return Promise.all(arry)
 }
+
+
 
 
 // Templates NEXBEE

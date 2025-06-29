@@ -1,3 +1,4 @@
+// 28/06/2025
 
 const SVG={
     Ponta:`<svg class="svg-Ponta" style="" viewBox="0 0 258 128"><path d="M161 15l98 113H0l98-113c17-20 46-20 63 0z"/></svg>`
@@ -130,7 +131,7 @@ const IptFile=(div)=>// vc Cria a Função Upload(files) lá dentro do seu Index
     <div class="Upld rd Cl Ct ppt Rltv"
         ondragover="event.preventDefault(); Add(this,'dragover')"
         ondragleave="Rmv(this,'dragover')"
-        ondrop="event.preventDefault();Rmv(this,'dragover');Promss_Imgs(event.dataTransfer.files,$('${div}')).then(()=>{Upload('${div}')})">
+        ondrop="event.preventDefault();Rmv(this,'dragover');Promss_Src(event.dataTransfer.files).then(srcList=>{Upload('${div}',srcList)})">
         <span>+</span><p>Arraste arquivos ou clique aqui</p>
         <input class="Abslt w100 h100 ppt Opacy" type="file" id="imagem" accept="image/*" multiple onchange="Rmv(Pai(this),'dragover');Promss_Imgs(this.files,$('${div}')).then(()=>{Upload('${div}')})">
     </div>
