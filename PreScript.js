@@ -1,5 +1,6 @@
 // Dia 22/03/2025
 // Dia 28/06/2025 (HexRGB)
+// Dia 13/07/2025 (UpperCase)
 
 function CSS_Prop(e,Obj){
   Object.assign(e.style,{
@@ -142,7 +143,6 @@ const ENone=e=>window.getComputedStyle($(e)).display==='none'
 const EShow=e=>window.getComputedStyle($(e)).display!=='none'
 function TogNone(e){ENone($(e))?Show($(e)):None($(e))}
 function TogShow(e){EShow($(e))?None($(e)):Show($(e))}
-function TogNoSh(e){e.forEach(E=>TogShow(E))}
 const ShowTime=(e,sec)=>{Show(e);setTimeout(()=>{None(e)},sec*1000)}
 const NoneTime=(e,sec)=>{None(e);setTimeout(()=>{Show(e)},sec*1000)}
 const TrcFih=e=>Filh(Pai(e)).forEach(f=>{if(f===e){None(f)}else{Show(f);f.focus()}}) // Oculta o Atual e exibe o Resto Funciona melhor com 2 Filhos
@@ -219,15 +219,16 @@ const Zero=Num=>String(Num).padStart(3,'0')
 const ParsMil=e=>parseFloat(Num($(e).value))*500
 
 //Funções Conversor de Strings_________________________________________________________________________________________________
-const LowCase=Arry=>Arry.filter(e=>e===e.toLowerCase())
-const UppCase=Arry=>Arry.filter(e=>e===e.toUpperCase())
+const aa=Stg=>Stg.toLowerCase()
+const AA=Stg=>Stg.toUpperCase()
+const Aa=Str=>Str[0].toUpperCase()+Str.slice(1).toLowerCase()
 const CleaAsps=e=>e.replace(/\*.*\*/,'').replace("*",'')
 const BrevData=Stg=> Stg.match(/\d{2}\/\d{2}\/\d{4}/) ? Stg.replace(/\/\d{4}$/,'') : Stg // Remover o ano 2024 de uma String Data
 const DMY=e=>e.split('-').reverse().join('/') // Muda String YYYY-MM-DD para DD/MM/YYYY
 const YMD=e=>e.split('/').reverse().join('-') // Muda String DD/MM/YYYY para YYYY-MM-DD
 
-const a=e=>e.toLowerCase()
-const A=e=>e.toUpperCase()
+const UppCase=Arry=>Arry.filter(e=>e===e.toUpperCase()) // Filtrar apenas os Upper
+const LowCase=Arry=>Arry.filter(e=>e===e.toLowerCase()) // Filtrar apenas os Lower
 
 // Funções de Validações_______________________________________________________________________________________________________
 const is=(e,stg)=> stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
@@ -561,7 +562,7 @@ function OrdenarRows(e,x,Cntd=null,order=null){ // se tiver 'Cntd' é conteudo, 
 
 // Exibir Lista de Sugestões abaixo de uma Div Específica
 function SuggAntigo(Val,Arry,Stg,list,Func){
-  if(Val){Show(list);list.innerHTML = Arry.filter(e=>a(e[Stg]).includes(a(Val)) || String(e['ID']).includes(Val)).map(e=>`<a class="ppt w100 Ct" onclick="${Func}(this,'${e[Stg]}',${e['ID']});None(Pai(this))"><p>${e['ID']}</p><p>${e[Stg]}</p></a>`).join('')}
+  if(Val){Show(list);list.innerHTML = Arry.filter(e=>aa(e[Stg]).includes(aa(Val)) || String(e['ID']).includes(Val)).map(e=>`<a class="ppt w100 Ct" onclick="${Func}(this,'${e[Stg]}',${e['ID']});None(Pai(this))"><p>${e['ID']}</p><p>${e[Stg]}</p></a>`).join('')}
   else{None(list);Inn(list,'')}
 }
 
@@ -569,13 +570,13 @@ function Sugg(Val, Arry, Stg, list, Func) {
   if (Val) {
     Show(list);
     const highlightedVal = Val; // Normaliza o valor de busca
-    const regex = new RegExp(`(${a(highlightedVal)})`, 'gi'); // Cria um regex que ignora maiúsculas e minúsculas
+    const regex = new RegExp(`(${aa(highlightedVal)})`, 'gi'); // Cria um regex que ignora maiúsculas e minúsculas
 
     list.innerHTML = Arry
-      .filter(e => a(e[Stg]).includes(a(highlightedVal)) || String(e['ID']).includes(highlightedVal))
+      .filter(e => aa(e[Stg]).includes(aa(highlightedVal)) || String(e['ID']).includes(highlightedVal))
       .map(e => {
         const highlightedID = String(e['ID']).replace(regex, '<span style="background: #8f007c;color:white">$1</span>'); // Destaca os caracteres no ID
-        const highlightedText = a(e[Stg]).replace(regex, '<span style="background: #8f007c;color:white">$1</span>'); // Destaca os caracteres no texto
+        const highlightedText = aa(e[Stg]).replace(regex, '<span style="background: #8f007c;color:white">$1</span>'); // Destaca os caracteres no texto
 
         return `<a class="ppt w100 Ct" onclick="${Func}(this,'${e[Stg]}',${e['ID']});None(Pai(this))">
                   <p>${highlightedID}</p>
