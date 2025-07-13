@@ -1,6 +1,6 @@
 // Dia 22/03/2025
 // Dia 28/06/2025 (HexRGB)
-// Dia 13/07/2025 (UpperCase)
+// Dia 13/07/2025 (UpperCase) (Novas Funcs)
 
 function CSS_Prop(e,Obj){
   Object.assign(e.style,{
@@ -648,3 +648,10 @@ function MaskR$(el){
 const RgbToHex =rgb=>`#${rgb.replace(/^rgb\(|\s+|\)$/g,'').split(',').map(x=>parseInt(x).toString(16).padStart(2,'0')).join('')}`
 const hexToRGB =hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `rgb(${r},${g},${b})`}
 const hexToRGB2=hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `${r},${g},${b}`}
+
+// Novidades q troce ta página OrcamentosGRAFF
+  const Dat=e=>new Date(e)
+  const cRepet  =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc},{}) // Conta quantas vezes cada item aparece no array
+  const cRepetID=arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
+  const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
+  const getClas=(e,Stg)=>[...e.classList].find(c=>c.includes(Stg)) || null // pegar uma Class q contem uma String especifica
