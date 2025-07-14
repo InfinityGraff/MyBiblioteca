@@ -1,6 +1,6 @@
 // Dia 22/03/2025
 // Dia 28/06/2025 (HexRGB)
-// Dia 13/07/2025 (UpperCase) (Novas Funcs)
+// Dia 13/07/2025 (UpperCase) (Novas Funcs) (ExtraClass)
 
 function CSS_Prop(e,Obj){
   Object.assign(e.style,{
@@ -154,7 +154,7 @@ const Tog=(e,Stg)=>FazArry(e).forEach(E=>E.classList.toggle(Stg))
 const TrcTog=(e,Stg1,Stg2)=>{FazArry(e).forEach(E=>{Tog(E,Stg1);Tog(E,Stg2)})}
 const Trc=(e,Add,Rmv)=>{FazArry(e).forEach(E=>{console.log(E) ; Add(E,Add);Rmv(E,Rmv)})}
 const DarkLite=e=>{TrcTog($(e),'Dark','Lite')}
-const Extrat_Clss=(div,Stg)=>[...div.classList].find(e=>e.startsWith(Stg))?.replace(Stg,'')||null //Passo (Div Class="col-Nome",'col-') Return 'None'
+const Extrat_Clss=(div,Stg)=>[...div.classList].find(e=>e.startsWith(Stg))||null
 
 const Add_N=e=>FazArry(e).forEach(el=>Add(el,'none'))
 const Rmv_N=e=>FazArry(e).forEach(el=>Rmv(el,'none'))
@@ -655,3 +655,17 @@ const hexToRGB2=hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(
   const cRepetID=arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
   const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
   const getClas=(e,Stg)=>[...e.classList].find(c=>c.includes(Stg)) || null // pegar uma Class q contem uma String especifica
+  const LocPcnt=(parte,total)=>(parte/total)
+  const RGBa=(e,op=0.2)=>{const [r,g,b]=getComputedStyle(e).backgroundColor.match(/\d+/g) ; e.style.backgroundColor = `rgba(${r},${g},${b},${op})`}
+  const zipObj=(Key,Val)=>Object.fromEntries(Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
+  const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
+  const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
+  const isImageLoaded=img=>img.complete && img.naturalWidth !== 0 // conferir se ta OK mesmo
+  const RandoCor=()=>'#'+Rndn(16777215).toString(16).padStart(6,'0')
+  const isArr=e=>Array.isArray(e)
+  const NULL__=a=>a.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v??""])))
+  const l0=e=>e.length===0
+  const ATV=e=>Add($(e),'Atv')
+  const DTV=e=>Rmv($(e),'Atv')
+  const TOV=e=>Tog($(e),'Atv') // Modificar todos os Tog:Atv pra mudar pra TOV
+  const Trc2=(e,add,rmv)=>{Add($(e),add);Rmv($(e),rmv)}
