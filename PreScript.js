@@ -560,43 +560,12 @@ function OrdenarRows(e,x,Cntd=null,order=null){ // se tiver 'Cntd' é conteudo, 
 }
 
 
-// Exibir Lista de Sugestões abaixo de uma Div Específica
-function SuggAntigo(Val,Arry,Stg,list,Func){
-  if(Val){Show(list);list.innerHTML = Arry.filter(e=>aa(e[Stg]).includes(aa(Val)) || String(e['ID']).includes(Val)).map(e=>`<a class="ppt w100 Ct" onclick="${Func}(this,'${e[Stg]}',${e['ID']});None(Pai(this))"><p>${e['ID']}</p><p>${e[Stg]}</p></a>`).join('')}
-  else{None(list);Inn(list,'')}
-}
-
-function Sugg(Val, Arry, Stg, list, Func) {
-  if (Val) {
-    Show(list);
-    const highlightedVal = Val; // Normaliza o valor de busca
-    const regex = new RegExp(`(${aa(highlightedVal)})`, 'gi'); // Cria um regex que ignora maiúsculas e minúsculas
-
-    list.innerHTML = Arry
-      .filter(e => aa(e[Stg]).includes(aa(highlightedVal)) || String(e['ID']).includes(highlightedVal))
-      .map(e => {
-        const highlightedID = String(e['ID']).replace(regex, '<span style="background: #8f007c;color:white">$1</span>'); // Destaca os caracteres no ID
-        const highlightedText = aa(e[Stg]).replace(regex, '<span style="background: #8f007c;color:white">$1</span>'); // Destaca os caracteres no texto
-
-        return `<a class="ppt w100 Ct" onclick="${Func}(this,'${e[Stg]}',${e['ID']});None(Pai(this))">
-                  <p>${highlightedID}</p>
-                  <p>${highlightedText}</p>
-                </a>`;
-      })
-      .join('');
-  } else {
-    None(list);
-    Inn(list, '');
-  }
-}
 
 
 
-function ClickSugg(eu,nome,id){$('input',Avo(eu)).value = nome ; Nm($('input',Avo(eu)),id)}
-function ClickSugg2(eu,nome,id){$('input',Avo(eu)).value = nome ; Nm($('input',Avo(eu)),id) ; None(Bzv(eu)) ; DispClick($('.sppns',Pai(eu.closest('.Bandj'))))}
 
 
-// Upei na parte da Infinity
+// Upados de OrçamentoGRAFF_______________________________________________________________________
 
 const _td=e=>e.tagName==='TD'?e:e.closest('td')
 const _tr=e=>e.tagName==='TR'?e:e.closest('tr')
@@ -615,7 +584,6 @@ function MaskNum(input){ // Funciona Muito bem e não pretendo me Livrar dela t�
         if (VLR > 5) {Mask = Mask.substring(0, 5)}
         input.value = Mask
 }
-
 
 function MaskNum2(e){ // Funciona Muito bem e não pretendo me Livrar dela tão Fácil
   var Vlr = e.innerHTML.replace(/\D/g, '').replace(/^0+(?=[1-9])/, '')
@@ -644,28 +612,26 @@ function MaskR$(el){
   CurEnd(el)
 }
 
-
 const RgbToHex =rgb=>`#${rgb.replace(/^rgb\(|\s+|\)$/g,'').split(',').map(x=>parseInt(x).toString(16).padStart(2,'0')).join('')}`
 const hexToRGB =hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `rgb(${r},${g},${b})`}
 const hexToRGB2=hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `${r},${g},${b}`}
 
-// Novidades q troce ta página OrcamentosGRAFF
-  const Dat=e=>new Date(e)
-  const cRepet  =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc},{}) // Conta quantas vezes cada item aparece no array
-  const cRepetID=arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
-  const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
-  const getClas=(e,Stg)=>[...e.classList].find(c=>c.includes(Stg)) || null // pegar uma Class q contem uma String especifica
-  const LocPcnt=(parte,total)=>(parte/total)
-  const RGBa=(e,op=0.2)=>{const [r,g,b]=getComputedStyle(e).backgroundColor.match(/\d+/g) ; e.style.backgroundColor = `rgba(${r},${g},${b},${op})`}
-  const zipObj=(Key,Val)=>Object.fromEntries(Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
-  const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
-  const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
-  const isImageLoaded=img=>img.complete && img.naturalWidth !== 0 // conferir se ta OK mesmo
-  const RandoCor=()=>'#'+Rndn(16777215).toString(16).padStart(6,'0')
-  const isArr=e=>Array.isArray(e)
-  const NULL__=a=>a.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v??""])))
-  const l0=e=>e.length===0
-  const ATV=e=>Add($(e),'Atv')
-  const DTV=e=>Rmv($(e),'Atv')
-  const TOV=e=>Tog($(e),'Atv') // Modificar todos os Tog:Atv pra mudar pra TOV
-  const Trc2=(e,add,rmv)=>{Add($(e),add);Rmv($(e),rmv)}
+const Dat=e=>new Date(e)
+const cRepet  =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc},{}) // Conta quantas vezes cada item aparece no array
+const cRepetID=arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
+const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
+const getClas=(e,Stg)=>[...e.classList].find(c=>c.includes(Stg)) || null // pegar uma Class q contem uma String especifica
+const LocPcnt=(parte,total)=>(parte/total)
+const RGBa=(e,op=0.2)=>{const [r,g,b]=getComputedStyle(e).backgroundColor.match(/\d+/g) ; e.style.backgroundColor = `rgba(${r},${g},${b},${op})`}
+const zipObj=(Key,Val)=>Object.fromEntries(Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
+const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
+const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
+const isImageLoaded=img=>img.complete && img.naturalWidth !== 0 // conferir se ta OK mesmo
+const RandoCor=()=>'#'+Rndn(16777215).toString(16).padStart(6,'0')
+const isArr=e=>Array.isArray(e)
+const NULL__=a=>a.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v??""])))
+const l0=e=>e.length===0
+const ATV=e=>Add($(e),'Atv')
+const DTV=e=>Rmv($(e),'Atv')
+const TOV=e=>Tog($(e),'Atv') // Modificar todos os Tog:Atv pra mudar pra TOV
+const Trc2=(e,add,rmv)=>{Add($(e),add);Rmv($(e),rmv)}
