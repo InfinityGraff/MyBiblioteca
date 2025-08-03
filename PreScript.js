@@ -138,7 +138,7 @@ const InnTogg=(e,Stg,Stg2)=>$(e).innerHTML = $(e).innerHTML===Stg?Stg2:Stg
 const ValTogg=(e,Stg,Stg2)=>$(e).value     = $(e).value    ===Stg?Stg2:Stg
 const Clen_Ipts=e=>$$('input', e).forEach(I=>I.value='')
 const Clen_Slct=e=>$$('select',e).forEach(S=>S.selectedIndex=0)
-const Clen_Alls=e=>Clen_Ipts(e);Clen_Slct(e)
+const Clen_Alls=e=>{Clen_Ipts(e);Clen_Slct(e)}
 
 //Display Show None________________________________________________________________________________________________________________
 function FazArry(e){return Array.isArray(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
@@ -222,21 +222,21 @@ const DisparoInpt = new Event('input',{bubbles:true})
 const DispClick=e=>e.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}))
 
 //Funções Conversor de Valores_________________________________________________________________________________________________
-const Ared=e=>Math.floor(e)
-const Cm =e=> parseFloat(e).toFixed(2).replace('.',',')
-const Fxd=e=> parseFloat(e).toFixed(2)
-const RS =e=> `R$ ${Cm(e)}`
-const RS_HTML=e=>`<div class="Ct"><div>R$</div><div class="VVLR">${Cm(e)}</div></div>`
-const Tm_RS=e=>`<div class="Ct"><p class="RS">R$</p><a>${Cm(e)}</a></div>`
-const Porcent=(V1,V2)=>((V1-V2)/V1)*100
-const Num= e=>{const value = typeof e === 'number' ? e : parseFloat(e.replace(',', '.').replace('R$', '').trim()) ; return isNaN(value) ? 0 : value}
-const Num2=e=>isNaN(value = parseFloat(e.replace('R$ ','').replace(/\./g,'').replace(',','.'))) ? 0 : value
-const Pct =e=>`${(e*100).toFixed(2)}%`
-const Virg=e=>e.replace('.',',')
-const Zero=Num=>String(Num).padStart(3,'0')
-const ParsMil=e=>parseFloat(Num($(e).value))*500
-const CalcMB=e=>Num((new Blob([JSON.stringify(e)]).size/1024).toFixed(2))
-const LocPcnt=(parte,total)=>(parte/total)
+const    Ared = e=>Math.floor(e)
+const      Cm = e=> parseFloat(e).toFixed(2).replace('.',',')
+const     Fxd = e=> parseFloat(e).toFixed(2)
+const      RS = e=> `R$ ${Cm(e)}`
+const RS_HTML = e=>`<div class="Ct"><div>R$</div><div class="VVLR">${Cm(e)}</div></div>`
+const   Tm_RS = e=>`<div class="Ct"><p class="RS">R$</p><a>${Cm(e)}</a></div>`
+const     Num = e=>{const value = typeof e === 'number' ? e : parseFloat(e.replace(',', '.').replace('R$', '').trim()) ; return isNaN(value) ? 0 : value}
+const    Num2 = e=>isNaN(value = parseFloat(e.replace('R$ ','').replace(/\./g,'').replace(',','.'))) ? 0 : value
+const     Pct = e=>`${(e*100).toFixed(2)}%`
+const    Virg = e=>e.replace('.',',')
+const ParsMil = e=>parseFloat(Num($(e).value))*500
+const  CalcMB = e=>Num((new Blob([JSON.stringify(e)]).size/1024).toFixed(2))
+const    Zero = Num=>String(Num).padStart(3,'0')
+const Porcent = (V1,V2)=>((V1-V2)/V1)*100
+const LocPcnt = (parte,total)=>(parte/total)
 
 //Funções Conversor de Strings_________________________________________________________________________________________________
 const aa=Stg=>Stg.toLowerCase()
@@ -265,6 +265,7 @@ const Ctrl      =e=>e.button === 0 && e.ctrlKey ? true : false
 const isImageLoaded=img=>img.complete && img.naturalWidth !== 0 // conferir se ta OK mesmo
 const isArr=e=>Array.isArray(e)
 const l0=e=>e.length===0
+const Bool = e => typeof e === 'boolean' ? e : e === 'true'
 
 // Funções de Templates________________________________________________________________________________________________________
 const SVG={
@@ -337,7 +338,7 @@ const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')               // E
 const Foco   =e=>$(e).focus()
 const FocoCh0=e=>$(e).children[0].focus()
 const FocoIn =e=>e.focus()
-const FocoOut=e=>e.focus();e.setSelectionRange(e.value.length,e.value.length)
+const FocoOut=e=>{e.focus();e.setSelectionRange(e.value.length,e.value.length)}
 
 // MODAL________________________________________________
 function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/
@@ -515,6 +516,9 @@ function MaskR$(el){
 }
 
 
+
+const LOG=(...stg)=>console.log(...stg)
+const Prvn    =()=>event.preventDefault()
 
 
 
