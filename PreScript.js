@@ -100,11 +100,10 @@ const  $Val = (Stg,e=document)=>$$(Stg,e).map(e=>e.value)
 const  $$Vl = (Stg,e=document)=>$$(Stg,e).map(e=>e.value) // Obsoletar o de cima
 const  $Inn = (Stg,e=document)=>$$(Stg,e).map(e=>e.innerHTML)
 const Clear = e=>[e].flat().forEach(el=>$(el).value='')
-const  Inn_ = (e,Stg)=>$(e).innerHTML+= Stg
+const  Inn_ = (e,Stg)=>$(e).innerHTML+=Stg
 const   Src = (e,Stg)=>$(e).src = Stg
 const   Txt = e=>e.innerText.trim()
 const   Inn = (e,Stg=null)=> Stg===null ? $(e).innerHTML : $(e).innerHTML = Stg
-const    $Name = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const    Nm = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const    Rx = arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
 const    Vll= e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
@@ -122,16 +121,16 @@ const SibAll = e=>[...e?.parentElement?.children || []].filter(s=>s!==e)
 
 // Ações DOM___________________________________________________________________________________________________________________
 //const Befor=(e,Stg)=>$(e).insertAdjacentHTML('beforeend' ,Stg)
-const Befor=(e,Stg,Stg2)=>typeof Stg === 'string' ? $(e).insertAdjacentHTML('beforeend',Stg):$(e).insertBefore(Stg,$(Stg2,$(e)))
-const After=(e,Stg)=>$(e).insertAdjacentHTML('afterbegin',Stg)
-const DltAll=e=>$$(e).forEach(e=>e.remove())
-const InnAll=(Stg,e)=>$$(Stg).forEach(E=>E.innerHTML = e)
-const NewTag = e=>document.createElement(e)
-const NewImg=Src=>Object.assign(new Image(),{src:Src})
-const NewDiv=Cls=>Object.assign(NewTag('div'),{className:Cls})
-function InnTogg(e,Stg,Stg2){$(e).innerHTML = $(e).innerHTML===Stg?Stg2:Stg}
-function ValTogg(e,Stg,Stg2){$(e).value = $(e).value===Stg?Stg2:Stg}
-const Zindx=(div)=>div.forEach((e,x,obj) => e.style.zIndex = obj.length-x) // pelomenos pra MyPlan n funciona mais, fiz diferente
+const Befor  =(e,Stg,Stg2)=>typeof Stg === 'string' ? $(e).insertAdjacentHTML('beforeend',Stg):$(e).insertBefore(Stg,$(Stg2,$(e)))
+const After  =(e,Stg)=>$(e).insertAdjacentHTML('afterbegin',Stg)
+const DltAll =e=>$$(e).forEach(e=>e.remove())
+const InnAll =(Stg,e)=>$$(Stg).forEach(E=>E.innerHTML = e)
+const NewTag =e=>document.createElement(e)
+const NewImg =Src=>Object.assign(new Image(),{src:Src})
+const NewDiv =Cls=>Object.assign(NewTag('div'),{className:Cls})
+const Zindx  =e=>e.forEach((e,x,obj) => e.style.zIndex = obj.length-x) // acho q n funciona mais
+const InnTogg=(e,Stg,Stg2)=>$(e).innerHTML = $(e).innerHTML===Stg?Stg2:Stg
+const ValTogg=(e,Stg,Stg2)=>$(e).value     = $(e).value    ===Stg?Stg2:Stg
 
 //Display Show None________________________________________________________________________________________________________________
 function FazArry(e){return Array.isArray(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
@@ -148,22 +147,20 @@ const ShowTime=(e,sec)=>{Show(e);setTimeout(()=>{None(e)},sec*1000)}
 const NoneTime=(e,sec)=>{None(e);setTimeout(()=>{Show(e)},sec*1000)}
 const TrcFih=e=>Filh(Pai(e)).forEach(f=>{if(f===e){None(f)}else{Show(f);f.focus()}}) // Oculta o Atual e exibe o Resto Funciona melhor com 2 Filhos
 
-// Funções de CSS
+// Funções de CSS ________________________________________________________________________________________________________________
 const Add=(e,Stg)=>FazArry(e).forEach(E=>E.classList.add(Stg))
 const Rmv=(e,Stg)=>FazArry(e).forEach(E=>E.classList.remove(Stg))
 const Tog=(e,Stg)=>FazArry(e).forEach(E=>E.classList.toggle(Stg))
 const TrcTog=(e,Stg1,Stg2)=>{FazArry(e).forEach(E=>{Tog(E,Stg1);Tog(E,Stg2)})}
 const Trc=(e,Add,Rmv)=>{FazArry(e).forEach(E=>{console.log(E) ; Add(E,Add);Rmv(E,Rmv)})}
-const DarkLite=e=>{TrcTog($(e),'Dark','Lite')}
 const Extrat_Clss=(div,Stg)=>[...div.classList].find(e=>e.startsWith(Stg))||null
-
+const DarkLite=e=>{TrcTog($(e),'Dark','Lite')}
 const Add_N=e=>FazArry(e).forEach(el=>Add(el,'none'))
 const Rmv_N=e=>FazArry(e).forEach(el=>Rmv(el,'none'))
 const Tog_N=e=>FazArry(e).forEach(el=>Tog(el,'none'))
-
-const Contem=(e,Stg)=>e.classList.contains(Stg) // NEXBEE
-const Coten=(e,Clss)=>FazArry(Clss).some(E=>e.classList.contains(E))
-const Notem=(e,Stg)=>!e.classList.contains(Stg) // NEXBEE
+const Contem=(e,Stg) =>e.classList.contains(Stg) // NEXBEE
+const Coten =(e,Clss)=>FazArry(Clss).some(E=>e.classList.contains(E))
+const Notem =(e,Stg) =>!e.classList.contains(Stg) // NEXBEE
 
 //Funções de Objeto e Array____________________________________________________________________________________________________
 const ObjKey =e=>Object.keys(e)                              // Converte todos Keys de Objetos em um array
@@ -228,27 +225,23 @@ const BrevData=Stg=> Stg.match(/\d{2}\/\d{2}\/\d{4}/) ? Stg.replace(/\/\d{4}$/,'
 const DMY=e=>e.split('-').reverse().join('/') // Muda String YYYY-MM-DD para DD/MM/YYYY
 const YMD=e=>e.split('/').reverse().join('-') // Muda String DD/MM/YYYY para YYYY-MM-DD
 
-const UppCase=Arry=>Arry.filter(e=>e===e.toUpperCase()) // Filtrar apenas os Upper
-const LowCase=Arry=>Arry.filter(e=>e===e.toLowerCase()) // Filtrar apenas os Lower
-
 // Funções de Validações_______________________________________________________________________________________________________
-const is=(e,stg)=> stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
-function is_Visivel(e){const r=e&&e.getBoundingClientRect();return!!(r&&r.bottom>=0&&r.right>=0&&r.top<=innerHeight&&r.left<=innerWidth)}
-const View_Vid=(e)=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].isIntersecting?'play':'pause']()).observe(v)})}
-const UndefNull=e=>e===undefined||e===null
-const IsNum=e=>typeof e==='number'
-const isCnvs=e=>e.tagName === 'CANVAS'
-const KeyEnter=e=>(e.code === 'Enter' || e.keyCode === 13)
-const KeyEntr=Call=>{if(event.code === 'Enter' || event.keyCode === 13){event.preventDefault();Call()}}
-const Ctrl=e=>e.button === 0 && e.ctrlKey ? true : false
+// Poderia ser um OBJ gigante is.view
+const is        =(e,stg)=>stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
+const is_Visivel=e=>{const r=e&&e.getBoundingClientRect();return!!(r&&r.bottom>=0&&r.right>=0&&r.top<=innerHeight&&r.left<=innerWidth)}
+const View_Vid  =e=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].isIntersecting?'play':'pause']()).observe(v)})}
+const UndefNull =e=>e===undefined||e===null
+const IsNum     =e=>typeof e==='number'
+const isCnvs    =e=>e.tagName === 'CANVAS'
+const KeyEnter  =e=>(e.code === 'Enter' || e.keyCode === 13)
+const KeyEntr   =Call=>{if(event.code === 'Enter' || event.keyCode === 13){event.preventDefault();Call()}}
+const Ctrl      =e=>e.button === 0 && e.ctrlKey ? true : false
 
 // Funções de Templates________________________________________________________________________________________________________
-const Div=(e,Class='')=>`<div class="${Class}">${e}</div>`
-const MapDiv=(e,on)=>e.map(e=>`<div onclick="${on}">${e}</div>`).join('')
-const Tm_th=(e,arr)=>e.innerHTML = arr.map(e=>`<th>${e}</th>`).join('')
-const Tm_td=(e,arr)=>e.innerHTML = arr.map(e=>`<td>${e}</td>`).join('')
+const Tm_th=(e,arr)=>Inn(e,arr.map(e=>`<th>${e}</th>`).join(''))
+const Tm_td=(e,arr)=>Inn(e,arr.map(e=>`<td>${e}</td>`).join(''))
+const Tm_Opt=(arry,Stg=null)=>arry.map((e,i)=>`<option value="${e}" ${i===0?'disabled':''} ${Stg===e?'selected':i===0?'selected':''}>${e}</option>`).join('')
 const load_Opts=(e,arry)=> $(e).innerHTML = arry.map(e=>`<option value="${e}">${e}</option>`).join('')
-const Tm_Opts=(arry,Stg=null)=>arry.map((e,i)=>`<option value="${e}" ${i===0?'disabled':''} ${Stg===e?'selected':i===0?'selected':''}>${e}</option>`).join('')
 const load_OptsFnt=(e,arry)=> $(e).innerHTML = arry.map(e=>`<option style="font-family:${e}" value="${e}">${e}</option>`).join('')
 const SrcSVG=e=>`data:image/svg+xml,${encodeURIComponent(e)}`
 
