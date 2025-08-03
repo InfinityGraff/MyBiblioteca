@@ -163,9 +163,9 @@ const TrcTog=(e,s1,s2)=>{FazArry(e).forEach(E=>{Tog(E,s1) ;Tog(E,s2 )})}
 const Trc=(e,add,rmv) =>{FazArry(e).forEach(E=>{Add(E,add);Rmv(E,rmv)})}
 const Trc2=(e,add,rmv)=>{Add($(e),add);Rmv($(e),rmv)}
 const TrcCls=(c1,c2)=>{const add = $$(c1).length === 0 ? c1 : c2;const rmv = add === c1 ? c2 : c1;Trc($$(rmv), add, rmv)}
-const ATV=e=>Add($(e),'Atv')
-const DTV=e=>Rmv($(e),'Atv')
-const TOV=e=>Tog($(e),'Atv') // Modificar todos os Tog:Atv pra mudar pra TOV
+const ATV=(a,b)=>{if(b){Rmv($(b),'Atv')} ; Add($(a),'Atv')}
+const DTV=(a,b)=>{if(b){Add($(b),'Atv')} ; Rmv($(a),'Atv')}
+const TOV=(a)=>Tog($(a),'Atv') // Modificar todos os Tog:Atv pra mudar pra TOV
 
 const getClss   =(e,Stg)=>[...e.classList].find(c=>c.includes(Stg))   || null // pegar uma Element q a Class contem a String
 const getClssIN =(e,Stg)=>[...e.classList].find(e=>e.startsWith(Stg)) || null // pegar uma Element q a Class inicia com a String
