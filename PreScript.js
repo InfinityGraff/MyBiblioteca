@@ -106,8 +106,13 @@ const   Txt = e=>e.innerText.trim()
 const   Inn = (e,Stg=null)=> Stg===null ? $(e).innerHTML : $(e).innerHTML = Stg
 const    Nm = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const    Rx = arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
-const    Vll= e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
-const    llv=(e,v)=>{if(e.tagName === 'INPUT' && e.type === 'checkbox'){e.checked = typeof v === 'string' ? JSON.parse(v) : v;} else {e.value = v}}
+const   Vll = e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
+const   llv =(e,v)=>{if(e.tagName === 'INPUT' && e.type === 'checkbox'){e.checked = typeof v === 'string' ? JSON.parse(v) : v;} else {e.value = v}}
+const   _td =e=>e.tagName==='TD'?e:e.closest('td')
+const   _tr =e=>e.tagName==='TR'?e:e.closest('tr')
+const   _th =e=>e.tagName==='TH'?e:e.closest('th')
+const _table=e=>e.tagName==='TABLE'?e:e.closest('table')
+const _tbody=e=>e.tagName==='TBODY'?e:e.closest('tbody')
 
 //Retornos DOM Parentes_______________________________________________________________________________________________________
 const Parent=(e,n)=>Array(n).fill(0).reduce(p=>p.parentNode,e)
@@ -131,6 +136,9 @@ const NewDiv =Cls=>Object.assign(NewTag('div'),{className:Cls})
 const Zindx  =e=>e.forEach((e,x,obj) => e.style.zIndex = obj.length-x) // acho q n funciona mais
 const InnTogg=(e,Stg,Stg2)=>$(e).innerHTML = $(e).innerHTML===Stg?Stg2:Stg
 const ValTogg=(e,Stg,Stg2)=>$(e).value     = $(e).value    ===Stg?Stg2:Stg
+const Clen_Ipts=e=>$$('input', e).forEach(I=>I.value='')
+const Clen_Slct=e=>$$('select',e).forEach(S=>S.selectedIndex=0)
+const Clen_Alls=e=>Clen_Ipts(e);Clen_Slct(e)
 
 //Display Show None________________________________________________________________________________________________________________
 function FazArry(e){return Array.isArray(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
@@ -151,9 +159,16 @@ const TrcFih=e=>Filh(Pai(e)).forEach(f=>{if(f===e){None(f)}else{Show(f);f.focus(
 const Add=(e,Stg)=>FazArry(e).forEach(E=>E.classList.add(Stg))
 const Rmv=(e,Stg)=>FazArry(e).forEach(E=>E.classList.remove(Stg))
 const Tog=(e,Stg)=>FazArry(e).forEach(E=>E.classList.toggle(Stg))
-const TrcTog=(e,Stg1,Stg2)=>{FazArry(e).forEach(E=>{Tog(E,Stg1);Tog(E,Stg2)})}
-const Trc=(e,Add,Rmv)=>{FazArry(e).forEach(E=>{console.log(E) ; Add(E,Add);Rmv(E,Rmv)})}
-const Extrat_Clss=(div,Stg)=>[...div.classList].find(e=>e.startsWith(Stg))||null
+const TrcTog=(e,s1,s2)=>{FazArry(e).forEach(E=>{Tog(E,s1) ;Tog(E,s2 )})}
+const Trc=(e,add,rmv) =>{FazArry(e).forEach(E=>{Add(E,add);Rmv(E,rmv)})}
+const Trc2=(e,add,rmv)=>{Add($(e),add);Rmv($(e),rmv)}
+const TrcCls=(c1,c2)=>{const add = $$(c1).length === 0 ? c1 : c2;const rmv = add === c1 ? c2 : c1;Trc($$(rmv), add, rmv)}
+const ATV=e=>Add($(e),'Atv')
+const DTV=e=>Rmv($(e),'Atv')
+const TOV=e=>Tog($(e),'Atv') // Modificar todos os Tog:Atv pra mudar pra TOV
+
+const getClss   =(e,Stg)=>[...e.classList].find(c=>c.includes(Stg))   || null // pegar uma Element q a Class contem a String
+const getClssIN =(e,Stg)=>[...e.classList].find(e=>e.startsWith(Stg)) || null // pegar uma Element q a Class inicia com a String
 const DarkLite=e=>{TrcTog($(e),'Dark','Lite')}
 const Add_N=e=>FazArry(e).forEach(el=>Add(el,'none'))
 const Rmv_N=e=>FazArry(e).forEach(el=>Rmv(el,'none'))
@@ -182,6 +197,11 @@ const SOMA=(Arry,Call)=>Arry.reduce((sum,e)=>sum+(Call?Number(Call(e)):Number(e)
 const SOMA_Obj=(ArrObj,Key)=>ArrObj.reduce((soma,obj)=>Number(soma)+Number(obj[Key]||0),0) // somar todos os valores de um determinado key [CRIEI UMA NOVA Q TÁ NO LIBGRAFF]
 const Angrm=arr=>arr.length===0?[[]]:arr.flatMap((e,x)=>Angrm([...arr.slice(0,x),...arr.slice(x+1)]).map(i=>[e,...i]))
 const ArrObj_ArrArr=(obj)=>{const keys = ObjKey(obj[0]);const sortedObj = obj.map(e=>ObjEtr(e).sort((a,b)=>keys.indexOf(a[0]) - keys.indexOf(b[0])).map(entry=>entry[1]));return [keys,...sortedObj]}
+const cRepet  =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc},{}) // Conta quantas vezes cada item aparece no array
+const cRepetID=arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
+const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
+const zipObj=(Key,Val)=>Object.fromEntries(Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
+const NULL__=a=>a.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v??""])))
 
 //FuncStorage________________________________________________________________________________________________________________
 const StogeGet=e=>localStorage.getItem(e)
@@ -215,6 +235,8 @@ const Pct =e=>`${(e*100).toFixed(2)}%`
 const Virg=e=>e.replace('.',',')
 const Zero=Num=>String(Num).padStart(3,'0')
 const ParsMil=e=>parseFloat(Num($(e).value))*500
+const CalcMB=e=>Num((new Blob([JSON.stringify(e)]).size/1024).toFixed(2))
+const LocPcnt=(parte,total)=>(parte/total)
 
 //Funções Conversor de Strings_________________________________________________________________________________________________
 const aa=Stg=>Stg.toLowerCase()
@@ -224,6 +246,10 @@ const CleaAsps=e=>e.replace(/\*.*\*/,'').replace("*",'')
 const BrevData=Stg=> Stg.match(/\d{2}\/\d{2}\/\d{4}/) ? Stg.replace(/\/\d{4}$/,'') : Stg // Remover o ano 2024 de uma String Data
 const DMY=e=>e.split('-').reverse().join('/') // Muda String YYYY-MM-DD para DD/MM/YYYY
 const YMD=e=>e.split('/').reverse().join('-') // Muda String DD/MM/YYYY para YYYY-MM-DD
+const RgbToHex =rgb=>`#${rgb.replace(/^rgb\(|\s+|\)$/g,'').split(',').map(x=>parseInt(x).toString(16).padStart(2,'0')).join('')}`
+const hexToRGB =hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `rgb(${r},${g},${b})`}
+const hexToRGB2=hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `${r},${g},${b}`}
+const RGBa=(e,op=0.2)=>{const [r,g,b]=getComputedStyle(e).backgroundColor.match(/\d+/g) ; e.style.backgroundColor = `rgba(${r},${g},${b},${op})`}
 
 // Funções de Validações_______________________________________________________________________________________________________
 // Poderia ser um OBJ gigante is.view
@@ -236,6 +262,9 @@ const isCnvs    =e=>e.tagName === 'CANVAS'
 const KeyEnter  =e=>(e.code === 'Enter' || e.keyCode === 13)
 const KeyEntr   =Call=>{if(event.code === 'Enter' || event.keyCode === 13){event.preventDefault();Call()}}
 const Ctrl      =e=>e.button === 0 && e.ctrlKey ? true : false
+const isImageLoaded=img=>img.complete && img.naturalWidth !== 0 // conferir se ta OK mesmo
+const isArr=e=>Array.isArray(e)
+const l0=e=>e.length===0
 
 // Funções de Templates________________________________________________________________________________________________________
 const SVG={
@@ -249,7 +278,6 @@ const SVG={
    ,Crop :(Clss,tog)      =>`<svg class="${Clss}" viewBox="0 0 152.96 152.96  "><g><path d="M152.96 126.63l-22.5 0 0 -14.4 22.5 0 0 14.4zm-152.96 -100.31l22.5 0 0 14.4 -22.5 0 0 -14.4zm42.2 -26.32l0 112.23 63.07 0 0 14.4 -77.29 0 0 -126.63 14.21 0zm68.56 152.96l0 -112.23 -63.07 0 0 -14.4 77.29 0 0 126.63 -14.21 0z"/><polygon class="Croped ${tog}" points="47.68,106.62 105.17,106.62 105.17,46.34 47.68,46.34 "/></g></svg>`
    ,Aling:(Clss,Cor1,Cor2)=>`<svg class="${Clss}" viewBox="0 0 1115.04 1115.03"<g><rect style="fill:white" transform="matrix(1.78337E-14 -0.131706 0.673364 3.48817E-15 518.703 658.109)" width="1527.55" height="115.29"/><circle style="fill:${Cor1}" cx="557.52" cy="238.6" r="161.42"/><circle style="fill:${Cor2}" cx="557.52" cy="876.43" r="161.42"/><rect x="0" y="-0" width="1115.04" height="1115.04"/></g></svg>`
 }
-
 const Tm_th    =(e,arr)=>Inn(e,arr.map(a=>`<th>${a}</th>`).join(''))
 const Tm_td    =(e,arr)=>Inn(e,arr.map(a=>`<td>${a}</td>`).join(''))
 const Tm_Opt   =(arr,Stg=null)=>arr.map((a,i)=>`<option value="${a}" ${i===0?'disabled':''} ${Stg===a?'selected':i===0?'selected':''}>${a}</option>`).join('')
@@ -274,70 +302,57 @@ const AplyRng = r=>(getSelection().removeAllRanges(),getSelection().addRange(r))
 const CurAll  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r)) // Seleciona Tudo
 const CurEnd  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r.collapse(false),r)) // vai pra o Fim da Linha
 
-function Tecla(key){
-  const event = window.event
-  const keys  = {ctrl:event.ctrlKey,shift:event.shiftKey,alt:event.altKey}
-  return keys[key]
-}
+function Tecla(key){const event = window.event;const keys  = {ctrl:event.ctrlKey,shift:event.shiftKey,alt:event.altKey};return keys[key]}
 
 //Funções Geradores____________________________________________________________________________________________________________
-const Rndn=e=>Math.floor(Math.random()*e)
+const Rndn   =e=>Math.floor(Math.random()*e)
 const Randomm=(min,max)=>Rndn((max-min+1))+min
+const RandoCor=()=>'#'+Rndn(16777215).toString(16).padStart(6,'0')
 const GerarID=()=>`ID-${Rndn(900)+100}`
 const GerarIT=()=>`IT-${Rndn(900)+100}`
-const HOJE = ()=>new Date().toLocaleDateString('pt-BR')
-const AGORA =()=>`${HOJE()} ${new Date().toLocaleTimeString('pt-BR')}`
+const Dat    =e =>new Date(e)
+const HOJE   =()=>new Date().toLocaleDateString('pt-BR')
+const AGORA  =()=>`${HOJE()} ${new Date().toLocaleTimeString('pt-BR')}`
 
 //Funções Check________________________________________________________________________________________________________________
-const IsChkTru=e=>e.checked===true
-const IsChkFal=e=>e.checked===false
-const ChkTru=e=>e.checked=true
-const ChkFal=e=>e.checked=false
-const ChkTru_Clik=e=>{e.checked=true ; DispClick(e)}
-const ChkFal_Clik=e=>{e.checked=false ; DispClick(e)}
-const AddRequired=e=>e.forEach(e=>{$(e).required = true})
+const IsChkTru   =e=>e.checked===true
+const IsChkFal   =e=>e.checked===false
+const ChkTru     =e=>e.checked=true
+const ChkFal     =e=>e.checked=false
+const ChkTru_Clik=e=>{ChkTru(e) ; DispClick(e)}
+const ChkFal_Clik=e=>{ChkFal(e) ; DispClick(e)}
+const AddRequired=e=>e.forEach(e=>{$(e).required = true })
 const EscRequired=e=>e.forEach(e=>{$(e).required = false})
 
 // Funções de Replace_____________________________________________________
-const RxRepeti = e=>e.replace(/(.)\1+/g,'$1')
-const RxEspaco = e=>e.trim().replace(/\s+/g,' ')
-const RxAcento = e=>e.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-const RxPlural = e=>e.replace(/ão$|ões$|ao$|oes*$/,'ao').replace(/s*$/i,'')
+const RxRepeti = e=>e.replace(/(.)\1+/g,'$1')                               // Remove letras repetidas seguidas (ex: "booom" → "bom")
+const RxEspaco = e=>e.trim().replace(/\s+/g,' ')                            // Remove espaços extras (início/fim e múltiplos espaços internos)
+const RxAcento = e=>e.normalize('NFD').replace(/[\u0300-\u036f]/g,'')       // Remove acentos (ex: "ação" → "acao")
+const RxPlural = e=>e.replace(/ão$|ões$|ao$|oes*$/,'ao').replace(/s*$/i,'') // Converte plurais para singular genérico (ex: "ações" → "acao")
 const NewRegex = e=>new RegExp(e.split('').map(e=>e+'.{0,3}').join(''),'i') // Transforma String num Regex Conciderando esse Criterio de .{0,3}
-const RxClear  = e=>RxPlural(RxAcento(RxRepeti(RxEspaco(e.toLowerCase())))) // Chama todas as fuções alterando Plural Acento e outros.
+const RxClear  = e=>RxPlural(RxAcento(RxRepeti(RxEspaco(aa(e)))))           // chama todos os Replaces
+const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')               // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
 
 // Funções de Ações e Simulações
-function Foco(e){$(e).focus()}
-function FocoCh0(e){$(e).children[0].focus()}
-function FocoIn(e){e.focus()}
-function FocoOut(e){e.focus();e.setSelectionRange(e.value.length,e.value.length)}
-
-// Outros
-
-const CalcMB=e=>Num((new Blob([JSON.stringify(e)]).size/1024).toFixed(2))
-
-function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/
+const Foco   =e=>$(e).focus()
+const FocoCh0=e=>$(e).children[0].focus()
+const FocoIn =e=>e.focus()
+const FocoOut=e=>e.focus();e.setSelectionRange(e.value.length,e.value.length)
 
 // MODAL________________________________________________
+function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/
 function ShowModal(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)}
-function SairModal(Fundo){document.addEventListener('keyup',e=>{if(e.key==='Escape'){None(Fundo)}})
-  Fundo.addEventListener('click',e=>{if(e.target===Fundo){None(Fundo)}})
-}
-function ShowBrother(e,pai){
-  var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e)
-  Fi.forEach(e=>None(e)) ; if(x<Fi.length-1){Show(Fi[x+1])}else{Show(Fi[0])}
-}
+function SairModal(Fundo){document.addEventListener('keyup',e=>{if(e.key==='Escape'){None(Fundo)}});Fundo.addEventListener('click',e=>{if(e.target===Fundo){None(Fundo)}})}
+function ShowBrother(e,pai){var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e);Fi.forEach(e=>None(e)) ; if(x<Fi.length-1){Show(Fi[x+1])}else{Show(Fi[0])}}
+const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
 
 //NEXBEE
 function EscThis(){if(event.target===event.currentTarget){None(event.target)}} //NEXBEE
 function EscModal(){} //NEXBEE
 function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"})} //NEXBEE
-
 const RxgOnFun=e=>e?e.toString().match(/\{([^}]*)\}/)[1]:'' // serve pra pegar o texto da função 'myfunction(gg)' onclick, onkeyup e todos
 function Delay(sec){return new Promise(r => setTimeout(r, sec*1000))} //NEXBEE
 async function Dellay(Sec,Call){await new Promise(r=>setTimeout(r, Sec* 1000));Call()} //NEXBEE
-function texte(){console.log('Texte')} //NEXBEE
-function Texte(){console.log('Texte')} //NEXBEE
 const WinH = window.innerHeight //NEXBEE
 const WinW = window.innerWidth //NEXBEE
 const WHXY=(W,H,X,Y)=>`style="width:${W}px;height:${H}px;left:${X}px;top:${Y}px"` //NEXBEE
@@ -345,61 +360,17 @@ function Top_Lef(e,T,L){e.style.top=`${T}px`;e.style.left=`${L}px`}
 const Requed=(Inpt)=>Inpt.name.trim()==='Rqued' && Inpt.value===''
 const TestPass=e=>((e!==""?1:0)+(e.length>= 8)?1:0)+((/[A-Z]/.test(e)&&e.length>1)?1:0)+((/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)?1:0) // Retorna de 1 a 3
 const TestEmail=e=>ValidEmail.some(E=>e.endsWith(E))
-
 const CriaKina=(W,H,S)=>`polygon(${S}px 0%, ${W-S}px 0%, ${W}px ${S}px, ${W}px ${H-S}px, ${W-S}px ${H}px, ${S}px ${H}px, 0% ${H-S}px, 0% ${S}px)`
 function Read_Kina(){$$('.Kina').forEach(E=>{E.style.clipPath = CriaKina(E.offsetWidth,E.offsetHeight,Nm(E))})}
 function Rfresh(){ console.log('Funções Atualizadas') ;Read_Kina()}
 
 //GABARITO
 function ResizeArea(e){e.style.height = e.scrollHeight + 'px';e.style.width = e.scrollWidth + 'px'}
-
-
-//conferir pra ver se realmente precisa
-function TrocaClass(Clas1,Clas2){
-  const Add = $All('.'+Clas1).length===0?Clas1:Clas2
-  const Rmv = $All('.'+Clas1).length!==0?Clas1:Clas2
-  $All('.'+Rmv).forEach(e=>{e.classList.remove(Rmv);e.classList.add(Add)})
-}
-
-
-
-function Clen_Ipts(e){$$('input', e).forEach(I=>I.value='')}
-function Clen_Slct(e){$$('select',e).forEach(S=>S.selectedIndex=0)}
-function Clen_Alls(e){Clen_Ipts(e);Clen_Slct(e)}
-
 function InptsVazio(e){$$(e).forEach(e=>{if(e.value.trim()===""){Add(e,'Error') ; return true}else{Rmv(e,'Error') ; return false}})}
-
 function CssFont(e,Stg){$(e).style.fontFamily=Stg}
-
-// Quando eu Upo Várias Imagens dentro de um input
-function Promss_Imgs2(files,div){
-  const arry = []
-  for (const file of files) {
-      const reader = new FileReader()
-      const promise = new Promise(r => {
-          reader.onload = e => {
-              const Div = document.createElement('div')
-              const img = document.createElement('img')
-              Div.classList.add('DivImgRsut','Ct','Rltv')
-              img.src = e.target.result
-              img.name = file.name
-              Div.appendChild(img)
-              $(div).appendChild(Div)
-              r()
-          };reader.readAsDataURL(file)
-      });arry.push(promise)
-  };return Promise.all(arry)
-}
-
-
-
-
-// Templates NEXBEE
 
 // Pega todas 'Div' com Onload de uma Div especifica, pra cada uma Rodar o Onload
 const Onloads=e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})}
-
-
 function LoadOnloads(e){const onLoad = $(e).getAttribute('onload');if(onLoad){eval(onLoad)}}
 function execOnloads(e,Def=null){if(Def!==null){$(e).innerHTML=Def} ; $$('[onload]',$(e)).forEach(e=>LoadOnloads(e))}
 
@@ -441,7 +412,6 @@ function AnimeProp(Div,CSS,Sec,Esperar=false){
       requestAnimationFrame(animar);
   }
 }
-
 function Anime(Div,Direct,Time,Effects,wid,hei,top,lef){ // Efeitos podem ser [Opacy,Pose,Hidd]
   const div = $(Div)
   if(Effects.includes('Hidd')){
@@ -459,7 +429,6 @@ function Anime(Div,Direct,Time,Effects,wid,hei,top,lef){ // Efeitos podem ser [O
   div.style.top =  `${top}px`
   div.style.left = `${lef}px`
 }
-
 function Animar(Div,btn){
   if(btn.id==='H_Lgin'){Tog(btn,'AnimeExibido')}
   const div = $(Div)
@@ -469,25 +438,20 @@ function Animar(Div,btn){
       if(div.classList.contains('Opacy')){div.style.opacity='0'}
     }
 }
-
 function RmvAnime(){$$('.AnimeExibido').forEach(e=>Rmv(e,'AnimeExibido'))}
-
-
 
 //Projeto Advogado______________________________
 
-  function estaVisivel(e) {
-    const rect = e.getBoundingClientRect()
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    )
-  }
-  function verificarDiv(e,Call){if(estaVisivel(e)){ Call() ; window.removeEventListener('scroll',verificarDiv)}}
-
-
+function estaVisivel(e) {
+  const rect = e.getBoundingClientRect()
+  return (
+      rect.top    >= 0 &&
+      rect.left   >= 0 &&
+      rect.bottom <=(window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right  <=(window.innerWidth  || document.documentElement.clientWidth)
+  )
+}
+function verificarDiv(e,Call){if(estaVisivel(e)){ Call() ; window.removeEventListener('scroll',verificarDiv)}}
 
 // Funções de Fetch
 function FetchPOST(link,Conteudo,ALERT=null){
@@ -499,85 +463,17 @@ function FetchGET(Link,CallBack){
   .catch(err=>console.error('Erro no GET:',err))
 }
 
-
-// Funções de Mask
-const Mask = {
-  cpf:   i=>{if (i.value.length > 14) i.value = i.value.substring(0,14); i.value = i.value.replace(/\D/g,'').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{2})$/,'$1-$2')},
-  fone:  i=>{if (i.value.length > 15) i.value = i.value.substring(0,15); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2')},
-  data:  i=>{if (i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'$1/$2').replace(/(\d{2})(\d{4})$/,'$1/$2')},
-  cep:   i=>{if (i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d{5})(\d)/,'$1-$2')},
-  cartao:i=>{if (i.value.length > 19) i.value = i.value.substring(0,19); i.value = i.value.replace(/\D/g,'').replace(/(\d{4})(\d)/g,'$1 $2').trim()},
-  rs:    i=>{if (i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d)(\d{2})$/,'$1,$2').replace(/(\d)(\d{3})(\d)/,'$1.$2$3').replace(/(\d)(\d{3})$/,'$1.$2').replace(/^(?!\b0\b)\d/,'R$ $&')},
-}
-
-
-
 const OBS=(e,Call,p=null)=>new MutationObserver(()=>Call()).observe(e,{attributes: true,attributeFilter: p && Array.isArray(p) ? p : undefined})
 
-
-
-
-
-//FUNÇÕES CRIADAS PARA A MYPLAN_________________________________________________
-//FUNÇÕES CRIADAS PARA A MYPLAN_________________________________________________
-//FUNÇÕES CRIADAS PARA A MYPLAN_________________________________________________
-
-
-
-
-
-// Reordenar Rows de Tabela por Ordem Crecente ou Decrecente
-function OrdenarRows(e,x,Cntd=null,order=null){ // se tiver 'Cntd' é conteudo, é por que o texto a ser coletado esta dentro de alguma tag especifica dentro do td, se não tiver ta no próprio td
-    function AtualizaSetas(e,asc){
-      $$('th',e.closest('table')).forEach(th=>{const seta = $('i',th);if(seta){seta.style.opacity=0.5;seta.textContent='▼'}})
-        const Atual = SibQSl(e,'i') ; if(Atual){Atual.style.opacity=1;Atual.textContent=asc?'▼':'▲'}
-    }
-    const table = e.closest('table')
-    const tbody = $('tbody',table)
-    const asc = order ? order === 'asc' : table.dataset.sortOrder !== "asc"
-    const Txxt=e=> Cntd ? Txt($(Cntd,e.children[x])) : Txt(e.children[x])
-
-    // Verifica se o valor é uma data no formato DD/MM/YYYY
-    const isDate=(val)=>/^\d{2}\/\d{2}\/\d{4}$/.test(val)
-
-    const convertDate=(val)=>{ // Não ta resolvendo NADA
-        if (isDate(val)) {
-            const [day, month, year] = val.split('/')
-            return `${year}-${month}-${day}`
-        }
-        return val
-    }
-
-    const Ordn = [...tbody.rows].sort((a, b) => {
-      const valA = parseFloat(Txxt(a).replace('R$',''))
-      const valB = parseFloat(Txxt(b).replace('R$',''))
-  
-      if (!isNaN(valA) && !isNaN(valB)){return asc ? valA - valB : valB - valA}
-  
-      // Ordena como texto se não forem números
-      const txtA = convertDate(`${Txxt(a)}`.replace('R$',''))
-      const txtB = convertDate(`${Txxt(b)}`.replace('R$',''))
-
-      return asc ? txtA.localeCompare(txtB) : txtB.localeCompare(txtA)
-  })
-    table.dataset.sortOrder = asc ? "asc" : "desc"
-    Ordn.forEach(r=>tbody.appendChild(r))
-    AtualizaSetas(e,asc)
+// Mask________________________________________________________________________________________________
+const Mask = {
+  cpf:   i=>{if(i.value.length > 14) i.value = i.value.substring(0,14); i.value = i.value.replace(/\D/g,'').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{2})$/,'$1-$2')},
+  fone:  i=>{if(i.value.length > 15) i.value = i.value.substring(0,15); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2')},
+  data:  i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'$1/$2').replace(/(\d{2})(\d{4})$/,'$1/$2')},
+  cep:   i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d{5})(\d)/,'$1-$2')},
+  cartao:i=>{if(i.value.length > 19) i.value = i.value.substring(0,19); i.value = i.value.replace(/\D/g,'').replace(/(\d{4})(\d)/g,'$1 $2').trim()},
+  rs:    i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d)(\d{2})$/,'$1,$2').replace(/(\d)(\d{3})(\d)/,'$1.$2$3').replace(/(\d)(\d{3})$/,'$1.$2').replace(/^(?!\b0\b)\d/,'R$ $&')},
 }
-
-
-
-
-
-
-
-// Upados de OrçamentoGRAFF_______________________________________________________________________
-
-const _td=e=>e.tagName==='TD'?e:e.closest('td')
-const _tr=e=>e.tagName==='TR'?e:e.closest('tr')
-const _th=e=>e.tagName==='TH'?e:e.closest('th')
-const _table=e=>e.tagName==='TABLE'?e:e.closest('table')
-const _tbody=e=>e.tagName==='TBODY'?e:e.closest('tbody')
 
 function MaskNum(input){ // Funciona Muito bem e não pretendo me Livrar dela tão Fácil
     var Vlr = input.value.replace(/\D/g, '').replace(/^0+(?=[1-9])/, '')
@@ -618,30 +514,12 @@ function MaskR$(el){
   CurEnd(el)
 }
 
-const RgbToHex =rgb=>`#${rgb.replace(/^rgb\(|\s+|\)$/g,'').split(',').map(x=>parseInt(x).toString(16).padStart(2,'0')).join('')}`
-const hexToRGB =hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `rgb(${r},${g},${b})`}
-const hexToRGB2=hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `${r},${g},${b}`}
-
-const Dat=e=>new Date(e)
-const cRepet  =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc},{}) // Conta quantas vezes cada item aparece no array
-const cRepetID=arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
-const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
-const getClas=(e,Stg)=>[...e.classList].find(c=>c.includes(Stg)) || null // pegar uma Class q contem uma String especifica
-const LocPcnt=(parte,total)=>(parte/total)
-const RGBa=(e,op=0.2)=>{const [r,g,b]=getComputedStyle(e).backgroundColor.match(/\d+/g) ; e.style.backgroundColor = `rgba(${r},${g},${b},${op})`}
-const zipObj=(Key,Val)=>Object.fromEntries(Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
-const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
-const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
-const isImageLoaded=img=>img.complete && img.naturalWidth !== 0 // conferir se ta OK mesmo
-const RandoCor=()=>'#'+Rndn(16777215).toString(16).padStart(6,'0')
-const isArr=e=>Array.isArray(e)
-const NULL__=a=>a.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v??""])))
-const l0=e=>e.length===0
-const ATV=e=>Add($(e),'Atv')
-const DTV=e=>Rmv($(e),'Atv')
-const TOV=e=>Tog($(e),'Atv') // Modificar todos os Tog:Atv pra mudar pra TOV
-const Trc2=(e,add,rmv)=>{Add($(e),add);Rmv($(e),rmv)}
 
 
-// Templates_________________________________________________________________
+
+
+
+
+
+
 
