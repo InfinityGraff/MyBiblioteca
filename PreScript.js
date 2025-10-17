@@ -2,6 +2,7 @@
 // Dia 28/06/2025 (HexRGB)
 // Dia 13/07/2025 (UpperCase) (Novas Funcs) (ExtraClass)
 // Dia 03/08/2025 (Trazendo o templates.js) (SVG's)
+// Dia 16/10/2025 (Inner Correção)
 
 function CSS_Prop(e,Obj){
   Object.assign(e.style,{
@@ -94,17 +95,16 @@ const Chil = (e,x)=>{
 //Retornos DOM________________________________________________________________________________________________________________
 const     $ = (Stg,e=document)=>(typeof Stg==='string'?e.querySelector(Stg):Stg)
 const    $$ = (Stg,e=document)=>(typeof Stg==='string'?Array.from(e.querySelectorAll(Stg)):Stg)
+const   Inn = (e,Stg=null)=>{const el=$(e);return el?Stg===null?el.innerHTML:el.innerHTML=Stg:undefined}
+const    Nm = (e,stg=null)=>e?stg===null?e.getAttribute('name'):e.setAttribute('name',stg):undefined
 const   $Vl = (Stg,e=document)=>$(Stg,e).value
 const   $Tx = (Stg,e=document)=>$(Stg,e).textContent
-const  $Val = (Stg,e=document)=>$$(Stg,e).map(e=>e.value)
-const  $$Vl = (Stg,e=document)=>$$(Stg,e).map(e=>e.value) // Obsoletar o de cima
-const  $Inn = (Stg,e=document)=>$$(Stg,e).map(e=>e.innerHTML)
+const  $$Vl = (Stg,e=document)=>$$(Stg,e).map(e=>e.value)
+const  $$In = (Stg,e=document)=>$$(Stg,e).map(e=>e.innerHTML)
 const Clear = e=>[e].flat().forEach(el=>$(el).value='')
 const  Inn_ = (e,Stg)=>$(e).innerHTML+=Stg
 const   Src = (e,Stg)=>$(e).src = Stg
 const   Txt = e=>e.innerText.trim()
-const   Inn = (e,Stg=null)=> Stg===null ? $(e).innerHTML : $(e).innerHTML = Stg
-const    Nm = (e,stg=null)=> stg===null ? e.getAttribute('name') : e.setAttribute('name',stg)
 const    Rx = arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
 const   Vll = e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
 const   llv =(e,v)=>{if(e.tagName === 'INPUT' && e.type === 'checkbox'){e.checked = typeof v === 'string' ? JSON.parse(v) : v;} else {e.value = v}}
