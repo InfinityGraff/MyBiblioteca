@@ -4,71 +4,6 @@
 // Dia 03/08/2025 (Trazendo o templates.js) (SVG's)
 // Dia 16/10/2025 (Inner Correção)
 
-function CSS_Prop(e,Obj){
-  Object.assign(e.style,{
-      background: Obj.Bk,
-      zIndex:     Obj.Z,
-      height:     Obj.H,
-      width:      Obj.W,
-      top:        Obj.T,
-      left:       Obj.L,
-      bottom:     Obj.B,
-      right:      Obj.R,
-  })
-}
-
-function VV_CSS(Srg){
-  const map = {H:'height', W:'width', T:'top', L:'left', B:'bottom', R:'right', Z:'zIndex', Bk:'background', O:'opacity', Fz:'font-size', Cor:'color'}
-  Srg = Array.isArray(Srg) ? Srg : [Srg]
-  return Srg.map(s=>{const [k,v] = s.split(":") ; return map[k] ? `${map[k]}:${v}`:''}).filter(Boolean).join(";")
-}
-
-// Tentar remover essas 2, estão Inúteis
-//Retornos DOM Novos________________________________________________________________________________________________________________
-function S(s,c=document){
-  const E = typeof s==='string'? c.querySelector(s) : s
-  return {E:[E],
-    css(p,v){if(E) E.style[p]=v!==undefined?v:E.style[p];return this},
-    CSS(Obj){if (E) CSS_Prop(E,Obj) ; return this},
-    Val() { return E ? E.value : undefined },
-    Inner() { return E ? E.innerHTML : undefined },
-    Inn(Stg){E.innerHTML = Stg},
-    None(){ if(E) E.style.display='none'; return this },
-    Show(){ if(E) E.style.display='flex'; return this },
-    EShow(){ return E&&window.getComputedStyle(E).display!=='none' },
-    ENone(){ return E&&window.getComputedStyle(E).display==='none' },
-    Coten(Stg){ return E&&E.classList.contains(Stg) },
-    Notem(Stg){ return E&&!E.classList.contains(Stg) },
-    Add(Stg){ if(E) E.classList.add(Stg); return this },
-    Rmv(Stg){ if(E) E.classList.remove(Stg); return this },
-    Tog(Stg){ if(E) E.classList.toggle(Stg); return this },
-    Trc(R,A){ this.Rmv(R).Add(A); return this },
-    Toc(R,A){ this.Tog(R).Tog(A); return this },
-    Cll(){if(E) E.className=''; return this },
-  }
-}
-function SS(s,c){
-  const E=(c||document).querySelectorAll(s)
-  return {E,
-    css(p,v){E.forEach(el=>el.style[p]=v!==undefined?v:el.style[p]);return this},
-    Val(){return Array.from(E).map(e => e.value)},
-    Inn(){return Array.from(E).map(e => e.innerHTML)},
-    None(){ return this.css('display','none') },
-    Show(){ return this.css('display','flex') },
-    EShow(){ return Array.from(E).every(e=>window.getComputedStyle(e).display!=='none') },
-    ENone(){ return Array.from(E).every(e=>window.getComputedStyle(e).display==='none') },
-    Coten(Stg){ return Array.from(E).some(e=>e.classList.contains(Stg)) },
-    Notem(Stg){ return Array.from(E).every(e=>!e.classList.contains(Stg)) },
-    Add(Stg){ E.forEach(el=>el.classList.add(Stg)); return this },
-    Rmv(Stg){ E.forEach(el=>el.classList.remove(Stg)); return this },
-    Tog(Stg){ E.forEach(el=>el.classList.toggle(Stg)); return this },
-    Trc(R,A){ this.Rmv(R).Add(A); return this },
-    Toc(R,A){ this.Tog(R).Tog(A); return this },
-    Cll(){E.forEach(e=>e.className=''); return this } 
-
-  }
-}
-
 // tem q da uma Ajeitadinha pra melhorar, e ter certeza se tudo Funciona
 const Insert=e=>({ // Como Chamar a função: Insert('#onde botar').Befor ou .After('o que botar String ou Div','#depois de quem')
   Befor:(Stg,Stg2=null)=>{const r = $(Stg2,$(e)) ; typeof Stg === 'string'
@@ -78,19 +13,6 @@ const Insert=e=>({ // Como Chamar a função: Insert('#onde botar').Befor ou .Af
     ? r ? r.insertAdjacentHTML('afterend',Stg) : $(e).insertAdjacentHTML('afterbegin',Stg)
     : r ? r.parentNode.insertBefore(Stg,r.nextSibling) : $(e).appendChild(Stg)}
 })
-
-const Chil = (e,x)=>{
-  const E = $(e).children[x-1]
-  return E ? {
-      Rmv:()=>{E.remove()},
-      Show:()=>Show(E),
-      None:()=>None(E),
-      Rtur:()=>E,
-      Redd:()=>E.style.background = 'Red',
-      Log:()=>{console.log(E)},
-      Add:(stg)=>E.classList.add(stg)
-  } : (alert('Índice inválido'), null)
-}
 
 //Retornos DOM________________________________________________________________________________________________________________
 const     $ = (Stg,e=document)=>(typeof Stg==='string'?e.querySelector(Stg):Stg)
@@ -113,19 +35,19 @@ const   _tr =e=>e.tagName==='TR'?e:e.closest('tr')
 const   _th =e=>e.tagName==='TH'?e:e.closest('th')
 const _table=e=>e.tagName==='TABLE'?e:e.closest('table')
 const _tbody=e=>e.tagName==='TBODY'?e:e.closest('tbody')
+const getClss   =(e,Stg)=>[...e.classList].find(c=>c.includes(Stg))   || null // pegar uma Element q a Class contem a String
+const getClssIN =(e,Stg)=>[...e.classList].find(e=>e.startsWith(Stg)) || null // pegar uma Element q a Class inicia com a String
 
 //Retornos DOM Parentes_______________________________________________________________________________________________________
 const Parent=(e,n)=>Array(n).fill(0).reduce(p=>p.parentNode,e)
 const Pai=e=>Parent(e,1), Avo=e=>Parent(e,2), Bzv=e=>Parent(e,3), Ttv=e=>Parent(e,4), Vo5=e=>Parent(e,5)
-// Retornos de Irmãos
-const SibNxt = e=>e?.nextElementSibling || null
-const SibPrv = e=>e?.previousElementSibling || null
-const SibIdx = (e,x)=>[...e?.parentElement?.children || []][x] || null
-const SibQSl = (e,Q)=> [...e?.parentElement?.children || []].find(s=>s.matches(Q)) || null
-const SibAll = e=>[...e?.parentElement?.children || []].filter(s=>s!==e)
+const SibNxt = e=>e?.nextElementSibling || null                                             // Retorna o próximo elemento irmão de 'e' (ou null se não houver)
+const SibPrv = e=>e?.previousElementSibling || null                                         // Retorna o elemento irmão anterior de 'e' (ou null se não houver)
+const SibIdx = (e,x)=>[...e?.parentElement?.children || []][x] || null                      // Retorna o irmão na posição 'x' dentro do mesmo pai de 'e' (ou null se não existir)
+const SibQSl = (e,Q)=> [...e?.parentElement?.children || []].find(s=>s.matches(Q)) || null  // Retorna o primeiro irmão de 'e' que corresponde ao seletor CSS 'Q' (ou null se nenhum corresponder)
+const SibAll = e=>[...e?.parentElement?.children || []].filter(s=>s!==e)                    // Retorna todos os irmãos de 'e', exceto o próprio 'e'
 
 // Ações DOM___________________________________________________________________________________________________________________
-//const Befor=(e,Stg)=>$(e).insertAdjacentHTML('beforeend' ,Stg)
 const Befor  =(e,Stg,Stg2)=>typeof Stg === 'string' ? $(e).insertAdjacentHTML('beforeend',Stg):$(e).insertBefore(Stg,$(Stg2,$(e)))
 const After  =(e,Stg)=>$(e).insertAdjacentHTML('afterbegin',Stg)
 const DltAll =e=>$$(e).forEach(e=>e.remove())
@@ -160,33 +82,32 @@ const Add=(e,Stg)=>FazArry(e).forEach(E=>E.classList.add(Stg))
 const Rmv=(e,Stg)=>FazArry(e).forEach(E=>E.classList.remove(Stg))
 const Tog=(e,Stg)=>FazArry(e).forEach(E=>E.classList.toggle(Stg))
 const TrcTog=(e,s1,s2)=>{FazArry(e).forEach(E=>{Tog(E,s1) ;Tog(E,s2 )})}
-const Trc=(e,add,rmv) =>{FazArry(e).forEach(E=>{Add(E,add);Rmv(E,rmv)})}
+const Trc =(e,add,rmv)=>{FazArry(e).forEach(E=>{Add(E,add);Rmv(E,rmv)})}
 const Trc2=(e,add,rmv)=>{Add($(e),add);Rmv($(e),rmv)}
 const TrcCls=(c1,c2)=>{const add = $$(c1).length === 0 ? c1 : c2;const rmv = add === c1 ? c2 : c1;Trc($$(rmv), add, rmv)}
 const ATV=(a,b)=>{if(b){Rmv($(b),'Atv')} ; Add($(a),'Atv')}
 const DTV=(a,b)=>{if(b){Add($(b),'Atv')} ; Rmv($(a),'Atv')}
-const TOV=(a)=>Tog($(a),'Atv') // Modificar todos os Tog:Atv pra mudar pra TOV
-
-const getClss   =(e,Stg)=>[...e.classList].find(c=>c.includes(Stg))   || null // pegar uma Element q a Class contem a String
-const getClssIN =(e,Stg)=>[...e.classList].find(e=>e.startsWith(Stg)) || null // pegar uma Element q a Class inicia com a String
+const TOV=(a  )=>Tog($(a),'Atv')
 const DarkLite=e=>{TrcTog($(e),'Dark','Lite')}
 const Add_N=e=>FazArry(e).forEach(el=>Add(el,'none'))
 const Rmv_N=e=>FazArry(e).forEach(el=>Rmv(el,'none'))
 const Tog_N=e=>FazArry(e).forEach(el=>Tog(el,'none'))
-const Contem=(e,Stg) =>e.classList.contains(Stg) // NEXBEE
-const Coten =(e,Clss)=>FazArry(Clss).some(E=>e.classList.contains(E))
-const Notem =(e,Stg) =>!e.classList.contains(Stg) // NEXBEE
+
+
+const Coten =(e,Clss)=> FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
+const Noten =(e,Clss)=>!FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
+
 
 //Funções de Objeto e Array____________________________________________________________________________________________________
 const ObjKey =e=>Object.keys(e)                              // Converte todos Keys de Objetos em um array
 const ObjVal =e=>Object.values(e)                            // Converte todos value de Objetos em um array
-const ObjEtr =e=>Object.entries(e)                           // Converte um objeto em um array de pares [chave,valor]
-const For    =e=>Array.from({length:e},(_,idx)=>idx)         // Converte 'number' em um array de 0 até 'number'
+const ObjEtr =e=>Object.entries(e)                           // Converte um objeto em um array de pares [key,val]
+const For    =e=>Array.from({length:e},(_,x)=>x)             // Converte 'number' em um array de 0 até 'number'
 const Fbj    =obj=>For(ObjKey(obj).length)                   // Faz a Mesma coisa só que com a Chave do Objeto
 const IdxDe  =e=>Array.from(Pai(e).children).indexOf(e)      // Passo (div) Retorna o Index dela
 const Filh   =e=>Array.from($(e).children)                   
-const FIdx   =(Arry,Stg)=>Arry.findIndex(e=>e===Stg)         // Retorna o Index de um item em um array baseado na String
-const ObjOrdn=(obj,Arry)=>Arry.map(k=>obj[k]).filter(v=>v!==undefined) // Ordena key de Objeto de acordo com um array
+const FIdx   =(Arr,Stg)=>Arr.findIndex(e=>e===Stg)           // Retorna o Index de um item em um array baseado na String
+const ObjOrdn=(obj,Arr)=>Arr.map(k=>obj[k]).filter(v=>v!==undefined) // Ordena key de Objeto de acordo com um array
 const MAX=(arry,K)=>arry.reduce((max,e)=>Math.max(max,e[K]),0) // Retorna o Maior numero de uma determinada Posição de um Objeto
 const UniqArry=(arr,chk)=>chk?arr.filter((e,x,eu)=>eu.findIndex(a=>a[0]===e[0])===x):Array.from(new Set(arr.map(JSON.stringify)),JSON.parse)
 const Uniq=arr=>[...new Set(arr)]                            // cria um array com valores Unicos
@@ -222,14 +143,17 @@ const DisparoInpt = new Event('input',{bubbles:true})
 const DispClick=e=>e.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}))
 
 //Funções Conversor de Valores_________________________________________________________________________________________________
-const    Ared = e=>Math.floor(e)
+const    Ared = e=> Math.floor(e)
 const      Cm = e=> parseFloat(e).toFixed(2).replace('.',',')
 const     Fxd = e=> parseFloat(e).toFixed(2)
 const      RS = e=> `R$ ${Cm(e)}`
-const RS_HTML = e=>`<div class="Ct"><div>R$</div><div class="VVLR">${Cm(e)}</div></div>`
 const   Tm_RS = e=>`<div class="Ct"><p class="RS">R$</p><a>${Cm(e)}</a></div>`
+
 const     Num = e=>{const value = typeof e === 'number' ? e : parseFloat(e.replace(',', '.').replace('R$', '').trim()) ; return isNaN(value) ? 0 : value}
 const    Num2 = e=>isNaN(value = parseFloat(e.replace('R$ ','').replace(/\./g,'').replace(',','.'))) ? 0 : value
+const    Num3 = e =>e == undefined ? 0 :  typeof e === 'number' ? e : typeof e !== 'string' ? "" : e.trim() === "--" ? 0 : e.includes('R$') ? (+e.replace('R$','').replace(/\./g,'').replace(',','.').trim()||0) : /^[\d.,]+$/.test(e) ? (+e.replace(/\./g,'').replace(',','.').trim()||0) : e
+const    Num4 = e=>e==undefined ? 0 : e=='' ? '' : Num(e)
+
 const     Pct = e=>`${(e*100).toFixed(2)}%`
 const    Virg = e=>e.replace('.',',')
 const ParsMil = e=>parseFloat(Num($(e).value))*500
