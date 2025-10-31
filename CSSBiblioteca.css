@@ -22,30 +22,21 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
   --Rglr:'Tommy_Regular','Lexend Deca','Arial';
   --Bold:'Tommy_Bold'   ,'Lexend Deca','Arial';
   --Medi:'Tommy_Medium' ,'Lexend Deca','Arial';
-}*{
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  border: none;
-  text-decoration: none;
-  font-family: var(--Rglr);
-  font-size: 12px;
-  letter-spacing: 0.7px;
-  text-align: center;
-  outline:none;
 }
-.Ct{display:flex;flex-wrap: wrap;justify-content:center;align-items:center}
-.Wrp{flex-wrap: nowrap}
-.Start{display:flex;justify-content:flex-start;align-items:center}
+/*depois Remover a Fonte daqui e o tamanho da letra e tal*/
+*{margin:0px;padding:0px;box-sizing:border-box;border:none;text-decoration:none;font-family:var(--Rglr);font-size:12px;letter-spacing:0.7px;text-align:center;outline:none}
+.Ct    {display:flex;flex-wrap:wrap;justify-content:center;align-items:center}
+.Cl    {display:flex;flex-direction:column;align-items:center}
+.Wrp   {flex-wrap: nowrap}
+.End   {display:flex;justify-content:flex-end  ;align-items:center}
+.Start {display:flex;justify-content:flex-start;align-items:center}
 .Start2{display:flex;align-items:flex-start;flex-direction:column}
-.End{display:flex;justify-content:flex-end;align-items:center}
-.Cl{display:flex;flex-direction:column;align-items: center;}
-.Rw{display:flex;flex-direction: row;flex-wrap:nowrap;overflow-x:scroll}
-.Bt{width: 100%;display: flex;justify-content: space-between;align-items:center}
-.Ev{display: flex;justify-content:space-evenly;align-items:center}
-.Fx{position:fixed;top:0;left:0}
-.Hr{border-bottom: 1px solid #606060}
-.rd{border-radius: 10px;}.Rd{border-radius: 20px;}.RD{border-radius: 255px;}
+.Rw    {display:flex;flex-direction: row;flex-wrap:nowrap;overflow-x:scroll}
+.Bt    {width: 100%;display: flex;justify-content: space-between;align-items:center}
+.Ev    {display: flex;justify-content:space-evenly;align-items:center}
+.Fx    {position:fixed;top:0;left:0} /*Tirar TOP LEFT*/
+.Hr    {border-bottom: 1px solid #606060}
+.rd    {border-radius: 10px;}.Rd{border-radius: 20px;}.RD{border-radius: 255px}
 .w100{width:100%}.w90{width:90%;}.w80{width:80%;}.w50{width:50%;}.w40{width:40%;}.w30{width:30%;}.w20{width:20%;}.w10{width:10%;}.wAuto{width:auto;}.w0{width:0%}
 .WH30{width:30px;height:30px;}.WH15{width:15px;height:15px;}.WH40{width:40px;height:40px;}
 .h100{height: 100%};.h90{height: 90%}
@@ -110,25 +101,4 @@ textarea{overflow:hidden;resize:none;padding: 10px;}
 
 .Shdw{box-shadow: 0px 4px 6px #0000004d}
 
-
-.n0  { display: none; }
-.n1  { display: none; }
-.n2  { display: none; }
-.n3  { display: none; }
-.n4  { display: none; }
-.n5  { display: none; }
-.n6  { display: none; }
-.n7  { display: none; }
-.n8  { display: none; }
-.n9  { display: none; }
-.n10 { display: none; }
-.n11 { display: none; }
-.n12 { display: none; }
-.n13 { display: none; }
-.n14 { display: none; }
-.n15 { display: none; }
-.n16 { display: none; }
-.n17 { display: none; }
-.n18 { display: none; }
-.n19 { display: none; }
-.n20 { display: none; }
+.n0,.n1,.n2,.n3,.n4,.n5,.n6,.n7,.n8,.n9,.n10,.n11,.n12,.n13,.n14,.n15,.n16,.n17,.n18,.n19,.n20,.n21,.n22,.n23,.n24,.n25,.n26{display:none}

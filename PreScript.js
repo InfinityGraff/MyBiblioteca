@@ -14,6 +14,8 @@ const Insert=e=>({ // Como Chamar a função: Insert('#onde botar').Befor ou .Af
     : r ? r.parentNode.insertBefore(Stg,r.nextSibling) : $(e).appendChild(Stg)}
 })
 const LOG=(...stg)=>console.log(...stg)
+const ERR=(...stg)=>console.error(...stg)
+const MS=IN=>{const ms = (performance.now()-IN) ; if(ms<0.5) ; if(ms<1000){return ms.toFixed(2)+'ms'} ; return (ms/1000).toFixed(2)+'s'}
 
 //Retornos DOM________________________________________________________________________________________________________________
 const     $ = (Stg,e=document)=>(typeof Stg==='string'?e.querySelector(Stg):Stg)
@@ -84,6 +86,7 @@ const Tecla   =k=>{const event = window.event;const keys  = {ctrl:event.ctrlKey,
 const isArr   =e=>Array.isArray(e)
 const l0      =e=>e.length===0
 const Bool    =e=>typeof e === 'boolean' ? e : e=='true'
+const IsObj=e=>(typeof e === "object" && e !== null && !Array.isArray(e) && e.constructor === Object)
 //Funções Check
 const IsChkTru   =e=>e.checked==true
 const IsChkFal   =e=>e.checked==false
@@ -153,6 +156,8 @@ const cRepetID=arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) +
 const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
 const zipObj=(Key,Val)=>Object.fromEntries(Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
 const NULL__=a=>a.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v??""])))
+const SOMA_Obj2 = (ArrObj, Key) => Array.isArray(ArrObj) ? ArrObj.reduce((soma, obj) => Number(soma) + Number(obj[Key] || 0), 0) : 0;  // ESSA JÁ TAVA LÁ ANTES
+
 
 //FuncStorage________________________________________________________________________________________________________________
 const StogeGet=e=>localStorage.getItem(e)
@@ -256,7 +261,7 @@ function ShowModal(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Sho
 function SairModal(Fundo){document.addEventListener('keyup',e=>{if(e.key==='Escape'){None(Fundo)}});Fundo.addEventListener('click',e=>{if(e.target===Fundo){None(Fundo)}})}
 function ShowBrother(e,pai){var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e);Fi.forEach(e=>None(e)) ; if(x<Fi.length-1){Show(Fi[x+1])}else{Show(Fi[0])}}
 
-// Mask________________________________________________________________________________________________
+// Mask (Desejo Analisar esses Masks, e Fundir os MaskNum pra eles ficarem curtos e Funcionais)________________________________________________________________________________________________
 const Mask = {
   cpf:   i=>{if(i.value.length > 14) i.value = i.value.substring(0,14); i.value = i.value.replace(/\D/g,'').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{2})$/,'$1-$2')},
   fone:  i=>{if(i.value.length > 15) i.value = i.value.substring(0,15); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2')},
@@ -265,9 +270,9 @@ const Mask = {
   cartao:i=>{if(i.value.length > 19) i.value = i.value.substring(0,19); i.value = i.value.replace(/\D/g,'').replace(/(\d{4})(\d)/g,'$1 $2').trim()},
   rs:    i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d)(\d{2})$/,'$1,$2').replace(/(\d)(\d{3})(\d)/,'$1.$2$3').replace(/(\d)(\d{3})$/,'$1.$2').replace(/^(?!\b0\b)\d/,'R$ $&')},
 }
-
-function MaskNum(input){ // Funciona Muito bem e não pretendo me Livrar dela tão Fácil
-    var Vlr = input.value.replace(/\D/g, '').replace(/^0+(?=[1-9])/, '')
+// analisar pq esta está movendo cursor pra o final mesmo sem ter CurEnd(Eu)
+function MaskNum(Eu){ // Funciona Muito bem e não pretendo me Livrar dela tão Fácil
+    var Vlr = Eu.value.replace(/\D/g, '').replace(/^0+(?=[1-9])/, '')
     var Mask = '' ; const VLR = Vlr.length
     var Mask = VLR === 1 ? '0,0'+Vlr :
                 VLR === 2 ? '0,'+Vlr :
@@ -275,27 +280,20 @@ function MaskNum(input){ // Funciona Muito bem e não pretendo me Livrar dela t�
                 VLR === 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2) :
                 VLR > 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2, 4) : ''
         if (VLR > 5) {Mask = Mask.substring(0, 5)}
-        input.value = Mask
+        Eu.value = Mask
 }
 
-function MaskNum2(e){ // Funciona Muito bem e não pretendo me Livrar dela tão Fácil
-  var Vlr = e.innerHTML.replace(/\D/g, '').replace(/^0+(?=[1-9])/, '')
-  var Mask = '' ; const VLR = Vlr.length
-  var Mask = VLR === 1 ? '0,0'+Vlr :
-              VLR === 2 ? '0,'+Vlr :
-              VLR === 3 ? Vlr.charAt(0)+','+Vlr.substring(1) :
-              VLR === 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2) :
-              VLR > 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2, 4) : ''
-      if (VLR > 5) {Mask = Mask.substring(0, 5)}
-      e.innerHTML = 'R$ '+Mask
-
-        // Move o cursor para o final
-      const range = document.createRange();
-      const sel = window.getSelection();
-      range.selectNodeContents(e);
-      range.collapse(false); // false = final do conteúdo
-      sel.removeAllRanges();
-      sel.addRange(range);
+function MaskNumI(Eu){ // A diferenã apenas é q isso não é uma Div Editavel e não um Input (Fundir com a de Cima)
+    var Vlr = Eu.innerHTML.replace(/\D/g, '').replace(/^0+(?=[1-9])/, '')
+    var Mask = '' ; const VLR = Vlr.length
+    var Mask = VLR === 1 ? '0,0'+Vlr :
+                VLR === 2 ? '0,'+Vlr :
+                VLR === 3 ? Vlr.charAt(0)+','+Vlr.substring(1) :
+                VLR === 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2) :
+                VLR > 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2, 4) : ''
+        if (VLR > 5) {Mask = Mask.substring(0, 5)}
+        Eu.innerHTML = Mask
+        CurEnd(Eu)
 }
 
 function MaskR$(el){
@@ -344,3 +342,33 @@ function CssFont(e,Stg){$(e).style.fontFamily=Stg} //GABARITO
 const Onloads=e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})} // Pega todas '*' com Onload de uma Div especifica, e Roda o Onload de cada
 // function LoadOnloads(e){const onLoad = $(e).getAttribute('onload');if(onLoad){eval(onLoad)}}                             // Provavelmente Obsoleta
 // function execOnloads(e,Def=null){if(Def!==null){$(e).innerHTML=Def} ; $$('[onload]',$(e)).forEach(e=>LoadOnloads(e))}    // Provavelmente Obsoleta
+
+
+// isso é pra Esperar a função terminar pra poder dar o Alert
+const ShowTime2=(e,sec)=>{Show(e);requestAnimationFrame(()=>{Add($(e),"show")});setTimeout(()=>{Rmv($(e),"show");setTimeout(()=>{None(e)},400)}, sec*1000)}
+
+
+const Seguro=v=>(isFinite(v) && !Number.isNaN(v)) ? v : 0  // Provavelmente oq eu Faço aqui já tem em Num() talvez n o Infinity mas é só adicionar lá
+const MSRX = stg => Number(stg.replace('ms','').trim())    // isso também só Converte em Numero, eu Poderia testar isso usando Num e provavelmente esse ms, poderia trocar pra remover todas as letras, isso tbm removeria R$ depois eu vejo lá
+
+// DROP Adicionar pra PreScript na aba de Templates, mas usar a idéia do q eu fiz no Jogo de Fitebol
+const IptFile=(div)=>// vc Cria a Função Upload(files) lá dentro do seu Index, e dentro execulta as Funções
+                      // esta Div, é o Lugar onde as Imanges vão ser inseridas
+   `<style>
+        .Upld {width:100%;max-width:400px;height:200px;margin: 0px 30%;border: 2px dashed #ccc; transition: border-color 0.3s, background-color 0.3s, transform 0.3s; }
+        .Upld:hover    {border-color:#7e7e7e; transform: scale(1.05)}
+        .Upld:active   {border-color:#7e7e7e; transform: scale(0.98)}
+        .Upld.dragover {border-color:#ff5e00; transform: scale(1.08); background: #af704c1a}
+        .Upld span    {font-size: 50px; color: #ccc; transition: color 0.3s; }
+        .Upld:hover span,.Upld.dragover span,.Upld.filled span{color:#ff5e00}
+        .Upld:hover p,.Upld.dragover p{color:#ff5e00}
+        .Upld p        {color:#aaa;margin:0; font-size:16px; transition:color 0.3s}
+    </style>
+    <div class="Upld rd Cl Ct ppt Rltv"
+        ondragover="event.preventDefault(); Add(this,'dragover')"
+        ondragleave="Rmv(this,'dragover')"
+        ondrop="event.preventDefault();Rmv(this,'dragover');Promss_Src(event.dataTransfer.files).then(srcList=>{Upload('${div}',srcList)})">
+        <span>+</span><p>Arraste arquivos ou clique aqui</p>
+        <input class="Abslt w100 h100 ppt Opacy" type="file" id="imagem" accept="image/*" multiple onchange="Rmv(Pai(this),'dragover');Promss_Src(this.files).then(srcList=>{Upload('${div}',srcList)})">
+    </div>
+`
