@@ -1,15 +1,11 @@
 @keyframes BtnBaby{0%{background-position-x: 0%;}100%{background-position-x: 90%;}}
-@keyframes FndoModal {from {opacity: 0;} to {opacity: 1;}}  /*Pra remover pq atualizei pra a debaixo, mas tem App q ainda ta usando*/
-
-
-@keyframes modal{
-  from { opacity: 0;transform: translate3d(0,-80px,0)}
-  to { opacity: 1;transform: translate3d(0,0,0)}}
+@keyframes FndoModal {from {opacity: 0;} to {opacity: 1;}}  /*Pra remover pq atualizei pra a debaixo (@keyframes modal), mas tem App q ainda ta usando*/
+@keyframes modal{from { opacity: 0;transform: translate3d(0,-80px,0)}to { opacity: 1;transform: translate3d(0,0,0)}}
 
 input[type="number"]::-webkit-inner-spin-button,/*remover Spinner*/
 input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin: 0}
 
-:root{
+:root{ /*Acho q isso é padrão da Gráfica não da Biblioteca CSS*/
   --Laranja: #fa7d09;
   --Branco: #ffffff;
   --Cor-Final: #FF5900;
@@ -37,12 +33,13 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 .Fx    {position:fixed;top:0;left:0} /*Tirar TOP LEFT*/
 .Hr    {border-bottom: 1px solid #606060}
 .rd    {border-radius: 10px;}.Rd{border-radius: 20px;}.RD{border-radius: 255px}
-.w100{width:100%}.w90{width:90%;}.w80{width:80%;}.w50{width:50%;}.w40{width:40%;}.w30{width:30%;}.w20{width:20%;}.w10{width:10%;}.wAuto{width:auto;}.w0{width:0%}
-.WH30{width:30px;height:30px;}.WH15{width:15px;height:15px;}.WH40{width:40px;height:40px;}
-.h100{height: 100%};.h90{height: 90%}
-.B{font-weight: bold}
-.Br{word-wrap: break-word}
-.Grn{background: #008000}.CrCnz{color: #ffffff2f}
+.w100  {width:100%}.w90{width:90%;}.w80{width:80%;}.w50{width:50%;}.w40{width:40%;}.w30{width:30%;}.w20{width:20%;}.w10{width:10%;}.wAuto{width:auto;}.w0{width:0%}
+.WH30  {width:30px;height:30px;}.WH15{width:15px;height:15px;}.WH40{width:40px;height:40px;}
+.h100  {height: 100%};.h90{height: 90%}
+.B     {font-weight: bold}
+.Br    {word-wrap: break-word}
+.Grn{background: #008000}
+.CrCnz{color: #ffffff2f}
 .Red{background: #ff0000}
 .Blu{background: #0004ff}
 
