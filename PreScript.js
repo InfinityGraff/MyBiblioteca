@@ -13,6 +13,7 @@ const Insert=e=>({ // Como Chamar a função: Insert('#onde botar').Befor ou .Af
     ? r ? r.insertAdjacentHTML('afterend',Stg) : $(e).insertAdjacentHTML('afterbegin',Stg)
     : r ? r.parentNode.insertBefore(Stg,r.nextSibling) : $(e).appendChild(Stg)}
 })
+const LOG=(...stg)=>console.log(...stg)
 
 //Retornos DOM________________________________________________________________________________________________________________
 const     $ = (Stg,e=document)=>(typeof Stg==='string'?e.querySelector(Stg):Stg)
@@ -61,6 +62,39 @@ const ValTogg=(e,Stg,Stg2)=>$(e).value     = $(e).value    ===Stg?Stg2:Stg
 const Clen_Ipts=e=>$$('input', e).forEach(I=>I.value='')
 const Clen_Slct=e=>$$('select',e).forEach(S=>S.selectedIndex=0)
 const Clen_Alls=e=>{Clen_Ipts(e);Clen_Slct(e)}
+const Foco   =e=>$(e).focus()
+const FocoCh0=e=>$(e).children[0].focus()
+const FocoIn =e=>e.focus()
+const FocoOut=e=>{e.focus();e.setSelectionRange(e.value.length,e.value.length)}
+const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
+const Prvn=()=>event.preventDefault()
+
+// Funções de Validações_______________________________________________________________________________________________________
+const Is      =(e,stg)=>stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
+const Is_View = (e,total=false)=>{if(!e) return false;const r = e.getBoundingClientRect();return total ? (r.top >= 0 && r.left >= 0 && r.bottom <= innerHeight && r.right <= innerWidth) : (r.bottom >= 0 && r.right >= 0 && r.top <= innerHeight && r.left <= innerWidth)}
+const View_Vid=e=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].isIntersecting?'play':'pause']()).observe(v)})}
+const IsImgLod=img=>img.complete && img.naturalWidth !== 0
+const UndfNull=e=>e===undefined||e===null
+const NoVazi  =v=>v!=='' && v!==false && v!==undefined && v!==null // Não está vazio
+const IsNum   =e=>typeof e==='number'
+const IsCnv   =e=>e.tagName === 'CANVAS'
+const KeyEntr =Call=>{if(event.code === 'Enter' || event.keyCode === 13){event.preventDefault();Call()}}
+const KeyCtrl =e=>e.button == 0 && e.ctrlKey ? true : false
+const Tecla   =k=>{const event = window.event;const keys  = {ctrl:event.ctrlKey,shift:event.shiftKey,alt:event.altKey};return keys[k]}
+const isArr   =e=>Array.isArray(e)
+const l0      =e=>e.length===0
+const Bool    =e=>typeof e === 'boolean' ? e : e=='true'
+//Funções Check
+const IsChkTru   =e=>e.checked==true
+const IsChkFal   =e=>e.checked==false
+const ChkTru     =e=>e.checked=true
+const ChkFal     =e=>e.checked=false
+const ChkTru_Clik=e=>{ChkTru(e) ; DispClick(e)}
+const ChkFal_Clik=e=>{ChkFal(e) ; DispClick(e)}
+const AddReqr=e=>e.forEach(e=>{$(e).required = true })
+const EscReqr=e=>e.forEach(e=>{$(e).required = false})
+const Coten =(e,Clss)=> FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
+const Noten =(e,Clss)=>!FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
 
 //Display Show None________________________________________________________________________________________________________________
 function FazArry(e){return Array.isArray(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
@@ -92,11 +126,6 @@ const DarkLite=e=>{TrcTog($(e),'Dark','Lite')}
 const Add_N=e=>FazArry(e).forEach(el=>Add(el,'none'))
 const Rmv_N=e=>FazArry(e).forEach(el=>Rmv(el,'none'))
 const Tog_N=e=>FazArry(e).forEach(el=>Tog(el,'none'))
-
-
-const Coten =(e,Clss)=> FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
-const Noten =(e,Clss)=>!FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
-
 
 //Funções de Objeto e Array____________________________________________________________________________________________________
 const ObjKey =e=>Object.keys(e)                              // Converte todos Keys de Objetos em um array
@@ -145,22 +174,16 @@ const DispClick=e=>e.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelab
 //Funções Conversor de Valores_________________________________________________________________________________________________
 const    Ared = e=> Math.floor(e)
 const      Cm = e=> parseFloat(e).toFixed(2).replace('.',',')
-const     Fxd = e=> parseFloat(e).toFixed(2)
 const      RS = e=> `R$ ${Cm(e)}`
 const   Tm_RS = e=>`<div class="Ct"><p class="RS">R$</p><a>${Cm(e)}</a></div>`
-
-const     Num = e=>{const value = typeof e === 'number' ? e : parseFloat(e.replace(',', '.').replace('R$', '').trim()) ; return isNaN(value) ? 0 : value}
-const    Num2 = e=>isNaN(value = parseFloat(e.replace('R$ ','').replace(/\./g,'').replace(',','.'))) ? 0 : value
-const    Num3 = e =>e == undefined ? 0 :  typeof e === 'number' ? e : typeof e !== 'string' ? "" : e.trim() === "--" ? 0 : e.includes('R$') ? (+e.replace('R$','').replace(/\./g,'').replace(',','.').trim()||0) : /^[\d.,]+$/.test(e) ? (+e.replace(/\./g,'').replace(',','.').trim()||0) : e
-const    Num4 = e=>e==undefined ? 0 : e=='' ? '' : Num(e)
-
-const     Pct = e=>`${(e*100).toFixed(2)}%`
-const    Virg = e=>e.replace('.',',')
+const     Num = e=>e==null?0:typeof e==='number'?isNaN(e)?0:e:typeof e!=='string'?0:((t=e.trim())==''?'':t=='--'?0:((n=parseFloat(t.replace(/R\$\s?/gi,'').replace(/\./g,'').replace(',','.'))),isNaN(n)?0:n))
 const ParsMil = e=>parseFloat(Num($(e).value))*500
-const  CalcMB = e=>Num((new Blob([JSON.stringify(e)]).size/1024).toFixed(2))
-const    Zero = Num=>String(Num).padStart(3,'0')
-const Porcent = (V1,V2)=>((V1-V2)/V1)*100
-const LocPcnt = (parte,total)=>(parte/total)
+const  CalcMB = e=>Num((new Blob([JSON.stringify(e)]).size/1024).toFixed(2)) // Calcula quantos MB o arquivo tem
+const     Pct = e=>`${(e*100).toFixed(2)}%`   // Sem USO
+const    Virg = e=>e.replace('.',',')         // Sem USO
+const    Zero = e=>String(e).padStart(3,'0')  // Sem USO
+const Porcent = (V1,V2)=>((V1-V2)/V1)*100     // Sem USO
+const LocPcnt = (parte,total)=>(parte/total)  // Sem USO
 
 //Funções Conversor de Strings_________________________________________________________________________________________________
 const aa=Stg=>Stg.toLowerCase()
@@ -174,41 +197,14 @@ const RgbToHex =rgb=>`#${rgb.replace(/^rgb\(|\s+|\)$/g,'').split(',').map(x=>par
 const hexToRGB =hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `rgb(${r},${g},${b})`}
 const hexToRGB2=hex=>{const [r,g,b]=hex.slice(1).match(/.{2}/g).map(h=>parseInt(h,16)) ; return `${r},${g},${b}`}
 const RGBa=(e,op=0.2)=>{const [r,g,b]=getComputedStyle(e).backgroundColor.match(/\d+/g) ; e.style.backgroundColor = `rgba(${r},${g},${b},${op})`}
-
-// Funções de Validações_______________________________________________________________________________________________________
-// Poderia ser um OBJ gigante is.view
-const is        =(e,stg)=>stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
-const is_Visivel=e=>{const r=e&&e.getBoundingClientRect();return!!(r&&r.bottom>=0&&r.right>=0&&r.top<=innerHeight&&r.left<=innerWidth)}
-const View_Vid  =e=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].isIntersecting?'play':'pause']()).observe(v)})}
-const UndefNull =e=>e===undefined||e===null
-const IsNum     =e=>typeof e==='number'
-const isCnvs    =e=>e.tagName === 'CANVAS'
-const KeyEnter  =e=>(e.code === 'Enter' || e.keyCode === 13)
-const KeyEntr   =Call=>{if(event.code === 'Enter' || event.keyCode === 13){event.preventDefault();Call()}}
-const Ctrl      =e=>e.button === 0 && e.ctrlKey ? true : false
-const isImageLoaded=img=>img.complete && img.naturalWidth !== 0 // conferir se ta OK mesmo
-const isArr=e=>Array.isArray(e)
-const l0=e=>e.length===0
-const Bool = e => typeof e === 'boolean' ? e : e === 'true'
-
-// Funções de Templates________________________________________________________________________________________________________
-const SVG={
-    Ponta:`<svg class="svg-Ponta" style="" viewBox="0 0 258 128"><path d="M161 15l98 113H0l98-113c17-20 46-20 63 0z"/></svg>`
-    ,Lixo:`<svg class="svg-Lixo HOV ppt" viewBox="0 0 153 188"><path d="M23.79 58.73h105.45v104.31c0 7.2-4.5 12.71-11.59 12.71H35.39c-7.09 0-11.59-5.52-11.59-12.71V58.73zm114.05-35.52h-31.78c0-7.46 1.94-16.7-5.52-21.4-3.5-2.2-5.95-1.78-11.3-1.78H63.07c-5.39 0-7.6-.26-11.01 2.08-6.38 4.37-5.07 11.01-5.07 21.1H23.79c-8.38 0-15.77-.9-20.11 3.45-5.02 5.03-3.44 13.69-3.46 20.12-.02 6.66 5.04 11.95 11.61 11.95v96.84c0 17.45 3.04 32.52 23.34 32.31h88.8c16.48-5.1 17.23-16.74 17.23-31.37V58.73c4.29 0 7.53-2.29 9.42-4.79 2.51-3.33 2.18-6.8 2.18-12.4 0-5.48.63-8.95-1.71-12.5-3.31-5.03-7.86-5.83-13.25-5.82zm-38.14 65.8v68.42c0 9.57 11.97 8.38 11.97 1.87v-72.16c0-6.23-11.97-8.14-11.97 1.87zm-58.33-1.87v72.16c0 6.18 11.97 8.15 11.97-1.87v-68.42c0-9.91-11.97-8.13-11.97-1.87zm29.17.75v70.66c0 7.77 11.97 7.77 11.97 0v-70.66c0-7.88-11.97-7.88-11.97 0zm-51.23-52.72h114.42c9.88 0 8.72 11.59 1.12 11.59H22.49c-7.65 0-8.7-11.59 1.12-11.59zm45.62-23.18h23.18c6.74 0 5.98 6.88 5.98 11.22H63.12c0-4.61-.67-11.22 5.98-11.22z"/></svg>`
-    ,Chek:`<svg viewBox="0 0 568 413"><path d="M207 265l-110-118c-63-67-129 13-81 64l187 201 342-319c60-56-15-128-71-76l-267 247z"/></svg>`
-    ,Fexa:`<svg class="HOV ppt" viewBox="0 0 7899.71 7899.71"><path d="M7636.53 274.37c351.27,351.27 350.54,925.58 0,1276.12l-2396.94 2396.99 2389.65 2389.6c355.18,355.23 355.18,936.88 0,1292.1l0 0c-355.23,355.23 -936.88,355.23 -1292.1,0l-2389.65 -2389.6 -2396.99 2396.94c-351.22,351.27 -925.58,350.54 -1276.12,0 -351.22,-351.22 -350.54,-925.58 0,-1276.12l2396.99 -2396.94 -2404.9 -2404.96c-355.23,-355.23 -355.23,-936.88 0,-1292.1l0 0c355.23,-355.18 936.88,-355.18 1292.1,0l2404.9 2404.96 2396.94 -2396.99c351.27,-351.22 925.58,-350.54 1276.12,0z"/></svg>`
-    ,Mais:`<svg class="HOV ppt" viewBox="0 0 110.89 110.89"><path d="M55.57 0c5.29,0 9.61,4.33 9.61,9.61l0 36.1 35.99 0c5.35,0 9.73,4.38 9.73,9.73l0 0c0,5.35 -4.38,9.73 -9.73,9.73l-35.99 0 0 36.1c0,5.29 -4.33,9.61 -9.61,9.61 -5.29,0 -9.61,-4.33 -9.61,-9.61l0 -36.1 -36.22 0c-5.35,0 -9.73,-4.38 -9.73,-9.73l0 -0c0,-5.35 4.38,-9.73 9.73,-9.73l36.22 0 0 -36.1c0,-5.29 4.33,-9.61 9.61,-9.61z"/></svg>`
-    ,Cler:`<svg class="HOV ppt" viewBox="0 0 453.06 566.32"><path d="M336.56 534.94c0,-12.86 4.72,-45.31 7.22,-58.09 3.37,-17.19 8.05,-34.07 13.92,-49.97 5.95,-16.12 10.91,-31.05 18.12,-45.81l20.49 -43.58c-3.83,-4.8 -51.72,-31.07 -56.93,-34.24 -19.35,-11.81 -38.19,-21.81 -57.45,-33.5l-114.96 -66.94c-5.53,8.34 -10.46,16.49 -16.52,25.12 -9.02,12.84 -25.66,35.07 -36.85,46.5 -13.23,13.51 -28.58,28.68 -43.03,40.19 -7.78,6.19 -15.12,12.09 -23.21,18.48 -8.64,6.83 -15.08,11.65 -23.52,18.04 -7.84,5.93 -15.65,12.15 -23.85,17.75l45.61 49.38c2.73,2.55 28.72,25.46 30.76,25.37 5.84,-0.26 75.27,-76.16 86.73,-83.9 -1.23,5.33 -11.1,21.2 -14.24,27.47 -4.49,8.98 -9.79,17.46 -14.23,26.15 -2.34,4.58 -4.64,8.35 -7.35,13.51 -2.7,5.13 -4.65,8.46 -7.32,13.52 -3.42,6.46 -12.51,20.96 -13.81,26.58l38.52 23.87c54.48,31.83 131.58,61.01 193.19,75.51l-1.29 -31.38zm-152.75 -355.67c0,14.78 9.93,19.46 19.35,24.91l137.75 80.49c11.18,6.47 45.16,29.29 57.78,29.29 17.31,0 37.54,-43.36 37.54,-51 0,-9.35 -3.05,-15.99 -10.35,-20.94l-155.1 -90.45c-11.88,-7.24 -22.79,-12.95 -34.41,-20.16 -5.57,-3.46 -13.03,-4.75 -20.66,-2.38 -7.38,2.29 -10.63,6.69 -14.22,13.17 -5.09,9.21 -17.69,27.17 -17.69,37.08zm124.27 -28.77c4.83,3.27 10.32,6.11 15.46,9.23l47.97 27.39 52.03 -91.28c3.73,-6.28 6.6,-12.06 10.34,-18.32 7.02,-11.75 19.18,-28.13 19.18,-42.09 0,-15.67 -15.58,-21.86 -30.64,-30.51 -28.77,-16.51 -37.53,11.41 -54.01,40.49l-29.79 52.24c-1.35,2.27 -2.76,4.04 -4.11,6.31 -1.65,2.78 -2.03,3.94 -3.67,6.75l-22.75 39.78z"/></svg>`
-   ,Tempo:`<svg class="HOV ppt" viewBox="0 0 6121.17 6121.95"><path class="fil0" d="M5496.46 3335.94c-46.14,352.73 -155.86,662.25 -292.31,920.64 -116.73,221.03 -355.09,513.98 -555.62,675.41 -433.38,348.91 -1090.47,668.54 -1857.96,563.08 -1277.26,-175.5 -2316.58,-1233.52 -2156.47,-2719.06 134.55,-1248.51 1278.98,-2308.86 2723.93,-2143.19 1221.6,140.06 2322.72,1294.47 2138.43,2703.12zm-2735.81 0c196.26,173.3 1347.75,865.1 1607.95,992.39l207.93 -358.87c-205.44,-211.81 -1143.17,-641.16 -1359.62,-844.7l-0.71 -1584.16 -455.44 -4.73 -0.11 1800.06zm-2749.06 0c136.73,1606.26 1529.83,2910.38 3320.29,2776.56 1610.56,-120.37 2927.63,-1562.46 2777.62,-3340.64 -133.51,-1582.67 -1559.4,-2907.78 -3320.07,-2760.67 -1592.89,133.08 -2928.24,1557.99 -2777.84,3324.75z"/></svg>`
-   ,Crop :(Clss,tog)      =>`<svg class="${Clss}" viewBox="0 0 152.96 152.96  "><g><path d="M152.96 126.63l-22.5 0 0 -14.4 22.5 0 0 14.4zm-152.96 -100.31l22.5 0 0 14.4 -22.5 0 0 -14.4zm42.2 -26.32l0 112.23 63.07 0 0 14.4 -77.29 0 0 -126.63 14.21 0zm68.56 152.96l0 -112.23 -63.07 0 0 -14.4 77.29 0 0 126.63 -14.21 0z"/><polygon class="Croped ${tog}" points="47.68,106.62 105.17,106.62 105.17,46.34 47.68,46.34 "/></g></svg>`
-   ,Aling:(Clss,Cor1,Cor2)=>`<svg class="${Clss}" viewBox="0 0 1115.04 1115.03"<g><rect style="fill:white" transform="matrix(1.78337E-14 -0.131706 0.673364 3.48817E-15 518.703 658.109)" width="1527.55" height="115.29"/><circle style="fill:${Cor1}" cx="557.52" cy="238.6" r="161.42"/><circle style="fill:${Cor2}" cx="557.52" cy="876.43" r="161.42"/><rect x="0" y="-0" width="1115.04" height="1115.04"/></g></svg>`
-}
-const Tm_th    =(e,arr)=>Inn(e,arr.map(a=>`<th>${a}</th>`).join(''))
-const Tm_td    =(e,arr)=>Inn(e,arr.map(a=>`<td>${a}</td>`).join(''))
-const Tm_Opt   =(arr,Stg=null)=>arr.map((a,i)=>`<option value="${a}" ${i===0?'disabled':''} ${Stg===a?'selected':i===0?'selected':''}>${a}</option>`).join('')
-const Tm_OptFnt=(e,arr)=>Inn(e,arr.map(a=>`<option style="font-family:${a}" value="${a}">${a}</option>`).join(''))
-const load_Opts=(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`).join(''))
-const SrcSVG   =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
+// Funções de Replace
+const RxRepeti = e=>e.replace(/(.)\1+/g,'$1')                               // Remove letras repetidas seguidas (ex: "booom" → "bom")
+const RxEspaco = e=>e.trim().replace(/\s+/g,' ')                            // Remove espaços extras (início/fim e múltiplos espaços internos)
+const RxAcento = e=>e.normalize('NFD').replace(/[\u0300-\u036f]/g,'')       // Remove acentos (ex: "ação" → "acao")
+const RxPlural = e=>e.replace(/ão$|ões$|ao$|oes*$/,'ao').replace(/s*$/i,'') // Converte plurais para singular genérico (ex: "ações" → "acao")
+const NewRegex = e=>new RegExp(e.split('').map(e=>e+'.{0,3}').join(''),'i') // Transforma String num Regex Conciderando esse Criterio de .{0,3}
+const RxClear  = e=>RxPlural(RxAcento(RxRepeti(RxEspaco(aa(e)))))           // chama todos os Replaces
+const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')               // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
 
 // Funções de Eventos__________________________________________________________________________________________________________
 const EvtChng=(e,Call)=>FazArry(e).forEach(e=>e.addEventListener('change',Call))
@@ -219,176 +215,30 @@ const EvtBlur=(e,Call)=>FazArry(e).forEach(e=>e.addEventListener('blur'  ,Call))
 const RmvChng=(e,Call)=>FazArry(e).forEach(e=>e.removeEventListener('change',Call))
 const RmvInpt=(e,Call)=>FazArry(e).forEach(e=>e.removeEventListener('input' ,Call))
 const RmvClik=(e,Call)=>FazArry(e).forEach(e=>e.removeEventListener('click' ,Call))
+const Copy   =(area,stg)=>{area.value = stg ; area.select() ; document.execCommand('copy') ; console.log('Copiado')}
 const ClickFora=(e,Call)=>{const H=(E)=>!e.contains(E.target) && (Call(),RmvClik(document,H));EvtClik(document,H)}
-const Copy=(area,stg)=>{area.value = stg ; area.select() ; document.execCommand('copy') ; console.log('Copiado')}
+const OBS    =(e,Call,p=null)=>new MutationObserver(()=>Call()).observe(e,{attributes: true,attributeFilter: p && Array.isArray(p) ? p : undefined})
 
 //Controlador de Cursor__________________________________________________________________________________________________________
 const AplyRng = r=>(getSelection().removeAllRanges(),getSelection().addRange(r))
 const CurAll  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r)) // Seleciona Tudo
 const CurEnd  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r.collapse(false),r)) // vai pra o Fim da Linha
 
-function Tecla(key){const event = window.event;const keys  = {ctrl:event.ctrlKey,shift:event.shiftKey,alt:event.altKey};return keys[key]}
-
 //Funções Geradores____________________________________________________________________________________________________________
-const Rndn   =e=>Math.floor(Math.random()*e)
-const Randomm=(min,max)=>Rndn((max-min+1))+min
+const Rndn    =e=>Math.floor(Math.random()*e)
+const Randomm =(min,max)=>Rndn((max-min+1))+min
 const RandoCor=()=>'#'+Rndn(16777215).toString(16).padStart(6,'0')
-const GerarID=()=>`ID-${Rndn(900)+100}`
-const GerarIT=()=>`IT-${Rndn(900)+100}`
-const Dat    =e =>new Date(e)
-const HOJE   =()=>new Date().toLocaleDateString('pt-BR')
-const AGORA  =()=>`${HOJE()} ${new Date().toLocaleTimeString('pt-BR')}`
-
-//Funções Check________________________________________________________________________________________________________________
-const IsChkTru   =e=>e.checked===true
-const IsChkFal   =e=>e.checked===false
-const ChkTru     =e=>e.checked=true
-const ChkFal     =e=>e.checked=false
-const ChkTru_Clik=e=>{ChkTru(e) ; DispClick(e)}
-const ChkFal_Clik=e=>{ChkFal(e) ; DispClick(e)}
-const AddRequired=e=>e.forEach(e=>{$(e).required = true })
-const EscRequired=e=>e.forEach(e=>{$(e).required = false})
-
-// Funções de Replace_____________________________________________________
-const RxRepeti = e=>e.replace(/(.)\1+/g,'$1')                               // Remove letras repetidas seguidas (ex: "booom" → "bom")
-const RxEspaco = e=>e.trim().replace(/\s+/g,' ')                            // Remove espaços extras (início/fim e múltiplos espaços internos)
-const RxAcento = e=>e.normalize('NFD').replace(/[\u0300-\u036f]/g,'')       // Remove acentos (ex: "ação" → "acao")
-const RxPlural = e=>e.replace(/ão$|ões$|ao$|oes*$/,'ao').replace(/s*$/i,'') // Converte plurais para singular genérico (ex: "ações" → "acao")
-const NewRegex = e=>new RegExp(e.split('').map(e=>e+'.{0,3}').join(''),'i') // Transforma String num Regex Conciderando esse Criterio de .{0,3}
-const RxClear  = e=>RxPlural(RxAcento(RxRepeti(RxEspaco(aa(e)))))           // chama todos os Replaces
-const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')               // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
-
-// Funções de Ações e Simulações
-const Foco   =e=>$(e).focus()
-const FocoCh0=e=>$(e).children[0].focus()
-const FocoIn =e=>e.focus()
-const FocoOut=e=>{e.focus();e.setSelectionRange(e.value.length,e.value.length)}
+const GerarID =()=>`ID-${Rndn(900)+100}`
+const GerarIT =()=>`IT-${Rndn(900)+100}`
+const Dat     =e =>new Date(e)
+const HOJE    =()=>new Date().toLocaleDateString('pt-BR')
+const AGORA   =()=>`${HOJE()} ${new Date().toLocaleTimeString('pt-BR')}`
 
 // MODAL________________________________________________
 function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/
 function ShowModal(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)}
 function SairModal(Fundo){document.addEventListener('keyup',e=>{if(e.key==='Escape'){None(Fundo)}});Fundo.addEventListener('click',e=>{if(e.target===Fundo){None(Fundo)}})}
 function ShowBrother(e,pai){var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e);Fi.forEach(e=>None(e)) ; if(x<Fi.length-1){Show(Fi[x+1])}else{Show(Fi[0])}}
-const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
-
-//NEXBEE
-function EscThis(){if(event.target===event.currentTarget){None(event.target)}} //NEXBEE
-function EscModal(){} //NEXBEE
-function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"})} //NEXBEE
-const RxgOnFun=e=>e?e.toString().match(/\{([^}]*)\}/)[1]:'' // serve pra pegar o texto da função 'myfunction(gg)' onclick, onkeyup e todos
-function Delay(sec){return new Promise(r => setTimeout(r, sec*1000))} //NEXBEE
-async function Dellay(Sec,Call){await new Promise(r=>setTimeout(r, Sec* 1000));Call()} //NEXBEE
-const WinH = window.innerHeight //NEXBEE
-const WinW = window.innerWidth //NEXBEE
-const WHXY=(W,H,X,Y)=>`style="width:${W}px;height:${H}px;left:${X}px;top:${Y}px"` //NEXBEE
-function Top_Lef(e,T,L){e.style.top=`${T}px`;e.style.left=`${L}px`}
-const Requed=(Inpt)=>Inpt.name.trim()==='Rqued' && Inpt.value===''
-const TestPass=e=>((e!==""?1:0)+(e.length>= 8)?1:0)+((/[A-Z]/.test(e)&&e.length>1)?1:0)+((/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)?1:0) // Retorna de 1 a 3
-const TestEmail=e=>ValidEmail.some(E=>e.endsWith(E))
-const CriaKina=(W,H,S)=>`polygon(${S}px 0%, ${W-S}px 0%, ${W}px ${S}px, ${W}px ${H-S}px, ${W-S}px ${H}px, ${S}px ${H}px, 0% ${H-S}px, 0% ${S}px)`
-function Read_Kina(){$$('.Kina').forEach(E=>{E.style.clipPath = CriaKina(E.offsetWidth,E.offsetHeight,Nm(E))})}
-function Rfresh(){ console.log('Funções Atualizadas') ;Read_Kina()}
-
-//GABARITO
-function ResizeArea(e){e.style.height = e.scrollHeight + 'px';e.style.width = e.scrollWidth + 'px'}
-function InptsVazio(e){$$(e).forEach(e=>{if(e.value.trim()===""){Add(e,'Error') ; return true}else{Rmv(e,'Error') ; return false}})}
-function CssFont(e,Stg){$(e).style.fontFamily=Stg}
-
-// Pega todas 'Div' com Onload de uma Div especifica, pra cada uma Rodar o Onload
-const Onloads=e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})}
-function LoadOnloads(e){const onLoad = $(e).getAttribute('onload');if(onLoad){eval(onLoad)}}
-function execOnloads(e,Def=null){if(Def!==null){$(e).innerHTML=Def} ; $$('[onload]',$(e)).forEach(e=>LoadOnloads(e))}
-
-// Animação_____________________________________________________________________________________
-function AnimeProp(Div,CSS,Sec,Esperar=false){
-  const inicio = {}
-  const startTime = performance.now()
-  for (let prop in CSS){inicio[prop]=parseFloat(getComputedStyle(Div)[prop]) || 0}
-  if(Esperar){
-      return new Promise((resolve)=>{
-          const animar = (Time) => {
-              const Prog = Math.min((Time-startTime)/(Sec*1000),1)
-              for (let prop in CSS) {
-                  const valorFinal = CSS[prop]
-                  if (prop === 'opacity'){Div.style[prop] = valorFinal * Prog + (1 - Prog) * inicio[prop]}
-                  else{Div.style[prop] = `${inicio[prop] + (valorFinal - inicio[prop]) * Prog}px`}
-              }
-              if (Prog < 1) {requestAnimationFrame(animar)}
-              else {resolve();}
-          }
-          requestAnimationFrame(animar);
-      });
-  } else {
-      const animar = (Time) => {
-          const Prog = Math.min((Time - startTime) / (Sec * 1000), 1);
-
-          for (let prop in CSS) {
-              const valorFinal = CSS[prop];
-              if (prop === 'opacity') {
-                  Div.style[prop] = valorFinal * Prog + (1 - Prog) * inicio[prop];
-              } else {
-                  Div.style[prop] = `${inicio[prop] + (valorFinal - inicio[prop]) * Prog}px`;
-              }
-          }
-          if (Prog < 1) {
-              requestAnimationFrame(animar);
-          }
-      }
-      requestAnimationFrame(animar);
-  }
-}
-function Anime(Div,Direct,Time,Effects,wid,hei,top,lef){ // Efeitos podem ser [Opacy,Pose,Hidd]
-  const div = $(Div)
-  if(Effects.includes('Hidd')){
-  const Pai = div.parentNode
-  Pai.classList.add('Anime')
-  Pai.style.width =  `${wid}px`
-  Pai.style.height = `${hei}px`
-  Pai.style.top =  `${70}px`
-  Pai.style.right = `${0}px`
-  }
-  if(Effects.includes('Opacy')){div.classList.add('Opacy')}
-  div.classList.add(Direct)
-  div.style.width = `${wid}px`
-  div.style.height = `${hei}px`
-  div.style.top =  `${top}px`
-  div.style.left = `${lef}px`
-}
-function Animar(Div,btn){
-  if(btn.id==='H_Lgin'){Tog(btn,'AnimeExibido')}
-  const div = $(Div)
-  if(btn.classList.contains('AnimeExibido')){Add(div,'Animar')
-    if(div.classList.contains('Opacy')){div.style.opacity='1'}}else{
-      Rmv(div,'Animar');None($('#mmdal'))
-      if(div.classList.contains('Opacy')){div.style.opacity='0'}
-    }
-}
-function RmvAnime(){$$('.AnimeExibido').forEach(e=>Rmv(e,'AnimeExibido'))}
-
-//Projeto Advogado______________________________
-
-function estaVisivel(e) {
-  const rect = e.getBoundingClientRect()
-  return (
-      rect.top    >= 0 &&
-      rect.left   >= 0 &&
-      rect.bottom <=(window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right  <=(window.innerWidth  || document.documentElement.clientWidth)
-  )
-}
-function verificarDiv(e,Call){if(estaVisivel(e)){ Call() ; window.removeEventListener('scroll',verificarDiv)}}
-
-// Funções de Fetch
-function FetchPOST(link,Conteudo,ALERT=null){
-  fetch(link,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Conteudo)})
-  .then(r=>{return r.text()}).then(m=>{ALERT?ALERT(m):null}).catch(rr=>{console.error('Erro no POST:',rr)})
-}
-function FetchGET(Link,CallBack){
-  fetch(Link).then(r=>r.json()).then(dados=>{CallBack(dados)})
-  .catch(err=>console.error('Erro no GET:',err))
-}
-
-const OBS=(e,Call,p=null)=>new MutationObserver(()=>Call()).observe(e,{attributes: true,attributeFilter: p && Array.isArray(p) ? p : undefined})
 
 // Mask________________________________________________________________________________________________
 const Mask = {
@@ -439,15 +289,42 @@ function MaskR$(el){
   CurEnd(el)
 }
 
+// Funções de Templates________________________________________________________________________________________________________
+// Daqui pra Baixo são Funções Gerais que Possuem Class, Id, e CSS particulares, tem que ter cuidado ao Usar algo Daqui!
+// Mas só de Importar este PreScript pode dar conflito no HTML q estiver usando isso.
+// então Logo Abaixo Listarei as Class e Id que já estarão em USO
+const SVG={
+    Ponta:`<svg class="svg-Ponta" style="" viewBox="0 0 258 128"><path d="M161 15l98 113H0l98-113c17-20 46-20 63 0z"/></svg>`
+    ,Lixo:`<svg class="svg-Lixo HOV ppt" viewBox="0 0 153 188"><path d="M23.79 58.73h105.45v104.31c0 7.2-4.5 12.71-11.59 12.71H35.39c-7.09 0-11.59-5.52-11.59-12.71V58.73zm114.05-35.52h-31.78c0-7.46 1.94-16.7-5.52-21.4-3.5-2.2-5.95-1.78-11.3-1.78H63.07c-5.39 0-7.6-.26-11.01 2.08-6.38 4.37-5.07 11.01-5.07 21.1H23.79c-8.38 0-15.77-.9-20.11 3.45-5.02 5.03-3.44 13.69-3.46 20.12-.02 6.66 5.04 11.95 11.61 11.95v96.84c0 17.45 3.04 32.52 23.34 32.31h88.8c16.48-5.1 17.23-16.74 17.23-31.37V58.73c4.29 0 7.53-2.29 9.42-4.79 2.51-3.33 2.18-6.8 2.18-12.4 0-5.48.63-8.95-1.71-12.5-3.31-5.03-7.86-5.83-13.25-5.82zm-38.14 65.8v68.42c0 9.57 11.97 8.38 11.97 1.87v-72.16c0-6.23-11.97-8.14-11.97 1.87zm-58.33-1.87v72.16c0 6.18 11.97 8.15 11.97-1.87v-68.42c0-9.91-11.97-8.13-11.97-1.87zm29.17.75v70.66c0 7.77 11.97 7.77 11.97 0v-70.66c0-7.88-11.97-7.88-11.97 0zm-51.23-52.72h114.42c9.88 0 8.72 11.59 1.12 11.59H22.49c-7.65 0-8.7-11.59 1.12-11.59zm45.62-23.18h23.18c6.74 0 5.98 6.88 5.98 11.22H63.12c0-4.61-.67-11.22 5.98-11.22z"/></svg>`
+    ,Chek:`<svg viewBox="0 0 568 413"><path d="M207 265l-110-118c-63-67-129 13-81 64l187 201 342-319c60-56-15-128-71-76l-267 247z"/></svg>`
+    ,Fexa:`<svg class="HOV ppt" viewBox="0 0 7899.71 7899.71"><path d="M7636.53 274.37c351.27,351.27 350.54,925.58 0,1276.12l-2396.94 2396.99 2389.65 2389.6c355.18,355.23 355.18,936.88 0,1292.1l0 0c-355.23,355.23 -936.88,355.23 -1292.1,0l-2389.65 -2389.6 -2396.99 2396.94c-351.22,351.27 -925.58,350.54 -1276.12,0 -351.22,-351.22 -350.54,-925.58 0,-1276.12l2396.99 -2396.94 -2404.9 -2404.96c-355.23,-355.23 -355.23,-936.88 0,-1292.1l0 0c355.23,-355.18 936.88,-355.18 1292.1,0l2404.9 2404.96 2396.94 -2396.99c351.27,-351.22 925.58,-350.54 1276.12,0z"/></svg>`
+    ,Mais:`<svg class="HOV ppt" viewBox="0 0 110.89 110.89"><path d="M55.57 0c5.29,0 9.61,4.33 9.61,9.61l0 36.1 35.99 0c5.35,0 9.73,4.38 9.73,9.73l0 0c0,5.35 -4.38,9.73 -9.73,9.73l-35.99 0 0 36.1c0,5.29 -4.33,9.61 -9.61,9.61 -5.29,0 -9.61,-4.33 -9.61,-9.61l0 -36.1 -36.22 0c-5.35,0 -9.73,-4.38 -9.73,-9.73l0 -0c0,-5.35 4.38,-9.73 9.73,-9.73l36.22 0 0 -36.1c0,-5.29 4.33,-9.61 9.61,-9.61z"/></svg>`
+    ,Cler:`<svg class="HOV ppt" viewBox="0 0 453.06 566.32"><path d="M336.56 534.94c0,-12.86 4.72,-45.31 7.22,-58.09 3.37,-17.19 8.05,-34.07 13.92,-49.97 5.95,-16.12 10.91,-31.05 18.12,-45.81l20.49 -43.58c-3.83,-4.8 -51.72,-31.07 -56.93,-34.24 -19.35,-11.81 -38.19,-21.81 -57.45,-33.5l-114.96 -66.94c-5.53,8.34 -10.46,16.49 -16.52,25.12 -9.02,12.84 -25.66,35.07 -36.85,46.5 -13.23,13.51 -28.58,28.68 -43.03,40.19 -7.78,6.19 -15.12,12.09 -23.21,18.48 -8.64,6.83 -15.08,11.65 -23.52,18.04 -7.84,5.93 -15.65,12.15 -23.85,17.75l45.61 49.38c2.73,2.55 28.72,25.46 30.76,25.37 5.84,-0.26 75.27,-76.16 86.73,-83.9 -1.23,5.33 -11.1,21.2 -14.24,27.47 -4.49,8.98 -9.79,17.46 -14.23,26.15 -2.34,4.58 -4.64,8.35 -7.35,13.51 -2.7,5.13 -4.65,8.46 -7.32,13.52 -3.42,6.46 -12.51,20.96 -13.81,26.58l38.52 23.87c54.48,31.83 131.58,61.01 193.19,75.51l-1.29 -31.38zm-152.75 -355.67c0,14.78 9.93,19.46 19.35,24.91l137.75 80.49c11.18,6.47 45.16,29.29 57.78,29.29 17.31,0 37.54,-43.36 37.54,-51 0,-9.35 -3.05,-15.99 -10.35,-20.94l-155.1 -90.45c-11.88,-7.24 -22.79,-12.95 -34.41,-20.16 -5.57,-3.46 -13.03,-4.75 -20.66,-2.38 -7.38,2.29 -10.63,6.69 -14.22,13.17 -5.09,9.21 -17.69,27.17 -17.69,37.08zm124.27 -28.77c4.83,3.27 10.32,6.11 15.46,9.23l47.97 27.39 52.03 -91.28c3.73,-6.28 6.6,-12.06 10.34,-18.32 7.02,-11.75 19.18,-28.13 19.18,-42.09 0,-15.67 -15.58,-21.86 -30.64,-30.51 -28.77,-16.51 -37.53,11.41 -54.01,40.49l-29.79 52.24c-1.35,2.27 -2.76,4.04 -4.11,6.31 -1.65,2.78 -2.03,3.94 -3.67,6.75l-22.75 39.78z"/></svg>`
+   ,Tempo:`<svg class="HOV ppt" viewBox="0 0 6121.17 6121.95"><path class="fil0" d="M5496.46 3335.94c-46.14,352.73 -155.86,662.25 -292.31,920.64 -116.73,221.03 -355.09,513.98 -555.62,675.41 -433.38,348.91 -1090.47,668.54 -1857.96,563.08 -1277.26,-175.5 -2316.58,-1233.52 -2156.47,-2719.06 134.55,-1248.51 1278.98,-2308.86 2723.93,-2143.19 1221.6,140.06 2322.72,1294.47 2138.43,2703.12zm-2735.81 0c196.26,173.3 1347.75,865.1 1607.95,992.39l207.93 -358.87c-205.44,-211.81 -1143.17,-641.16 -1359.62,-844.7l-0.71 -1584.16 -455.44 -4.73 -0.11 1800.06zm-2749.06 0c136.73,1606.26 1529.83,2910.38 3320.29,2776.56 1610.56,-120.37 2927.63,-1562.46 2777.62,-3340.64 -133.51,-1582.67 -1559.4,-2907.78 -3320.07,-2760.67 -1592.89,133.08 -2928.24,1557.99 -2777.84,3324.75z"/></svg>`
+   ,Crop :(Clss,tog)      =>`<svg class="${Clss}" viewBox="0 0 152.96 152.96  "><g><path d="M152.96 126.63l-22.5 0 0 -14.4 22.5 0 0 14.4zm-152.96 -100.31l22.5 0 0 14.4 -22.5 0 0 -14.4zm42.2 -26.32l0 112.23 63.07 0 0 14.4 -77.29 0 0 -126.63 14.21 0zm68.56 152.96l0 -112.23 -63.07 0 0 -14.4 77.29 0 0 126.63 -14.21 0z"/><polygon class="Croped ${tog}" points="47.68,106.62 105.17,106.62 105.17,46.34 47.68,46.34 "/></g></svg>`
+   ,Aling:(Clss,Cor1,Cor2)=>`<svg class="${Clss}" viewBox="0 0 1115.04 1115.03"<g><rect style="fill:white" transform="matrix(1.78337E-14 -0.131706 0.673364 3.48817E-15 518.703 658.109)" width="1527.55" height="115.29"/><circle style="fill:${Cor1}" cx="557.52" cy="238.6" r="161.42"/><circle style="fill:${Cor2}" cx="557.52" cy="876.43" r="161.42"/><rect x="0" y="-0" width="1115.04" height="1115.04"/></g></svg>`
+}
+const Tm_th    =(e,arr)=>Inn(e,arr.map(a=>`<th>${a}</th>`).join(''))
+const Tm_td    =(e,arr)=>Inn(e,arr.map(a=>`<td>${a}</td>`).join(''))
+const Tm_Opt   =(arr,Stg=null)=>arr.map((a,i)=>`<option value="${a}" ${i===0?'disabled':''} ${Stg===a?'selected':i===0?'selected':''}>${a}</option>`).join('')
+const Tm_OptFnt=(e,arr)=>Inn(e,arr.map(a=>`<option style="font-family:${a}" value="${a}">${a}</option>`).join(''))
+const load_Opts=(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`).join(''))
+const SrcSVG   =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
 
 
-const LOG=(...stg)=>console.log(...stg)
-const Prvn    =()=>event.preventDefault()
 
 
 
 
+// Pra analizar_______________________________________________________________________________________________________
+function Delay(sec){return new Promise(r => setTimeout(r, sec*1000))} //NEXBEE
+async function Dellay(Sec,Call){await new Promise(r=>setTimeout(r, Sec* 1000));Call()} //NEXBEE
+const TestPass=e=>((e!==""?1:0)+(e.length>= 8)?1:0)+((/[A-Z]/.test(e)&&e.length>1)?1:0)+((/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)?1:0) // Retorna de 1 a 3
+const TestEmail=e=>ValidEmail.some(E=>e.endsWith(E))
+function ResizeArea(e){e.style.height = e.scrollHeight + 'px';e.style.width = e.scrollWidth + 'px'} //GABARITO
+function InptsVazio(e){$$(e).forEach(e=>{if(e.value.trim()===""){Add(e,'Error') ; return true}else{Rmv(e,'Error') ; return false}})} //GABARITO
+function CssFont(e,Stg){$(e).style.fontFamily=Stg} //GABARITO
 
-
-
-
+const Onloads=e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})} // Pega todas '*' com Onload de uma Div especifica, e Roda o Onload de cada
+// function LoadOnloads(e){const onLoad = $(e).getAttribute('onload');if(onLoad){eval(onLoad)}}                             // Provavelmente Obsoleta
+// function execOnloads(e,Def=null){if(Def!==null){$(e).innerHTML=Def} ; $$('[onload]',$(e)).forEach(e=>LoadOnloads(e))}    // Provavelmente Obsoleta

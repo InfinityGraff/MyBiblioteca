@@ -74,3 +74,95 @@ const Chil = (e,x)=>{
       Add:(stg)=>E.classList.add(stg)
   } : (alert('Índice inválido'), null)
 }
+
+
+// Funções de Fetch
+function FetchPOST(link,Conteudo,ALERT=null){
+  fetch(link,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Conteudo)})
+  .then(r=>{return r.text()}).then(m=>{ALERT?ALERT(m):null}).catch(rr=>{console.error('Erro no POST:',rr)})
+}
+function FetchGET(Link,CallBack){
+  fetch(Link).then(r=>r.json()).then(dados=>{CallBack(dados)})
+  .catch(err=>console.error('Erro no GET:',err))
+}
+
+
+//NEXBEE
+function EscThis(){if(event.target===event.currentTarget){None(event.target)}} //NEXBEE
+function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"})} //NEXBEE
+const RxgOnFun=e=>e?e.toString().match(/\{([^}]*)\}/)[1]:'' // serve pra pegar o texto da função 'myfunction(gg)' onclick, onkeyup e todos
+const WinH = window.innerHeight //NEXBEE
+const WinW = window.innerWidth //NEXBEE
+const WHXY=(W,H,X,Y)=>`style="width:${W}px;height:${H}px;left:${X}px;top:${Y}px"` //NEXBEE
+function Top_Lef(e,T,L){e.style.top=`${T}px`;e.style.left=`${L}px`}
+const Requed=(Inpt)=>Inpt.name.trim()==='Rqued' && Inpt.value===''
+const CriaKina=(W,H,S)=>`polygon(${S}px 0%, ${W-S}px 0%, ${W}px ${S}px, ${W}px ${H-S}px, ${W-S}px ${H}px, ${S}px ${H}px, 0% ${H-S}px, 0% ${S}px)`
+function Read_Kina(){$$('.Kina').forEach(E=>{E.style.clipPath = CriaKina(E.offsetWidth,E.offsetHeight,Nm(E))})}
+function Rfresh(){ console.log('Funções Atualizadas') ;Read_Kina()}
+
+
+// Animação_____________________________________________________________________________________
+function AnimeProp(Div,CSS,Sec,Esperar=false){
+  const inicio = {}
+  const startTime = performance.now()
+  for (let prop in CSS){inicio[prop]=parseFloat(getComputedStyle(Div)[prop]) || 0}
+  if(Esperar){
+      return new Promise((resolve)=>{
+          const animar = (Time) => {
+              const Prog = Math.min((Time-startTime)/(Sec*1000),1)
+              for (let prop in CSS) {
+                  const valorFinal = CSS[prop]
+                  if (prop === 'opacity'){Div.style[prop] = valorFinal * Prog + (1 - Prog) * inicio[prop]}
+                  else{Div.style[prop] = `${inicio[prop] + (valorFinal - inicio[prop]) * Prog}px`}
+              }
+              if (Prog < 1) {requestAnimationFrame(animar)}
+              else {resolve();}
+          }
+          requestAnimationFrame(animar);
+      });
+  } else {
+      const animar = (Time) => {
+          const Prog = Math.min((Time - startTime) / (Sec * 1000), 1);
+
+          for (let prop in CSS) {
+              const valorFinal = CSS[prop];
+              if (prop === 'opacity') {
+                  Div.style[prop] = valorFinal * Prog + (1 - Prog) * inicio[prop];
+              } else {
+                  Div.style[prop] = `${inicio[prop] + (valorFinal - inicio[prop]) * Prog}px`;
+              }
+          }
+          if (Prog < 1) {
+              requestAnimationFrame(animar);
+          }
+      }
+      requestAnimationFrame(animar);
+  }
+}
+function Anime(Div,Direct,Time,Effects,wid,hei,top,lef){ // Efeitos podem ser [Opacy,Pose,Hidd]
+  const div = $(Div)
+  if(Effects.includes('Hidd')){
+  const Pai = div.parentNode
+  Pai.classList.add('Anime')
+  Pai.style.width =  `${wid}px`
+  Pai.style.height = `${hei}px`
+  Pai.style.top =  `${70}px`
+  Pai.style.right = `${0}px`
+  }
+  if(Effects.includes('Opacy')){div.classList.add('Opacy')}
+  div.classList.add(Direct)
+  div.style.width = `${wid}px`
+  div.style.height = `${hei}px`
+  div.style.top =  `${top}px`
+  div.style.left = `${lef}px`
+}
+function Animar(Div,btn){
+  if(btn.id==='H_Lgin'){Tog(btn,'AnimeExibido')}
+  const div = $(Div)
+  if(btn.classList.contains('AnimeExibido')){Add(div,'Animar')
+    if(div.classList.contains('Opacy')){div.style.opacity='1'}}else{
+      Rmv(div,'Animar');None($('#mmdal'))
+      if(div.classList.contains('Opacy')){div.style.opacity='0'}
+    }
+}
+function RmvAnime(){$$('.AnimeExibido').forEach(e=>Rmv(e,'AnimeExibido'))}
