@@ -111,6 +111,7 @@ const ShowTime=(e,sec)=>{Show(e);setTimeout(()=>{None(e)},sec*1000)}
 const NoneTime=(e,sec)=>{None(e);setTimeout(()=>{Show(e)},sec*1000)}
 const TrcFih=e=>Filh(Pai(e)).forEach(f=>{if(f===e){None(f)}else{Show(f);f.focus()}}) // Oculta o Atual e exibe o Resto Funciona melhor com 2 Filhos
 
+
 // Funções de CSS ________________________________________________________________________________________________________________
 const Add=(e,Stg)=>FazArry(e).forEach(E=>E.classList.add(Stg))
 const Rmv=(e,Stg)=>FazArry(e).forEach(E=>E.classList.remove(Stg))
@@ -203,8 +204,9 @@ const RxEspaco = e=>e.trim().replace(/\s+/g,' ')                            // R
 const RxAcento = e=>e.normalize('NFD').replace(/[\u0300-\u036f]/g,'')       // Remove acentos (ex: "ação" → "acao")
 const RxPlural = e=>e.replace(/ão$|ões$|ao$|oes*$/,'ao').replace(/s*$/i,'') // Converte plurais para singular genérico (ex: "ações" → "acao")
 const NewRegex = e=>new RegExp(e.split('').map(e=>e+'.{0,3}').join(''),'i') // Transforma String num Regex Conciderando esse Criterio de .{0,3}
-const RxClear  = e=>RxPlural(RxAcento(RxRepeti(RxEspaco(aa(e)))))           // chama todos os Replaces
-const EscpRgx=Stg=>Stg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')               // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
+const RxClear  = s=>RxPlural(RxAcento(RxRepeti(RxEspaco(aa(s)))))           // chama todos os Replaces
+const EscpRgx  = s=>s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')               // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
+const RmvPlural= s=>s.endsWith('ões')?s.slice(0,-3)+'ão':s.endsWith('ães')?s.slice(0,-3)+'ão':s.endsWith('is')?s.slice(0,-2)+'l':s.endsWith('res')?s.slice(0,-1):s.endsWith('s')&&s.length>2?s.slice(0,-1):s
 
 // Funções de Eventos__________________________________________________________________________________________________________
 const EvtChng=(e,Call)=>FazArry(e).forEach(e=>e.addEventListener('change',Call))
