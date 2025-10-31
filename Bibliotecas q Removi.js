@@ -166,3 +166,5 @@ function Animar(Div,btn){
     }
 }
 function RmvAnime(){$$('.AnimeExibido').forEach(e=>Rmv(e,'AnimeExibido'))}
+
+

@@ -207,6 +207,20 @@ const NewRegex = e=>new RegExp(e.split('').map(e=>e+'.{0,3}').join(''),'i') // T
 const RxClear  = s=>RxPlural(RxAcento(RxRepeti(RxEspaco(aa(s)))))           // chama todos os Replaces
 const EscpRgx  = s=>s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')               // Escapa símbolos de regex (.+*?^$()[] etc.) para uso literal em uma RegExp
 const RmvPlural= s=>s.endsWith('ões')?s.slice(0,-3)+'ão':s.endsWith('ães')?s.slice(0,-3)+'ão':s.endsWith('is')?s.slice(0,-2)+'l':s.endsWith('res')?s.slice(0,-1):s.endsWith('s')&&s.length>2?s.slice(0,-1):s
+const QntTempo = data => {
+  const d = new Date(data), ms = Date.now() - d, m = 6e4, h = 36e5, d1 = 864e5;
+  if (isNaN(d)) return '-';
+  if (ms < m) return 'agora mesmo';
+  const n = (v,u,s) => `há ${v} ${u}${v>1?s||'s':''}`;
+  if (ms < h)   return n(Math.floor(ms/m),'minuto');
+  if (ms < d1)  return n(Math.floor(ms/h),'hora');
+  const dias = Math.floor(ms/d1);
+  if (dias === 1) return 'ontem';
+  if (dias < 7)   return n(dias,'dia');
+  if (dias < 30)  return n(Math.floor(dias/7),'semana');
+  if (dias < 365) return n(Math.floor(dias/30),'mês','es');
+  return n(Math.floor(dias/365),'ano');
+}
 
 // Funções de Eventos__________________________________________________________________________________________________________
 const EvtChng=(e,Call)=>FazArry(e).forEach(e=>e.addEventListener('change',Call))
