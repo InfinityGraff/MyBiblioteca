@@ -304,6 +304,7 @@ const Tm_OptFnt=(e,arr)=>Inn(e,arr.map(a=>`<option style="font-family:${a}" valu
 const load_Opts=(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`).join(''))
 const SrcSVG   =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
 const Tm_Interup=(Eu,v1,v2)=>{Eu.classList.add("Interup","Rltv","Bt","PT");Eu.addEventListener("click",()=>TOV(Eu));Inn(Eu,`<a>${v1}</a><a>${v2}</a><i></i>`)}
+const Tm_Check  =(Eu,Stg,nome)=>{Eu.classList.add("Chek","Ct");Inn(Eu,`<input class="none" type="checkbox"><a class="Ct">${Stg}</a><p>${nome}</p>`)}
 // Criar Modal
 // Criar Alert
 // Criar Input Drag
