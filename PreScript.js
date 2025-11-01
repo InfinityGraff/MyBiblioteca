@@ -303,7 +303,7 @@ const Tm_Opt   =(arr,Stg=null)=>arr.map((a,i)=>`<option value="${a}" ${i===0?'di
 const Tm_OptFnt=(e,arr)=>Inn(e,arr.map(a=>`<option style="font-family:${a}" value="${a}">${a}</option>`).join(''))
 const load_Opts=(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`).join(''))
 const SrcSVG   =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
-
+const Tm_Interup=(Eu,v1,v2)=>{Eu.classList.add("Interup","Rltv","Bt","PT");Eu.addEventListener("click",()=>TOV(Eu));Inn(Eu,`<a>${v1}</a><a>${v2}</a><i></i>`)}
 // Criar Modal
 // Criar Alert
 // Criar Input Drag
