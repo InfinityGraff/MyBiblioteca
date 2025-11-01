@@ -3,6 +3,7 @@
 // Dia 13/07/2025 (UpperCase) (Novas Funcs) (ExtraClass)
 // Dia 03/08/2025 (Trazendo o templates.js) (SVG's)
 // Dia 16/10/2025 (Inner Correção)
+// Mask
 
 // tem q da uma Ajeitadinha pra melhorar, e ter certeza se tudo Funciona
 const Insert=e=>({ // Como Chamar a função: Insert('#onde botar').Befor ou .After('o que botar String ou Div','#depois de quem')
@@ -20,19 +21,18 @@ const MS=IN=>{const ms = (performance.now()-IN) ; if(ms<0.5) ; if(ms<1000){retur
 //Retornos DOM________________________________________________________________________________________________________________
 const     $ = (Stg,e=document)=>(typeof Stg==='string'?e.querySelector(Stg):Stg)
 const    $$ = (Stg,e=document)=>(typeof Stg==='string'?Array.from(e.querySelectorAll(Stg)):Stg)
-const   Inn = (e,Stg=null)=>{const el=$(e);return el?Stg===null?el.innerHTML:el.innerHTML=Stg:undefined}
+const   Inn = (e,Stg=null)=>{const el=$(e);return el?(Stg===null?el.innerHTML:(el.innerHTML=Stg)):undefined}
+const   Vll = (e,Stg=null)=>{const el=$(e);return el?(Stg===null?el.value    :(el.value    =Stg)):undefined}
 const    Nm = (e,stg=null)=>e?stg===null?e.getAttribute('name'):e.setAttribute('name',stg):undefined
-const   $Vl = (Stg,e=document)=>$(Stg,e).value
 const   $Tx = (Stg,e=document)=>$(Stg,e).textContent
-const  $$Vl = (Stg,e=document)=>$$(Stg,e).map(e=>e.value)
-const  $$In = (Stg,e=document)=>$$(Stg,e).map(e=>e.innerHTML)
+const   $Vl = (Stg,e=document)=>$(Stg,e).value
+const   VLl = e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
+const   llv =(e,v)=>{if(e.tagName === 'INPUT' && e.type === 'checkbox'){e.checked = typeof v === 'string' ? JSON.parse(v) : v;} else {e.value = v}}
 const Clear = e=>[e].flat().forEach(el=>$(el).value='')
 const  Inn_ = (e,Stg)=>$(e).innerHTML+=Stg
 const   Src = (e,Stg)=>$(e).src = Stg
 const   Txt = e=>e.innerText.trim()
 const    Rx = arry=>FazArry(arry).map(e=>`[class*="${e}"]`).join('')
-const   Vll = e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
-const   llv =(e,v)=>{if(e.tagName === 'INPUT' && e.type === 'checkbox'){e.checked = typeof v === 'string' ? JSON.parse(v) : v;} else {e.value = v}}
 const   _td =e=>e.tagName==='TD'?e:e.closest('td')
 const   _tr =e=>e.tagName==='TR'?e:e.closest('tr')
 const   _th =e=>e.tagName==='TH'?e:e.closest('th')
@@ -78,6 +78,7 @@ const View_Vid=e=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].i
 const IsImgLod=img=>img.complete && img.naturalWidth !== 0
 const UndfNull=e=>e===undefined||e===null
 const NoVazi  =v=>v!=='' && v!==false && v!==undefined && v!==null // Não está vazio
+const IsInp   =e=>'value' in e
 const IsNum   =e=>typeof e==='number'
 const IsCnv   =e=>e.tagName === 'CANVAS'
 const KeyEntr =Call=>{if(event.code === 'Enter' || event.keyCode === 13){event.preventDefault();Call()}}
@@ -261,46 +262,23 @@ function ShowModal(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Sho
 function SairModal(Fundo){document.addEventListener('keyup',e=>{if(e.key==='Escape'){None(Fundo)}});Fundo.addEventListener('click',e=>{if(e.target===Fundo){None(Fundo)}})}
 function ShowBrother(e,pai){var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e);Fi.forEach(e=>None(e)) ; if(x<Fi.length-1){Show(Fi[x+1])}else{Show(Fi[0])}}
 
-// Mask (Desejo Analisar esses Masks, e Fundir os MaskNum pra eles ficarem curtos e Funcionais)________________________________________________________________________________________________
+// Mask________________________________________________________________________________________________
 const Mask = {
-  cpf:   i=>{if(i.value.length > 14) i.value = i.value.substring(0,14); i.value = i.value.replace(/\D/g,'').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{2})$/,'$1-$2')},
-  fone:  i=>{if(i.value.length > 15) i.value = i.value.substring(0,15); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2')},
-  data:  i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'$1/$2').replace(/(\d{2})(\d{4})$/,'$1/$2')},
-  cep:   i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d{5})(\d)/,'$1-$2')},
-  cartao:i=>{if(i.value.length > 19) i.value = i.value.substring(0,19); i.value = i.value.replace(/\D/g,'').replace(/(\d{4})(\d)/g,'$1 $2').trim()},
-  rs:    i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d)(\d{2})$/,'$1,$2').replace(/(\d)(\d{3})(\d)/,'$1.$2$3').replace(/(\d)(\d{3})$/,'$1.$2').replace(/^(?!\b0\b)\d/,'R$ $&')},
-}
-// analisar pq esta está movendo cursor pra o final mesmo sem ter CurEnd(Eu)
-function MaskNum(Eu){ // Funciona Muito bem e não pretendo me Livrar dela tão Fácil
-    var Vlr = Eu.value.replace(/\D/g, '').replace(/^0+(?=[1-9])/, '')
-    var Mask = '' ; const VLR = Vlr.length
-    var Mask = VLR === 1 ? '0,0'+Vlr :
-                VLR === 2 ? '0,'+Vlr :
-                VLR === 3 ? Vlr.charAt(0)+','+Vlr.substring(1) :
-                VLR === 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2) :
-                VLR > 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2, 4) : ''
-        if (VLR > 5) {Mask = Mask.substring(0, 5)}
-        Eu.value = Mask
-}
-
-function MaskNumI(Eu){ // A diferenã apenas é q isso não é uma Div Editavel e não um Input (Fundir com a de Cima)
-    var Vlr = Eu.innerHTML.replace(/\D/g, '').replace(/^0+(?=[1-9])/, '')
-    var Mask = '' ; const VLR = Vlr.length
-    var Mask = VLR === 1 ? '0,0'+Vlr :
-                VLR === 2 ? '0,'+Vlr :
-                VLR === 3 ? Vlr.charAt(0)+','+Vlr.substring(1) :
-                VLR === 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2) :
-                VLR > 4 ? Vlr.substring(0, 2)+','+Vlr.substring(2, 4) : ''
-        if (VLR > 5) {Mask = Mask.substring(0, 5)}
-        Eu.innerHTML = Mask
-        CurEnd(Eu)
-}
-
-function MaskR$(el){
-  let v = el.innerText.replace(/\D/g,'').padStart(3,'0')
-  let r = v.slice(0,-2), c = v.slice(-2)
-  el.innerText = `R$ ${parseInt(r).toLocaleString('pt-BR')},${c}`
-  CurEnd(el)
+  cpf   :i=>{if(i.value.length > 14) i.value = i.value.substring(0,14); i.value = i.value.replace(/\D/g,'').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{2})$/,'$1-$2')},
+  fone  :i=>{if(i.value.length > 15) i.value = i.value.substring(0,15); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2')},
+  data  :i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d{2})(\d)/,'$1/$2').replace(/(\d{2})(\d{4})$/,'$1/$2')},
+  cep   :i=>{if(i.value.length > 10) i.value = i.value.substring(0,10); i.value = i.value.replace(/\D/g,'').replace(/(\d{5})(\d)/,'$1-$2')},
+  RS    :e=>{let v=(IsInp(e)?Vll(e):Inn(e)).replace(/\D/g,'').padStart(3,'0');let r=v.slice(0,-2),c=v.slice(-2);let m=`R$ ${parseInt(r).toLocaleString('pt-BR')},${c}`;if(IsInp(e))Vll(e,m);else Inn(e,m);if(!IsInp(e)){CurEnd(e)}},
+  Num   :e=>{
+    const I = IsInp(e)
+    let v = ( I ? Vll(e) : Inn(e)).replace(/\D/g,'').replace(/^0+(?=[1-9])/,'')
+    if (!v) { I ? Vll(e,'') : Inn(e,'') ; if (!I) CurEnd(e); return }
+    const n = v.length
+    let m = n < 3 ? '0,' + v.padStart(2,'0'):v.slice(0,Math.min(2,n-2))+','+v.slice(-2)
+    if (n > 5) m = m.slice(0,5)
+      I ? Vll(e,m) : Inn(e,m)
+    if (!I) CurEnd(e)
+  }
 }
 
 // Funções de Templates________________________________________________________________________________________________________
