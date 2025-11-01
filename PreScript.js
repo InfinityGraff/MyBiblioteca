@@ -51,6 +51,7 @@ const SibQSl = (e,Q)=> [...e?.parentElement?.children || []].find(s=>s.matches(Q
 const SibAll = e=>[...e?.parentElement?.children || []].filter(s=>s!==e)                    // Retorna todos os irmãos de 'e', exceto o próprio 'e'
 
 // Ações DOM___________________________________________________________________________________________________________________
+const Onloads=e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})} // Pega todas '*' com Onload de uma Div especifica, e Roda o Onload de cada
 const Befor  =(e,Stg,Stg2)=>typeof Stg === 'string' ? $(e).insertAdjacentHTML('beforeend',Stg):$(e).insertBefore(Stg,$(Stg2,$(e)))
 const After  =(e,Stg)=>$(e).insertAdjacentHTML('afterbegin',Stg)
 const DltAll =e=>$$(e).forEach(e=>e.remove())
@@ -99,6 +100,8 @@ const AddReqr=e=>e.forEach(e=>{$(e).required = true })
 const EscReqr=e=>e.forEach(e=>{$(e).required = false})
 const Coten =(e,Clss)=> FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
 const Noten =(e,Clss)=>!FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
+const TestPass = (e,ignore=[]) => ["Não pode estar vazio","Ter pelo menos 8 caracteres","Ter pelo menos uma letra maiúscula","Ter pelo menos um caractere especial"].map((l,i)=>(!ignore.includes(i) && ![+!!e,+!!(e.length>=8),+(/[A-Z]/.test(e)&&e.length>1),+(/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)][i] ? l : null)).filter(Boolean) // no segundo argumento posso iguinorar alguma condição
+const TestEmail=e=>["@gmail.com","@yahoo.com","@yahoo.co.uk","@outlook.com","@hotmail.com","@live.com","@icloud.com","@me.com","@aol.com","@protonmail.com","@zoho.com","@mail.com","@gmx.com","@yandex.com"].some(E=>e.endsWith(E))
 
 //Display Show None________________________________________________________________________________________________________________
 function FazArry(e){return Array.isArray(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
@@ -241,11 +244,6 @@ const Copy   =(area,stg)=>{area.value = stg ; area.select() ; document.execComma
 const ClickFora=(e,Call)=>{const H=(E)=>!e.contains(E.target) && (Call(),RmvClik(document,H));EvtClik(document,H)}
 const OBS    =(e,Call,p=null)=>new MutationObserver(()=>Call()).observe(e,{attributes: true,attributeFilter: p && Array.isArray(p) ? p : undefined})
 
-//Controlador de Cursor__________________________________________________________________________________________________________
-const AplyRng = r=>(getSelection().removeAllRanges(),getSelection().addRange(r))
-const CurAll  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r)) // Seleciona Tudo
-const CurEnd  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r.collapse(false),r)) // vai pra o Fim da Linha
-
 //Funções Geradores____________________________________________________________________________________________________________
 const Rndn    =e=>Math.floor(Math.random()*e)
 const Randomm =(min,max)=>Rndn((max-min+1))+min
@@ -256,11 +254,10 @@ const Dat     =e =>new Date(e)
 const HOJE    =()=>new Date().toLocaleDateString('pt-BR')
 const AGORA   =()=>`${HOJE()} ${new Date().toLocaleTimeString('pt-BR')}`
 
-// MODAL________________________________________________
-function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/
-function ShowModal(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)}
-function SairModal(Fundo){document.addEventListener('keyup',e=>{if(e.key==='Escape'){None(Fundo)}});Fundo.addEventListener('click',e=>{if(e.target===Fundo){None(Fundo)}})}
-function ShowBrother(e,pai){var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e);Fi.forEach(e=>None(e)) ; if(x<Fi.length-1){Show(Fi[x+1])}else{Show(Fi[0])}}
+//Controlador de Cursor__________________________________________________________________________________________________________
+const AplyRng = r=>(getSelection().removeAllRanges(),getSelection().addRange(r))
+const CurAll  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r)) // Seleciona Tudo
+const CurEnd  = e=>AplyRng((r=document.createRange(),r.selectNodeContents(e),r.collapse(false),r)) // vai pra o Fim da Linha
 
 // Mask________________________________________________________________________________________________
 const Mask = {
@@ -303,23 +300,20 @@ const Tm_OptFnt=(e,arr)=>Inn(e,arr.map(a=>`<option style="font-family:${a}" valu
 const load_Opts=(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`).join(''))
 const SrcSVG   =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
 
+// Criar Modal
+// Criar Alert
+// Criar Input Drag
+
+// MODAL________________________________________________
+function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/
+function ShowModal(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)}
+function SairModal(Fundo){document.addEventListener('keyup',e=>{if(e.key==='Escape'){None(Fundo)}});Fundo.addEventListener('click',e=>{if(e.target===Fundo){None(Fundo)}})}
+function ShowBrother(e,pai){var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e);Fi.forEach(e=>None(e)) ; if(x<Fi.length-1){Show(Fi[x+1])}else{Show(Fi[0])}}
 
 
 
 
 
-// Pra analizar_______________________________________________________________________________________________________
-function Delay(sec){return new Promise(r => setTimeout(r, sec*1000))} //NEXBEE
-async function Dellay(Sec,Call){await new Promise(r=>setTimeout(r, Sec* 1000));Call()} //NEXBEE
-const TestPass=e=>((e!==""?1:0)+(e.length>= 8)?1:0)+((/[A-Z]/.test(e)&&e.length>1)?1:0)+((/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)?1:0) // Retorna de 1 a 3
-const TestEmail=e=>ValidEmail.some(E=>e.endsWith(E))
-function ResizeArea(e){e.style.height = e.scrollHeight + 'px';e.style.width = e.scrollWidth + 'px'} //GABARITO
-function InptsVazio(e){$$(e).forEach(e=>{if(e.value.trim()===""){Add(e,'Error') ; return true}else{Rmv(e,'Error') ; return false}})} //GABARITO
-function CssFont(e,Stg){$(e).style.fontFamily=Stg} //GABARITO
-
-const Onloads=e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})} // Pega todas '*' com Onload de uma Div especifica, e Roda o Onload de cada
-// function LoadOnloads(e){const onLoad = $(e).getAttribute('onload');if(onLoad){eval(onLoad)}}                             // Provavelmente Obsoleta
-// function execOnloads(e,Def=null){if(Def!==null){$(e).innerHTML=Def} ; $$('[onload]',$(e)).forEach(e=>LoadOnloads(e))}    // Provavelmente Obsoleta
 
 
 // isso é pra Esperar a função terminar pra poder dar o Alert
@@ -351,6 +345,14 @@ const IptFile=(div)=>// vc Cria a Função Upload(files) lá dentro do seu Index
     </div>
 `
 
+
+
+// Pra analizar_______________________________________________________________________________________________________
+  function Delay(sec){return new Promise(r => setTimeout(r, sec*1000))} //NEXBEE
+  async function Dellay(Sec,Call){await new Promise(r=>setTimeout(r, Sec* 1000));Call()} //NEXBEE
+  function ResizeArea(e){e.style.height = e.scrollHeight + 'px';e.style.width = e.scrollWidth + 'px'} //GABARITO
+  function InptsVazio(e){$$(e).forEach(e=>{if(e.value.trim()===""){Add(e,'Error') ; return true}else{Rmv(e,'Error') ; return false}})} //GABARITO
+  function CssFont(e,Stg){$(e).style.fontFamily=Stg} //GABARITO
   const Bkg = (e,bg,txt,rd) =>{(e.style.backgroundColor = bg, txt && (e.style.color = txt), rd && (e.style.borderColor = rd))}
   const ArrtoOBJ=(arr,col)=>{return arr.reduce((acc, el) => {acc[el[col]] = el;return acc;}, {})}
   const ArrObj_OrdnCol=(Obj,Ordn)=>{const K = Object.keys(Obj[0]) ; const x = Ordn.map(col=>K.indexOf(col)) ; return [Ordn,...Obj.map(obj => x.map(i => obj[K[i]]))]}
