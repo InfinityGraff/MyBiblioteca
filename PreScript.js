@@ -298,14 +298,27 @@ const SVG={
    ,Card:`<svg class="HOV PT" viewBox="0 0  9.9 6.88"><path class="fil0" d="M0.54 5.39l0 -3.86c0,-0.55 0.36,-0.94 0.74,-0.94l7.22 0c0.45,0 0.79,0.34 0.79,0.79l0 4.16c0,0.17 -0.16,0.45 -0.26,0.53 -0.12,0.1 -0.37,0.21 -0.58,0.21l-7.07 0c-0.48,0 -0.84,-0.42 -0.84,-0.89zm0.78 -3.39c0.11,0.11 0.26,0.3 0.57,0.3l6.01 0c0.91,0 0.9,-0.59 -0.1,-0.59l-5.72 0c-0.49,0 -0.59,0.13 -0.76,0.3zm3.97 3.73l2.97 0c0.5,0 0.53,-0.59 0.05,-0.59l-3.12 0c-0.32,0 -0.42,0.59 0.1,0.59zm-0.4 -1.58c0.06,0.11 0.13,0.3 0.3,0.3l3.12 0c0.47,0 0.47,-0.59 -0.05,-0.59l-2.97 0c-0.26,0 -0.31,0.13 -0.4,0.3zm-3.76 -0.64l0 1.98c0,0.19 0.24,0.25 0.45,0.25l1.93 0c0.54,0 0.4,-0.54 0.4,-1.43 0,-0.25 -0.59,-0.49 -0.59,0.2l0 0.64 -1.63 0 0 -1.29c0.67,0 1.43,0.13 1.43,-0.3 0,-0.43 -0.96,-0.3 -1.53,-0.3 -0.2,0 -0.45,0.05 -0.45,0.25zm8.03 -3.34c-0.36,-0.2 -1.16,-0.17 -1.63,-0.17l-6.11 0c-0.78,0 -1.43,0.66 -1.43,1.29l0 4.3c0,0.42 0.3,0.79 0.56,0.98 0.31,0.23 0.71,0.31 1.22,0.31l6.33 0c1.06,0 1.78,-0.46 1.78,-1.58l0 -3.02 0 0c0.01,-0.74 0.03,-1.69 -0.73,-2.11z"/></svg>`
 }
 const SynChk=(Eu   )=>{const C=$('input',Eu);C.checked = !C.checked} // isso é uma Gambiarra q precisa ser Removida (ela não precisava a conteceer se eu conseguisse usar label ao invés de div, mas usando label dispara 2 vezes) ai preferir assim, mas div não dar o evento de check, então tive que fazer manualmente
-const Tm_th    =(e,arr)=>Inn(e,arr.map(a=>`<th>${a}</th>`).join(''))
-const Tm_td    =(e,arr)=>Inn(e,arr.map(a=>`<td>${a}</td>`).join(''))
-const Tm_Opt   =(arr,Stg=null)=>arr.map((a,i)=>`<option value="${a}" ${i===0?'disabled':''} ${Stg===a?'selected':i===0?'selected':''}>${a}</option>`).join('')
-const Tm_OptFnt=(e,arr)=>Inn(e,arr.map(a=>`<option style="font-family:${a}" value="${a}">${a}</option>`).join(''))
-const load_Opts=(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`).join(''))
-const SrcSVG   =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
+const Tm_th     =(e,arr)=>Inn(e,arr.map(a=>`<th>${a}</th>`).join(''))
+const Tm_td     =(e,arr)=>Inn(e,arr.map(a=>`<td>${a}</td>`).join(''))
+const Tm_Opt    =(arr,Stg=null)=>arr.map((a,i)=>`<option value="${a}" ${i===0?'disabled':''} ${Stg===a?'selected':i===0?'selected':''}>${a}</option>`).join('')
+const Tm_OptFnt =(e,arr)=>Inn(e,arr.map(a=>`<option style="font-family:${a}" value="${a}">${a}</option>`).join(''))
+const load_Opts =(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`).join(''))
+const SrcSVG    =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
 const Tm_Interup=(Eu,v1,v2   )=>{Eu.classList.add("Interup","Rltv","Bt","PT");Eu.addEventListener("click",()=>TOV(Eu)   );Inn(Eu,`<a>${v1}</a><a>${v2}</a><i></i>`)}
 const Tm_Check  =(Eu,Stg,nome)=>{Eu.classList.add("Chek","Ct")               ;Eu.addEventListener("click",()=>SynChk(Eu));Inn(Eu,`<input class="none" type="checkbox"><a class="Ct">${Stg}</a><p>${nome}</p>`)}
+const Tm_Switch =(Eu,Labels=[],Func)=>{
+    const X=Labels.length
+    Eu.classList.add("Switch","Rltv","Ct","PT")
+    Inn(Eu,`<style>${For(X).map(e=>`
+        #opt${e}:checked ~ i {transform:translateX(${e * 100}%)}
+        #opt${e}:checked ~ label[for="opt${e}"] {color:#fff}
+    `).join("")}
+    </style>
+    ${For(X).map(e=>`<input type="radio" onchange="${Func.replace('x',e)}" id="opt${e}" name="mode" class="none" ${e===0?"checked":""}>`).join("")}
+    ${For(X).map(e=>`<label for="opt${e}">${Labels[e] || "Opção " + e}</label>`).join("")}
+    <i style="width: calc(100%/${X})"></i>`)
+}
+
 // Criar Modal
 // Criar Alert
 // Criar Input Drag
