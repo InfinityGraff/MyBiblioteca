@@ -312,7 +312,7 @@ const Tm_Switch =(Eu,Labels=[],Func)=>{
     Inn(Eu,`<style>${For(X).map(e=>`
         #opt${e}:checked ~ i {transform:translateX(${e * 100}%)}
         #opt${e}:checked ~ label[for="opt${e}"] {color:#fff}
-    `).join("")}
+    `).join("")}label[for="opt0"]{color:#fff}
     </style>
     ${For(X).map(e=>`<input type="radio" onchange="${Func.replace('x',e)}" id="opt${e}" name="mode" class="none" ${e===0?"checked":""}>`).join("")}
     ${For(X).map(e=>`<label for="opt${e}">${Labels[e] || "Opção " + e}</label>`).join("")}
