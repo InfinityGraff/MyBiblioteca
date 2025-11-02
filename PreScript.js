@@ -305,7 +305,7 @@ const Tm_OptFnt =(e,arr)=>Inn(e,arr.map(a=>`<option style="font-family:${a}" val
 const load_Opts =(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`).join(''))
 const SrcSVG    =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
 const Tm_Interup=(Eu,v1,v2   )=>{Eu.classList.add("Interup","Rltv","Bt","PT");Eu.addEventListener("click",()=>TOV(Eu)   );Inn(Eu,`<a>${v1}</a><a>${v2}</a><i></i>`)}
-const Tm_Check  =(Eu,Stg,nome)=>{Eu.classList.add("Chek","Ct")               ;Eu.addEventListener("click",()=>SynChk(Eu));Inn(Eu,`<input class="none" type="checkbox"><a class="Ct">${Stg}</a><p>${nome}</p>`)}
+const Tm_Check  =(Eu,Stg,nome)=>{Eu.classList.add("Chek","Ct")               ;Eu.addEventListener("click",()=>SynChk(Eu));Inn(Eu,`<input class="none" type="checkbox"><a class="Ct">${Stg}</a>${nome ? `<p>${nome}</p>` : ''}`)}
 const Tm_Switch =(Eu,Labels=[],Func)=>{
     const X=Labels.length
     Eu.classList.add("Switch","Rltv","Ct","PT")
