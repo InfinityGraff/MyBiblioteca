@@ -306,16 +306,16 @@ const load_Opts =(e,arr)=>Inn(e,arr.map(a=>`<option value="${a}">${a}</option>`)
 const SrcSVG    =e=>`data:image/svg+xml,${encodeURIComponent(e)}`
 const Tm_Interup=(Eu,v1,v2   )=>{Eu.classList.add("Interup","Rltv","Bt","PT");Eu.addEventListener("click",()=>TOV(Eu)   );Inn(Eu,`<a>${v1}</a><a>${v2}</a><i></i>`)}
 const Tm_Check  =(Eu,Stg,nome)=>{Eu.classList.add("Chek","Ct")               ;Eu.addEventListener("click",()=>SynChk(Eu));Inn(Eu,`<input class="none" type="checkbox"><a class="Ct">${Stg}</a>${nome ? `<p>${nome}</p>` : ''}`)}
-const Tm_Switch =(Eu,Labels=[],Func)=>{
+const Tm_Switch =(Eu,Labels=[],Func,Pre)=>{
     const X=Labels.length
     Eu.classList.add("Switch","Rltv","Ct","PT")
     Inn(Eu,`<style>${For(X).map(e=>`
-        #opt${e}:checked ~ i {transform:translateX(${e * 100}%)}
-        #opt${e}:checked ~ label[for="opt${e}"] {color:#fff}
-    `).join("")}label[for="opt0"]{color:#fff}
+        #opt_${Pre}_${e}:checked ~ i {transform:translateX(${e * 100}%)}
+        #opt_${Pre}_${e}:checked ~ label[for="opt_${Pre}_${e}"] {color:#fff}
+    `).join("")}label[for="opt_${Pre}_0"]{color:#fff}
     </style>
-    ${For(X).map(e=>`<input type="radio" onchange="${Func.replace('x',e)}" id="opt${e}" name="mode" class="none" ${e===0?"checked":""}>`).join("")}
-    ${For(X).map(e=>`<label for="opt${e}">${Labels[e] || "Opção " + e}</label>`).join("")}
+    ${For(X).map(e=>`<input type="radio" onchange="${Func.replace('x',e)}" id="opt_${Pre}_${e}" name="mode" class="none" ${e===0?"checked":""}>`).join("")}
+    ${For(X).map(e=>`<label for="opt_${Pre}_${e}">${Labels[e] || "Opção " + e}</label>`).join("")}
     <i style="width: calc(100%/${X})"></i>`)
 }
 
