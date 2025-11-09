@@ -187,7 +187,6 @@ const      Cm = e=> parseFloat(e).toFixed(2).replace('.',',')
 const      RS = e=> `R$ ${Cm(e)}`
 const   Tm_RS = e=>`<div class="Ct"><p class="RS">R$</p><a>${Cm(e)}</a></div>`
 const     Num = e=>e==null?0:typeof e==='number'?isNaN(e)?0:e:typeof e!=='string'?0:((t=e.trim())==''?'':t=='--'?0:((n=parseFloat(t.replace(/R\$\s?/gi,'').replace(/\./g,'').replace(',','.'))),isNaN(n)?0:n))
-const ParsMil = e=>parseFloat(Num($(e).value))*500
 const  CalcMB = e=>Num((new Blob([JSON.stringify(e)]).size/1024).toFixed(2)) // Calcula quantos MB o arquivo tem
 const     Pct = e=>`${(e*100).toFixed(2)}%`   // Sem USO
 const    Virg = e=>e.replace('.',',')         // Sem USO
