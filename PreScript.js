@@ -71,6 +71,7 @@ const FocoIn =e=>e.focus()
 const FocoOut=e=>{e.focus();e.setSelectionRange(e.value.length,e.value.length)}
 const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
 const Prvn=()=>event.preventDefault()
+const Prvn2 = ev=>(ev||event).preventDefault() // Acho q esse é melhor q o de cima
 
 // Funções de Validações_______________________________________________________________________________________________________
 const Is      =(e,stg)=>stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
@@ -134,6 +135,9 @@ const DarkLite=e=>{TrcTog($(e),'Dark','Lite')}
 const Add_N=e=>FazArry(e).forEach(el=>Add(el,'none'))
 const Rmv_N=e=>FazArry(e).forEach(el=>Rmv(el,'none'))
 const Tog_N=e=>FazArry(e).forEach(el=>Tog(el,'none'))
+const AddTrue=(Div,Stg,Valid)=>Valid ? Add(Div,Stg) : Rmv(Div,Stg)
+const RmvTrue=(Div,Stg,Valid)=>Valid ? Add(Div,Stg) : Rmv(Div,Stg)
+const ATVtrue=(Div    ,Valid)=>Valid ? ATV(Div)     : DTV(Div)
 
 //Funções de Objeto e Array____________________________________________________________________________________________________
 const ObjKey =e=>Object.keys(e)                              // Converte todos Keys de Objetos em um array
@@ -322,10 +326,25 @@ const Tm_Switch =(Eu,Labels=[],Func,Pre)=>{
     ${For(X).map(e=>`<label for="opt_${Pre}_${e}">${Labels[e] || "Opção " + e}</label>`).join("")}
     <i style="width: calc(100%/${X})"></i>`)
 }
+function MyAlert(msg){
+    if(!document.querySelector('#alertCSS')){
+        const css = `.MyAlert{position:fixed;bottom:20px;right:20px;font-size:14px;opacity:0;transform:translateY(20px);transition:all 0.4s ease;z-index:99999}.MyAlert.Atv{opacity:1;transform:translateY(0)}`
+        const style = document.createElement('style')
+        style.id = 'alertCSS'
+        style.textContent = css
+        document.head.appendChild(style)
+    }
+    const e = document.createElement('div')
+    e.className = 'MyAlert'
+    e.textContent = msg
+    document.body.appendChild(e)
+    requestAnimationFrame(()=>ATV(e))
+    setTimeout(()=>{DTV(e);e.addEventListener('transitionend',()=>e.remove())},2000)
+}
+
 
 // Criar Modal
-// Criar Alert
-// Criar Input Drag
+
 
 // MODAL________________________________________________
 function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/
