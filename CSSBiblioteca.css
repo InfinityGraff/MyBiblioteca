@@ -21,6 +21,8 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 }
 /*depois Remover a Fonte daqui e o tamanho da letra e tal*/
 *{margin:0px;padding:0px;box-sizing:border-box;border:none;text-decoration:none;font-family:var(--Rglr);font-size:12px;letter-spacing:0.7px;text-align:center;outline:none}
+.Grid  {display:grid}
+.Blok  {display:block}
 .Ct    {display:flex;flex-wrap:wrap;justify-content:center;align-items:center}
 .Cl    {display:flex;flex-direction:column;align-items:center}
 .Wrp   {flex-wrap: nowrap}
