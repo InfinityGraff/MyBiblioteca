@@ -65,7 +65,7 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 .Hddn{overflow: hidden;}
 .Opacy{opacity: 0}
 .Bd0{border:1px solid #ff000000}
-.none{display: none;}
+.none{display: none !important}
 .g90{transform: rotate(90deg)}
 
 .erro{color:red;}
