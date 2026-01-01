@@ -4,6 +4,7 @@
 // Dia 03/08/2025 (Trazendo o templates.js) (SVG's)
 // Dia 16/10/2025 (Inner Correção)
 // Mask
+// Dia 31/12/2025
 
 // tem q da uma Ajeitadinha pra melhorar, e ter certeza se tudo Funciona
 const Insert=e=>({ // Como Chamar a função: Insert('#onde botar').Befor ou .After('o que botar String ou Div','#depois de quem')
@@ -74,6 +75,7 @@ const Prvn=()=>event.preventDefault()
 const Prvn2 = ev=>(ev||event).preventDefault() // Acho q esse é melhor q o de cima
 
 // Funções de Validações_______________________________________________________________________________________________________
+const isDOM   = v => v instanceof Element;
 const Is      =(e,stg)=>stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
 const Is_View = (e,total=false)=>{if(!e) return false;const r = e.getBoundingClientRect();return total ? (r.top >= 0 && r.left >= 0 && r.bottom <= innerHeight && r.right <= innerWidth) : (r.bottom >= 0 && r.right >= 0 && r.top <= innerHeight && r.left <= innerWidth)}
 const View_Vid=e=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].isIntersecting?'play':'pause']()).observe(v)})}
@@ -117,8 +119,7 @@ function TogNone(e){ENone($(e))?Show($(e)):None($(e))}
 function TogShow(e){EShow($(e))?None($(e)):Show($(e))}
 const ShowTime=(e,sec)=>{Show(e);setTimeout(()=>{None(e)},sec*1000)}
 const NoneTime=(e,sec)=>{None(e);setTimeout(()=>{Show(e)},sec*1000)}
-const TrcFih=e=>Filh(Pai(e)).forEach(f=>{if(f===e){None(f)}else{Show(f);f.focus()}}) // Oculta o Atual e exibe o Resto Funciona melhor com 2 Filhos
-
+const TrcFih  =(e,Chi)=>Filh(Pai(e)).forEach(f=>(f==e?None(f):(Chi?(f==Chi?Show(f):None(f)):Show(f))))||(Chi&&Chi.focus()); // Oculta o Atual e exibe o Resto Funciona melhor com 2 Filhos
 
 // Funções de CSS ________________________________________________________________________________________________________________
 const Add=(e,Stg)=>FazArry(e).forEach(E=>E.classList.add(Stg))
@@ -138,6 +139,8 @@ const Tog_N=e=>FazArry(e).forEach(el=>Tog(el,'none'))
 const AddTrue=(Div,Stg,Valid)=>Valid ? Add(Div,Stg) : Rmv(Div,Stg)
 const RmvTrue=(Div,Stg,Valid)=>Valid ? Add(Div,Stg) : Rmv(Div,Stg)
 const ATVtrue=(Div    ,Valid)=>Valid ? ATV(Div)     : DTV(Div)
+const N_Tru=(e,Tru)=>Tru ? Rmv_N(e) : Add_N(e)
+const N_Fal=(e,Fal)=>Fal ? Add_N(e) : Rmv_N(e)
 
 //Funções de Objeto e Array____________________________________________________________________________________________________
 const ObjKey =e=>Object.keys(e)                              // Converte todos Keys de Objetos em um array
@@ -165,7 +168,7 @@ const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)]))
 const zipObj=(Key,Val)=>Object.fromEntries(Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
 const NULL__=a=>a.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v??""])))
 const SOMA_Obj2 = (ArrObj, Key) => Array.isArray(ArrObj) ? ArrObj.reduce((soma, obj) => Number(soma) + Number(obj[Key] || 0), 0) : 0;  // ESSA JÁ TAVA LÁ ANTES
-
+const ContFreq = (ArrObj,k)=>ArrObj.reduce((a,e)=>(e[k]?.trim()&&(a[e[k].trim()]=(a[e[k].trim()]||0)+1),a),{}) // Contagem de frequência só recebe um array de Objetos
 
 //FuncStorage________________________________________________________________________________________________________________
 const StogeGet=e=>localStorage.getItem(e)
@@ -184,14 +187,18 @@ const RectR=e=>Rect(e).right
 //Funções de Disparar Eventos__________________________________________________________________________________________________
 const DisparoInpt = new Event('input',{bubbles:true})
 const DispClick=e=>e.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}))
+const Dispinput=e=>e.dispatchEvent(new Event('input',{bubbles:true}))
 
 //Funções Conversor de Valores_________________________________________________________________________________________________
 const    Ared = e=> Math.floor(e)
 const      Cm = e=> parseFloat(e).toFixed(2).replace('.',',')
+const      RS_= e=>'R$ '+e.toLocaleString('pt-BR',{minimumFractionDigits:2})
 const      RS = e=> `R$ ${Cm(e)}`
 const   Tm_RS = e=>`<div class="Ct"><p class="RS">R$</p><a>${Cm(e)}</a></div>`
+const  Tm_RS2 = e=>`<div class="RS Ct"><i class="rs">R$</i><b class="rs">${Cm(e).split(',')[0]}</b><i class="rs">,${Cm(e).split(',')[1]}</i></div>`
 const     Num = e=>e==null?0:typeof e==='number'?isNaN(e)?0:e:typeof e!=='string'?0:((t=e.trim())==''?'':t=='--'?0:((n=parseFloat(t.replace(/R\$\s?/gi,'').replace(/\./g,'').replace(',','.'))),isNaN(n)?0:n))
 const  CalcMB = e=>Num((new Blob([JSON.stringify(e)]).size/1024).toFixed(2)) // Calcula quantos MB o arquivo tem
+const    _0_1 = e=>Number(Math.min(Math.max(e,0),1)) // Converte valores pra ficar Entre 0 e 1
 const     Pct = e=>`${(e*100).toFixed(2)}%`   // Sem USO
 const    Virg = e=>e.replace('.',',')         // Sem USO
 const    Zero = e=>String(e).padStart(3,'0')  // Sem USO
@@ -280,6 +287,7 @@ const Mask = {
     if (!I) CurEnd(e)
   }
 }
+const Mask2 = {fone:i=>{if(i.innerHTML.length > 15) i.innerHTML = i.innerHTML.substring(0,15); i.innerHTML = i.innerHTML.replace(/\D/g,'').replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2') ; CurEnd(i)}} 
 
 // Funções de Templates________________________________________________________________________________________________________
 // Daqui pra Baixo são Funções Gerais que Possuem Class, Id, e CSS particulares, tem que ter cuidado ao Usar algo Daqui!
@@ -293,22 +301,22 @@ const SVG={
     ,Mais:`<svg class="HOV PT" viewBox="0 0 110.89 110.89"><path d="M55.57 0c5.29,0 9.61,4.33 9.61,9.61l0 36.1 35.99 0c5.35,0 9.73,4.38 9.73,9.73l0 0c0,5.35 -4.38,9.73 -9.73,9.73l-35.99 0 0 36.1c0,5.29 -4.33,9.61 -9.61,9.61 -5.29,0 -9.61,-4.33 -9.61,-9.61l0 -36.1 -36.22 0c-5.35,0 -9.73,-4.38 -9.73,-9.73l0 -0c0,-5.35 4.38,-9.73 9.73,-9.73l36.22 0 0 -36.1c0,-5.29 4.33,-9.61 9.61,-9.61z"/></svg>`
     ,Cler:`<svg class="HOV PT" viewBox="0 0 453.06 566.32"><path d="M336.56 534.94c0,-12.86 4.72,-45.31 7.22,-58.09 3.37,-17.19 8.05,-34.07 13.92,-49.97 5.95,-16.12 10.91,-31.05 18.12,-45.81l20.49 -43.58c-3.83,-4.8 -51.72,-31.07 -56.93,-34.24 -19.35,-11.81 -38.19,-21.81 -57.45,-33.5l-114.96 -66.94c-5.53,8.34 -10.46,16.49 -16.52,25.12 -9.02,12.84 -25.66,35.07 -36.85,46.5 -13.23,13.51 -28.58,28.68 -43.03,40.19 -7.78,6.19 -15.12,12.09 -23.21,18.48 -8.64,6.83 -15.08,11.65 -23.52,18.04 -7.84,5.93 -15.65,12.15 -23.85,17.75l45.61 49.38c2.73,2.55 28.72,25.46 30.76,25.37 5.84,-0.26 75.27,-76.16 86.73,-83.9 -1.23,5.33 -11.1,21.2 -14.24,27.47 -4.49,8.98 -9.79,17.46 -14.23,26.15 -2.34,4.58 -4.64,8.35 -7.35,13.51 -2.7,5.13 -4.65,8.46 -7.32,13.52 -3.42,6.46 -12.51,20.96 -13.81,26.58l38.52 23.87c54.48,31.83 131.58,61.01 193.19,75.51l-1.29 -31.38zm-152.75 -355.67c0,14.78 9.93,19.46 19.35,24.91l137.75 80.49c11.18,6.47 45.16,29.29 57.78,29.29 17.31,0 37.54,-43.36 37.54,-51 0,-9.35 -3.05,-15.99 -10.35,-20.94l-155.1 -90.45c-11.88,-7.24 -22.79,-12.95 -34.41,-20.16 -5.57,-3.46 -13.03,-4.75 -20.66,-2.38 -7.38,2.29 -10.63,6.69 -14.22,13.17 -5.09,9.21 -17.69,27.17 -17.69,37.08zm124.27 -28.77c4.83,3.27 10.32,6.11 15.46,9.23l47.97 27.39 52.03 -91.28c3.73,-6.28 6.6,-12.06 10.34,-18.32 7.02,-11.75 19.18,-28.13 19.18,-42.09 0,-15.67 -15.58,-21.86 -30.64,-30.51 -28.77,-16.51 -37.53,11.41 -54.01,40.49l-29.79 52.24c-1.35,2.27 -2.76,4.04 -4.11,6.31 -1.65,2.78 -2.03,3.94 -3.67,6.75l-22.75 39.78z"/></svg>`
    ,Tempo:`<svg class="HOV PT" viewBox="0 0 6121.17 6121.95"><path class="fil0" d="M5496.46 3335.94c-46.14,352.73 -155.86,662.25 -292.31,920.64 -116.73,221.03 -355.09,513.98 -555.62,675.41 -433.38,348.91 -1090.47,668.54 -1857.96,563.08 -1277.26,-175.5 -2316.58,-1233.52 -2156.47,-2719.06 134.55,-1248.51 1278.98,-2308.86 2723.93,-2143.19 1221.6,140.06 2322.72,1294.47 2138.43,2703.12zm-2735.81 0c196.26,173.3 1347.75,865.1 1607.95,992.39l207.93 -358.87c-205.44,-211.81 -1143.17,-641.16 -1359.62,-844.7l-0.71 -1584.16 -455.44 -4.73 -0.11 1800.06zm-2749.06 0c136.73,1606.26 1529.83,2910.38 3320.29,2776.56 1610.56,-120.37 2927.63,-1562.46 2777.62,-3340.64 -133.51,-1582.67 -1559.4,-2907.78 -3320.07,-2760.67 -1592.89,133.08 -2928.24,1557.99 -2777.84,3324.75z"/></svg>`
-   ,Crop :(Clss,tog)      =>`<svg class="${Clss}" viewBox="0 0 152.96 152.96  "><g><path d="M152.96 126.63l-22.5 0 0 -14.4 22.5 0 0 14.4zm-152.96 -100.31l22.5 0 0 14.4 -22.5 0 0 -14.4zm42.2 -26.32l0 112.23 63.07 0 0 14.4 -77.29 0 0 -126.63 14.21 0zm68.56 152.96l0 -112.23 -63.07 0 0 -14.4 77.29 0 0 126.63 -14.21 0z"/><polygon class="Croped ${tog}" points="47.68,106.62 105.17,106.62 105.17,46.34 47.68,46.34 "/></g></svg>`
+    ,Crop:(Clss,tog)      =>`<svg class="${Clss}" viewBox="0 0 152.96 152.96  "><g><path d="M152.96 126.63l-22.5 0 0 -14.4 22.5 0 0 14.4zm-152.96 -100.31l22.5 0 0 14.4 -22.5 0 0 -14.4zm42.2 -26.32l0 112.23 63.07 0 0 14.4 -77.29 0 0 -126.63 14.21 0zm68.56 152.96l0 -112.23 -63.07 0 0 -14.4 77.29 0 0 126.63 -14.21 0z"/><polygon class="Croped ${tog}" points="47.68,106.62 105.17,106.62 105.17,46.34 47.68,46.34 "/></g></svg>`
    ,Aling:(Clss,Cor1,Cor2)=>`<svg class="${Clss}" viewBox="0 0 1115.04 1115.03"<g><rect style="fill:white" transform="matrix(1.78337E-14 -0.131706 0.673364 3.48817E-15 518.703 658.109)" width="1527.55" height="115.29"/><circle style="fill:${Cor1}" cx="557.52" cy="238.6" r="161.42"/><circle style="fill:${Cor2}" cx="557.52" cy="876.43" r="161.42"/><rect x="0" y="-0" width="1115.04" height="1115.04"/></g></svg>`
-   ,RszH:`<svg class="HOV PT" viewBox="0 0 2.62 4.56"><path class="fil0" d="M1.02 1.67l0 1.23 0 0.63 -0.64 -0.63c-0.07,0.05 -0.35,0.32 -0.39,0.37l1.31 1.3 1.3 -1.3 -0.37 -0.38c-0.11,0.08 -0.51,0.5 -0.64,0.63l0 -0.62 0 -1.23 0 -0.62c0.13,0.13 0.53,0.56 0.64,0.63l0.37 -0.38 -1.3 -1.3 -1.31 1.3c0.04,0.05 0.31,0.32 0.39,0.37l0.64 -0.63 0 0.63z"/></svg>`
-   ,RszW:`<svg class="HOV PT" viewBox="0 0 8.33 4.78"><path class="fil0" d="M3.04 2.92l2.25 0 1.14 0 -1.15 1.16c0.09,0.13 0.58,0.64 0.68,0.7l2.38 -2.4 -2.37 -2.38 -0.69 0.68c0.14,0.21 0.92,0.94 1.16,1.17l-1.14 0 -2.25 0 -1.14 0c0.24,-0.23 1.01,-0.96 1.16,-1.17l-0.69 -0.68 -2.37 2.38 2.38 2.4c0.1,-0.06 0.59,-0.57 0.68,-0.7l-1.15 -1.16 1.14 0z"/></svg>`
-   ,List:`<svg class="HOV PT" viewBox="0 0 6.69 4.74"><path class="fil0" d="M1.58 4.48l5.11 0 0 -0.53 -5.11 0 0 0.53zm-1.58 -0.56l0 0.59c0,0.1 0.13,0.23 0.23,0.23l0.59 0c0.1,0 0.23,-0.13 0.23,-0.23l0 -0.59c0,-0.1 -0.13,-0.23 -0.23,-0.23l-0.59 0c-0.1,0 -0.23,0.13 -0.23,0.23zm0 -1.84l0 0.59c0,0.1 0.13,0.23 0.23,0.23l0.59 0c0.1,0 0.23,-0.13 0.23,-0.23l0 -0.59c0,-0.1 -0.13,-0.23 -0.23,-0.23l-0.59 0c-0.1,0 -0.23,0.13 -0.23,0.23zm0 -1.84l0 0.59c0,0.1 0.13,0.23 0.23,0.23l0.59 0c0.1,0 0.23,-0.13 0.23,-0.23l0 -0.59c0,-0.1 -0.13,-0.23 -0.23,-0.23l-0.59 0c-0.1,0 -0.23,0.13 -0.23,0.23zm1.58 2.4l5.11 0 0 -0.53 -5.11 0 0 0.53zm0 -1.84l5.11 0 0 -0.53 -5.11 0 0 0.53z"/></svg>`
-   ,Card:`<svg class="HOV PT" viewBox="0 0  9.9 6.88"><path class="fil0" d="M0.54 5.39l0 -3.86c0,-0.55 0.36,-0.94 0.74,-0.94l7.22 0c0.45,0 0.79,0.34 0.79,0.79l0 4.16c0,0.17 -0.16,0.45 -0.26,0.53 -0.12,0.1 -0.37,0.21 -0.58,0.21l-7.07 0c-0.48,0 -0.84,-0.42 -0.84,-0.89zm0.78 -3.39c0.11,0.11 0.26,0.3 0.57,0.3l6.01 0c0.91,0 0.9,-0.59 -0.1,-0.59l-5.72 0c-0.49,0 -0.59,0.13 -0.76,0.3zm3.97 3.73l2.97 0c0.5,0 0.53,-0.59 0.05,-0.59l-3.12 0c-0.32,0 -0.42,0.59 0.1,0.59zm-0.4 -1.58c0.06,0.11 0.13,0.3 0.3,0.3l3.12 0c0.47,0 0.47,-0.59 -0.05,-0.59l-2.97 0c-0.26,0 -0.31,0.13 -0.4,0.3zm-3.76 -0.64l0 1.98c0,0.19 0.24,0.25 0.45,0.25l1.93 0c0.54,0 0.4,-0.54 0.4,-1.43 0,-0.25 -0.59,-0.49 -0.59,0.2l0 0.64 -1.63 0 0 -1.29c0.67,0 1.43,0.13 1.43,-0.3 0,-0.43 -0.96,-0.3 -1.53,-0.3 -0.2,0 -0.45,0.05 -0.45,0.25zm8.03 -3.34c-0.36,-0.2 -1.16,-0.17 -1.63,-0.17l-6.11 0c-0.78,0 -1.43,0.66 -1.43,1.29l0 4.3c0,0.42 0.3,0.79 0.56,0.98 0.31,0.23 0.71,0.31 1.22,0.31l6.33 0c1.06,0 1.78,-0.46 1.78,-1.58l0 -3.02 0 0c0.01,-0.74 0.03,-1.69 -0.73,-2.11z"/></svg>`
-   ,Grid:`<svg class="HOV PT" viewBox="0 0 165.77 165.78"><path class="fil0" d="M71.95 71.95l0 -71.8c-78.71,0 -71.8,-6.9 -71.8,71.8l71.8 0zm21.87 -71.8l0 71.8 71.8 0c0,-78.75 6.93,-71.8 -71.8,-71.8zm0 93.67l0 71.8c78.73,0 71.8,6.93 71.8,-71.8l-71.8 0zm-21.87 71.8l0 -71.8 -71.8 0c0,78.71 -6.9,71.8 71.8,71.8z"/></svg>`
-   ,Gris:`<svg class="HOV PT" viewBox="0 0 165.77 165.78"><path class="fil0" d="M71.95 71.95l0 -71.8c-78.71,0 -71.8,-6.9 -71.8,71.8l71.8 0zm21.87 -71.8l0 71.8 71.8 0c0,-78.75 6.93,-71.8 -71.8,-71.8zm0 93.67l0 71.8c78.73,0 71.8,6.93 71.8,-71.8l-71.8 0zm-21.87 71.8l0 -71.8 -71.8 0c0,78.71 -6.9,71.8 71.8,71.8z"/></svg>`
-   ,Gemn:`<svg class="HOV PT" viewBox="0 0 192.32 192.32"><path class="fil0" d="M-0 96.16c70.01,-17.75 75.96,-31.07 96.16,-96.16 20.2,65.09 26.15,78.41 96.16,96.16 -70.01,17.75 -75.96,31.07 -96.16,96.16 -20.2,-65.09 -26.15,-78.41 -96.16,-96.16z"/></svg>`
-   ,Blok:`<svg class="HOV PT" viewBox="0 0 200.69 203.34"><path class="fil0" d="M117.03 0l73.8 0c5.43,0 9.87,4.44 9.87,9.87l0 73.8c0,5.43 -4.44,9.86 -9.87,9.86l-73.8 0c-5.43,0 -9.86,-4.44 -9.86,-9.86l0 -73.8c0,-5.43 4.44,-9.87 9.86,-9.87zm-107.16 0l73.8 0c5.43,0 9.87,4.44 9.87,9.87l0 73.8c0,5.43 -4.44,9.86 -9.87,9.86l-73.8 0c-5.43,0 -9.87,-4.44 -9.87,-9.86l0 -73.8c0,-5.43 4.44,-9.87 9.87,-9.87zm107.16 109.81l73.8 0c5.43,0 9.87,4.44 9.87,9.87l0 73.8c0,5.43 -4.44,9.87 -9.87,9.87l-73.8 0c-5.43,0 -9.86,-4.44 -9.86,-9.87l0 -73.8c0,-5.43 4.44,-9.87 9.86,-9.87zm-107.16 0l73.8 0c5.43,0 9.87,4.44 9.87,9.87l0 73.8c0,5.43 -4.44,9.87 -9.87,9.87l-73.8 0c-5.43,0 -9.87,-4.44 -9.87,-9.87l0 -73.8c0,-5.43 4.44,-9.87 9.87,-9.87z"/></svg>`
-   ,Alvn:`<svg class="HOV PT" viewBox="0 0 142.87 141.84"><path class="fil0" d="M83.27 0l52.57 0c3.87,0 7.03,3.03 7.03,6.74l0 75.96c0,3.71 -3.16,6.74 -7.03,6.74l-52.57 0c-3.87,0 -7.03,-3.03 -7.03,-6.74l0 -75.96c0,-3.71 3.16,-6.74 7.03,-6.74zm-78.97 0l58.02 0c2.37,0 4.3,1.94 4.3,4.3l0 32.19c0,2.37 -1.93,4.3 -4.3,4.3l-58.02 0c-2.37,0 -4.3,-1.94 -4.3,-4.3l0 -32.19c0,-2.37 1.94,-4.3 4.3,-4.3zm76.42 99.41l57.68 0c2.46,0 4.47,2.01 4.47,4.47l0 33.49c0,2.46 -2.01,4.47 -4.47,4.47l-57.68 0c-2.46,0 -4.48,-2.01 -4.48,-4.47l0 -33.49c0,-2.46 2.01,-4.47 4.48,-4.47zm-73.69 -49.03l52.57 0c3.87,0 7.03,3.16 7.03,7.03l0 77.42c0,3.86 -3.16,7.03 -7.03,7.03l-52.57 0c-3.87,0 -7.03,-3.16 -7.03,-7.03l0 -77.42c0,-3.86 3.16,-7.03 7.03,-7.03z"/></svg>`
-   ,Past:`<svg class="HOV PT" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>`
+    ,RszH:`<svg class="HOV PT" viewBox="0 0 2.62 4.56"><path class="fil0" d="M1.02 1.67l0 1.23 0 0.63 -0.64 -0.63c-0.07,0.05 -0.35,0.32 -0.39,0.37l1.31 1.3 1.3 -1.3 -0.37 -0.38c-0.11,0.08 -0.51,0.5 -0.64,0.63l0 -0.62 0 -1.23 0 -0.62c0.13,0.13 0.53,0.56 0.64,0.63l0.37 -0.38 -1.3 -1.3 -1.31 1.3c0.04,0.05 0.31,0.32 0.39,0.37l0.64 -0.63 0 0.63z"/></svg>`
+    ,RszW:`<svg class="HOV PT" viewBox="0 0 8.33 4.78"><path class="fil0" d="M3.04 2.92l2.25 0 1.14 0 -1.15 1.16c0.09,0.13 0.58,0.64 0.68,0.7l2.38 -2.4 -2.37 -2.38 -0.69 0.68c0.14,0.21 0.92,0.94 1.16,1.17l-1.14 0 -2.25 0 -1.14 0c0.24,-0.23 1.01,-0.96 1.16,-1.17l-0.69 -0.68 -2.37 2.38 2.38 2.4c0.1,-0.06 0.59,-0.57 0.68,-0.7l-1.15 -1.16 1.14 0z"/></svg>`
+    ,List:`<svg class="HOV PT" viewBox="0 0 6.69 4.74"><path class="fil0" d="M1.58 4.48l5.11 0 0 -0.53 -5.11 0 0 0.53zm-1.58 -0.56l0 0.59c0,0.1 0.13,0.23 0.23,0.23l0.59 0c0.1,0 0.23,-0.13 0.23,-0.23l0 -0.59c0,-0.1 -0.13,-0.23 -0.23,-0.23l-0.59 0c-0.1,0 -0.23,0.13 -0.23,0.23zm0 -1.84l0 0.59c0,0.1 0.13,0.23 0.23,0.23l0.59 0c0.1,0 0.23,-0.13 0.23,-0.23l0 -0.59c0,-0.1 -0.13,-0.23 -0.23,-0.23l-0.59 0c-0.1,0 -0.23,0.13 -0.23,0.23zm0 -1.84l0 0.59c0,0.1 0.13,0.23 0.23,0.23l0.59 0c0.1,0 0.23,-0.13 0.23,-0.23l0 -0.59c0,-0.1 -0.13,-0.23 -0.23,-0.23l-0.59 0c-0.1,0 -0.23,0.13 -0.23,0.23zm1.58 2.4l5.11 0 0 -0.53 -5.11 0 0 0.53zm0 -1.84l5.11 0 0 -0.53 -5.11 0 0 0.53z"/></svg>`
+    ,Card:`<svg class="HOV PT" viewBox="0 0  9.9 6.88"><path class="fil0" d="M0.54 5.39l0 -3.86c0,-0.55 0.36,-0.94 0.74,-0.94l7.22 0c0.45,0 0.79,0.34 0.79,0.79l0 4.16c0,0.17 -0.16,0.45 -0.26,0.53 -0.12,0.1 -0.37,0.21 -0.58,0.21l-7.07 0c-0.48,0 -0.84,-0.42 -0.84,-0.89zm0.78 -3.39c0.11,0.11 0.26,0.3 0.57,0.3l6.01 0c0.91,0 0.9,-0.59 -0.1,-0.59l-5.72 0c-0.49,0 -0.59,0.13 -0.76,0.3zm3.97 3.73l2.97 0c0.5,0 0.53,-0.59 0.05,-0.59l-3.12 0c-0.32,0 -0.42,0.59 0.1,0.59zm-0.4 -1.58c0.06,0.11 0.13,0.3 0.3,0.3l3.12 0c0.47,0 0.47,-0.59 -0.05,-0.59l-2.97 0c-0.26,0 -0.31,0.13 -0.4,0.3zm-3.76 -0.64l0 1.98c0,0.19 0.24,0.25 0.45,0.25l1.93 0c0.54,0 0.4,-0.54 0.4,-1.43 0,-0.25 -0.59,-0.49 -0.59,0.2l0 0.64 -1.63 0 0 -1.29c0.67,0 1.43,0.13 1.43,-0.3 0,-0.43 -0.96,-0.3 -1.53,-0.3 -0.2,0 -0.45,0.05 -0.45,0.25zm8.03 -3.34c-0.36,-0.2 -1.16,-0.17 -1.63,-0.17l-6.11 0c-0.78,0 -1.43,0.66 -1.43,1.29l0 4.3c0,0.42 0.3,0.79 0.56,0.98 0.31,0.23 0.71,0.31 1.22,0.31l6.33 0c1.06,0 1.78,-0.46 1.78,-1.58l0 -3.02 0 0c0.01,-0.74 0.03,-1.69 -0.73,-2.11z"/></svg>`
+    ,Grid:`<svg class="HOV PT" viewBox="0 0 165.77 165.78"><path class="fil0" d="M71.95 71.95l0 -71.8c-78.71,0 -71.8,-6.9 -71.8,71.8l71.8 0zm21.87 -71.8l0 71.8 71.8 0c0,-78.75 6.93,-71.8 -71.8,-71.8zm0 93.67l0 71.8c78.73,0 71.8,6.93 71.8,-71.8l-71.8 0zm-21.87 71.8l0 -71.8 -71.8 0c0,78.71 -6.9,71.8 71.8,71.8z"/></svg>`
+    ,Gris:`<svg class="HOV PT" viewBox="0 0 165.77 165.78"><path class="fil0" d="M71.95 71.95l0 -71.8c-78.71,0 -71.8,-6.9 -71.8,71.8l71.8 0zm21.87 -71.8l0 71.8 71.8 0c0,-78.75 6.93,-71.8 -71.8,-71.8zm0 93.67l0 71.8c78.73,0 71.8,6.93 71.8,-71.8l-71.8 0zm-21.87 71.8l0 -71.8 -71.8 0c0,78.71 -6.9,71.8 71.8,71.8z"/></svg>`
+    ,Gemn:`<svg class="HOV PT" viewBox="0 0 192.32 192.32"><path class="fil0" d="M-0 96.16c70.01,-17.75 75.96,-31.07 96.16,-96.16 20.2,65.09 26.15,78.41 96.16,96.16 -70.01,17.75 -75.96,31.07 -96.16,96.16 -20.2,-65.09 -26.15,-78.41 -96.16,-96.16z"/></svg>`
+    ,Blok:`<svg class="HOV PT" viewBox="0 0 200.69 203.34"><path class="fil0" d="M117.03 0l73.8 0c5.43,0 9.87,4.44 9.87,9.87l0 73.8c0,5.43 -4.44,9.86 -9.87,9.86l-73.8 0c-5.43,0 -9.86,-4.44 -9.86,-9.86l0 -73.8c0,-5.43 4.44,-9.87 9.86,-9.87zm-107.16 0l73.8 0c5.43,0 9.87,4.44 9.87,9.87l0 73.8c0,5.43 -4.44,9.86 -9.87,9.86l-73.8 0c-5.43,0 -9.87,-4.44 -9.87,-9.86l0 -73.8c0,-5.43 4.44,-9.87 9.87,-9.87zm107.16 109.81l73.8 0c5.43,0 9.87,4.44 9.87,9.87l0 73.8c0,5.43 -4.44,9.87 -9.87,9.87l-73.8 0c-5.43,0 -9.86,-4.44 -9.86,-9.87l0 -73.8c0,-5.43 4.44,-9.87 9.86,-9.87zm-107.16 0l73.8 0c5.43,0 9.87,4.44 9.87,9.87l0 73.8c0,5.43 -4.44,9.87 -9.87,9.87l-73.8 0c-5.43,0 -9.87,-4.44 -9.87,-9.87l0 -73.8c0,-5.43 4.44,-9.87 9.87,-9.87z"/></svg>`
+    ,Alvn:`<svg class="HOV PT" viewBox="0 0 142.87 141.84"><path class="fil0" d="M83.27 0l52.57 0c3.87,0 7.03,3.03 7.03,6.74l0 75.96c0,3.71 -3.16,6.74 -7.03,6.74l-52.57 0c-3.87,0 -7.03,-3.03 -7.03,-6.74l0 -75.96c0,-3.71 3.16,-6.74 7.03,-6.74zm-78.97 0l58.02 0c2.37,0 4.3,1.94 4.3,4.3l0 32.19c0,2.37 -1.93,4.3 -4.3,4.3l-58.02 0c-2.37,0 -4.3,-1.94 -4.3,-4.3l0 -32.19c0,-2.37 1.94,-4.3 4.3,-4.3zm76.42 99.41l57.68 0c2.46,0 4.47,2.01 4.47,4.47l0 33.49c0,2.46 -2.01,4.47 -4.47,4.47l-57.68 0c-2.46,0 -4.48,-2.01 -4.48,-4.47l0 -33.49c0,-2.46 2.01,-4.47 4.48,-4.47zm-73.69 -49.03l52.57 0c3.87,0 7.03,3.16 7.03,7.03l0 77.42c0,3.86 -3.16,7.03 -7.03,7.03l-52.57 0c-3.87,0 -7.03,-3.16 -7.03,-7.03l0 -77.42c0,-3.86 3.16,-7.03 7.03,-7.03z"/></svg>`
+    ,Past:`<svg class="HOV PT" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>`
 }
 
 
-
+const InptSVG = `type="file" accept=".svg" multiple onchange="SVG_FILES=[...this.files].filter(f=>f.type==='image/svg+xml')"`
 const SynChk=(Eu   )=>{const C=$('input',Eu);C.checked = !C.checked} // isso é uma Gambiarra q precisa ser Removida (ela não precisava a conteceer se eu conseguisse usar label ao invés de div, mas usando label dispara 2 vezes) ai preferir assim, mas div não dar o evento de check, então tive que fazer manualmente
 const Tm_th     =(e,arr)=>Inn(e,arr.map(a=>`<th>${a}</th>`).join(''))
 const Tm_td     =(e,arr)=>Inn(e,arr.map(a=>`<td>${a}</td>`).join(''))
@@ -349,18 +357,14 @@ function MyAlert(msg){
 
 
 // Criar Modal
-
-
 // MODAL________________________________________________
 function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/
 function ShowModal(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)}
 function SairModal(Fundo){document.addEventListener('keyup',e=>{if(e.key==='Escape'){None(Fundo)}});Fundo.addEventListener('click',e=>{if(e.target===Fundo){None(Fundo)}})}
 function ShowBrother(e,pai){var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e);Fi.forEach(e=>None(e)) ; if(x<Fi.length-1){Show(Fi[x+1])}else{Show(Fi[0])}}
 
-
-
-
-
+function MODAL(DOM){document.body.insertAdjacentHTML("beforeend", `<div class="FModal Ct" onclick="this.remove()"><div class="Rd Rltv" onclick="event.stopPropagation()"><div class="XX Ct" onclick="XModal(this)">X</div>${DOM}</div></div>`)}
+function XModal(Eu){Eu.closest('.FModal').remove()}
 
 
 // isso é pra Esperar a função terminar pra poder dar o Alert
@@ -369,6 +373,9 @@ const ShowTime2=(e,sec)=>{Show(e);requestAnimationFrame(()=>{Add($(e),"show")});
 
 const Seguro=v=>(isFinite(v) && !Number.isNaN(v)) ? v : 0  // Provavelmente oq eu Faço aqui já tem em Num() talvez n o Infinity mas é só adicionar lá
 const MSRX = stg => Number(stg.replace('ms','').trim())    // isso também só Converte em Numero, eu Poderia testar isso usando Num e provavelmente esse ms, poderia trocar pra remover todas as letras, isso tbm removeria R$ depois eu vejo lá
+
+
+function SelectFiles(Inpt,Call){if(Inpt.files.length > 0 && typeof Call === "function"){Call(Inpt)}} // usar isso no InputFiles abaixo (Garante que tudo entrou bem antes de Continuar)
 
 // DROP Adicionar pra PreScript na aba de Templates, mas usar a idéia do q eu fiz no Jogo de Fitebol
 const IptFile=(div)=>// vc Cria a Função Upload(files) lá dentro do seu Index, e dentro execulta as Funções
@@ -411,5 +418,18 @@ const IptFile=(div)=>// vc Cria a Função Upload(files) lá dentro do seu Index
   const NAN=e=>isNaN(e) ? 0 : e
   const RmvLinByID=(arr,id)=>{const x = arr.findIndex(e => e.Id === id);if (x !== -1) arr.splice(x, 1)}
 
-  // evita erro de XSS
-  function XSS(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;")}
+// evita erro de XSS
+function XSS(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;")}
+
+function baixarJSON(dados, nomeArquivo){ // baixa arrays e objetos e converte em JSONs
+  const json = JSON.stringify(dados,null,2)
+  const blob = new Blob([json],{type:'application/json'})
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = nomeArquivo
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+}

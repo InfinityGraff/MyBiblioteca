@@ -1,3 +1,5 @@
+/*Dia 31/12/2025*/
+
 @keyframes BtnBaby{0%{background-position-x: 0%;}100%{background-position-x: 90%;}}
 @keyframes FndoModal {from {opacity: 0;} to {opacity: 1;}}  /*Pra remover pq atualizei pra a debaixo (@keyframes modal), mas tem App q ainda ta usando*/
 @keyframes modal{from { opacity: 0;transform: translate3d(0,-80px,0)}to { opacity: 1;transform: translate3d(0,0,0)}}
@@ -66,6 +68,7 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 .Opacy{opacity: 0}
 .Bd0{border:1px solid #ff000000}
 .none{display: none}
+.NONE{display: none !important;}
 .g90{transform: rotate(90deg)}
 
 .erro{color:red;}
