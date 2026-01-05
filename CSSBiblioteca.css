@@ -25,7 +25,8 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 *{margin:0px;padding:0px;box-sizing:border-box;border:none;text-decoration:none;font-family:var(--Rglr);font-size:12px;letter-spacing:0.7px;text-align:center;outline:none}
 .Grid  {display:grid}
 .Blok  {display:block}
-.Ct    {display:flex;flex-wrap:wrap;justify-content:center;align-items:center}
+.Ct    {display:flex;flex-wrap:wrap  ;justify-content:center;align-items:center}
+.CT    {display:flex;flex-wrap:nowrap}
 .Cl    {display:flex;flex-direction:column;align-items:center}
 .Wrp   {flex-wrap: nowrap}
 .End   {display:flex;justify-content:flex-end  ;align-items:center}
@@ -75,14 +76,16 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 .error{border: 2px solid red;}
 .error::placeholder {color: red}
 
+.Gap{gap:15px}
+.gap{gap:4px}
 
 h1{font-size:40px;font-family:var(--Bold)}
 h2{font-size:18px; color:var(--Laranja)}
 .Dark hr{border: 1px solid #ffffff2e;margin:4px 0px;}
 .Lite hr{border: 1px solid #00000070;margin:4px 0px;}
 
-.PT,button,.Close{cursor:pointer;user-select: none;-webkit-user-select: none;-moz-user-select: none;}
-.noslt{user-select: none;-webkit-user-select: none;-moz-user-select: none;} /*NexBee*/
+
+
 .Link{text-decoration: underline;cursor: pointer}
 
 @keyframes FModal {from {opacity: 0;} to {opacity: 1;}}
@@ -91,7 +94,10 @@ h2{font-size:18px; color:var(--Laranja)}
 
 textarea{overflow:hidden;resize:none;padding: 10px;}
 
-.noClk{pointer-events: none}
+.noClk{pointer-events:none}
+.noslt{user-select: none;-webkit-user-select: none;-moz-user-select:none} /*NexBee*/
+.noDrg{user-select: none;-webkit-user-select: none;-ms-user-select :none} /*bloquear o Drag*/
+.PT,button,.Close{cursor:pointer;user-select: none;-webkit-user-select: none;-moz-user-select: none;}
 
 .hov{cursor: pointer;transition: all 0.2s ease-in-out;}.hov:hover{transform: scale(1.05)}.hov:active{transform: scale(1.02)}
 .Hov{cursor: pointer;transition: all 0.2s ease-in-out;}.Hov:hover{transform: scale(1.05)}.Hov:active{transform: scale(1.02)}

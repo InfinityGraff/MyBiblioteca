@@ -55,6 +55,7 @@ const SibAll = e=>[...e?.parentElement?.children || []].filter(s=>s!==e)        
 const Onloads=e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})} // Pega todas '*' com Onload de uma Div especifica, e Roda o Onload de cada
 const Befor  =(e,Stg,Stg2)=>typeof Stg === 'string' ? $(e).insertAdjacentHTML('beforeend',Stg):$(e).insertBefore(Stg,$(Stg2,$(e)))
 const After  =(e,Stg)=>$(e).insertAdjacentHTML('afterbegin',Stg)
+const Dlt    =e=>FazArry(e).forEach(E=>E.remove())
 const DltAll =e=>$$(e).forEach(e=>e.remove())
 const InnAll =(Stg,e)=>$$(Stg).forEach(E=>E.innerHTML = e)
 const NewTag =e=>document.createElement(e)
@@ -73,6 +74,7 @@ const FocoOut=e=>{e.focus();e.setSelectionRange(e.value.length,e.value.length)}
 const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
 const Prvn=()=>event.preventDefault()
 const Prvn2 = ev=>(ev||event).preventDefault() // Acho q esse é melhor q o de cima
+
 
 // Funções de Validações_______________________________________________________________________________________________________
 const isDOM   = v => v instanceof Element;
@@ -141,6 +143,7 @@ const RmvTrue=(Div,Stg,Valid)=>Valid ? Add(Div,Stg) : Rmv(Div,Stg)
 const ATVtrue=(Div    ,Valid)=>Valid ? ATV(Div)     : DTV(Div)
 const N_Tru=(e,Tru)=>Tru ? Rmv_N(e) : Add_N(e)
 const N_Fal=(e,Fal)=>Fal ? Add_N(e) : Rmv_N(e)
+
 
 //Funções de Objeto e Array____________________________________________________________________________________________________
 const ObjKey =e=>Object.keys(e)                              // Converte todos Keys de Objetos em um array
