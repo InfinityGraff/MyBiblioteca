@@ -448,3 +448,10 @@ const InptImg = cb => {
     };
     i.click();
 };
+
+
+
+const getArr  =v=>Array.isArray(v) ? v : []
+const ArrToObj=(arr,keys)=>Object.fromEntries(keys.map((k,i)=>[k, arr[i]]))
+const NUMM    =e=>parseFloat(e).toFixed(2)
+const isJSON  =e=>typeof e=="string" && e.length > 1 && (e[0]=="{"||e[0]=="[")
