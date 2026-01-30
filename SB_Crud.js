@@ -6,6 +6,7 @@ const NewID   =arr=>Math.max(...arr.map(o=>Num(o.Id)))+1
 const _Bol=v=> v !== '_'
 const _par=s=>(([Ty,Id,Cl,Tm,Bj,Sc]) => ({Ty,Id,Cl,Tm,Bj:_Bol(Bj),Sc:_Bol(Sc)}))(s.split('-'))
 const d_r =e=>_par(typeof e == "string" ? e : _td(e).dataset.r)
+const d_r2=e=>_par(typeof e == "string" ? e : e.dataset.r)
 const d_p =e=>_td(e).dataset.p === 'SemPai' ? null : _par(_td(e).dataset.p)
 const RR=(r,p)=>$$(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p?(isArr(p)?p:[p]).map(k=>`[data-p*="${k}"]`).join(''):''}`)
 const rr=(r,p)=> $(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p?(isArr(p)?p:[p]).map(k=>`[data-p*="${k}"]`).join(''):''}`)
@@ -57,21 +58,53 @@ function VAL(e){
     return val
 }
 
+function VAL2(e){
+    const R = d_r2(e)
+    const val = 
+              ['Edit','Fixo','Sugg','Soma','Bndj'].includes(R.Tm) ?     e.textContent.trim()
+            : ['Ssvg','Imgs','Link'              ].includes(R.Tm) ?  Nm(e).trim()
+            : ['Valr','Mdds','Auto','Sync'       ].includes(R.Tm) ? Num(e.textContent.trim())
+            : ['Data','Inpt','Slct'              ].includes(R.Tm) ?     e.value
+            : R.Tm==='Chek' ? e.checked
+            : Is(td,'input')? td.value
+            : R.Tm==='Lixo' ? '-'
+            : null
+    return val
+}
+
 const Tm_Tm = {
-    Fixo:e=>`<p class="P-P Ct" name="${e}">${e}</p>`,
-    Fixy:e=>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this));RenderINFO(this)" name="${e}">${e}</p><div class="BndjTBL MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><table class="Bdj_INFO"></table></div></div>`,
-    Auto:e=>`<p class="P-P Ct" name="${Num(e) }" onclick="CtrlSoma(this)">${e}</p>`,
-    Sync:e=>`<p class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
-    Edit:e=>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco')">${e}</p>`,
-    Valr:e=>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco');CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
-    Mdds:e=>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco');CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
-    Data:e=>`<p class="P-P Ct" name="${YMD(e)}" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" class="none" value="${YMD(e)}" onchange="EditCell(this)" onblur="TrcFih(this,$('p',Pai(this)))">`,
+    Fixo:e      =>`<p class="P-P Ct" name="${e}">${e}</p>`,
+    Fixy:e      =>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this));RenderINFO(this)" name="${e}">${e}</p><div class="BndjTBL MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><table class="Bdj_INFO"></table></div></div>`,
+    Auto:e      =>`<p class="P-P Ct" name="${ Num(e)}" onclick="CtrlSoma(this)">${e}</p>`,
+    Sync:e      =>`<p class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
+    Edit:e      =>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco')">${e}</p>`,
+    Valr:e      =>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco');CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
+    Mdds:e      =>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco');CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
+    Data:e      =>`<p class="P-P Ct" name="${YMD(e)}" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" class="none" value="${YMD(e)}" onchange="EditCell(this)" onblur="TrcFih(this,$('p',Pai(this)))">`,
+    Chek:e      =>`<input  class="P-P" name="${e}" onchange="EditCell(this)" type="checkbox" ${Bool(e)?'checked':''}>`,
+    Ssvg:e      =>`<p class="P-P Ct" name="${e}">${e}</p>`,
+    Lixo:e      =>`<img class="PT" onclick="RmvROW(this)" name="${e}" src="./SVG/I_Lixo.webp"><i class="Abslt GrifFora"></i>`,
     Slct:(e,R)=>`<select class="P-P w100" name="${e}" onchange="EditCell(this)">${Tm_Opt(O[R.Col],e)}</select>`,
-    Chek:e=>`<input  class="P-P" name="${e}" onchange="EditCell(this)" type="checkbox" ${Bool(e)?'checked':''}>`,
     Imgs:(e,R)=>`<img class="P-P" loading="lazy" name="${e?'True':'False'}" draggable="false" src="${SrcsIMG(e,R)}" onclick="AbrirImg('${e}',this,'${e?'':R.Col=='Arte'?'X':'Place'}','${R.Row}')">`,
-    Ssvg:e=>`<p class="P-P Ct" name="${e}">${e}</p>`,
     Link:(e,R)=>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[R.Col]}" oninput="LinkSug(this,'${AA(R.Col)}')" onkeydown="KeyEntr(()=>TestRow(this,'${R.Col}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
-    Lixo:e=>`<img class="PT" onclick="RmvROW(this)" name="${e}" src="./SVG/I_Lixo.webp"><i class="Abslt GrifFora"></i>`,
+}
+
+const Tm_Tm2 = {
+    Fixo:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
+    Auto:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ Num(e)}" onclick="CtrlSoma(this)">${e}</p>`,
+    Sync:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
+    Edit:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this)" onfocus="ATV(this)">${e}</p>`,
+    Valr:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this)" onfocus="ATV(this);CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
+    Mdds:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this)" onfocus="ATV(this);CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
+    Data:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${YMD(e) }" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" class="none" value="${YMD(e)}" onchange="EditCell(this)" onblur="TrcFih(this,$('p',Pai(this)))">`,
+    Chek:(e,R,P)=>`<input  data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this)" type="checkbox" ${Bool(e)?'checked':''}>`,
+    Ssvg:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
+    Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="PT" onclick="RmvROW(this)" name="${e}" src="./SVG/I_Lixo.webp"><i class="Abslt GrifFora"></i>`,
+
+    Slct:(e,R,P)=>`<select data-R="${R}" data-P="${P}" class="P-P w100" name="${e}" onchange="EditCell(this)">${Tm_Opt(O[d_r(R).Col],e)}</select>`,
+    Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P" loading="lazy" name="${e?'True':'False'}" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
+    Link:(e,R,P)=>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Col]}" oninput="LinkSug(this,'${AA(d_r(R).Col)}')" onkeydown="KeyEntr(()=>TestRow(this,'${d_r(R).Col}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
+    Fixy:e      =>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this));RenderINFO(this)" name="${e}">${e}</p><div class="BndjTBL MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><table class="Bdj_INFO"></table></div></div>`,
 }
 
 function Tm_Table(Typ,arry,Rpai=''){
@@ -79,6 +112,33 @@ function Tm_Table(Typ,arry,Rpai=''){
     const Retorno = arry.map(e=> e ? `<tr class="tr-${e[Primary[Typ]]}">${ObjOrdn(e,OjKy(Typ)).map((v,x)=>Tm_Td(v,e,x,Typ,Rpai)).join('')}</tr>` : '').join('')
     LOG(`⏱️🔴 Tm_table(${Typ}): ${MS(IN)}`)
     return Retorno
+}
+
+function SellFilesIMG(Inpt){ // Fazer isso Ficar imbutido dentro da Função do input Files
+    const file = Inpt.files[0]
+    $('img',Pai(Pai(Inpt))).src = URL.createObjectURL(file)
+    $('span',Pai(Inpt)).textContent = file.name
+}
+
+function AbrirImg(img,Nome,R){
+    const X  = Nome ? 'Plc' : 'Up'
+    const _R =d_r(R)
+    const Pre = BS[_R.Ty][_R.Cl][2]
+    const W = img.naturalWidth>img.naturalHeight
+    MODAL(`<div class="MdalIMG ${W?'Cl':'Ct'}">
+                <img src="${img.src}">
+                <div class="casusa Cl ${W?'w100':'h100'}">
+                    <span>Nome</span>
+                    <div>${Pre}${_R.Id}</div>
+                    <input type="file" class="w80" onchange="SelectFiles(this,SellFilesIMG)" accept="image/*">
+                    ${Nome ? `<button onclick="XModal(this);ImgTRC($('input',Pai(this)),'${Nome       }','${R}')">Trocar Imagem</button>`
+                           : `<button onclick="XModal(this);ImgUPP($('input',Pai(this)),'${Pre}${_R.Id}','${R}')">Enviar       </button>`
+                    }
+                    
+                </div>
+            <div>`)
+    if(X=='Up'){$('.MdalIMG input').click()}
+
 }
 
 
