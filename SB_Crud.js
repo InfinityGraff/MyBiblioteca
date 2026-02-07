@@ -1,15 +1,16 @@
 const OjKy   =Typ=>ObjKey(BS[Typ])
-const NoneCol=(Typ,col)=>Cgo[U?.cgo]?.[Typ]?.includes(col) ? `display:none` : '' // não é exatamente assim q eu quero usar ela Cgo tem q já vir Pronto
 const ClrObj  =obj=>Object.fromEntries(ObjKey(obj).map(k=>[k,'']))
 const NewID   =arr=>Math.max(...arr.map(o=>Num(o.Id)))+1
-
+const Tm_R=(e,x,Typ,P=false)=>{const k=OjKy(Typ)[x] ; return `${Typ}-${e=='Foot'?e:e[isArr(e)?0:'Id']}-${k}-${CRYPP[BS[Typ][k][0]]}-${P?'Bj':'_'}-${ObjKey(Secund).includes(Typ)?'Sc':'_'}`}
+const daClass =_R=>{const R = d_r(_R) ; const bs = BS[R.Ty][R.Cl][1] ; return (bs==true?'':bs).split('').map(e=>CRYCLS[e]).join(' ') || ''} // Aplica as Casses q estão no 'bs'
 const _Bol=v=> v !== '_'
 const _par=s=>(([Ty,Id,Cl,Tm,Bj,Sc]) => ({Ty,Id,Cl,Tm,Bj:_Bol(Bj),Sc:_Bol(Sc)}))(s.split('-'))
-const d_r =e=>_par(typeof e == "string" ? e : _td(e).dataset.r)
-const d_r2=e=>_par(typeof e == "string" ? e : e.dataset.r)
-const d_p =e=>_td(e).dataset.p === 'SemPai' ? null : _par(_td(e).dataset.p)
+const d_r=e=>_par(typeof e == "string" ? e : e.dataset.r)
+const d_p=e=>e.dataset.p == '' ? null : _par(e.dataset.p)
 const RR=(r,p)=>$$(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p?(isArr(p)?p:[p]).map(k=>`[data-p*="${k}"]`).join(''):''}`)
 const rr=(r,p)=> $(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p?(isArr(p)?p:[p]).map(k=>`[data-p*="${k}"]`).join(''):''}`)
+const $r=(...arr)=>{const K=arr.filter(v=>v!=null&&v!=="").join('-') ; return K ? $(`[data-r="${K}"]`) : null} // da pra simplificar esta Limpeza
+const Rx7=(...arr)=>`.P-P${(arr).map(k=>`[data-r*="${k}"]`).join('')}` // nem todos tem .P-P isso pode dar BO depois
 
 const DarJJ = (M,T,R,C,V,Lv2Arr)=>{
     const Lv2 = Lv2Arr && (([pT,pR,pC]) => ({pT,pR,pC}))(Lv2Arr)
@@ -43,68 +44,85 @@ const DarJJ = (M,T,R,C,V,Lv2Arr)=>{
     //LOG(`Const Atualizadas! ${M}, ${iguais}`)
 }
 
-function VAL(e){
-    const td = e.tagName=='TD'?e:_td(e)
-    const R = d_r(td)
-    const val = 
-              ['Edit','Fixo','Sugg','Soma','Bndj'].includes(R.Tm) ?     $('.P-P',td).textContent.trim()
-            : ['Ssvg','Imgs','Link'              ].includes(R.Tm) ?  Nm($('.P-P',td)).trim()
-            : ['Valr','Mdds','Auto','Sync'       ].includes(R.Tm) ? Num($('.P-P',td).textContent.trim())
-            : ['Data','Inpt','Slct'              ].includes(R.Tm) ?     $('input,select',td).value
-            : R.Tm==='Chek' ? $('input' ,td).checked
-            : Is(td,'input')? td.value
-            : R.Tm==='Lixo' ? '-'
-            : null
-    return val
+async function ImgLowQuality(src, mod = 'Low') {
+    const CFG = {
+        Low: { w: 35,  h: 17,  q: 0.3 },
+        Med: { w: 300, h: 300, q: 0.7 },
+        HD:  { w: null, h: null, q: 0.9 } // tamanho real
+    };
+    const cfg = CFG[mod] || CFG.Low;
+    return new Promise(res => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+            const r = (cfg.w && cfg.h)
+                ? Math.min(cfg.w / img.width, cfg.h / img.height, 1)
+                : 1; // HD → escala real
+            const canvas = document.createElement('canvas');
+            canvas.width  = img.width  * r;
+            canvas.height = img.height * r;
+            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            // sempre WebP
+            res(canvas.toDataURL('image/webp', cfg.q));
+        }
+        img.onerror = () => res(null);
+        img.src = src;
+    });
 }
 
-function VAL2(e){
-    const R = d_r2(e)
+function ReOpt(Sel,arr){ // arr = valores Disponiveis (precisa ser no DOM) (✔️ SB agora disponível)
+    if(arr.length==1)         {EditCell(Sel,'Edt',arr[0],'Auto')} // Troca pra o Unico option, se Tiver
+    if(!arr.includes(Nm(Sel))){EditCell(Sel,'Edt',""    ,'Auto')} // se o valor atual não Existir dar valor "Vazio"
+    setTimeout(()=>{$$('option',Sel).forEach(o=>{Add_N(o);if(arr.includes(o.value)){Rmv_N(o)}})},500) // Ocultar os Options Ausentes
+}
+
+function VAL(e){
+    const R = d_r(e)
     const val = 
               ['Edit','Fixo','Sugg','Soma','Bndj'].includes(R.Tm) ?     e.textContent.trim()
             : ['Ssvg','Imgs','Link'              ].includes(R.Tm) ?  Nm(e).trim()
             : ['Valr','Mdds','Auto','Sync'       ].includes(R.Tm) ? Num(e.textContent.trim())
             : ['Data','Inpt','Slct'              ].includes(R.Tm) ?     e.value
             : R.Tm==='Chek' ? e.checked
-            : Is(td,'input')? td.value
+            : Is(e,'input') ? e.value
             : R.Tm==='Lixo' ? '-'
             : null
     return val
 }
 
-const Tm_Tm = {
-    Fixo:e      =>`<p class="P-P Ct" name="${e}">${e}</p>`,
-    Fixy:e      =>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this));RenderINFO(this)" name="${e}">${e}</p><div class="BndjTBL MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><table class="Bdj_INFO"></table></div></div>`,
-    Auto:e      =>`<p class="P-P Ct" name="${ Num(e)}" onclick="CtrlSoma(this)">${e}</p>`,
-    Sync:e      =>`<p class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
-    Edit:e      =>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco')">${e}</p>`,
-    Valr:e      =>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco');CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
-    Mdds:e      =>`<p class="P-P Ct" name="${e}" contenteditable="true" onkeydown="EntBlr(this)" onblur="Rmv(_td(this),'Foco');EditCell(this)" onfocus="Add(_td(this),'Foco');CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
-    Data:e      =>`<p class="P-P Ct" name="${YMD(e)}" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" class="none" value="${YMD(e)}" onchange="EditCell(this)" onblur="TrcFih(this,$('p',Pai(this)))">`,
-    Chek:e      =>`<input  class="P-P" name="${e}" onchange="EditCell(this)" type="checkbox" ${Bool(e)?'checked':''}>`,
-    Ssvg:e      =>`<p class="P-P Ct" name="${e}">${e}</p>`,
-    Lixo:e      =>`<img class="PT" onclick="RmvROW(this)" name="${e}" src="./SVG/I_Lixo.webp"><i class="Abslt GrifFora"></i>`,
-    Slct:(e,R)=>`<select class="P-P w100" name="${e}" onchange="EditCell(this)">${Tm_Opt(O[R.Col],e)}</select>`,
-    Imgs:(e,R)=>`<img class="P-P" loading="lazy" name="${e?'True':'False'}" draggable="false" src="${SrcsIMG(e,R)}" onclick="AbrirImg('${e}',this,'${e?'':R.Col=='Arte'?'X':'Place'}','${R.Row}')">`,
-    Link:(e,R)=>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[R.Col]}" oninput="LinkSug(this,'${AA(R.Col)}')" onkeydown="KeyEntr(()=>TestRow(this,'${R.Col}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
+function DarVAL(e,V){
+    const R = d_r(e)
+    if(['Edit','Fixo'  ].includes(R.Tm)){Nm(e,V)       ; Inn(e,V)}
+    if(['Slct'         ].includes(R.Tm)){Nm(e,V)       ; e.value = V}
+    if(['Auto'         ].includes(R.Tm)){Nm(e,Num(V))  ; Inn(e,V)}
+    if(['Mdds'         ].includes(R.Tm)){Nm(e,Num(V))  ; Inn(e,V?Cm(V):'')}
+    if(['Valr','Sync'  ].includes(R.Tm)){Nm(e,V==''?'':Num(V)) ; Inn(e,V==''?'':RS(V))}
+    if(['Data','Link','Ssvg','Imgs','Chek'].includes(R.Tm)){Inn(Pai(e),Tm_Tm[R.Tm](V,e.dataset.r,''))} // Parece q Sugg n existe mais
 }
 
-const Tm_Tm2 = {
+const SrcsIMG=(src,R)=>src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src.replace('.svg','.webp')}` : `./CrudSB/${R.Cl=='Arte'?'Upld':'Plce'}.webp`
+
+const Tm_Tm = {
     Fixo:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
+    Ssvg:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
+    Edit:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" onfocus="ATV(this)">${e}</p>`,
+    Valr:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" onfocus="ATV(this);CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
+    Mdds:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" onfocus="ATV(this);CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
+    Chek:(e,R,P)=>`<input  data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this,'Edt')" type="checkbox" ${Bool(e)?'checked':''}>`,
+    Slct:(e,R,P)=>`<select data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this,'Edt')">${Tm_Opt(O[d_r(R).Cl],e)}</select>`,
+    Data:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ YMD(e)}" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" data-R="${R}" data-P="${P}" class="none" value="${YMD(e)}" onchange="EditCell(this,'Edt')" onblur="TrcFih(this,$('p',Pai(this)))">`,
     Auto:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ Num(e)}" onclick="CtrlSoma(this)">${e}</p>`,
     Sync:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
-    Edit:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this)" onfocus="ATV(this)">${e}</p>`,
-    Valr:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this)" onfocus="ATV(this);CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
-    Mdds:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this)" onfocus="ATV(this);CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
-    Data:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${YMD(e) }" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" class="none" value="${YMD(e)}" onchange="EditCell(this)" onblur="TrcFih(this,$('p',Pai(this)))">`,
-    Chek:(e,R,P)=>`<input  data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this)" type="checkbox" ${Bool(e)?'checked':''}>`,
-    Ssvg:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
-    Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="PT" onclick="RmvROW(this)" name="${e}" src="./SVG/I_Lixo.webp"><i class="Abslt GrifFora"></i>`,
-
-    Slct:(e,R,P)=>`<select data-R="${R}" data-P="${P}" class="P-P w100" name="${e}" onchange="EditCell(this)">${Tm_Opt(O[d_r(R).Col],e)}</select>`,
+    Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" onclick="${d_r(P).Tm =='Bndj'?`EditCell(this,'Del')`:'RmvROW(this)'}" name="${e}" src="./CrudSB/Lixo.webp"><i class="Abslt GrifFora"></i>`,
     Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P" loading="lazy" name="${e?'True':'False'}" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
-    Link:(e,R,P)=>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Col]}" oninput="LinkSug(this,'${AA(d_r(R).Col)}')" onkeydown="KeyEntr(()=>TestRow(this,'${d_r(R).Col}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
-    Fixy:e      =>`<div class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this));RenderINFO(this)" name="${e}">${e}</p><div class="BndjTBL MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><table class="Bdj_INFO"></table></div></div>`,
+    Link:(e,R,P)=>e!=''?Tm_Bndj(R,e) : `<div data-R="${R}" data-P="${P}" class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this))"                  name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>TestRow(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
+    Bndj:(e,R,P)=>Tm_Bndj(R,e),
+    BjIn:(e,R,P)=>Tm_Bndj(R,e)
+}
+
+function Tm_Td(v,e,x,Typ,_P=''){
+    const _R = Tm_R(e,x,Typ,_P)
+    return `<td class="${daClass(_R)} Rltv">${Tm_Tm[d_r(_R).Tm](v,_R,_P)}</td>`
 }
 
 function Tm_Table(Typ,arry,Rpai=''){
@@ -121,28 +139,85 @@ function SellFilesIMG(Inpt){ // Fazer isso Ficar imbutido dentro da Função do 
 }
 
 function AbrirImg(img,Nome,R){
+    LOG('Mochi')
     const X  = Nome ? 'Plc' : 'Up'
     const _R =d_r(R)
-    const Pre = BS[_R.Ty][_R.Cl][2]
+    const Pre = BS[_R.Ty][_R.Cl][2] ? `${BS[_R.Ty][_R.Cl][2]}` : '' // isso é pra Criar um Prefixo nas Imagens se tiver predefinido no BS
     const W = img.naturalWidth>img.naturalHeight
     MODAL(`<div class="MdalIMG ${W?'Cl':'Ct'}">
                 <img src="${img.src}">
                 <div class="casusa Cl ${W?'w100':'h100'}">
                     <span>Nome</span>
-                    <div>${Pre}${_R.Id}</div>
+                    <div>${_R.Id}</div>
                     <input type="file" class="w80" onchange="SelectFiles(this,SellFilesIMG)" accept="image/*">
-                    ${Nome ? `<button onclick="XModal(this);ImgTRC($('input',Pai(this)),'${Nome       }','${R}')">Trocar Imagem</button>`
+                    ${Nome ? `<button onclick="XModal(this);ImgTRC($('input',Pai(this)),'${Nome        }','${R}')">Trocar Imagem</button>`
                            : `<button onclick="XModal(this);ImgUPP($('input',Pai(this)),'${Pre}${_R.Id}','${R}')">Enviar       </button>`
                     }
-                    
                 </div>
             <div>`)
     if(X=='Up'){$('.MdalIMG input').click()}
-
 }
 
 
-// SUPABASE
+
+function GambiarraAdd(div){Add(_tr(div),'Hoov') ; $$(':scope > td',_tr(div)).forEach(e=>Add(e,'Hoov'))} // HOROZOZA fazer de tudo pra tirar!
+
+function ShowBndj(div,Typ){                                                // Função que exibe/oculta o painel .BNdj dentro da div recebida
+    if(!document.contains(event.target)){LOG('não ta mais no DOM') ; return} // interrompe se o target não estiver mais no DOM
+    if(['IMG','I','BUTTON'].includes(event.target.tagName)){return}
+    if(event.target.closest('svg')){return}
+    const e = $('.BNdj',div)                                      // Seleciona o elemento .BNdj dentro da div Passada
+    if(event.target.closest('.BNdj')){return}                     // Se o clique for dentro do .BNdj, interrompe (não fecha nem altera)
+    else{                                                         // Caso contrário (clique fora do conteúdo interno)
+        e.style.zIndex = $$('.BNdj:not(.none)').length + 500      // Define o z-index dinamicamente com base na quantidade de painéis visíveis
+        if(Tecla('ctrl')){
+            Tog_N(e);GambiarraAdd(div)}                           // Se a tecla CTRL estiver pressionada, apenas alterna o estado (mostra/oculta)
+        else{                                                     // Caso não esteja com CTRL
+            $$('.BNdj:not(.none)').forEach(E=>{                   // Percorre todos os painéis .BNdj que estão visíveis
+            //    if(E==e){return}else{Add_N(E)}                  // Fecha (adiciona .none) em todos, exceto o atual
+            })
+            Tog_N(e);GambiarraAdd(div);                           // Alterna visibilidade do painel atual (mostra se estava oculto, e vice-versa)
+            Typ ? RFresh(Typ,_tr(div)) : null
+        }
+    }
+    if(Tecla('ctrl')){return}                                     // Se CTRL estiver pressionado, interrompe (não aplica o fechamento automático)
+    else if(e.contains(event.target)){return}                     // se o Click foi Interno
+    else{ClickFora(div,()=>{Add_N(e)})}                           // Caso contrário (clique fora da div), ativa função para fechar o painel ao clicar fora
+}
+
+
+// criar uma Função Geral, que serve tanto pra Edit ImgUpload, para delete, para várias coisas ela faz o seguinte abaixo
+// ela Localiza todos os seus relacionados nessesários e gera um objeto, ent ela vai localizar
+// Eu, Pai, T-T Pai, fora o d_r(R) inteiro, mas tbm vai terornar Minha tr, a tr do Pai, qual td é o Pai dela
+// retornará várias coisas em um unico Obj dai é só acessalo pelo nome do Obj
+
+
+//===========================CRUD===========================
+async function ImgUPP(Inpt,Nome,R){       // ⭐⭐⭐⭐⭐
+    const Eximg = ["jpg","jpeg","png","gif","webp","svg"]
+    const _R  = d_r(R)
+    const f   = Inpt.files[0]           // pega o único arquivo
+    const src = URL.createObjectURL(f)  // src temporário
+    const PP  = $(`table ${Rx7(`${Nome}-${_R.Cl}`)}`)
+    LOG(`${Nome}-${_R.Cl}`,PP)
+    const Pay =_td(Pai(_td(PP)))                 // encontrar o td pai se ele for dentro da Bndj
+    const T_T = Pay ? Pai($('.T-T',Pay)) : null  // Localiza o T-T se existir
+    J.IMGS[Nome] = f.name
+    DarVAL(PP,src)
+    if(_R.Bj && T_T){T_T.innerHTML += `<img loading="lazy" onclick="AbrirImg('${d_r(PP).Id}',this)" src="${src}">`}
+    if(Eximg.includes(RxExt(f.name))){
+        Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'HD' )).then(r=>r.blob()),`Img/${Nome}.webp`,true)
+        Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'Low')).then(r=>r.blob()),`Low/${Nome}.webp`,true)
+        Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'Med')).then(r=>r.blob()),`Med/${Nome}.webp`,true)
+    }else if(RxExt(f.name)=='svg'){
+        Sb_UPLOAD(supaBASE,f,`Img/${Nome}.svg`,true)
+    }else{
+        LOG('não é nem Img nem Svg é um arquivo!')
+    }
+}
+
+
+// ===========================SUPABASE===========================
 async function SB_Get(SB,Typs){
 
     const IN = performance.now()
@@ -190,6 +265,7 @@ async function Sb_DELETE(SB,Typ,id){
 }
 
 async function Sb_CREATE(SB,Typ,row){
+    LOG(row)
     let baseId = Number(row.Id) || 0
     let tentativas = 0
     while (true) {
@@ -207,8 +283,15 @@ async function Sb_EDIT(SB,Typ,id,col,Val){
     } catch (err){ ERR('Erro:',err)  ; MyAlert('Erro ao atualizar serviço')}
 }
 
-async function Sb_UPLOAD(SB,file,nome){
-    let {error} = await SB.storage.from('uploads').upload(nome,file,{upsert:false})
+async function Sb_UPLOAD(SB,file,nome,Upst){ // Upst true e false Permitir ou n Subistituir Img
+    let {error} = await SB.storage.from('uploads').upload(nome,file,{upsert:Upst}) 
     if  (error) {ERR("Erro no upload:", error.message) ; alert("Erro ao enviar: "+error.message)}
     else{LOG('✔️ Arquivo enviado!',nome)}
+}
+
+async function Sb_DEL_IMG(SB,nome){
+    const paths = ['Img','Med','Low'].map(p=>`${p}/${nome}`)
+    let {error} = await SB.storage.from('uploads').remove(paths)
+    if  (error) {ERR("Erro ao excluir:",error.message) ; alert("Erro ao excluir: "+error.message)}
+    else {LOG('🗑️ Arquivo excluído!',nome)}
 }
