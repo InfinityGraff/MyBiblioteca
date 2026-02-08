@@ -100,7 +100,7 @@ function DarVAL(e,V){
     if(['Data','Link','Ssvg','Imgs','Chek'].includes(R.Tm)){Inn(Pai(e),Tm_Tm[R.Tm](V,e.dataset.r,''))} // Parece q Sugg n existe mais
 }
 
-const SrcsIMG=(src,R)=>src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src.replace('.svg','.webp')}` : `./CrudSB/${R.Cl=='Arte'?'Upld':'Plce'}.webp`
+const SrcsIMG=(src,R)=>src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src.replace('.svg','.webp')}?v=${Date.now()}` : `./CrudSB/${R.Cl=='Arte'?'Upld':'Plce'}.webp`
 
 const Tm_Tm = {
     Fixo:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
@@ -114,7 +114,7 @@ const Tm_Tm = {
     Auto:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ Num(e)}" onclick="CtrlSoma(this)">${e}</p>`,
     Sync:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
     Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" onclick="${d_r(P).Tm =='Bndj'?`EditCell(this,'Del')`:'RmvROW(this)'}" name="${e}" src="./CrudSB/Lixo.webp"><i class="Abslt GrifFora"></i>`,
-    Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P" loading="lazy" name="${e?'True':'False'}" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
+    Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" loading="lazy" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
     Link:(e,R,P)=>e!=''?Tm_Bndj(R,e) : `<div data-R="${R}" data-P="${P}" class="Rltv"><p class="P-P" onclick="ShowBndj(_td(this))"                  name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>TestRow(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
     Bndj:(e,R,P)=>Tm_Bndj(R,e),
     BjIn:(e,R,P)=>Tm_Bndj(R,e)
@@ -139,26 +139,21 @@ function SellFilesIMG(Inpt){ // Fazer isso Ficar imbutido dentro da Função do 
 }
 
 function AbrirImg(img,Nome,R){
-    LOG('Mochi')
     const X  = Nome ? 'Plc' : 'Up'
     const _R =d_r(R)
     const Pre = BS[_R.Ty][_R.Cl][2] ? `${BS[_R.Ty][_R.Cl][2]}` : '' // isso é pra Criar um Prefixo nas Imagens se tiver predefinido no BS
     const W = img.naturalWidth>img.naturalHeight
     MODAL(`<div class="MdalIMG ${W?'Cl':'Ct'}">
-                <img src="${img.src}">
+                <img src="${img.src.replace('/Low/','/Img/')}">
                 <div class="casusa Cl ${W?'w100':'h100'}">
                     <span>Nome</span>
                     <div>${_R.Id}</div>
                     <input type="file" class="w80" onchange="SelectFiles(this,SellFilesIMG)" accept="image/*">
-                    ${Nome ? `<button onclick="XModal(this);ImgTRC($('input',Pai(this)),'${Nome        }','${R}')">Trocar Imagem</button>`
-                           : `<button onclick="XModal(this);ImgUPP($('input',Pai(this)),'${Pre}${_R.Id}','${R}')">Enviar       </button>`
-                    }
+                    <button onclick="XModal(this);ImgUPP($('input',Pai(this)),'${Pre}${_R.Id}','${R}')">${Nome?'Trocar Imagem':'Enviar'}</button>
                 </div>
             <div>`)
     if(X=='Up'){$('.MdalIMG input').click()}
 }
-
-
 
 function GambiarraAdd(div){Add(_tr(div),'Hoov') ; $$(':scope > td',_tr(div)).forEach(e=>Add(e,'Hoov'))} // HOROZOZA fazer de tudo pra tirar!
 
@@ -198,22 +193,31 @@ async function ImgUPP(Inpt,Nome,R){       // ⭐⭐⭐⭐⭐
     const _R  = d_r(R)
     const f   = Inpt.files[0]           // pega o único arquivo
     const src = URL.createObjectURL(f)  // src temporário
-    const PP  = $(`table ${Rx7(`${Nome}-${_R.Cl}`)}`)
-    LOG(`${Nome}-${_R.Cl}`,PP)
+    const PP  = $(`table ${Rx7(`${_R.Id}-${_R.Cl}`)}`) // tem que ser o ID e depois a Coluna
+    LOG('Existe?',`${_R.Id}-${_R.Cl}`,PP)
     const Pay =_td(Pai(_td(PP)))                 // encontrar o td pai se ele for dentro da Bndj
     const T_T = Pay ? Pai($('.T-T',Pay)) : null  // Localiza o T-T se existir
     J.IMGS[Nome] = f.name
     DarVAL(PP,src)
     if(_R.Bj && T_T){T_T.innerHTML += `<img loading="lazy" onclick="AbrirImg('${d_r(PP).Id}',this)" src="${src}">`}
     if(Eximg.includes(RxExt(f.name))){
+        EditCell(PP,'Edt',`${Nome}.webp`)
         Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'HD' )).then(r=>r.blob()),`Img/${Nome}.webp`,true)
         Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'Low')).then(r=>r.blob()),`Low/${Nome}.webp`,true)
         Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'Med')).then(r=>r.blob()),`Med/${Nome}.webp`,true)
-    }else if(RxExt(f.name)=='svg'){
-        Sb_UPLOAD(supaBASE,f,`Img/${Nome}.svg`,true)
-    }else{
-        LOG('não é nem Img nem Svg é um arquivo!')
-    }
+    }else if(RxExt(f.name)=='svg'){                                 Sb_UPLOAD(supaBASE,f,`Img/${Nome}.svg` ,true)
+        EditCell(PP,'Edt',`${Nome}.svg`)
+    }else{LOG('não é nem Img nem Svg é um arquivo!')}
+}
+
+function RmvROW(Eu,SB){
+    const R   = d_r(Eu) ; if(!R) return
+    const Img = $$(Rx7('-Imgs-'),_tr(Eu)).map(e=>Nm(e))
+    /*OBJ*/     DarJJ('Del',R.Ty,R.Id)
+    /*OBJ-IMG*/ Img.forEach(e=>delete J['IMGS'][e])
+    /*SUB*/     if(!SB){Sb_DELETE(supaBASE,R.Ty,R.Id)}
+    /*SUB-IMG*/ if(!SB){Img.forEach(e=>Sb_DELIMG(supaBASE,e))}
+    /*DOM*/     $$(Rx7(`${R.Ty}-${R.Id}-${R.Cl}`)).forEach(td=>{_tr(td).remove() ; if(SB){LOG('Deletado pelo SupaBase')}})
 }
 
 
@@ -289,9 +293,9 @@ async function Sb_UPLOAD(SB,file,nome,Upst){ // Upst true e false Permitir ou n 
     else{LOG('✔️ Arquivo enviado!',nome)}
 }
 
-async function Sb_DEL_IMG(SB,nome){
+async function Sb_DELIMG(SB,nome){
     const paths = ['Img','Med','Low'].map(p=>`${p}/${nome}`)
     let {error} = await SB.storage.from('uploads').remove(paths)
     if  (error) {ERR("Erro ao excluir:",error.message) ; alert("Erro ao excluir: "+error.message)}
-    else {LOG('🗑️ Arquivo excluído!',nome)}
+    else {LOG('🗑️ Arquivos excluído! Img,Med,Low',nome)}
 }
