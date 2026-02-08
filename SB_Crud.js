@@ -11,6 +11,8 @@ const RR=(r,p)=>$$(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p
 const rr=(r,p)=> $(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p?(isArr(p)?p:[p]).map(k=>`[data-p*="${k}"]`).join(''):''}`)
 const $r=(...arr)=>{const K=arr.filter(v=>v!=null&&v!=="").join('-') ; return K ? $(`[data-r="${K}"]`) : null} // da pra simplificar esta Limpeza
 const Rx7=(...arr)=>`.P-P${(arr).map(k=>`[data-r*="${k}"]`).join('')}` // nem todos tem .P-P isso pode dar BO depois
+const __tr=e=>e.closest('[class^="tr-"]')
+const RmvExt=e=>e.replace(/\.[^/.]+$/,'')
 
 const DarJJ = (M,T,R,C,V,Lv2Arr)=>{
     const Lv2 = Lv2Arr && (([pT,pR,pC]) => ({pT,pR,pC}))(Lv2Arr)
@@ -212,14 +214,13 @@ async function ImgUPP(Inpt,Nome,R){       // ⭐⭐⭐⭐⭐
 
 function RmvROW(Eu,SB){
     const R   = d_r(Eu) ; if(!R) return
-    const Img = $$(Rx7('-Imgs-'),_tr(Eu)).map(e=>Nm(e))
+    const Img = $$(Rx7('-Imgs-'),__tr(Eu)).map(e=>Nm(e))
     /*OBJ*/     DarJJ('Del',R.Ty,R.Id)
-    /*OBJ-IMG*/ Img.forEach(e=>delete J['IMGS'][e])
+    /*OBJ-IMG*/ Img.forEach(e=>delete J['IMGS'][RmvExt(e)])
     /*SUB*/     if(!SB){Sb_DELETE(supaBASE,R.Ty,R.Id)}
     /*SUB-IMG*/ if(!SB){Img.forEach(e=>Sb_DELIMG(supaBASE,e))}
-    /*DOM*/     $$(Rx7(`${R.Ty}-${R.Id}-${R.Cl}`)).forEach(td=>{_tr(td).remove() ; if(SB){LOG('Deletado pelo SupaBase')}})
+    /*DOM*/     $$(Rx7(`${R.Ty}-${R.Id}-${R.Cl}`)).forEach(td=>{__tr(td).remove() ; if(SB){LOG('Deletado pelo SupaBase')}})
 }
-
 
 // ===========================SUPABASE===========================
 async function SB_Get(SB,Typs){
