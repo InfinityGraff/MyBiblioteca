@@ -13,6 +13,7 @@ const $r=(...arr)=>{const K=arr.filter(v=>v!=null&&v!=="").join('-') ; return K 
 const Rx7=(...arr)=>`.P-P${(arr).map(k=>`[data-r*="${k}"]`).join('')}` // nem todos tem .P-P isso pode dar BO depois
 const __tr=e=>e.closest('[class^="tr-"]')
 const RmvExt=e=>e.replace(/\.[^/.]+$/,'')
+const PrePos=(div,Clone,Ps)=>Ps == "<" ? After(div,Clone) : Befor(div,Clone)
 
 const DarJJ = (M,T,R,C,V,Lv2Arr)=>{
     const Lv2 = Lv2Arr && (([pT,pR,pC]) => ({pT,pR,pC}))(Lv2Arr)
@@ -196,20 +197,37 @@ async function ImgUPP(Inpt,Nome,R){       // ⭐⭐⭐⭐⭐
     const f   = Inpt.files[0]           // pega o único arquivo
     const src = URL.createObjectURL(f)  // src temporário
     const PP  = $(`table ${Rx7(`${_R.Id}-${_R.Cl}`)}`) // tem que ser o ID e depois a Coluna
-    LOG('Existe?',`${_R.Id}-${_R.Cl}`,PP)
     const Pay =_td(Pai(_td(PP)))                 // encontrar o td pai se ele for dentro da Bndj
     const T_T = Pay ? Pai($('.T-T',Pay)) : null  // Localiza o T-T se existir
     J.IMGS[Nome] = f.name
-    DarVAL(PP,src)
     if(_R.Bj && T_T){T_T.innerHTML += `<img loading="lazy" onclick="AbrirImg('${d_r(PP).Id}',this)" src="${src}">`}
     if(Eximg.includes(RxExt(f.name))){
         EditCell(PP,'Edt',`${Nome}.webp`)
+        DarVAL(PP,src)
         Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'HD' )).then(r=>r.blob()),`Img/${Nome}.webp`,true)
         Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'Low')).then(r=>r.blob()),`Low/${Nome}.webp`,true)
         Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'Med')).then(r=>r.blob()),`Med/${Nome}.webp`,true)
     }else if(RxExt(f.name)=='svg'){                                 Sb_UPLOAD(supaBASE,f,`Img/${Nome}.svg` ,true)
         EditCell(PP,'Edt',`${Nome}.svg`)
     }else{LOG('não é nem Img nem Svg é um arquivo!')}
+}
+
+const getRG=df=>{
+    const pc = GetPC() ; const Ag = AGORA().split(' ')
+    return [{'Rg':df.Id,'Data':Ag[0],'Hora':Ag[1],'User':Inn($('#LgNome')),'PC':pc.PC,'Navgd':pc.Navgd}]
+}
+
+function AddROW(Typ,Ps,obj={},SB){   // ⭐⭐⭐⭐_ (Adicionar um OBJ se tiver!)
+    const df = Deff[Typ]                 // Cria um Default Baseado na bndj
+       df.Id = NewID(J[Typ])             // Atribuindo Novo Id++
+    if('Rg' in df){df.Rg = getRG(df)}    // Atribuindo o Rg se Existir
+    ObjKey(obj).forEach(k=>df[k]=obj[k]) // Atribuindo oq vem no Objeto dos argumento!
+    LOG(df)
+    /*Obj*/ DarJJ('Add',Typ,df.Id,null,df)
+    /*Sub*/ if(!SB){Sb_CREATE(supaBASE,Typ,CleanObj(df))}
+    /*DOM*/ PrePos($(`#H_${Typ} > tbody`),Tm_Table(Typ,[df]),Ps)
+    if(SB){LOG('Linha Adicionada pelo SB')}
+    return df // isso é bom pq que precisa de dados daqui pode usar por Fora
 }
 
 function RmvROW(Eu,SB){
