@@ -142,15 +142,14 @@ function SellFilesIMG(Inpt){ // Fazer isso Ficar imbutido dentro da Função do 
 }
 
 function AbrirImg(img,Nome,R){
-    const X  = Nome ? 'Plc' : 'Up'
-    const _R =d_r(R)
+    const X   = Nome ? 'Plc' : 'Up'
+    const _R  = d_r(R)
     const Pre = BS[_R.Ty][_R.Cl][2] ? `${BS[_R.Ty][_R.Cl][2]}` : '' // isso é pra Criar um Prefixo nas Imagens se tiver predefinido no BS
-    const W = img.naturalWidth>img.naturalHeight
-    MODAL(`<div class="MdalIMG ${W?'Cl':'Ct'}">
-                <img src="${img.src.replace('/Low/','/Img/')}">
-                <div class="casusa Cl ${W?'w100':'h100'}">
-                    <span>Nome</span>
-                    <div>${_R.Id}</div>
+    const W   = img.naturalWidth > img.naturalHeight
+    MODAL(`<div class="MdalIMG ${W ? 'Cl':'Ct'}">
+                <img src="${BASE_URL}Img/${Nome}">
+                <div class="casusa Cl ${W ? 'w100':'h100'}">
+                    <span>Nome: ${Nome}</span> <div>Id: ${_R.Id}</div>
                     <input type="file" class="w80" onchange="SelectFiles(this,SellFilesIMG)" accept="image/*">
                     <button onclick="XModal(this);ImgUPP($('input',Pai(this)),'${Pre}${_R.Id}','${R}')">${Nome?'Trocar Imagem':'Enviar'}</button>
                 </div>
@@ -194,21 +193,21 @@ function ShowBndj(div,Typ){                                                // Fu
 async function ImgUPP(Inpt,Nome,R){       // ⭐⭐⭐⭐⭐
     const Eximg = ["jpg","jpeg","png","gif","webp","svg"]
     const _R  = d_r(R)
-    const f   = Inpt.files[0]           // pega o único arquivo
-    const src = URL.createObjectURL(f)  // src temporário
+    const f   = Inpt.files[0]                          // Pega o único arquivo
+    const Ext = RxExt(f.name)                          // Pega a Extensão do Arquivo
+    const src = URL.createObjectURL(f)                 // src temporário
     const PP  = $(`table ${Rx7(`${_R.Id}-${_R.Cl}`)}`) // tem que ser o ID e depois a Coluna
-    const Pay =_td(Pai(_td(PP)))                 // encontrar o td pai se ele for dentro da Bndj
-    const T_T = Pay ? Pai($('.T-T',Pay)) : null  // Localiza o T-T se existir
+    const Pay = _td(Pai(_td(PP)))                      // encontrar o td pai se ele for dentro da Bndj
+    const T_T = Pay ? Pai($('.T-T',Pay)) : null        // Localiza o T-T se existir
     J.IMGS[Nome] = f.name
     if(_R.Bj && T_T){T_T.innerHTML += `<img loading="lazy" onclick="AbrirImg('${d_r(PP).Id}',this)" src="${src}">`}
-    if(Eximg.includes(RxExt(f.name))){
-        EditCell(PP,'Edt',`${Nome}.webp`)
+    if(Eximg.includes(Ext)){
+        EditCell(PP,'Edt',`${Nome}.${Ext}`)
         DarVAL(PP,src)
-        Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'HD' )).then(r=>r.blob()),`Img/${Nome}.webp`,true)
         Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'Low')).then(r=>r.blob()),`Low/${Nome}.webp`,true)
         Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'Med')).then(r=>r.blob()),`Med/${Nome}.webp`,true)
-    }else if(RxExt(f.name)=='svg'){                                 Sb_UPLOAD(supaBASE,f,`Img/${Nome}.svg` ,true)
-        EditCell(PP,'Edt',`${Nome}.svg`)
+        if(Ext=='svg'){Sb_UPLOAD(supaBASE,f,`Img/${Nome}.svg` ,true)
+        }else{Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'HD' )).then(r=>r.blob()),`Img/${Nome}.webp`,true)}
     }else{LOG('não é nem Img nem Svg é um arquivo!')}
 }
 
@@ -222,7 +221,6 @@ function AddROW(Typ,Ps,obj={},SB){   // ⭐⭐⭐⭐_ (Adicionar um OBJ se tiver
        df.Id = NewID(J[Typ])             // Atribuindo Novo Id++
     if('Rg' in df){df.Rg = getRG(df)}    // Atribuindo o Rg se Existir
     ObjKey(obj).forEach(k=>df[k]=obj[k]) // Atribuindo oq vem no Objeto dos argumento!
-    LOG(df)
     /*Obj*/ DarJJ('Add',Typ,df.Id,null,df)
     /*Sub*/ if(!SB){Sb_CREATE(supaBASE,Typ,CleanObj(df))}
     /*DOM*/ PrePos($(`#H_${Typ} > tbody`),Tm_Table(Typ,[df]),Ps)
