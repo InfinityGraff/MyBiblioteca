@@ -6,7 +6,7 @@ const daClass =_R=>{const R = d_r(_R) ; const bs = BS[R.Ty][R.Cl][1] ; return (b
 const _Bol=v=> v !== '_'
 const _par=s=>(([Ty,Id,Cl,Tm,Bj,Sc]) => ({Ty,Id,Cl,Tm,Bj:_Bol(Bj),Sc:_Bol(Sc)}))(s.split('-'))
 const d_r=e=>_par(typeof e == "string" ? e : e.dataset.r)
-const d_p=e=>e.dataset.p == '' ? null : _par(e.dataset.p)
+const d_p=e=>NoVazi(e.dataset.p) ? _par(e.dataset.p) : null
 const RR=(r,p)=>$$(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p?(isArr(p)?p:[p]).map(k=>`[data-p*="${k}"]`).join(''):''}`)
 const rr=(r,p)=> $(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p?(isArr(p)?p:[p]).map(k=>`[data-p*="${k}"]`).join(''):''}`)
 const $r=(...arr)=>{const K=arr.filter(v=>v!=null&&v!=="").join('-') ; return K ? $(`[data-r="${K}"]`) : null} // da pra simplificar esta Limpeza
@@ -121,7 +121,8 @@ const Tm_Tm = {
     Sync:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
     Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" onclick="${d_r(P).Tm =='Bndj'?`EditCell(this,'Del')`:'RmvROW(this)'}" name="${e}" src="./CrudSB/Lixo.webp"><i class="Abslt GrifFora"></i>`,
     Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" loading="lazy" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
-    Link:(e,R,P)=>e!=''?Tm_Bndj(R,e) : `<div class="Rltv"><p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>TestRow(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
+    Link:(e,R,P)=>e!=''?Tm_Bndj(R,e) : `<div class="Rltv"><p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
+   Link2:(e,R,P)=>                                                                                                                                                                                                                  `<input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span>`,             // Aqui é o de Troca (mas Fundir com a de Cima)
     Bndj:(e,R,P)=>Tm_Bndj(R,e),
     BjIn:(e,R,P)=>Tm_Bndj(R,e)
 }
@@ -188,12 +189,13 @@ function ShowBndj(div,Typ){                                                // Fu
 
 // criar uma Função Geral, que serve tanto pra Edit ImgUpload, para delete, para várias coisas ela faz o seguinte abaixo
 // ela Localiza todos os seus relacionados nessesários e gera um objeto, ent ela vai localizar
-// Eu, Pai, T-T Pai, fora o d_r(R) inteiro, mas tbm vai terornar Minha tr, a tr do Pai, qual td é o Pai dela
+// Eu, Pai, T-T Pai, fora o d_r(R) inteiro, mas tbm vai Rerornar Minha tr, a tr do Pai, qual td é o Pai dela
 // retornará várias coisas em um unico Obj dai é só acessalo pelo nome do Obj
 
 
 //===========================CRUD===========================
-const getRG=df=>{
+
+const getRG=df=>{                    // ⭐_ _ _ _ (Da Pra Melhorar)
     const pc = GetPC() ; const Ag = AGORA().split(' ')
     return [{'Rg':df.Id,'Data':Ag[0],'Hora':Ag[1],'User':Inn($('#LgNome')),'PC':pc.PC,'Navgd':pc.Navgd}]
 }
@@ -217,6 +219,29 @@ async function ImgUPP(Inpt,Nome,R){  // ⭐⭐⭐⭐_ (ver se ta funcionando Bon
         if(Ext=='svg'){Sb_UPLOAD(supaBASE,f,`Img/${Nome}.svg` ,true)
         }else{Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'HD' )).then(r=>r.blob()),`Img/${Nome}.webp`,true)}
     }else{LOG('não é nem Img nem Svg é um arquivo!')}
+}
+
+function NewLink(Ipt,col){          // ⭐⭐⭐_ _ Perguntar antes se quer Adicionar Nova Linha
+    if(confirm(`Tem Certeza que quer salvar: ${Ipt.value} em ${col}?`)){
+        LOG('pra que estew IF?',Nm(Ipt))
+        if(Nm(Ipt)){return Nm(Ipt)}else{
+            const df = AddROW(AA(col),'<',{[col]:Ipt.value})
+            Linkar(Ipt,df.Id) // só tem 2 formas de linkar ou pelo Input ou pelo LinkSugg
+        }
+    }
+}
+
+// 
+// OPÇÃO de remover cliente caso n tenha ainda, Link Cliente removido
+// Opção de Unir Clinetes diretamente pela tabela de Pedidos
+//
+
+function Linkar(Eu,val){          // ⭐⭐⭐⭐_  (Faz o Básico)
+    const td = _td(Eu)
+    const PP = $('.P-P',td)
+    const _R = PP.dataset.r
+    EditCell(PP,'Edt',val)
+    Inn(td,Tm_Bndj(_R,`${val}`))
 }
 
 function AddROW(Typ,Ps,obj={},SB){   // ⭐⭐⭐⭐_ (Adicionar um OBJ se tiver!)
@@ -257,7 +282,10 @@ function MesclaRow(Typ,bs){          // ⭐⭐⭐⭐_ (Ficar usando apenas com C
     })
 }
 
+
+
 // ===========================SUPABASE===========================
+
 async function SB_Get(SB,Typs){
 
     const IN = performance.now()
