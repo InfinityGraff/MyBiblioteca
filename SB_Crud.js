@@ -14,6 +14,9 @@ const Rx7=(...arr)=>`.P-P${(arr).map(k=>`[data-r*="${k}"]`).join('')}` // nem to
 const __tr=e=>e.closest('[class^="tr-"]')
 const RmvExt=e=>e.replace(/\.[^/.]+$/,'')
 const PrePos=(div,Clone,Ps)=>Ps == "<" ? After(div,Clone) : Befor(div,Clone)
+/*Novos Libs*/
+const SELE=(ev,Eu)=>{ev.preventDefault() ; Tog(Eu,'SEL')}
+const ClnObjs=(obj,bs)=>CleanObj(Object.fromEntries(ObjEtr(obj).filter(([k])=>{const r = bs[k] ; return r && r[1] !== 'I' && r[0] !== 'X' && r[1] !== 'A'})))
 
 const DarJJ = (M,T,R,C,V,Lv2Arr)=>{
     const Lv2 = Lv2Arr && (([pT,pR,pC]) => ({pT,pR,pC}))(Lv2Arr)
@@ -108,9 +111,9 @@ const SrcsIMG=(src,R)=>src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src
 const Tm_Tm = {
     Fixo:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
     Ssvg:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
-    Edit:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" onfocus="ATV(this)">${e}</p>`,
-    Valr:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" onfocus="ATV(this);CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
-    Mdds:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" onfocus="ATV(this);CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
+    Edit:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" oncontextmenu="SELE(event,this)" onfocus="ATV(this)">${e}</p>`,
+    Valr:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" oncontextmenu="SELE(event,this)" onfocus="ATV(this);CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
+    Mdds:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" oncontextmenu="SELE(event,this)" onfocus="ATV(this);CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
     Chek:(e,R,P)=>`<input  data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this,'Edt')" type="checkbox" ${Bool(e)?'checked':''}>`,
     Slct:(e,R,P)=>`<select data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this,'Edt')">${Tm_Opt(O[d_r(R).Cl],e)}</select>`,
     Data:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ YMD(e)}" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" data-R="${R}" data-P="${P}" class="none" value="${YMD(e)}" onchange="EditCell(this,'Edt')" onblur="TrcFih(this,$('p',Pai(this)))">`,
@@ -190,7 +193,12 @@ function ShowBndj(div,Typ){                                                // Fu
 
 
 //===========================CRUD===========================
-async function ImgUPP(Inpt,Nome,R){       // ⭐⭐⭐⭐⭐
+const getRG=df=>{
+    const pc = GetPC() ; const Ag = AGORA().split(' ')
+    return [{'Rg':df.Id,'Data':Ag[0],'Hora':Ag[1],'User':Inn($('#LgNome')),'PC':pc.PC,'Navgd':pc.Navgd}]
+}
+
+async function ImgUPP(Inpt,Nome,R){  // ⭐⭐⭐⭐_ (ver se ta funcionando Bonitinho com SVG)
     const Eximg = ["jpg","jpeg","png","gif","webp","svg"]
     const _R  = d_r(R)
     const f   = Inpt.files[0]                          // Pega o único arquivo
@@ -211,11 +219,6 @@ async function ImgUPP(Inpt,Nome,R){       // ⭐⭐⭐⭐⭐
     }else{LOG('não é nem Img nem Svg é um arquivo!')}
 }
 
-const getRG=df=>{
-    const pc = GetPC() ; const Ag = AGORA().split(' ')
-    return [{'Rg':df.Id,'Data':Ag[0],'Hora':Ag[1],'User':Inn($('#LgNome')),'PC':pc.PC,'Navgd':pc.Navgd}]
-}
-
 function AddROW(Typ,Ps,obj={},SB){   // ⭐⭐⭐⭐_ (Adicionar um OBJ se tiver!)
     const df = Deff[Typ]                 // Cria um Default Baseado na bndj
        df.Id = NewID(J[Typ])             // Atribuindo Novo Id++
@@ -228,7 +231,7 @@ function AddROW(Typ,Ps,obj={},SB){   // ⭐⭐⭐⭐_ (Adicionar um OBJ se tiver
     return df // isso é bom pq que precisa de dados daqui pode usar por Fora
 }
 
-function RmvROW(Eu,SB){
+function RmvROW(Eu,SB){              // ⭐⭐⭐⭐_
     const R   = d_r(Eu) ; if(!R) return
     const Img = $$(Rx7('-Imgs-'),__tr(Eu)).map(e=>Nm(e))
     /*OBJ*/     DarJJ('Del',R.Ty,R.Id)
@@ -236,6 +239,22 @@ function RmvROW(Eu,SB){
     /*SUB*/     if(!SB){Sb_DELETE(supaBASE,R.Ty,R.Id)}
     /*SUB-IMG*/ if(!SB){Img.forEach(e=>Sb_DELIMG(supaBASE,e))}
     /*DOM*/     $$(Rx7(`${R.Ty}-${R.Id}-${R.Cl}`)).forEach(td=>{__tr(td).remove() ; if(SB){LOG('Deletado pelo SupaBase')}})
+}
+
+function MesclaRow(Typ,bs){          // ⭐⭐⭐⭐_ (Ficar usando apenas com CLNT até ver se ta TUDO OK mesmo, pra Evoluir pra outras Tabelas)
+    const SEL = $$(`#H_${Typ} tbody .SEL`) // pega todas as Células Selecionadas
+    const Fim = SEL.at(-1)                 // pega Ultimo Item do Array
+    const _Rf = d_r(Fim)                   // pega o _R do Ultimo
+    let    Jn = ObjValToArr(ClnObjs(JJ[Typ][_Rf.Id],bs)) // criar o Def
+    SEL.forEach(p=>{                       // pra cada Célula
+        const _R = d_r(p)                  // pega o _R de cada um
+        if(p!==Fim){                                                           // se for Diferente da Ultima
+            const Ids_PDDS = ContCLNT[_R.Id]?.List||[]                         // Pega a Lista de Pedidos
+            Ids_PDDS.forEach(ID=>{Sb_EDIT(supaBASE,'PDDS',ID,Aa(Typ),_Rf.Id)}) // Editar PDDS
+            ObjEtr(ClnObjs(JJ[Typ][_R.Id],bs)).forEach(([k,v])=>Jn[k].push(v)) // Concatena as Informações
+            RmvROW(p)                                                          // remove a Linha
+        }else{ObjEtr(Jn).forEach(([k,v])=>{Sb_EDIT(supaBASE,'CLNT',_Rf.Id,k,UniqSplit(v).join(' || '))})} // Editar o Ultimo
+    })
 }
 
 // ===========================SUPABASE===========================
