@@ -1,4 +1,20 @@
+.BNdj    {transform:translate(-50%,0%); left:50%; z-index:500 ; /*width:250px*/ ; max-height:250px;  box-shadow:0 0 9px #00000069}
+.BNdj > a{position:absolute ; bottom:100%; left:50%; transform:translate(-50%,0%); z-index:1; width:20px ; height:11px} /*essa é a Pontinha da Bndj*/
+
 .MdalIMG{width: 800px; height: 500px}
 .MdalIMG img{max-width: 100%;max-height: 100%;object-fit: contain; background: #474747; border-radius: 10px; padding: 5px;}
 
-.P-P.SEL{background-color: blue;color: white;}
+/*Ambos São a mesma coisa!*/
+   .P-P.SEL{background:#0000ff !important;color: #ffffff}
+.SelectSoma{background:#ff0000 !important; color:#ffffff}
+
+
+.Fita1{border-right:4px solid #bb0092} /*Divisórias*/
+.Fita2{border-left :4px solid #bb0092} /*Divisórias*/
+
+
+.Sugg.Atv  {background: #d822ab; color: #ffffff}
+.CorID     {background:#94949473}
+
+.GrifFora{left:20px;opacity:0.7}
+

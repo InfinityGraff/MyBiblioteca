@@ -108,13 +108,16 @@ function DarVAL(e,V){
 
 const SrcsIMG=(src,R)=>src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src.replace('.svg','.webp')}?v=${Date.now()}` : `./CrudSB/${R.Cl=='Arte'?'Upld':'Plce'}.webp`
 
+const safeS =(e)=>encodeURIComponent(JSON.stringify(e))
+const ArrBolean = v =>Array.isArray(v) && v.length > 0
+
 const Tm_Tm = {
     Fixo:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
     Ssvg:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }">${e}</p>`,
     Edit:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" oncontextmenu="SELE(event,this)" onfocus="ATV(this)">${e}</p>`,
     Valr:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" oncontextmenu="SELE(event,this)" onfocus="ATV(this);CurAll(this)" oninput="Mask.RS(this) ">${e?RS(e):'R$ -'}</p>`,
     Mdds:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" contenteditable="true" onkeydown="EntBlr(this)" onblur="DTV(this);EditCell(this,'Edt')" oncontextmenu="SELE(event,this)" onfocus="ATV(this);CurAll(this)" oninput="Mask.Num(this)">${e?Cm(e):''    }</p>`,
-    Chek:(e,R,P)=>`<input  data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this,'Edt')" type="checkbox" ${Bool(e)?'checked':''}>`,
+    Chek:(e,R,P)=>`<input  data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this,'Edt')" type="checkbox" ${ArrBolean(e)?'checked':Bool(e)?'checked':''}>`,
     Slct:(e,R,P)=>`<select data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" onchange="EditCell(this,'Edt')">${Tm_Opt(O[d_r(R).Cl],e)}</select>`,
     Data:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ YMD(e)}" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" data-R="${R}" data-P="${P}" class="none" value="${YMD(e)}" onchange="EditCell(this,'Edt')" onblur="TrcFih(this,$('p',Pai(this)))">`,
     Auto:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ Num(e)}" onclick="CtrlSoma(this)">${e}</p>`,
@@ -123,13 +126,18 @@ const Tm_Tm = {
     Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" loading="lazy" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
     Link:(e,R,P)=>e!=''?Tm_Bndj(R,e) : `<div class="Rltv"><p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
    Link2:(e,R,P)=>                                                                                                                                                                                                                  `<input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span>`,             // Aqui é o de Troca (mas Fundir com a de Cima)
+    OKAY:(e,R,P)=>{const Nove = LINK[d_r(R).Ty].map(k=>{const Stg =  Tm_Tm['Chek'](e,R,P) ; 
+        return Stg.replace(/onchange="[^"]*"/,`onchange="EditCell(this,'Edt','${safeS(e)}')"`) }).join('') ; LOG(Nove) ; return Nove},
     Bndj:(e,R,P)=>Tm_Bndj(R,e),
     BjIn:(e,R,P)=>Tm_Bndj(R,e)
 }
 
 function Tm_Td(v,e,x,Typ,_P=''){
     const _R = Tm_R(e,x,Typ,_P)
+    const _RR=d_r(_R)
+    if((Typ=='SERV'||Typ=='PGMT')&&_RR.Sc&&!_RR.Bj){_P=`PDDS-${_RR.Id.split('_')[0]}-${Aa(Typ)}-Bndj-_-_`} // GAMBIARRRRA (isso é pra dar o Rpai nas tabelas secuntárias prinmcipais pois na hora de exibir erlas não possuem Rpai)
     return `<td class="${daClass(_R)} Rltv">${Tm_Tm[d_r(_R).Tm](v,_R,_P)}</td>`
+    
 }
 
 function Tm_Table(Typ,arry,Rpai=''){
