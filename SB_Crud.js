@@ -124,13 +124,14 @@ const Tm_Tm = {
     Sync:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
     Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" onclick="${d_r(P).Tm =='Bndj'?`EditCell(this,'Del')`:'RmvROW(this)'}" name="${e}" src="./CrudSB/Lixo.webp"><i class="Abslt GrifFora"></i>`,
     Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" loading="lazy" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
-    Link:(e,R,P)=>e!=''?Tm_Bndj(R,e) : `<div class="Rltv"><p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${d_r(R).Ty}','${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
+    Link:(e,R,P)=>e!=''? Tm_Bndj(R,e) : `<div class="Rltv"><p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${d_r(R).Ty}','${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
    Link2:(e,R,P)=>                                                                                                                                                                                                                  `<input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${d_r(R).Ty}','${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span>`,             // Aqui é o de Troca (mas Fundir com a de Cima)
-    OKAY:(e,R,P)=>{const Nove = LINK[d_r(R).Ty].map(k=>{const Stg =  Tm_Tm['Chek'](e,R,P) ; 
-        return Stg.replace(/onchange="[^"]*"/,`onchange="EditCell(this,'Edt','${safeS(e)}')"`) }).join('') ; LOG(Nove) ; return Nove},
+    OKAY:(e,R,P)=>{return e ? e : `<img data-R="${R}" data-P="${P}" onclick="Linkar2(this)" src="./CrudSB/Link.webp">`},
     Bndj:(e,R,P)=>Tm_Bndj(R,e),
     BjIn:(e,R,P)=>Tm_Bndj(R,e)
 }
+
+
 
 function Tm_Td(v,e,x,Typ,_P=''){
     const _R = Tm_R(e,x,Typ,_P)
@@ -243,6 +244,30 @@ function NewLink(Ipt,col){          // ⭐⭐⭐_ _ Perguntar antes se quer Adic
 // OPÇÃO de remover cliente caso n tenha ainda, Link Cliente removido
 // Opção de Unir Clinetes diretamente pela tabela de Pedidos
 //
+
+function Linkar2(Eu){
+    const PP1 = $('.P-P',Eu.closest('.LnK'))         // Ativa
+    const _R1 = d_r(PP1)   // Raster da Ativa
+    const PP2 = $(Rx7(`${Aa(_R1.Ty)}-Link`),_tr(Eu)) // Passiva
+    const OK  = $(Rx7(`OKAY-OKAY`),_tr(Eu))
+    const _R2 = d_r(PP2)   // Raster da Passivo
+
+    const ID1 = _R1.Id     // Pega o Id da Ativa
+    const ID2 = _R2.Id     // Pega o Id da Passiva
+
+    const Ar1 = JJ[_R1.Ty][_R1.Id][_R1.Cl] // PGMT
+    const Ar2 = JJ[_R2.Ty][_R2.Id][_R2.Cl] // MPAG
+
+    const Vl1 = Ar1 ? `${Ar1} | ${_R1.Ty}-${ID1}` : `${_R1.Ty}-${ID1}`
+    const Vl2 = Ar2 ? `${Ar2} | ${_R2.Ty}-${ID2}` : `${_R2.Ty}-${ID2}`
+
+    EditCell(PP1,'Edt',Vl2)    // Id da Passiva na Ativa (String)
+    LOG('Passou1')
+    EditCell(PP2,'Edt',Vl1)    // Id da Ativa na Passiva como Array
+    LOG('Passou2')
+    EditCell(OK ,'Edt',_R1.Ty) // Recebe String
+    LOG('Passou3')
+}
 
 function Linkar(Eu,val){          // ⭐⭐⭐⭐_  (Faz o Básico)
     const td = _td(Eu)
