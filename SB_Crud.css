@@ -11,6 +11,10 @@
 
 .Fita1{border-right:4px solid #bb0092} /*Divisórias*/
 .Fita2{border-left :4px solid #bb0092} /*Divisórias*/
+.Destk .P-P{font-size:13px ; border-radius: 255px ; cursor: pointer}
+.Font13 .T-T{font-size:13px}
+
+.LnK > div:first-child{background: #0000ff1a;border-radius: 255px;border: 1px solid #0000ff4f;}
 
 
 .Sugg.Atv  {background: #d822ab; color: #ffffff}
@@ -19,6 +23,9 @@
 
 .GrifFora{left:20px;opacity:0.7}
 
-.LnK > div:first-child{background: #0000ff1a;border-radius: 255px;border: 1px solid #0000ff4f;}
 
-
+/*Depois Analisar esse AutoCom*/
+.CSS1 .TBLAA .Auto    {background: #a7a7a744 ; color: #696969;}
+.CSS1 .TBLAA .Auto.Cor{background: #9dff00} /*Ver se isso realmente serve antes ffffff00*/
+.CSS3 .TBLAA .Auto    {background: #f08cb64f}
+.CSS3 .TBLAA .Auto.Cor{background: #9dff00} /*Ver se isso realmente serve antes ffffff00*/

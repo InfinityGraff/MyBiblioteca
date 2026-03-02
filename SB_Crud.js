@@ -1,8 +1,12 @@
-const OjKy   =Typ=>ObjKey(BS[Typ])
+const OjKy   =Typ=>ObjKey(BS[Typ].Json)
 const ClrObj  =obj=>Object.fromEntries(ObjKey(obj).map(k=>[k,'']))
 const NewID   =arr=>Math.max(...arr.map(o=>Num(o.Id)))+1
-const Tm_R=(e,x,Typ,P=false)=>{const k=OjKy(Typ)[x] ; return `${Typ}-${e=='Foot'?e:e[isArr(e)?0:'Id']}-${k}-${CRYPP[BS[Typ][k][0]]}-${P?'Bj':'_'}-${ObjKey(Secund).includes(Typ)?'Sc':'_'}`}
-const daClass =_R=>{const R = d_r(_R) ; const bs = BS[R.Ty][R.Cl][1] ; return (bs==true?'':bs).split('').map(e=>CRYCLS[e]).join(' ') || ''} // Aplica as Casses q estão no 'bs'
+
+const Tm_R=(e,x,Typ,P=false)=>{
+    const k=OjKy(Typ)[x]
+    return `${Typ}-${e=='Foot'?e:e[isArr(e)?0:'Id']}-${k}-${BS[Typ].Json[k].TM}-${P?'Bj':'_'}-${ObjKey(Secund).includes(Typ)?'Sc':'_'}`}
+
+
 const _Bol=v=> v !== '_'
 const _par=s=>(([Ty,Id,Cl,Tm,Bj,Sc]) => ({Ty,Id,Cl,Tm,Bj:_Bol(Bj),Sc:_Bol(Sc)}))(s.split('-'))
 const d_r=e=>_par(typeof e == "string" ? e : e.dataset.r)
@@ -11,6 +15,7 @@ const RR=(r,p)=>$$(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p
 const rr=(r,p)=> $(`td${(isArr(r)?r:[r]).map(k=>`[data-r*="${k}"]`).join('')}${p?(isArr(p)?p:[p]).map(k=>`[data-p*="${k}"]`).join(''):''}`)
 const $r=(...arr)=>{const K=arr.filter(v=>v!=null&&v!=="").join('-') ; return K ? $(`[data-r="${K}"]`) : null} // da pra simplificar esta Limpeza
 const Rx7=(...arr)=>`.P-P${(arr).map(k=>`[data-r*="${k}"]`).join('')}` // nem todos tem .P-P isso pode dar BO depois
+const Rx8=(...arr)=>`${(arr).map(k=>`[data-r*="${k}"]`).join('')}` // esse é pra usar em Tfoot justamente pq ele não tem .P-P
 const __tr=e=>e.closest('[class^="tr-"]')
 const RmvExt=e=>e.replace(/\.[^/.]+$/,'')
 const PrePos=(div,Clone,Ps)=>Ps == "<" ? After(div,Clone) : Befor(div,Clone)
@@ -25,14 +30,17 @@ const DarJJ = (M,T,R,C,V,Lv2Arr)=>{
     if (Lv2){
         parent = J[Lv2.pT]?.find(e => e.Id == Lv2.pR)
         if (!parent) return
-        jL   = parent[Lv2.pC]?.find(e => e.Id == R)
-        jjL  = JJ[Lv2.pT]?.[Lv2.pR]?.[Lv2.pC]?.find(e=>e.Id==R)
+        if(M!=='Add'){
+            jL   = parent[Lv2.pC]?.find(e => e.Id == R)
+            jjL  = JJ[Lv2.pT]?.[Lv2.pR]?.[Lv2.pC]?.find(e=>e.Id==R)
+        }
     } else o = j.find(e => e.Id == R)
 
     switch(M){
         case 'Add':{
             const n = typeof V=='object'?V:{Id:R,[C]:V}
-            if(Lv2) { parent[Lv2.pC].push(n); if(!JJ[Lv2.pC]) JJ[Lv2.pC]={}; JJ[Lv2.pC][R]=n}
+            if(Lv2) {   if(!parent[Lv2.pC]) parent[Lv2.pC]=[] ; parent[Lv2.pC].push(n)
+                        if(    !JJ[Lv2.pC]) JJ[Lv2.pC]={}     ;     JJ[Lv2.pC][R]=n}
             else { j.push(n); k[R]=n}
             break;
         }
@@ -124,26 +132,26 @@ const Tm_Tm = {
     Sync:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
     Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" onclick="${d_r(P).Tm =='Bndj'?`EditCell(this,'Del')`:'RmvROW(this)'}" name="${e}" src="./CrudSB/Lixo.webp"><i class="Abslt GrifFora"></i>`,
     Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" loading="lazy" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
-    Link:(e,R,P)=>e!=''? Tm_Bndj(R,e) : `<div class="Rltv"><p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${d_r(R).Ty}','${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span></div></div>`, // opções de "Apenas Troca" ou de "Adição"
-   Link2:(e,R,P)=>                                                                                                                                                                                                                  `<input class="Stky" placeholder="${dbCol[d_r(R).Cl]}" oninput="LinkSug(this,'${d_r(R).Ty}','${AA(d_r(R).Cl)}')" onkeydown="KeyEntr(()=>NewLink(this,'${d_r(R).Cl}'))"><span class="Sugg Cl"></span>`,             // Aqui é o de Troca (mas Fundir com a de Cima)
+    Link:(e,R,P)=>{const Typ2 = BS[d_r(R).Ty].Json[d_r(R).Cl].LINK  ; return e!=''? Tm_Bndj(R,e) : `<div class="Rltv"><p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[Typ2]}" oninput="LinkSug(this,'${d_r(R).Ty}','${Typ2}')" onkeydown="KeyEntr(()=>NewLink('${Typ2}',this))"><span class="Sugg Cl"></span></div></div>`}, // opções de "Apenas Troca" ou de "Adição"
+   Link2:(e,R,P)=>{const Typ2 = BS[d_r(R).Ty].Json[d_r(R).Cl].LINK  ;                                                                                                                                                                                                                    return `<input class="Stky" placeholder="${dbCol[Typ2]}" oninput="LinkSug(this,'${d_r(R).Ty}','${Typ2}')" onkeydown="KeyEntr(()=>NewLink('${Typ2}',this))"><span class="Sugg Cl"></span>`},             // Aqui é o de Troca (mas Fundir com a de Cima)
     OKAY:(e,R,P)=>{return e ? e : `<img data-R="${R}" data-P="${P}" class="P-P" onclick="Linkar2(this)" src="./CrudSB/Link.webp">`},
     Bndj:(e,R,P)=>Tm_Bndj(R,e),
     BjIn:(e,R,P)=>Tm_Bndj(R,e)
 }
 
-
-
 function Tm_Td(v,e,x,Typ,_P=''){
     const _R = Tm_R(e,x,Typ,_P)
     const _RR=d_r(_R)
+    const Cls= BS[Typ].Json[_RR.Cl].CLS
+
     if((Typ=='SERV'||Typ=='PGMT')&&_RR.Sc&&!_RR.Bj){_P=`PDDS-${_RR.Id.split('_')[0]}-${Aa(Typ)}-Bndj-_-_`} // GAMBIARRRRA (isso é pra dar o Rpai nas tabelas secuntárias prinmcipais pois na hora de exibir erlas não possuem Rpai)
-    return `<td class="${daClass(_R)} Rltv">${Tm_Tm[d_r(_R).Tm](v,_R,_P)}</td>`
+    return `<td class="${Cls} Rltv">${Tm_Tm[d_r(_R).Tm](v,_R,_P)}</td>`
     
 }
 
 function Tm_Table(Typ,arry,Rpai=''){
     const IN = performance.now()
-    const Retorno = arry.map(e=> e ? `<tr class="tr-${e[Primary[Typ]]}">${ObjOrdn(e,OjKy(Typ)).map((v,x)=>Tm_Td(v,e,x,Typ,Rpai)).join('')}</tr>` : '').join('')
+    const Retorno = arry.map(e=> e ? `<tr class="tr-${e[Primary[Typ]]}">${ObjOrdn(e,BS[Typ].Orden).map((v,x)=>Tm_Td(v,e,x,Typ,Rpai)).join('')}</tr>` : '').join('')
     LOG(`⏱️🔴 Tm_table(${Typ}): ${MS(IN)}`)
     return Retorno
 }
@@ -157,7 +165,8 @@ function SellFilesIMG(Inpt){ // Fazer isso Ficar imbutido dentro da Função do 
 function AbrirImg(img,Nome,R){
     const X   = Nome ? 'Plc' : 'Up'
     const _R  = d_r(R)
-    const Pre = BS[_R.Ty][_R.Cl][2] ? `${BS[_R.Ty][_R.Cl][2]}` : '' // isso é pra Criar um Prefixo nas Imagens se tiver predefinido no BS
+    const Pre = BS[_R.Ty].Json[_R.Cl].SRC ?? '' // Prefixo de Imagens se Tiver
+
     const W   = img.naturalWidth > img.naturalHeight
     MODAL(`<div class="MdalIMG ${W ? 'Cl':'Ct'}">
                 <img src="${BASE_URL}Img/${Nome}">
@@ -230,11 +239,11 @@ async function ImgUPP(Inpt,Nome,R){  // ⭐⭐⭐⭐_ (ver se ta funcionando Bon
     }else{LOG('não é nem Img nem Svg é um arquivo!')}
 }
 
-function NewLink(Ipt,col){          // ⭐⭐⭐_ _ Perguntar antes se quer Adicionar Nova Linha
-    if(confirm(`Tem Certeza que quer salvar: ${Ipt.value} em ${col}?`)){
+function NewLink(Typ,Ipt){          // ⭐⭐⭐_ _ Perguntar antes se quer Adicionar Nova Linha
+    if(confirm(`Tem Certeza que quer salvar: ${Ipt.value} em ${Typ}?`)){
         LOG('pra que estew IF?',Nm(Ipt))
         if(Nm(Ipt)){return Nm(Ipt)}else{
-            const df = AddROW(AA(col),'<',{[col]:Ipt.value})
+            const df = AddROW(AA(Typ),'<',{[Typ]:Ipt.value})
             Linkar(Ipt,df.Id) // só tem 2 formas de linkar ou pelo Input ou pelo LinkSugg
         }
     }
@@ -276,7 +285,7 @@ function Linkar(Eu,val){          // ⭐⭐⭐⭐_  (Faz o Básico)
 }
 
 function AddROW(Typ,Ps,obj={},SB){   // ⭐⭐⭐⭐_ (Adicionar um OBJ se tiver!)
-    const df = Deff[Typ]                 // Cria um Default Baseado na bndj
+    const df = Deff(Typ)                 // Cria um Default Baseado no BS
        df.Id = NewID(J[Typ])             // Atribuindo Novo Id++
     if('Rg' in df){df.Rg = getRG(df)}    // Atribuindo o Rg se Existir
     ObjKey(obj).forEach(k=>df[k]=obj[k]) // Atribuindo oq vem no Objeto dos argumento!
