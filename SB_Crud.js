@@ -114,7 +114,7 @@ function DarVAL(e,V){
     if(['Data','Link','Ssvg','Imgs','Chek'].includes(R.Tm)){Inn(Pai(e),Tm_Tm[R.Tm](V,e.dataset.r,''))} // Parece q Sugg n existe mais
 }
 
-const SrcsIMG=(src,R)=>src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src.replace('.svg','.webp')}?v=${Date.now()}` : `./CrudSB/${R.Cl=='Arte'?'Upld':'Plce'}.webp`
+const SrcsIMG=(src,R)=>src ? '' :src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src.replace('.svg','.webp')}?v=${Date.now()}` : `./CrudSB/${R.Cl=='Arte'?'Upld':'Plce'}.webp`
 
 const safeS =(e)=>encodeURIComponent(JSON.stringify(e))
 const ArrBolean = v =>Array.isArray(v) && v.length > 0
