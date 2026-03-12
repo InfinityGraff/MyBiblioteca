@@ -114,7 +114,7 @@ function DarVAL(e,V){
     if(['Data','Link','Ssvg','Imgs','Chek'].includes(R.Tm)){Inn(Pai(e),Tm_Tm[R.Tm](V,e.dataset.r,''))} // Parece q Sugg n existe mais
 }
 
-const SrcsIMG=(src,R)=>src ? '' :src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src.replace('.svg','.webp')}?v=${Date.now()}` : `./CrudSB/${R.Cl=='Arte'?'Upld':'Plce'}.webp`
+const SrcsIMG=(src,R)=>src.includes('blob:') ? src : src ? `${BASE_URL}Low/${src.replace('.svg','.webp')}?v=${Date.now()}` : `./CrudSB/${R.Cl=='Arte'?'Upld':'Plce'}.webp`
 
 const safeS =(e)=>encodeURIComponent(JSON.stringify(e))
 const ArrBolean = v =>Array.isArray(v) && v.length > 0
@@ -337,11 +337,8 @@ async function SB_Get(SB,Typs){
         do{({data}=await SB.from(Typ).select('*').order('Id',{ascending:true}).range(ofs,ofs+lim-1))
             if (!data) return ERR('Erro ao carregar dados')
             todas.push(...data) ; ofs+=lim
-        }while(data.length===lim)
-        
-            const Colet = {}
-        if(Typ=='ARTE'){LOG(Typ,'Poeira',data)}
-        if(Typ=='ARTE'){LOG(Typ,todas,'>>', todas.map(e=>normalizeObj(e,Colet)))}
+        }while(data.length===lim)        
+        const Colet = {}
         J[Typ]=todas.map(e=>normalizeObj(e,Colet))
         for(const col in Colet){J[AA(col)] = Colet[col] ; JJ[AA(col)] = ArrtoOBJ(Colet[col],Primary[AA(col)])}
         JJ[Typ] = ArrtoOBJ(J[Typ],Primary[Typ])
