@@ -4,8 +4,8 @@ const NewID   =arr=>Math.max(...arr.map(o=>Num(o.Id)))+1
 
 const Tm_R=(e,x,Typ,P=false)=>{
     const k=OjKy(Typ)[x]
-    return `${Typ}-${e=='Foot'?e:e[isArr(e)?0:'Id']}-${k}-${BS[Typ].Json[k].TM}-${P?'Bj':'_'}-${ObjKey(Secund).includes(Typ)?'Sc':'_'}`}
-
+    return `${Typ}-${e=='Foot'?e:e[isArr(e)?0:'Id']}-${k}-${BS[Typ].Json[k].TM}-${P?'Bj':'_'}-${ObjKey(Secund).includes(Typ)?'Sc':'_'}`
+}
 
 const _Bol=v=> v !== '_'
 const _par=s=>(([Ty,Id,Cl,Tm,Bj,Sc]) => ({Ty,Id,Cl,Tm,Bj:_Bol(Bj),Sc:_Bol(Sc)}))(s.split('-'))
@@ -130,11 +130,33 @@ const Tm_Tm = {
     Data:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ YMD(e)}" onclick="TrcFih(this,$('input',Pai(this)))">${BrevData(DMY(e))}</p><input type="date" data-R="${R}" data-P="${P}" class="none" value="${YMD(e)}" onchange="EditCell(this,'Edt')" onblur="TrcFih(this,$('p',Pai(this)))">`,
     Auto:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${ Num(e)}" onclick="CtrlSoma(this)">${e}</p>`,
     Sync:(e,R,P)=>`<p      data-R="${R}" data-P="${P}" class="P-P Ct" name="${NUMM(e)}" onclick="CtrlSoma(this)">${e=='--'?'--':e==''?'':e==0?'--':RS(e)}</p>`, // a idéia seria receber aqui sempre um Numero
-    Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" onclick="${d_r(P).Tm =='Bndj'?`EditCell(this,'Del')`:'RmvROW(this)'}" name="${e}" src="./CrudSB/Lixo.webp"><i class="Abslt GrifFora"></i>`,
-    Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P Ct" name="${e      }" loading="lazy" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
-    Link:(e,R,P)=>{const Typ2 = BS[d_r(R).Ty].Json[d_r(R).Cl].LINK  ; return e!=''? Tm_Bndj(R,e) : `<div class="Rltv"><p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p><div class="BndjSUG MySelect BNdj Abslt none Cl"><a>${SVG.Ponta}</a><input class="Stky" placeholder="${dbCol[Typ2]}" oninput="LinkSug(this,'${d_r(R).Ty}','${Typ2}')" onkeydown="KeyEntr(()=>NewLink('${Typ2}',this))"><span class="Sugg Cl"></span></div></div>`}, // opções de "Apenas Troca" ou de "Adição"
-   Link2:(e,R,P)=>{const Typ2 = BS[d_r(R).Ty].Json[d_r(R).Cl].LINK  ;                                                                                                                                                                                                                    return `<input class="Stky" placeholder="${dbCol[Typ2]}" oninput="LinkSug(this,'${d_r(R).Ty}','${Typ2}')" onkeydown="KeyEntr(()=>NewLink('${Typ2}',this))"><span class="Sugg Cl"></span>`},             // Aqui é o de Troca (mas Fundir com a de Cima)
-    OKAY:(e,R,P)=>{return e ? e : `<img data-R="${R}" data-P="${P}" class="P-P" onclick="Linkar2(this)" src="./CrudSB/Link.webp">`},
+    Lixo:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P PT HOV" onclick="${d_r(P).Tm =='Bndj'?`EditCell(this,'Del')`:'RmvROW(this)'}" name="${e}" src="./CrudSB/Lixo.webp"><i class="Abslt GrifFora"></i>`,
+    Imgs:(e,R,P)=>`<img    data-R="${R}" data-P="${P}" class="P-P"    name="${e      }" loading="lazy" draggable="false" src="${SrcsIMG(e,d_r(R))}" onclick="AbrirImg(this,'${e}','${R}')">`,
+    Link:(e,R,P)=>{ // aqui é o Link principal q aparece
+        const Typ2 = BS[d_r(R).Ty].Json[d_r(R).Cl].LINK ; const TYP2 = Typ2.split('-')
+        return e!=''? Tm_Bndj(R,e)
+         : `<div class="Rltv">
+                <p class="P-P" data-R="${R}" data-P="${P}" onclick="ShowBndj(_td(this))" name="${e}">${e==''?'-':e}</p>
+                <div class="BndjSUG MySelect BNdj Abslt none Cl">
+                    <a>${SVG.Ponta}</a>
+                    <input class="Stky" placeholder="${dbCol[TYP2[0]]}" oninput="LinkSug(this,'${R}','${Typ2}')" onkeydown="KeyEntr(()=>NewLink('${TYP2[0]}',this))">
+                    <span class="Sugg Cl"></span>
+                </div>
+            </div>`
+    },
+
+   Link2:(e,R,P)=>{ // Aqui é o de Troca (mas Fundir com a de Cima)
+        const Typ2 = BS[d_r(R).Ty].Json[d_r(R).Cl].LINK  ;   
+        return `<input class="Stky" placeholder="${dbCol[Typ2]}" oninput="LinkSug(this,'${R}','${Typ2}')" onkeydown="KeyEntr(()=>NewLink('${Typ2}',this))">
+                <span class="Sugg Cl"></span>`
+    },
+
+    OKAY:(e,R,P)=>{
+        // se tiver na Tabela Normal não carrega nada
+        // Provavelmente Mpag não usa OK, quem usa isso é Somente as GRADS, pois depende manualmente desta Validação
+        return e ? `<img data-R="${R}" data-P="${P}" class="P-P PT HOV" onclick="RmvLink(this,'${R}','${P}')" src="./CrudSB/Unlink.webp">` :
+                   `<img data-R="${R}" data-P="${P}" class="P-P PT HOV" onclick="Linkar2(this,'${R}','${P}')" src="./CrudSB/Link.webp">`
+    },
     Bndj:(e,R,P)=>Tm_Bndj(R,e),
     BjIn:(e,R,P)=>Tm_Bndj(R,e)
 }
@@ -177,7 +199,6 @@ function AbrirImg(img,Nome,R){
     if(X=='Up'){$('.MdalIMG input').click()}
 }
 
-
 function GambiarraAdd(div){Add(_tr(div),'Hoov') ; $$(':scope > td',_tr(div)).forEach(e=>Add(e,'Hoov'))} // HOROZOZA fazer de tudo pra tirar! (remover o hov q faz a saturação da tr)
 function GambiarraRmv(div){Rmv(_tr(div),'Hoov') ; $$(':scope > td',_tr(div)).forEach(e=>Rmv(e,'Hoov'))} // HOROZOZA fazer de tudo pra tirar! (adicionar o hov q faz a saturação da tr)
 
@@ -187,15 +208,83 @@ function ShowBndj(div,Typ){ //Typ ? RFresh(Typ,_tr(div)) : null // (antes tinha 
     ClickForaa(el,div,()=>{Add_N(el);/*GambiarraRmv(div)*/}) // não remover a GAMBIARRA se a próxima bandeija estiver na msm tr
 }
 
-
-
-
-
-
 // criar uma Função Geral, que serve tanto pra Edit ImgUpload, para delete, para várias coisas ela faz o seguinte abaixo
 // ela Localiza todos os seus relacionados nessesários e gera um objeto, ent ela vai localizar
 // Eu, Pai, T-T Pai, fora o d_r(R) inteiro, mas tbm vai Rerornar Minha tr, a tr do Pai, qual td é o Pai dela
 // retornará várias coisas em um unico Obj dai é só acessalo pelo nome do Obj
+
+
+//===========================LINK===========================
+    // Opção de Unir Mesclar ou Fundir Links diretamente pelo Sugg
+
+function NewLink(Typ,Ipt){          // ⭐⭐⭐_ _ Perguntar antes se quer Adicionar Nova Linha
+    if(confirm(`Tem Certeza que quer salvar: ${Ipt.value} em ${Typ}?`)){
+        LOG('pra que estew IF?',Nm(Ipt))
+        if(Nm(Ipt)){return Nm(Ipt)}else{
+            const df = AddROW(AA(Typ),'<',{[Typ]:Ipt.value})
+            Linkar(Ipt,df.Id) // só tem 2 formas de linkar ou pelo Input ou pelo LinkSugg
+        }
+    } // Permitir isso para os que Podem
+}
+
+function RmvLink(){
+    LOG('remove Link')
+}
+
+// isso tem que servir pra ADICIONAR, REMOVER, TROCAR
+function Linkar2(Eu){ // esse Link é usado pra Linkar pela Tabela (essa Função é Chamada pelo BOTÃO de Link q aparece no SuggLink em Formato de Tabela)
+    const PP1 = $('.P-P',Eu.closest('.LnK'))          // Ativa
+    const _R1 = d_r(PP1)                              // Raster da Ativa (Alterar pra d_r(Pai))
+    const PP2 = $(Rx7(`${d_r(Eu).Id}-Link`),_tr(Eu))  // Passiva (isso deveria ser a td que recebe o valor do ativo dentro do passivo)
+    const  OK = $(Rx7('OKAY'),_tr(Eu))                // (para as Linkagem que o OKOK é automativo blz, mas tem umas como Grad q é Manual depois ver isso!)
+    const _R2 = d_r(PP2)                              // Raster da Passivo (Alterar pra d_r(this))
+
+    const Ar1 = JJ[_R1.Ty][_R1.Id][_R1.Cl] // PGMT (Buscar o que Ja tinha)
+    const Ar2 = JJ[_R2.Ty][_R2.Id][_R2.Cl] // MPAG (Buscar o que Ja tinha)
+
+    const Vl1 = Ar1 ? `${Ar1} | ${_R1.Ty}-${_R1.Id}` : `${_R1.Ty}-${_R1.Id}` // Concatenar o novo com o antigo caso o antigo ele exista
+    const Vl2 = Ar2 ? `${Ar2} | ${_R2.Ty}-${_R2.Id}` : `${_R2.Ty}-${_R2.Id}` // Concatenar o novo com o antigo caso o antigo ele exista
+
+    EditCell(PP1,'Edt',Vl2)    // Id da Passiva na Ativa (String)
+    EditCell(PP2,'Edt',Vl1)    // Id da Ativa na Passiva como Array
+    EditCell(OK ,'Edt',true)   // Recebe String (aqui não serve se tiver 2, isso tem q ser Bolean) /tem uns que só pode ser OK automático se permitir/
+}
+
+function Linkar(Eu,val){          // ⭐⭐⭐⭐_  (Faz o Básico)
+    const td = _td(Eu)
+    const PP = $('.P-P',td)
+    const _R = PP.dataset.r
+    EditCell(PP,'Edt',val)
+    Inn(td,Tm_Bndj(_R,`${val}`))
+}
+
+function LinkSug(Ipt,R,TYP2){ // Typ2 é a Tabela Passiva (a qual eu estou Procurando)
+    clearTimeout(debounceTimer) // Cancela Chamadas Anteriores ao escrever mt Rápido
+    debounceTimer = setTimeout(()=>{
+        const _R = d_r(R)
+        const [Typ2,Mod,Qnt,Cria] = TYP2.split('-')
+
+        const [I,_C,RX] = Avnc_Pesq(Ipt,Typ2)
+        const list = $('.Sugg',Pai(Ipt)) ; Show(list) ; if(!I){None(list) ; return Inn(list,'')} // Exibe a Div Lista
+
+        const RgxOK=j=>ObjEtr(j).some(([k,v])=>RX.test(BS[Typ2].Json[k]?.TM=='Link' ? Getna(j,k) : v))
+        
+        const EXTRA = BS[_R.Ty].Json[_R.Cl].LnkEX   // Acessar os Extras (de cada Tabela)
+        const Fn    = Function(`return ${EXTRA}`)()
+        const filt  = (J[Typ2]||[]).filter(j=>RgxOK(j) && (!j.OKAY) && (!EXTRA||Fn(j))) // [RgxOK obrigatório] | !OKAY Pula, Se existir [precisa faltar o typ] | [chama Extra se Existir]
+
+        if(Mod=='List'){
+            Inn(list,filt.map(e=>`<a class="PT w100 Ct" onclick="Linkar(this,'${e[Primary[Typ2]]}')">${Griff(Tm_Suggs[Typ2](e),RX)}</a>`).join(''))
+        }
+        if(Mod=='Table'){
+            Inn(list,`<table><thead class="Stky" style="z-index:510"><tr>${Tm_thSort(BS[Typ2].Orden,Typ2)}</tr></thead><tbody>${Tm_Table(Typ2,filt,R)}</tbody></table>`)
+            Ex_Pesq($$('tbody > tr',list),Typ2,RX,I,true,Ipt) // isso é só pra fazer os Grifos
+        }
+        if(Mod=='Card'){
+
+        }
+    },100)
+}
 
 
 //===========================CRUD===========================
@@ -224,51 +313,6 @@ async function ImgUPP(Inpt,Nome,R){  // ⭐⭐⭐⭐_ (ver se ta funcionando Bon
         if(Ext=='svg'){Sb_UPLOAD(supaBASE,f,`Img/${Nome}.svg` ,true)
         }else{Sb_UPLOAD(supaBASE,await fetch(await ImgLowQuality(src,'HD' )).then(r=>r.blob()),`Img/${Nome}.webp`,true)}
     }else{LOG('não é nem Img nem Svg é um arquivo!')}
-}
-
-function NewLink(Typ,Ipt){          // ⭐⭐⭐_ _ Perguntar antes se quer Adicionar Nova Linha
-    if(confirm(`Tem Certeza que quer salvar: ${Ipt.value} em ${Typ}?`)){
-        LOG('pra que estew IF?',Nm(Ipt))
-        if(Nm(Ipt)){return Nm(Ipt)}else{
-            const df = AddROW(AA(Typ),'<',{[Typ]:Ipt.value})
-            Linkar(Ipt,df.Id) // só tem 2 formas de linkar ou pelo Input ou pelo LinkSugg
-        }
-    }
-}
-
-// 
-// OPÇÃO de remover cliente caso n tenha ainda, Link Cliente removido
-// Opção de Unir Clinetes diretamente pela tabela de Pedidos
-//
-
-
-function Linkar2(Eu){
-    const PP1 = $('.P-P',Eu.closest('.LnK'))          // Ativa
-    const _R1 = d_r(PP1)                              // Raster da Ativa
-    const PP2 = $(Rx7(`${d_r(Eu).Id}-Link`),_tr(Eu))  // Passiva
-    const  OK = $(Rx7('OKAY'),_tr(Eu))                // (para as Linkagem que o OKOK é automativo blz, mas tem umas como Grad q é Manual depois ver isso!)
-    const _R2 = d_r(PP2)                              // Raster da Passivo
-
-    const ID1 = _R1.Id     // Pega o Id da Ativa
-    const ID2 = _R2.Id     // Pega o Id da Passiva
-
-    const Ar1 = JJ[_R1.Ty][_R1.Id][_R1.Cl] // PGMT (Buscar o que Ja tinha)
-    const Ar2 = JJ[_R2.Ty][_R2.Id][_R2.Cl] // MPAG (Buscar o que Ja tinha)
-
-    const Vl1 = Ar1 ? `${Ar1} | ${_R1.Ty}-${ID1}` : `${_R1.Ty}-${ID1}` // Concatenar o novo com o antigo caso o antigo ele exista
-    const Vl2 = Ar2 ? `${Ar2} | ${_R2.Ty}-${ID2}` : `${_R2.Ty}-${ID2}` // Concatenar o novo com o antigo caso o antigo ele exista
-
-    EditCell(PP1,'Edt',Vl2)    // Id da Passiva na Ativa (String)
-    EditCell(PP2,'Edt',Vl1)    // Id da Ativa na Passiva como Array
-    EditCell(OK ,'Edt',true)   // Recebe String (aqui não serve se tiver 2, isso tem q ser Bolean)
-}
-
-function Linkar(Eu,val){          // ⭐⭐⭐⭐_  (Faz o Básico)
-    const td = _td(Eu)
-    const PP = $('.P-P',td)
-    const _R = PP.dataset.r
-    EditCell(PP,'Edt',val)
-    Inn(td,Tm_Bndj(_R,`${val}`))
 }
 
 function AddROW(Typ,Ps,obj={},SB){   // ⭐⭐⭐⭐_ (Adicionar um OBJ se tiver!)
@@ -308,8 +352,6 @@ function MesclaRow(Typ,bs){          // ⭐⭐⭐⭐_ (Ficar usando apenas com C
         }else{ObjEtr(Jn).forEach(([k,v])=>{Sb_EDIT(supaBASE,'CLNT',_Rf.Id,k,UniqSplit(v).join(' || '))})} // Editar o Ultimo
     })
 }
-
-
 
 // ===========================SUPABASE===========================
 
