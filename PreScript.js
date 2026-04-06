@@ -382,6 +382,70 @@ function PrepDrop(Eu,nome,Call=null){
     Eu.ondrop     =e=>(Prvn2(e),Rmv(Eu,'hover'),Import(e.dataTransfer.files[0]))
 }
 
+function Calendario(i,c){
+    const M=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
+    let D=new Date(),ini=null,fim=null,drag=false
+
+    document.onmouseup=()=>drag=false
+
+    const C={}
+    C.i=i // 🔥 guarda o input correto
+
+    const R=()=>{
+        let a=D.getFullYear(),m=D.getMonth(),p=new Date(a,m,1).getDay(),u=new Date(a,m+1,0).getDate(),h=new Date();h.setHours(0,0,0,0)
+
+        let H=`<div class="w100 Bt">
+                <button onclick="this.closest('.calendar').C.h()">Hoje</button>
+                <button onclick="this.closest('.calendar').C.l()">Limpar</button>
+            </div>
+            <header class="w100 Bt">
+                <button onclick="this.closest('.calendar').C.m(-1)">◀</button>
+                <span>${M[m]} ${a}</span>
+                <button onclick="this.closest('.calendar').C.m(1)">▶</button>
+            </header>
+            <table><tr class="NONO"><td>D</td><td>S</td><td>T</td><td>Q</td><td>Q</td><td>S</td><td>S</td></tr><tr>`
+
+        let d=1
+
+        for(let x=0;x<42;x++){
+            if(x<p||d>u) H+="<td></td>"
+            else{
+                let dt=new Date(a,m,d);dt.setHours(0,0,0,0)
+                let cls=[]
+                if(+dt==+h) cls.push("Tag_DESTK")
+                if(dt<h) cls.push("Tag_Off")
+                let w=dt.getDay(); if(w==0||w==6) cls.push("Tag_destk")
+
+                if(ini&&!fim&&+dt==+ini) cls.push("Tag_Atv")
+                if(ini&&fim){
+                    if(+dt==+ini||+dt==+fim) cls.push("Tag_Atv")
+                    if(dt>ini&&dt<fim) cls.push("Tag_Range")
+                }
+
+                H+=`<td class="${cls.join(" ")}"
+                onmousedown="this.closest('.calendar').C.d(${a},${m},${d})"
+                onmouseover="this.closest('.calendar').C.o(${a},${m},${d})"
+                onclick="this.closest('.calendar').C.c(${a},${m},${d})">${d}</td>`
+                d++
+            }
+            if((x+1)%7==0) H+="</tr><tr>"
+        }
+
+        c.innerHTML=H+"</tr></table>"
+        c.C=C // 🔥 instancia ligada ao DOM
+    }
+    C.m=n=>{D.setMonth(D.getMonth()+n);R()}
+    C.d=(a,m,d)=>{let dt=new Date(a,m,d);dt.setHours(0,0,0,0);ini=dt;fim=null;drag=true;R()}
+    C.o=(a,m,d)=>{if(!drag)return;let dt=new Date(a,m,d);dt.setHours(0,0,0,0);fim=dt<ini?ini:dt;if(dt<ini) ini=dt;let f=x=>String(x).padStart(2,"0")
+        if(fim && +ini==+fim){C.i.value = `${f(ini.getDate())}/${f(ini.getMonth()+1)}/${ini.getFullYear()}`
+        }else if(fim){C.i.value = `${f(ini.getDate())}/${f(ini.getMonth()+1)}/${ini.getFullYear()} - ${f(fim.getDate())}/${f(fim.getMonth()+1)}/${fim.getFullYear()}`}R()}
+    C.c=(a,m,d)=>{if(drag){drag=false; return};let dt=new Date(a,m,d);dt.setHours(0,0,0,0);ini=dt;fim=null;let f=x=>String(x).padStart(2,"0");C.i.value=`${f(d)}/${f(m+1)}/${a}`;P(a,m+1,d);R()}
+    C.h=()=>{let t=new Date();ini=t;fim=null;C.c(t.getFullYear(),t.getMonth(),t.getDate())}
+    C.l=()=>{C.i.value="";ini=fim=null;c.classList.add("none")}
+    const P=(a,m,d,a2,m2,d2)=>{if(a2){LOG("intervalo")}else{let iso=a+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");LOG("buscar:",iso)}}
+    R()
+}
+
 // Criar Modal
 // MODAL________________________________________________
 function FocoFilho(Pai,Filho){Array.from(Pai.children).forEach(e=>{None(e)});Show([Pai,Filho]);SairModal(Pai)} /*Manter isso aqui só pelo App da Infinity até trocar Tudo*/

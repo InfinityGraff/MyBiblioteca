@@ -8,14 +8,6 @@ input[type="number"]::-webkit-inner-spin-button,/*remover Spinner*/
 input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin: 0}
 
 :root{ /*Acho q isso é padrão da Gráfica não da Biblioteca CSS*/
-  --Laranja: #fa7d09;
-  --Branco: #ffffff;
-  --Cor-Final: #FF5900;
-  --Degrade: linear-gradient(to right,#434343,#73008A,#FF5900);
-  --MargemImput: 5px 15px 15px 15px;
-  --DegradeFundo:linear-gradient(#1f1f1f,#101010) center center no-repeat fixed;
-  --degradeFonte:linear-gradient(to bottom,#E312DF, #FA077D, #ff6f00);
-  --CorInput:#303030;
   --Lite:'Tommy_Ligth'  ,'Lexend Deca','Arial';
   --Rglr:'Tommy_Regular','Lexend Deca','Arial';
   --Bold:'Tommy_Bold'   ,'Lexend Deca','Arial';
@@ -80,7 +72,7 @@ input[type="number"]::-webkit-outer-spin-button{-webkit-appearance: none;margin:
 .gap{gap:4px}
 
 h1{font-size:40px;font-family:var(--Bold)}
-h2{font-size:18px; color:var(--Laranja)}
+
 .Dark hr{border: 1px solid #ffffff2e;margin:4px 0px;}
 .Lite hr{border: 1px solid #00000070;margin:4px 0px;}
 
