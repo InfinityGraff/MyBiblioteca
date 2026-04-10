@@ -345,7 +345,7 @@ const Tm_Switch =(Eu,Labels=[],Func,Pre)=>{ // <div onload="Tm_Switch(this,['Ped
         #opt_${Pre}_${e}:checked ~ label[for="opt_${Pre}_${e}"] {color:#fff}
     `).join("")}label[for="opt_${Pre}_0"]{color:#fff}
     </style>
-    ${For(X).map(e=>`<input type="radio" onchange="${Func.replace('x',e)}" id="opt_${Pre}_${e}" name="mode" class="none" ${e===0?"checked":""}>`).join("")}
+    ${For(X).map(e=>`<input type="radio" onchange="${Func.replace('x',e)}" id="opt_${Pre}_${e}" name="mode" class="NONE" ${e===0?"checked":""}>`).join("")}
     ${For(X).map(e=>`<label for="opt_${Pre}_${e}">${Labels[e] || "Opção " + e}</label>`).join("")}
     <i style="width: calc(100%/${X})"></i>`)
 }
@@ -368,7 +368,7 @@ function MyAlert(msg){
 function SelectFiles(Inpt,Call){if(Inpt.files.length > 0 && typeof Call === "function"){Call(Inpt)}} // usar isso no InputFiles abaixo (Garante que tudo entrou bem antes de Continuar)
 let VarDropImg = {} // uma Váriavel Global q talvez possa ficar dentro do PreScript Destinada a Receber os Files pra serem usados Depois
 function PrepDrop(Eu,nome,Call=null){
-    Inn(Eu,'<a>Adicionar Imagem</a><input type="file" accept="image/*" class="none">')
+    Inn(Eu,'<a>Adicionar Imagem</a><input type="file" accept="image/*" class="NONE">')
     const f=$('input',Eu),d=$('a',Eu)
     const Import=F=>{if (!F) return
         const ext  = F.name.split('.').pop()
