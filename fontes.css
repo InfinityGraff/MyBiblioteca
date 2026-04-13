@@ -1,81 +1,137 @@
-@font-face{font-family:'advent-Bd1';src:url('./KitFontes/advent-Bd1.otf') format('opentype')}
-@font-face{font-family:'advent-Bd2';src:url('./KitFontes/advent-Bd2.otf') format('opentype')}
-@font-face{font-family:'advent-Bd3';src:url('./KitFontes/advent-Bd3.otf') format('opentype')}
-@font-face{font-family:'advent-Lt1';src:url('./KitFontes/advent-Lt1.otf') format('opentype')}
-@font-face{font-family:'advent-Lt2';src:url('./KitFontes/advent-Lt2.otf') format('opentype')}
-@font-face{font-family:'advent-Lt3';src:url('./KitFontes/advent-Lt3.otf') format('opentype')}
-@font-face{font-family:'advent-Re';src:url('./KitFontes/advent-Re.otf') format('opentype')}
-@font-face{font-family:'Almarose-Black';src:url('./KitFontes/Basica/Almarose-Black.otf') format('opentype')}
-@font-face{font-family:'Almarose-Bold';src:url('./KitFontes/Basica/Almarose-Bold.otf') format('opentype')}
-@font-face{font-family:'Almarose-ExtraBlack';src:url('./KitFontes/Basica/Almarose-ExtraBlack.otf') format('opentype')}
-@font-face{font-family:'Almarose-Extrabold';src:url('./KitFontes/Basica/Almarose-Extrabold.otf') format('opentype')}
-@font-face{font-family:'Almarose-Light';src:url('./KitFontes/Basica/Almarose-Light.otf') format('opentype')}
-@font-face{font-family:'Almarose-Medium';src:url('./KitFontes/Basica/Almarose-Medium.otf') format('opentype')}
-@font-face{font-family:'Almarose-Regular';src:url('./KitFontes/Basica/Almarose-Regular.otf') format('opentype')}
-@font-face{font-family:'Almarose-Semibold';src:url('./KitFontes/Basica/Almarose-Semibold.otf') format('opentype')}
-@font-face{font-family:'Almarose-Thin';src:url('./KitFontes/Basica/Almarose-Thin.otf') format('opentype')}
-@font-face{font-family:'Anja Eliane accent002';src:url('./KitFontes/Basica/Anja Eliane accent002.ttf') format('truetype')}
-@font-face{font-family:'arial-rounded-mt-bold';src:url('./KitFontes/Basica/arial-rounded-mt-bold.ttf') format('truetype')}
-@font-face{font-family:'Balbek-Personal Use Only';src:url('./KitFontes/Basica/Balbek-Personal Use Only.otf') format('opentype')}
-@font-face{font-family:'BebasNeue-Regular';src:url('./KitFontes/Basica/BebasNeue-Regular.otf') format('opentype')}
-@font-face{font-family:'BebasNeue-Regular';src:url('./KitFontes/Basica/BebasNeue-Regular.ttf') format('truetype')}
+@font-face{font-family:'advent Bold1';src:url('./KitFontes/Basica/advent Bold1.otf') format('opentype')}
+@font-face{font-family:'advent Bold2';src:url('./KitFontes/Basica/advent Bold2.otf') format('opentype')}
+@font-face{font-family:'advent Bold3';src:url('./KitFontes/Basica/advent Bold3.otf') format('opentype')}
+@font-face{font-family:'advent Light1';src:url('./KitFontes/Basica/advent Light1.otf') format('opentype')}
+@font-face{font-family:'advent Light2';src:url('./KitFontes/Basica/advent Light2.otf') format('opentype')}
+@font-face{font-family:'advent Light3';src:url('./KitFontes/Basica/advent Light3.otf') format('opentype')}
+@font-face{font-family:'advent Regular';src:url('./KitFontes/Basica/advent Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Black Regular';src:url('./KitFontes/Basica/Almarose Black Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Bold Regular';src:url('./KitFontes/Basica/Almarose Bold Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Extrablack Regular';src:url('./KitFontes/Basica/Almarose Extrablack Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Extrabold Regular';src:url('./KitFontes/Basica/Almarose Extrabold Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Light Regular';src:url('./KitFontes/Basica/Almarose Light Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Medium Regular';src:url('./KitFontes/Basica/Almarose Medium Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Regular Regular';src:url('./KitFontes/Basica/Almarose Regular Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Semibold Regular';src:url('./KitFontes/Basica/Almarose Semibold Regular.otf') format('opentype')}
+@font-face{font-family:'Almarose Thin Regular';src:url('./KitFontes/Basica/Almarose Thin Regular.otf') format('opentype')}
+@font-face{font-family:'Arial Black Regular';src:url('./KitFontes/Basica/Arial Black Regular.ttf') format('truetype')}
+@font-face{font-family:'Arial Bold Italic';src:url('./KitFontes/Basica/Arial Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Arial Bold';src:url('./KitFontes/Basica/Arial Bold.ttf') format('truetype')}
+@font-face{font-family:'Arial Italic';src:url('./KitFontes/Basica/Arial Italic.ttf') format('truetype')}
+@font-face{font-family:'Arial Regular';src:url('./KitFontes/Basica/Arial Regular.ttf') format('truetype')}
+@font-face{font-family:'Arial Rounded MT Bold Regular';src:url('./KitFontes/Basica/Arial Rounded MT Bold Regular.ttf') format('truetype')}
+@font-face{font-family:'Balbek Personal Use Regular';src:url('./KitFontes/Basica/Balbek Personal Use Regular.otf') format('opentype')}
+@font-face{font-family:'Baloo Tamma Regular';src:url('./KitFontes/Basica/Baloo Tamma Regular.ttf') format('truetype')}
+@font-face{font-family:'Bebas Neue Regular';src:url('./KitFontes/Basica/Bebas Neue Regular.otf') format('opentype')}
+@font-face{font-family:'Bebas Neue Regular';src:url('./KitFontes/Basica/Bebas Neue Regular.ttf') format('truetype')}
+@font-face{font-family:'BigNoodleTitling Regular';src:url('./KitFontes/Basica/BigNoodleTitling Regular.ttf') format('truetype')}
+@font-face{font-family:'Blippo Black Regular';src:url('./KitFontes/Basica/Blippo Black Regular.ttf') format('truetype')}
+@font-face{font-family:'Candara Bold';src:url('./KitFontes/Basica/Candara Bold.ttf') format('truetype')}
+@font-face{font-family:'Candara Light Regular';src:url('./KitFontes/Basica/Candara Light Regular.ttf') format('truetype')}
+@font-face{font-family:'Candara Regular';src:url('./KitFontes/Basica/Candara Regular.ttf') format('truetype')}
+@font-face{font-family:'COCOGOOSE  UltraLight';src:url('./KitFontes/Basica/COCOGOOSE  UltraLight.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Classic Trial ExBold Regular';src:url('./KitFontes/Basica/Cocogoose Classic Trial ExBold Regular.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Classic Trial Medium Regular';src:url('./KitFontes/Basica/Cocogoose Classic Trial Medium Regular.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Compressed Trial Bold';src:url('./KitFontes/Basica/Cocogoose Compressed Trial Bold.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Compressed Trial Light';src:url('./KitFontes/Basica/Cocogoose Compressed Trial Light.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Compressed Trial Regular';src:url('./KitFontes/Basica/Cocogoose Compressed Trial Regular.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Compressed Trial Semilight';src:url('./KitFontes/Basica/Cocogoose Compressed Trial Semilight.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Compressed Trial Thin';src:url('./KitFontes/Basica/Cocogoose Compressed Trial Thin.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Compressed Trial UltraLight';src:url('./KitFontes/Basica/Cocogoose Compressed Trial UltraLight.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Condensed Trial Light';src:url('./KitFontes/Basica/Cocogoose Condensed Trial Light.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Condensed Trial Regular';src:url('./KitFontes/Basica/Cocogoose Condensed Trial Regular.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Condensed Trial Semilight';src:url('./KitFontes/Basica/Cocogoose Condensed Trial Semilight.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Condensed Trial Thin';src:url('./KitFontes/Basica/Cocogoose Condensed Trial Thin.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Condensed Trial UltraLight';src:url('./KitFontes/Basica/Cocogoose Condensed Trial UltraLight.ttf') format('truetype')}
+@font-face{font-family:'COCOGOOSE DemiBold';src:url('./KitFontes/Basica/COCOGOOSE DemiBold.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Light';src:url('./KitFontes/Basica/Cocogoose Light.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Narrow Trial Light';src:url('./KitFontes/Basica/Cocogoose Narrow Trial Light.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Narrow Trial Regular';src:url('./KitFontes/Basica/Cocogoose Narrow Trial Regular.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Narrow Trial Semilight';src:url('./KitFontes/Basica/Cocogoose Narrow Trial Semilight.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Narrow Trial Thin';src:url('./KitFontes/Basica/Cocogoose Narrow Trial Thin.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Narrow Trial UltraLight';src:url('./KitFontes/Basica/Cocogoose Narrow Trial UltraLight.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Pro Thin Regular';src:url('./KitFontes/Basica/Cocogoose Pro Thin Regular.ttf') format('truetype')}
+@font-face{font-family:'Cocogoose Regular';src:url('./KitFontes/Basica/Cocogoose Regular.ttf') format('truetype')}
+@font-face{font-family:'Consolas Bold';src:url('./KitFontes/Basica/Consolas Bold.ttf') format('truetype')}
+@font-face{font-family:'Consolas Regular';src:url('./KitFontes/Basica/Consolas Regular.ttf') format('truetype')}
+@font-face{font-family:'Corbel Bold';src:url('./KitFontes/Basica/Corbel Bold.ttf') format('truetype')}
+@font-face{font-family:'Corbel Regular';src:url('./KitFontes/Basica/Corbel Regular.ttf') format('truetype')}
 @font-face{font-family:'Dunkin Bold';src:url('./KitFontes/Basica/Dunkin Bold.otf') format('opentype')}
 @font-face{font-family:'Dunkin Sans Bold';src:url('./KitFontes/Basica/Dunkin Sans Bold.otf') format('opentype')}
-@font-face{font-family:'EngraversGothic BT';src:url('./KitFontes/Basica/EngraversGothic BT.ttf') format('truetype')}
+@font-face{font-family:'EngraversGothic BT Regular';src:url('./KitFontes/Basica/EngraversGothic BT Regular.ttf') format('truetype')}
+@font-face{font-family:'Eras Bold ITC Regular';src:url('./KitFontes/Basica/Eras Bold ITC Regular.ttf') format('truetype')}
+@font-face{font-family:'Eurostile Next LT Pro Bold';src:url('./KitFontes/Basica/Eurostile Next LT Pro Bold.otf') format('opentype')}
 @font-face{font-family:'Exotc350 Bd BT Bold';src:url('./KitFontes/Basica/Exotc350 Bd BT Bold.ttf') format('truetype')}
 @font-face{font-family:'Exotc350 DmBd BT Demi-Bold';src:url('./KitFontes/Basica/Exotc350 DmBd BT Demi-Bold.ttf') format('truetype')}
+@font-face{font-family:'Fairweather ExtraBold Bold';src:url('./KitFontes/Basica/Fairweather ExtraBold Bold.ttf') format('truetype')}
+@font-face{font-family:'Futura BdCn BT Bold';src:url('./KitFontes/Basica/Futura BdCn BT Bold.ttf') format('truetype')}
 @font-face{font-family:'Futura Bk BT Book';src:url('./KitFontes/Basica/Futura Bk BT Book.ttf') format('truetype')}
-@font-face{font-family:'Futura Bold BT';src:url('./KitFontes/Basica/Futura Bold BT.ttf') format('truetype')}
-@font-face{font-family:'Futura Bold Condensed BT';src:url('./KitFontes/Basica/Futura Bold Condensed BT.ttf') format('truetype')}
-@font-face{font-family:'Futura Light Condensed BT';src:url('./KitFontes/Basica/Futura Light Condensed BT.ttf') format('truetype')}
+@font-face{font-family:'Futura LtCn BT Light';src:url('./KitFontes/Basica/Futura LtCn BT Light.ttf') format('truetype')}
 @font-face{font-family:'Futura Md BT Bold';src:url('./KitFontes/Basica/Futura Md BT Bold.ttf') format('truetype')}
 @font-face{font-family:'Futura Md BT Medium';src:url('./KitFontes/Basica/Futura Md BT Medium.ttf') format('truetype')}
-@font-face{font-family:'Futura Medium Condensed BT';src:url('./KitFontes/Basica/Futura Medium Condensed BT.ttf') format('truetype')}
-@font-face{font-family:'Futura-Condensed-Bold';src:url('./KitFontes/Basica/Futura-Condensed-Bold.ttf') format('truetype')}
-@font-face{font-family:'Futura-Condensed-Normal';src:url('./KitFontes/Basica/Futura-Condensed-Normal.ttf') format('truetype')}
-@font-face{font-family:'Futura-Condensed-Thin';src:url('./KitFontes/Basica/Futura-Condensed-Thin.ttf') format('truetype')}
-@font-face{font-family:'Futura-CondensedExtraBold-Th';src:url('./KitFontes/Basica/Futura-CondensedExtraBold-Th.ttf') format('truetype')}
-@font-face{font-family:'Futura-CondensedLight-Normal';src:url('./KitFontes/Basica/Futura-CondensedLight-Normal.ttf') format('truetype')}
-@font-face{font-family:'Futura-CondensedLight-Thin';src:url('./KitFontes/Basica/Futura-CondensedLight-Thin.ttf') format('truetype')}
-@font-face{font-family:'Futura-Normal';src:url('./KitFontes/Basica/Futura-Normal.ttf') format('truetype')}
-@font-face{font-family:'FuturaCnd-Bold';src:url('./KitFontes/Basica/FuturaCnd-Bold.ttf') format('truetype')}
-@font-face{font-family:'FuturaCnd-Norma';src:url('./KitFontes/Basica/FuturaCnd-Norma.ttf') format('truetype')}
-@font-face{font-family:'FuturaCondLightE Regular';src:url('./KitFontes/Basica/FuturaCondLightE Regular.ttf') format('truetype')}
+@font-face{font-family:'Futura MdCn BT Medium';src:url('./KitFontes/Basica/Futura MdCn BT Medium.ttf') format('truetype')}
+@font-face{font-family:'FuturaCnd-Bold Regular';src:url('./KitFontes/Basica/FuturaCnd-Bold Regular.ttf') format('truetype')}
+@font-face{font-family:'FuturaCnd-Norma Regular';src:url('./KitFontes/Basica/FuturaCnd-Norma Regular.ttf') format('truetype')}
+@font-face{font-family:'Gala Condensed Bold';src:url('./KitFontes/Basica/Gala Condensed Bold.ttf') format('truetype')}
 @font-face{font-family:'Geometr212 BkCn BT Book';src:url('./KitFontes/Basica/Geometr212 BkCn BT Book.ttf') format('truetype')}
 @font-face{font-family:'Geometr212 BkCn BT Heavy';src:url('./KitFontes/Basica/Geometr212 BkCn BT Heavy.ttf') format('truetype')}
 @font-face{font-family:'Geometr415 Blk BT Black';src:url('./KitFontes/Basica/Geometr415 Blk BT Black.ttf') format('truetype')}
 @font-face{font-family:'Geometr706 BlkCn BT Black';src:url('./KitFontes/Basica/Geometr706 BlkCn BT Black.ttf') format('truetype')}
-@font-face{font-family:'GlacialIndifference-Bold';src:url('./KitFontes/Basica/GlacialIndifference-Bold.otf') format('opentype')}
-@font-face{font-family:'GlacialIndifference-Regular';src:url('./KitFontes/Basica/GlacialIndifference-Regular.otf') format('opentype')}
+@font-face{font-family:'Glacial Indifference Bold';src:url('./KitFontes/Basica/Glacial Indifference Bold.otf') format('opentype')}
+@font-face{font-family:'Glacial Indifference Regular';src:url('./KitFontes/Basica/Glacial Indifference Regular.otf') format('opentype')}
+@font-face{font-family:'Gotham Black Regular';src:url('./KitFontes/Basica/Gotham Black Regular.otf') format('opentype')}
 @font-face{font-family:'Gotham Black Regular';src:url('./KitFontes/Basica/Gotham Black Regular.ttf') format('truetype')}
-@font-face{font-family:'gotham-black';src:url('./KitFontes/Basica/gotham-black.otf') format('opentype')}
-@font-face{font-family:'holomdl2';src:url('./KitFontes/Basica/holomdl2.ttf') format('truetype')}
+@font-face{font-family:'Gretta Bold';src:url('./KitFontes/Basica/Gretta Bold.otf') format('opentype')}
+@font-face{font-family:'HandelGothic BT Regular';src:url('./KitFontes/Basica/HandelGothic BT Regular.ttf') format('truetype')}
+@font-face{font-family:'HandelGothic Regular';src:url('./KitFontes/Basica/HandelGothic Regular.ttf') format('truetype')}
+@font-face{font-family:'Heading Now Trial 67 Extrabold Regular';src:url('./KitFontes/Basica/Heading Now Trial 67 Extrabold Regular.ttf') format('truetype')}
+@font-face{font-family:'Heading Pro Trial Bold';src:url('./KitFontes/Basica/Heading Pro Trial Bold.ttf') format('truetype')}
+@font-face{font-family:'Heading Pro Trial Book';src:url('./KitFontes/Basica/Heading Pro Trial Book.ttf') format('truetype')}
+@font-face{font-family:'Heading Pro Trial ExtraBold';src:url('./KitFontes/Basica/Heading Pro Trial ExtraBold.ttf') format('truetype')}
+@font-face{font-family:'Heading Pro Trial ExtraLight';src:url('./KitFontes/Basica/Heading Pro Trial ExtraLight.ttf') format('truetype')}
+@font-face{font-family:'Heading Pro Trial Heavy';src:url('./KitFontes/Basica/Heading Pro Trial Heavy.ttf') format('truetype')}
+@font-face{font-family:'Heading Pro Trial Light';src:url('./KitFontes/Basica/Heading Pro Trial Light.ttf') format('truetype')}
+@font-face{font-family:'Heading Pro Trial Thin';src:url('./KitFontes/Basica/Heading Pro Trial Thin.ttf') format('truetype')}
+@font-face{font-family:'Heavitas Regular';src:url('./KitFontes/Basica/Heavitas Regular.ttf') format('truetype')}
 @font-face{font-family:'Humanst521 BT Bold';src:url('./KitFontes/Basica/Humanst521 BT Bold.ttf') format('truetype')}
 @font-face{font-family:'Humanst521 BT Roman';src:url('./KitFontes/Basica/Humanst521 BT Roman.ttf') format('truetype')}
 @font-face{font-family:'Humanst521 Lt BT Light';src:url('./KitFontes/Basica/Humanst521 Lt BT Light.ttf') format('truetype')}
 @font-face{font-family:'Humnst777 BlkCn BT Black';src:url('./KitFontes/Basica/Humnst777 BlkCn BT Black.ttf') format('truetype')}
 @font-face{font-family:'Humnst777 BT Roman';src:url('./KitFontes/Basica/Humnst777 BT Roman.ttf') format('truetype')}
 @font-face{font-family:'Humnst777 Cn BT Bold';src:url('./KitFontes/Basica/Humnst777 Cn BT Bold.ttf') format('truetype')}
-@font-face{font-family:'Humnst777 Cn BT';src:url('./KitFontes/Basica/Humnst777 Cn BT.ttf') format('truetype')}
+@font-face{font-family:'Humnst777 Cn BT Regular';src:url('./KitFontes/Basica/Humnst777 Cn BT Regular.ttf') format('truetype')}
 @font-face{font-family:'Humnst777 Lt BT Light';src:url('./KitFontes/Basica/Humnst777 Lt BT Light.ttf') format('truetype')}
-@font-face{font-family:'IN901XKI';src:url('./KitFontes/Basica/IN901XKI.ttf') format('truetype')}
-@font-face{font-family:'Insanibc';src:url('./KitFontes/Basica/Insanibc.ttf') format('truetype')}
-@font-face{font-family:'Insanibu';src:url('./KitFontes/Basica/Insanibu.ttf') format('truetype')}
-@font-face{font-family:'integral-cf-medium';src:url('./KitFontes/Basica/integral-cf-medium.otf') format('opentype')}
-@font-face{font-family:'Netraly';src:url('./KitFontes/Basica/Netraly.otf') format('opentype')}
-@font-face{font-family:'neuzeitgrotblaextcon';src:url('./KitFontes/Basica/neuzeitgrotblaextcon.ttf') format('truetype')}
+@font-face{font-family:'Impact Regular';src:url('./KitFontes/Basica/Impact Regular.ttf') format('truetype')}
+@font-face{font-family:'Insaniburger Regular';src:url('./KitFontes/Basica/Insaniburger Regular.ttf') format('truetype')}
+@font-face{font-family:'Insaniburger with Cheese Regular';src:url('./KitFontes/Basica/Insaniburger with Cheese Regular.ttf') format('truetype')}
+@font-face{font-family:'Integral CF Medium Regular';src:url('./KitFontes/Basica/Integral CF Medium Regular.otf') format('opentype')}
+@font-face{font-family:'ITC Bauhaus Bold';src:url('./KitFontes/Basica/ITC Bauhaus Bold.otf') format('opentype')}
+@font-face{font-family:'Kaleko 105 Bold Bold';src:url('./KitFontes/Basica/Kaleko 105 Bold Bold.ttf') format('truetype')}
+@font-face{font-family:'Kaleko 105 Book Regular';src:url('./KitFontes/Basica/Kaleko 105 Book Regular.ttf') format('truetype')}
+@font-face{font-family:'Kaleko 105 Heavy Bold';src:url('./KitFontes/Basica/Kaleko 105 Heavy Bold.ttf') format('truetype')}
+@font-face{font-family:'Kaleko 105 Light Regular';src:url('./KitFontes/Basica/Kaleko 105 Light Regular.ttf') format('truetype')}
+@font-face{font-family:'Kaleko 105 Thin Regular';src:url('./KitFontes/Basica/Kaleko 105 Thin Regular.ttf') format('truetype')}
+@font-face{font-family:'Latinka-Bold ☞';src:url('./KitFontes/Basica/Latinka-Bold ☞.ttf') format('truetype')}
+@font-face{font-family:'Leelawadee UI Bold';src:url('./KitFontes/Basica/Leelawadee UI Bold.ttf') format('truetype')}
+@font-face{font-family:'Leelawadee UI Regular';src:url('./KitFontes/Basica/Leelawadee UI Regular.ttf') format('truetype')}
+@font-face{font-family:'Leelawadee UI Semilight Regular';src:url('./KitFontes/Basica/Leelawadee UI Semilight Regular.ttf') format('truetype')}
+@font-face{font-family:'Lucida Console Regular';src:url('./KitFontes/Basica/Lucida Console Regular.ttf') format('truetype')}
+@font-face{font-family:'Lucida Sans Unicode Regular';src:url('./KitFontes/Basica/Lucida Sans Unicode Regular.ttf') format('truetype')}
+@font-face{font-family:'Netraly Personal Use Regular';src:url('./KitFontes/Basica/Netraly Personal Use Regular.otf') format('opentype')}
+@font-face{font-family:'NeuzeitGroTBlaExtCon Regular';src:url('./KitFontes/Basica/NeuzeitGroTBlaExtCon Regular.ttf') format('truetype')}
 @font-face{font-family:'NewsGoth BT Bold';src:url('./KitFontes/Basica/NewsGoth BT Bold.ttf') format('truetype')}
 @font-face{font-family:'NewsGoth BT Roman';src:url('./KitFontes/Basica/NewsGoth BT Roman.ttf') format('truetype')}
 @font-face{font-family:'NewsGoth Lt BT Light';src:url('./KitFontes/Basica/NewsGoth Lt BT Light.ttf') format('truetype')}
-@font-face{font-family:'ntailu';src:url('./KitFontes/Basica/ntailu.ttf') format('truetype')}
-@font-face{font-family:'ntailub';src:url('./KitFontes/Basica/ntailub.ttf') format('truetype')}
-@font-face{font-family:'OCR-B 10 BT';src:url('./KitFontes/Basica/OCR-B 10 BT.ttf') format('truetype')}
-@font-face{font-family:'phagspa';src:url('./KitFontes/Basica/phagspa.ttf') format('truetype')}
-@font-face{font-family:'phagspab';src:url('./KitFontes/Basica/phagspab.ttf') format('truetype')}
-@font-face{font-family:'Square721 BT Bold';src:url('./KitFontes/Basica/Square721 BT Bold.ttf') format('truetype')}
-@font-face{font-family:'Square721 BT Roman';src:url('./KitFontes/Basica/Square721 BT Roman.ttf') format('truetype')}
-@font-face{font-family:'Square721 Cn BT Bold';src:url('./KitFontes/Basica/Square721 Cn BT Bold.ttf') format('truetype')}
-@font-face{font-family:'Square721 Cn BT Roman';src:url('./KitFontes/Basica/Square721 Cn BT Roman.ttf') format('truetype')}
+@font-face{font-family:'OCR-B 10 BT Regular';src:url('./KitFontes/Basica/OCR-B 10 BT Regular.ttf') format('truetype')}
+@font-face{font-family:'Plaza Regular';src:url('./KitFontes/Basica/Plaza Regular.ttf') format('truetype')}
+@font-face{font-family:'Rolf Bold Bold';src:url('./KitFontes/Basica/Rolf Bold Bold.otf') format('opentype')}
+@font-face{font-family:'Stapel Condensed Bold Bold';src:url('./KitFontes/Basica/Stapel Condensed Bold Bold.ttf') format('truetype')}
+@font-face{font-family:'Stapel Condensed Extra Bold Extra Bold';src:url('./KitFontes/Basica/Stapel Condensed Extra Bold Extra Bold.ttf') format('truetype')}
+@font-face{font-family:'Stapel Condensed Extra Light Extra Light';src:url('./KitFontes/Basica/Stapel Condensed Extra Light Extra Light.ttf') format('truetype')}
+@font-face{font-family:'Stapel Condensed Light Light';src:url('./KitFontes/Basica/Stapel Condensed Light Light.ttf') format('truetype')}
+@font-face{font-family:'Stapel Condensed Medium Medium';src:url('./KitFontes/Basica/Stapel Condensed Medium Medium.ttf') format('truetype')}
+@font-face{font-family:'Stapel Condensed Regular';src:url('./KitFontes/Basica/Stapel Condensed Regular.ttf') format('truetype')}
+@font-face{font-family:'Stapel Condensed Thin Thin';src:url('./KitFontes/Basica/Stapel Condensed Thin Thin.ttf') format('truetype')}
 @font-face{font-family:'Swis721 Blk BT Black';src:url('./KitFontes/Basica/Swis721 Blk BT Black.ttf') format('truetype')}
 @font-face{font-family:'Swis721 BlkCn BT Black';src:url('./KitFontes/Basica/Swis721 BlkCn BT Black.ttf') format('truetype')}
 @font-face{font-family:'Swis721 BT Bold';src:url('./KitFontes/Basica/Swis721 BT Bold.ttf') format('truetype')}
@@ -87,96 +143,292 @@
 @font-face{font-family:'Swis721 LtEx BT Light';src:url('./KitFontes/Basica/Swis721 LtEx BT Light.ttf') format('truetype')}
 @font-face{font-family:'Swis721 WGL4 BT Bold';src:url('./KitFontes/Basica/Swis721 WGL4 BT Bold.ttf') format('truetype')}
 @font-face{font-family:'Swis721 WGL4 BT Roman';src:url('./KitFontes/Basica/Swis721 WGL4 BT Roman.ttf') format('truetype')}
-@font-face{font-family:'taile';src:url('./KitFontes/Basica/taile.ttf') format('truetype')}
-@font-face{font-family:'taileb';src:url('./KitFontes/Basica/taileb.ttf') format('truetype')}
-@font-face{font-family:'Black-coffee-shadow';src:url('./KitFontes/Black-coffee-shadow.ttf') format('truetype')}
-@font-face{font-family:'Black-coffee';src:url('./KitFontes/Black-coffee.ttf') format('truetype')}
-@font-face{font-family:'CFGlitchCity-Regular';src:url('./KitFontes/CFGlitchCity-Regular.ttf') format('truetype')}
-@font-face{font-family:'CoffeCake';src:url('./KitFontes/Curvas/CoffeCake.otf') format('opentype')}
-@font-face{font-family:'Empires';src:url('./KitFontes/Curvas/Empires.otf') format('opentype')}
-@font-face{font-family:'Freehand521 BT';src:url('./KitFontes/Curvas/Freehand521 BT.ttf') format('truetype')}
-@font-face{font-family:'Gloomy Things';src:url('./KitFontes/Curvas/Gloomy Things.otf') format('opentype')}
-@font-face{font-family:'Jacksilver';src:url('./KitFontes/Curvas/Jacksilver.otf') format('opentype')}
-@font-face{font-family:'Jamstreet Graffiti';src:url('./KitFontes/Curvas/Jamstreet Graffiti.ttf') format('truetype')}
-@font-face{font-family:'KOMIKAX_';src:url('./KitFontes/Curvas/KOMIKAX_.ttf') format('truetype')}
-@font-face{font-family:'Malvie Trial';src:url('./KitFontes/Curvas/Malvie Trial.otf') format('opentype')}
-@font-face{font-family:'MARSNEVENEKSK-Clean';src:url('./KitFontes/Curvas/MARSNEVENEKSK-Clean.otf') format('opentype')}
-@font-face{font-family:'Mermaid Babies';src:url('./KitFontes/Curvas/Mermaid Babies.otf') format('opentype')}
-@font-face{font-family:'Mustard Smile';src:url('./KitFontes/Curvas/Mustard Smile.otf') format('opentype')}
-@font-face{font-family:'Sandler Trial';src:url('./KitFontes/Curvas/Sandler Trial.otf') format('opentype')}
-@font-face{font-family:'SOUTH-CREW';src:url('./KitFontes/Curvas/SOUTH-CREW.ttf') format('truetype')}
-@font-face{font-family:'Starlight';src:url('./KitFontes/Curvas/Starlight.otf') format('opentype')}
-@font-face{font-family:'Starlight';src:url('./KitFontes/Curvas/Starlight.ttf') format('truetype')}
-@font-face{font-family:'Study Alone';src:url('./KitFontes/Curvas/Study Alone.otf') format('opentype')}
-@font-face{font-family:'Thunder Bold';src:url('./KitFontes/Curvas/Thunder Bold.otf') format('opentype')}
-@font-face{font-family:'Trolls Movie Font';src:url('./KitFontes/Curvas/Trolls Movie Font.otf') format('opentype')}
-@font-face{font-family:'True Lies';src:url('./KitFontes/Curvas/True Lies.ttf') format('truetype')}
-@font-face{font-family:'waltograph42';src:url('./KitFontes/Curvas/waltograph42.otf') format('opentype')}
-@font-face{font-family:'waltographUI';src:url('./KitFontes/Curvas/waltographUI.ttf') format('truetype')}
-@font-face{font-family:'whoa!';src:url('./KitFontes/Curvas/whoa!.ttf') format('truetype')}
-@font-face{font-family:'Fluo Gums';src:url('./KitFontes/Fluo Gums.ttf') format('truetype')}
-@font-face{font-family:'GAGARIN_';src:url('./KitFontes/GAGARIN_.TTF') format('truetype')}
-@font-face{font-family:'GAGASM__';src:url('./KitFontes/GAGASM__.TTF') format('truetype')}
-@font-face{font-family:'Gobold Blocky Regular';src:url('./KitFontes/Gobold Blocky Regular.otf') format('opentype')}
-@font-face{font-family:'Good Morning';src:url('./KitFontes/Good Morning.ttf') format('truetype')}
-@font-face{font-family:'Jackpot Demo';src:url('./KitFontes/Jackpot Demo.ttf') format('truetype')}
-@font-face{font-family:'KGHAPPYSolid';src:url('./KitFontes/KGHAPPYSolid.ttf') format('truetype')}
-@font-face{font-family:'Legend M54';src:url('./KitFontes/Legend M54.ttf') format('truetype')}
-@font-face{font-family:'Magnificent Personal Use';src:url('./KitFontes/Magnificent Personal Use.ttf') format('truetype')}
-@font-face{font-family:'Amsterdam';src:url('./KitFontes/Manuscrita/Amsterdam.ttf') format('truetype')}
-@font-face{font-family:'April June';src:url('./KitFontes/Manuscrita/April June.otf') format('opentype')}
-@font-face{font-family:'Austria';src:url('./KitFontes/Manuscrita/Austria.otf') format('opentype')}
-@font-face{font-family:'Bacalisties';src:url('./KitFontes/Manuscrita/Bacalisties.ttf') format('truetype')}
-@font-face{font-family:'Blacksword';src:url('./KitFontes/Manuscrita/Blacksword.otf') format('opentype')}
-@font-face{font-family:'boutiera-regular';src:url('./KitFontes/Manuscrita/boutiera-regular.otf') format('opentype')}
-@font-face{font-family:'BrushScriptOpti-Regular';src:url('./KitFontes/Manuscrita/BrushScriptOpti-Regular.otf') format('opentype')}
-@font-face{font-family:'buttercup_sample';src:url('./KitFontes/Manuscrita/buttercup_sample.otf') format('opentype')}
-@font-face{font-family:'Caroline';src:url('./KitFontes/Manuscrita/Caroline.ttf') format('truetype')}
-@font-face{font-family:'Contoursy Free';src:url('./KitFontes/Manuscrita/Contoursy Free.ttf') format('truetype')}
-@font-face{font-family:'Cream Cake';src:url('./KitFontes/Manuscrita/Cream Cake.otf') format('opentype')}
-@font-face{font-family:'Delight Sunset';src:url('./KitFontes/Manuscrita/Delight Sunset.ttf') format('truetype')}
-@font-face{font-family:'dk-combustible-regular';src:url('./KitFontes/Manuscrita/dk-combustible-regular.otf') format('opentype')}
-@font-face{font-family:'Embassy BT';src:url('./KitFontes/Manuscrita/Embassy BT.ttf') format('truetype')}
-@font-face{font-family:'exmouth';src:url('./KitFontes/Manuscrita/exmouth.ttf') format('truetype')}
-@font-face{font-family:'FontsFree-Net-MoonTime-Regular-1';src:url('./KitFontes/Manuscrita/FontsFree-Net-MoonTime-Regular-1.ttf') format('truetype')}
-@font-face{font-family:'Gillian Rode';src:url('./KitFontes/Manuscrita/Gillian Rode.otf') format('opentype')}
-@font-face{font-family:'Halimun';src:url('./KitFontes/Manuscrita/Halimun.ttf') format('truetype')}
-@font-face{font-family:'harlow-solid-std';src:url('./KitFontes/Manuscrita/harlow-solid-std.otf') format('opentype')}
-@font-face{font-family:'Howell Rode';src:url('./KitFontes/Manuscrita/Howell Rode.otf') format('opentype')}
-@font-face{font-family:'Kaufmann BT';src:url('./KitFontes/Manuscrita/Kaufmann BT.ttf') format('truetype')}
-@font-face{font-family:'LOKICOLA';src:url('./KitFontes/Manuscrita/LOKICOLA.TTF') format('truetype')}
-@font-face{font-family:'Madina';src:url('./KitFontes/Manuscrita/Madina.otf') format('opentype')}
+@font-face{font-family:'Tawakkal Sans Regular';src:url('./KitFontes/Basica/Tawakkal Sans Regular.otf') format('opentype')}
+@font-face{font-family:'Trebuchet MS Bold';src:url('./KitFontes/Basica/Trebuchet MS Bold.ttf') format('truetype')}
+@font-face{font-family:'Trebuchet MS Regular';src:url('./KitFontes/Basica/Trebuchet MS Regular.ttf') format('truetype')}
+@font-face{font-family:'Unigeo128 Trial Extralight Bold';src:url('./KitFontes/Basica/Unigeo128 Trial Extralight Bold.ttf') format('truetype')}
+@font-face{font-family:'Unigeo128 Trial Thin Regular';src:url('./KitFontes/Basica/Unigeo128 Trial Thin Regular.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Bold Italic';src:url('./KitFontes/Basica/Unigeo64 Trial Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Bold';src:url('./KitFontes/Basica/Unigeo64 Trial Bold.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Extrabold Italic';src:url('./KitFontes/Basica/Unigeo64 Trial Extrabold Italic.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Extrabold Regular';src:url('./KitFontes/Basica/Unigeo64 Trial Extrabold Regular.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Extralight Italic';src:url('./KitFontes/Basica/Unigeo64 Trial Extralight Italic.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Extralight Regular';src:url('./KitFontes/Basica/Unigeo64 Trial Extralight Regular.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Italic';src:url('./KitFontes/Basica/Unigeo64 Trial Italic.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Light Italic';src:url('./KitFontes/Basica/Unigeo64 Trial Light Italic.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Light Regular';src:url('./KitFontes/Basica/Unigeo64 Trial Light Regular.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Medium Italic';src:url('./KitFontes/Basica/Unigeo64 Trial Medium Italic.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Medium Regular';src:url('./KitFontes/Basica/Unigeo64 Trial Medium Regular.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Regular';src:url('./KitFontes/Basica/Unigeo64 Trial Regular.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Semibold Italic';src:url('./KitFontes/Basica/Unigeo64 Trial Semibold Italic.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Semibold Regular';src:url('./KitFontes/Basica/Unigeo64 Trial Semibold Regular.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Thin Italic';src:url('./KitFontes/Basica/Unigeo64 Trial Thin Italic.ttf') format('truetype')}
+@font-face{font-family:'Unigeo64 Trial Thin Regular';src:url('./KitFontes/Basica/Unigeo64 Trial Thin Regular.ttf') format('truetype')}
+@font-face{font-family:'Verdana Bold';src:url('./KitFontes/Basica/Verdana Bold.ttf') format('truetype')}
+@font-face{font-family:'Verdana Regular';src:url('./KitFontes/Basica/Verdana Regular.ttf') format('truetype')}
+@font-face{font-family:'Anja Eliane accent Nornal';src:url('./KitFontes/Curvas/Anja Eliane accent Nornal.ttf') format('truetype')}
+@font-face{font-family:'Black Coffee Regular Bold';src:url('./KitFontes/Curvas/Black Coffee Regular Bold.ttf') format('truetype')}
+@font-face{font-family:'Black Coffee Shadow Bold';src:url('./KitFontes/Curvas/Black Coffee Shadow Bold.ttf') format('truetype')}
+@font-face{font-family:'CoffeCake Regular';src:url('./KitFontes/Curvas/CoffeCake Regular.otf') format('opentype')}
+@font-face{font-family:'Comfortaa Bold';src:url('./KitFontes/Curvas/Comfortaa Bold.ttf') format('truetype')}
+@font-face{font-family:'Comfortaa Light Regular';src:url('./KitFontes/Curvas/Comfortaa Light Regular.ttf') format('truetype')}
+@font-face{font-family:'Comfortaa Regular';src:url('./KitFontes/Curvas/Comfortaa Regular.ttf') format('truetype')}
+@font-face{font-family:'Comic Sans MS Bold';src:url('./KitFontes/Curvas/Comic Sans MS Bold.ttf') format('truetype')}
+@font-face{font-family:'Comic Sans MS Regular';src:url('./KitFontes/Curvas/Comic Sans MS Regular.ttf') format('truetype')}
+@font-face{font-family:'Dunkin Regular';src:url('./KitFontes/Curvas/Dunkin Regular.otf') format('opentype')}
+@font-face{font-family:'Dunkin Sans Regular';src:url('./KitFontes/Curvas/Dunkin Sans Regular.otf') format('opentype')}
+@font-face{font-family:'Freehand521 BT Regular';src:url('./KitFontes/Curvas/Freehand521 BT Regular.ttf') format('truetype')}
+@font-face{font-family:'Glossy Sheen Outline Regular';src:url('./KitFontes/Curvas/Glossy Sheen Outline Regular.ttf') format('truetype')}
+@font-face{font-family:'Glossy Sheen Regular';src:url('./KitFontes/Curvas/Glossy Sheen Regular.ttf') format('truetype')}
+@font-face{font-family:'Glossy Sheen Shadow Regular';src:url('./KitFontes/Curvas/Glossy Sheen Shadow Regular.ttf') format('truetype')}
+@font-face{font-family:'Glossy Sheen Shine Regular';src:url('./KitFontes/Curvas/Glossy Sheen Shine Regular.ttf') format('truetype')}
+@font-face{font-family:'HAMBURGUER PERSONAL USE Regular';src:url('./KitFontes/Curvas/HAMBURGUER PERSONAL USE Regular.ttf') format('truetype')}
+@font-face{font-family:'Komika Axis Regular';src:url('./KitFontes/Curvas/Komika Axis Regular.ttf') format('truetype')}
+@font-face{font-family:'Magic Sound Regular';src:url('./KitFontes/Curvas/Magic Sound Regular.ttf') format('truetype')}
+@font-face{font-family:'Malvie Trial Regular';src:url('./KitFontes/Curvas/Malvie Trial Regular.otf') format('opentype')}
+@font-face{font-family:'Mandatory Regular';src:url('./KitFontes/Curvas/Mandatory Regular.otf') format('opentype')}
+@font-face{font-family:'Melt Swashes Regular';src:url('./KitFontes/Curvas/Melt Swashes Regular.otf') format('opentype')}
+@font-face{font-family:'Mercadillo Black Black';src:url('./KitFontes/Curvas/Mercadillo Black Black.ttf') format('truetype')}
+@font-face{font-family:'Mermaid Babies Regular';src:url('./KitFontes/Curvas/Mermaid Babies Regular.otf') format('opentype')}
+@font-face{font-family:'Mustard Smile Regular';src:url('./KitFontes/Curvas/Mustard Smile Regular.otf') format('opentype')}
+@font-face{font-family:'MV Boli Regular';src:url('./KitFontes/Curvas/MV Boli Regular.ttf') format('truetype')}
+@font-face{font-family:'Pottery Regular';src:url('./KitFontes/Curvas/Pottery Regular.otf') format('opentype')}
+@font-face{font-family:'Sandler Trial Regular';src:url('./KitFontes/Curvas/Sandler Trial Regular.otf') format('opentype')}
+@font-face{font-family:'Segoe Print Bold';src:url('./KitFontes/Curvas/Segoe Print Bold.ttf') format('truetype')}
+@font-face{font-family:'Segoe Print Regular';src:url('./KitFontes/Curvas/Segoe Print Regular.ttf') format('truetype')}
+@font-face{font-family:'Segoe Script Bold';src:url('./KitFontes/Curvas/Segoe Script Bold.ttf') format('truetype')}
+@font-face{font-family:'Segoe Script Regular';src:url('./KitFontes/Curvas/Segoe Script Regular.ttf') format('truetype')}
+@font-face{font-family:'Starlight Regular';src:url('./KitFontes/Curvas/Starlight Regular.otf') format('opentype')}
+@font-face{font-family:'Starlight Regular';src:url('./KitFontes/Curvas/Starlight Regular.ttf') format('truetype')}
+@font-face{font-family:'Stella Regular';src:url('./KitFontes/Curvas/Stella Regular.otf') format('opentype')}
+@font-face{font-family:'Study Alone Regular';src:url('./KitFontes/Curvas/Study Alone Regular.otf') format('opentype')}
+@font-face{font-family:'TF Madloud DEMO Regular';src:url('./KitFontes/Curvas/TF Madloud DEMO Regular.otf') format('opentype')}
+@font-face{font-family:'TF Madloud DEMO Regular';src:url('./KitFontes/Curvas/TF Madloud DEMO Regular.ttf') format('truetype')}
+@font-face{font-family:'The Barethos Regular';src:url('./KitFontes/Curvas/The Barethos Regular.ttf') format('truetype')}
+@font-face{font-family:'TOMO Acuario Regular Regular';src:url('./KitFontes/Curvas/TOMO Acuario Regular Regular.otf') format('opentype')}
+@font-face{font-family:'Trolls Movie Font Regular';src:url('./KitFontes/Curvas/Trolls Movie Font Regular.otf') format('opentype')}
+@font-face{font-family:'Waltograph Regular';src:url('./KitFontes/Curvas/Waltograph Regular.otf') format('opentype')}
+@font-face{font-family:'Waltograph UI Bold';src:url('./KitFontes/Curvas/Waltograph UI Bold.ttf') format('truetype')}
+@font-face{font-family:'Winter Half Regular';src:url('./KitFontes/Curvas/Winter Half Regular.otf') format('opentype')}
+@font-face{font-family:'Young Frankenstein 3D Regular';src:url('./KitFontes/Curvas/Young Frankenstein 3D Regular.ttf') format('truetype')}
+@font-face{font-family:'Ancient Geek Regular';src:url('./KitFontes/Estrangeiras/Ancient Geek Regular.ttf') format('truetype')}
+@font-face{font-family:'Angel wish Regular';src:url('./KitFontes/Estrangeiras/Angel wish Regular.ttf') format('truetype')}
+@font-face{font-family:'Chinese Dragon Regular';src:url('./KitFontes/Estrangeiras/Chinese Dragon Regular.ttf') format('truetype')}
+@font-face{font-family:'Diogenes Regular';src:url('./KitFontes/Estrangeiras/Diogenes Regular.ttf') format('truetype')}
+@font-face{font-family:'Gelio Fasolada Regular';src:url('./KitFontes/Estrangeiras/Gelio Fasolada Regular.ttf') format('truetype')}
+@font-face{font-family:'Gelio Greek Diner Regular';src:url('./KitFontes/Estrangeiras/Gelio Greek Diner Regular.ttf') format('truetype')}
+@font-face{font-family:'Gelio Pasteli Regular';src:url('./KitFontes/Estrangeiras/Gelio Pasteli Regular.ttf') format('truetype')}
+@font-face{font-family:'Gelio Retsina Regular';src:url('./KitFontes/Estrangeiras/Gelio Retsina Regular.ttf') format('truetype')}
+@font-face{font-family:'Greek-Freak Regular';src:url('./KitFontes/Estrangeiras/Greek-Freak Regular.ttf') format('truetype')}
+@font-face{font-family:'Karate Medium';src:url('./KitFontes/Estrangeiras/Karate Medium.ttf') format('truetype')}
+@font-face{font-family:'Last Ninja Regular';src:url('./KitFontes/Estrangeiras/Last Ninja Regular.ttf') format('truetype')}
+@font-face{font-family:'Magnificent Personal Use Regular';src:url('./KitFontes/Estrangeiras/Magnificent Personal Use Regular.ttf') format('truetype')}
+@font-face{font-family:'Roman SD Regular';src:url('./KitFontes/Estrangeiras/Roman SD Regular.ttf') format('truetype')}
+@font-face{font-family:'Shanghai Regular';src:url('./KitFontes/Estrangeiras/Shanghai Regular.ttf') format('truetype')}
+@font-face{font-family:'Xilosa Regular';src:url('./KitFontes/Estrangeiras/Xilosa Regular.ttf') format('truetype')}
+@font-face{font-family:'Chalkiez Regular';src:url('./KitFontes/Giz/Chalkiez Regular.otf') format('opentype')}
+@font-face{font-family:'Good Morning Regular';src:url('./KitFontes/Giz/Good Morning Regular.ttf') format('truetype')}
+@font-face{font-family:'Jackpot Demo Regular';src:url('./KitFontes/Giz/Jackpot Demo Regular.ttf') format('truetype')}
+@font-face{font-family:'KG HAPPY Regular';src:url('./KitFontes/Giz/KG HAPPY Regular.ttf') format('truetype')}
+@font-face{font-family:'KG HAPPY Solid Regular';src:url('./KitFontes/Giz/KG HAPPY Solid Regular.ttf') format('truetype')}
+@font-face{font-family:'meatloaf outline Regular';src:url('./KitFontes/Giz/meatloaf outline Regular.ttf') format('truetype')}
+@font-face{font-family:'meatloaf Regular';src:url('./KitFontes/Giz/meatloaf Regular.ttf') format('truetype')}
+@font-face{font-family:'meatloaf shadow outline Regular';src:url('./KitFontes/Giz/meatloaf shadow outline Regular.ttf') format('truetype')}
+@font-face{font-family:'meatloaf sketched Regular';src:url('./KitFontes/Giz/meatloaf sketched Regular.ttf') format('truetype')}
+@font-face{font-family:'meatloaf solid Regular';src:url('./KitFontes/Giz/meatloaf solid Regular.ttf') format('truetype')}
+@font-face{font-family:'Nikolas & Pine Regular';src:url('./KitFontes/Giz/Nikolas & Pine Regular.otf') format('opentype')}
+@font-face{font-family:'PWPerspective Medium';src:url('./KitFontes/Giz/PWPerspective Medium.ttf') format('truetype')}
+@font-face{font-family:'PWYummyDonuts Medium';src:url('./KitFontes/Giz/PWYummyDonuts Medium.ttf') format('truetype')}
+@font-face{font-family:'Quark Cheese - Personal Use Regular';src:url('./KitFontes/Giz/Quark Cheese - Personal Use Regular.otf') format('opentype')}
+@font-face{font-family:'Scratchy Regular Regular';src:url('./KitFontes/Giz/Scratchy Regular Regular.ttf') format('truetype')}
+@font-face{font-family:'Sketch 3D Regular';src:url('./KitFontes/Giz/Sketch 3D Regular.otf') format('opentype')}
+@font-face{font-family:'Agnostic Italic Regular';src:url('./KitFontes/Gotica/Agnostic Italic Regular.otf') format('opentype')}
+@font-face{font-family:'Agnostic Regular';src:url('./KitFontes/Gotica/Agnostic Regular.otf') format('opentype')}
+@font-face{font-family:'AmazDooMLeft Regular';src:url('./KitFontes/Gotica/AmazDooMLeft Regular.ttf') format('truetype')}
+@font-face{font-family:'AmazDooMRight Regular';src:url('./KitFontes/Gotica/AmazDooMRight Regular.ttf') format('truetype')}
+@font-face{font-family:'Buckingham Italic Regular';src:url('./KitFontes/Gotica/Buckingham Italic Regular.otf') format('opentype')}
+@font-face{font-family:'Buckingham Regular';src:url('./KitFontes/Gotica/Buckingham Regular.otf') format('opentype')}
+@font-face{font-family:'Calvera Personal Use Regular';src:url('./KitFontes/Gotica/Calvera Personal Use Regular.ttf') format('truetype')}
+@font-face{font-family:'Damages 3D Filled Italic';src:url('./KitFontes/Gotica/Damages 3D Filled Italic.ttf') format('truetype')}
+@font-face{font-family:'Damages 3D Filled Regular';src:url('./KitFontes/Gotica/Damages 3D Filled Regular.ttf') format('truetype')}
+@font-face{font-family:'Damages Italic';src:url('./KitFontes/Gotica/Damages Italic.ttf') format('truetype')}
+@font-face{font-family:'Damages Regular';src:url('./KitFontes/Gotica/Damages Regular.ttf') format('truetype')}
+@font-face{font-family:'Enchanted Land Regular';src:url('./KitFontes/Gotica/Enchanted Land Regular.otf') format('opentype')}
+@font-face{font-family:'English Towne Regular';src:url('./KitFontes/Gotica/English Towne Regular.ttf') format('truetype')}
+@font-face{font-family:'Gamerock Personal Use Regular';src:url('./KitFontes/Gotica/Gamerock Personal Use Regular.otf') format('opentype')}
+@font-face{font-family:'Legend M54 Regular';src:url('./KitFontes/Gotica/Legend M54 Regular.ttf') format('truetype')}
+@font-face{font-family:'Mina is gone 3D Regular';src:url('./KitFontes/Gotica/Mina is gone 3D Regular.ttf') format('truetype')}
+@font-face{font-family:'Mina is gone Regular';src:url('./KitFontes/Gotica/Mina is gone Regular.ttf') format('truetype')}
+@font-face{font-family:'Old London Alternate Regular';src:url('./KitFontes/Gotica/Old London Alternate Regular.otf') format('opentype')}
+@font-face{font-family:'a Another Tag Regular';src:url('./KitFontes/Grafits/a Another Tag Regular.otf') format('opentype')}
+@font-face{font-family:'a Attack Graffiti Regular';src:url('./KitFontes/Grafits/a Attack Graffiti Regular.ttf') format('truetype')}
+@font-face{font-family:'a dripping marker Regular';src:url('./KitFontes/Grafits/a dripping marker Regular.ttf') format('truetype')}
+@font-face{font-family:'Archaz Negras PERSONAL USE Regular';src:url('./KitFontes/Grafits/Archaz Negras PERSONAL USE Regular.otf') format('opentype')}
+@font-face{font-family:'Aveinatortia Personal Use Only Regular';src:url('./KitFontes/Grafits/Aveinatortia Personal Use Only Regular.ttf') format('truetype')}
+@font-face{font-family:'Bombing Regular';src:url('./KitFontes/Grafits/Bombing Regular.ttf') format('truetype')}
+@font-face{font-family:'Bopollux Regular';src:url('./KitFontes/Grafits/Bopollux Regular.ttf') format('truetype')}
+@font-face{font-family:'CHASE ZEN SPRAWL Regular';src:url('./KitFontes/Grafits/CHASE ZEN SPRAWL Regular.ttf') format('truetype')}
+@font-face{font-family:'Don Graffiti Regular';src:url('./KitFontes/Grafits/Don Graffiti Regular.otf') format('opentype')}
+@font-face{font-family:'Fluo Gums Regular';src:url('./KitFontes/Grafits/Fluo Gums Regular.ttf') format('truetype')}
+@font-face{font-family:'Gemstone Regular';src:url('./KitFontes/Grafits/Gemstone Regular.ttf') format('truetype')}
+@font-face{font-family:'GoodDog Cool Regular';src:url('./KitFontes/Grafits/GoodDog Cool Regular.ttf') format('truetype')}
+@font-face{font-family:'GoodDog Plain Regular';src:url('./KitFontes/Grafits/GoodDog Plain Regular.ttf') format('truetype')}
+@font-face{font-family:'Grafitik Riot Regular';src:url('./KitFontes/Grafits/Grafitik Riot Regular.otf') format('opentype')}
+@font-face{font-family:'Jacksilver Regular';src:url('./KitFontes/Grafits/Jacksilver Regular.otf') format('opentype')}
+@font-face{font-family:'JAK ARTA Regular';src:url('./KitFontes/Grafits/JAK ARTA Regular.otf') format('opentype')}
+@font-face{font-family:'JAK ARTA Regular';src:url('./KitFontes/Grafits/JAK ARTA Regular.ttf') format('truetype')}
+@font-face{font-family:'Jamstreet Graffiti Regular';src:url('./KitFontes/Grafits/Jamstreet Graffiti Regular.ttf') format('truetype')}
+@font-face{font-family:'JFK Wall Hunter Demo Juan Jeje JFK Font';src:url('./KitFontes/Grafits/JFK Wall Hunter Demo Juan Jeje JFK Font.ttf') format('truetype')}
+@font-face{font-family:'MAELSTROM Regular';src:url('./KitFontes/Grafits/MAELSTROM Regular.ttf') format('truetype')}
+@font-face{font-family:'MARSNEVENEKSK Clean Regular';src:url('./KitFontes/Grafits/MARSNEVENEKSK Clean Regular.otf') format('opentype')}
+@font-face{font-family:'MESTIZOS UNIDOS -URBAN HOOKUPZ Regular';src:url('./KitFontes/Grafits/MESTIZOS UNIDOS -URBAN HOOKUPZ Regular.otf') format('opentype')}
+@font-face{font-family:'Most Wazted Regular';src:url('./KitFontes/Grafits/Most Wazted Regular.ttf') format('truetype')}
+@font-face{font-family:'Neo Bopollux  The Remix Neo Bopollux  The Remix';src:url('./KitFontes/Grafits/Neo Bopollux  The Remix Neo Bopollux  The Remix.ttf') format('truetype')}
+@font-face{font-family:'Notress Graffiti Regular';src:url('./KitFontes/Grafits/Notress Graffiti Regular.ttf') format('truetype')}
+@font-face{font-family:'Run! Demo Regular';src:url('./KitFontes/Grafits/Run! Demo Regular.otf') format('opentype')}
+@font-face{font-family:'Smasher 312 Custom Regular';src:url('./KitFontes/Grafits/Smasher 312 Custom Regular.ttf') format('truetype')}
+@font-face{font-family:'Snikers Regular';src:url('./KitFontes/Grafits/Snikers Regular.ttf') format('truetype')}
+@font-face{font-family:'SOUTH-CREW Regular';src:url('./KitFontes/Grafits/SOUTH-CREW Regular.ttf') format('truetype')}
+@font-face{font-family:'SR CUEN font Regular';src:url('./KitFontes/Grafits/SR CUEN font Regular.ttf') format('truetype')}
+@font-face{font-family:'Street Writer (noah) Street Writer (noah)';src:url('./KitFontes/Grafits/Street Writer (noah) Street Writer (noah).ttf') format('truetype')}
+@font-face{font-family:'Streetfire Personal Use Only Regular';src:url('./KitFontes/Grafits/Streetfire Personal Use Only Regular.ttf') format('truetype')}
+@font-face{font-family:'THE JACATRA Regular';src:url('./KitFontes/Grafits/THE JACATRA Regular.otf') format('opentype')}
+@font-face{font-family:'Thunder Bold Regular';src:url('./KitFontes/Grafits/Thunder Bold Regular.otf') format('opentype')}
+@font-face{font-family:'Trisula Street Graffiti Regular';src:url('./KitFontes/Grafits/Trisula Street Graffiti Regular.ttf') format('truetype')}
+@font-face{font-family:'Whoa! Regular';src:url('./KitFontes/Grafits/Whoa! Regular.ttf') format('truetype')}
+@font-face{font-family:'Alexander Lettering PERSONAL Regular';src:url('./KitFontes/Manuscrita/Alexander Lettering PERSONAL Regular.otf') format('opentype')}
+@font-face{font-family:'Amsterdam Regular';src:url('./KitFontes/Manuscrita/Amsterdam Regular.ttf') format('truetype')}
+@font-face{font-family:'Anthony Hunter Regular';src:url('./KitFontes/Manuscrita/Anthony Hunter Regular.ttf') format('truetype')}
+@font-face{font-family:'April June Regular';src:url('./KitFontes/Manuscrita/April June Regular.otf') format('opentype')}
+@font-face{font-family:'Australian Signature Signature';src:url('./KitFontes/Manuscrita/Australian Signature Signature.otf') format('opentype')}
+@font-face{font-family:'Austria Regular';src:url('./KitFontes/Manuscrita/Austria Regular.otf') format('opentype')}
+@font-face{font-family:'Avarelove Regular';src:url('./KitFontes/Manuscrita/Avarelove Regular.otf') format('opentype')}
+@font-face{font-family:'Bacalisties Regular';src:url('./KitFontes/Manuscrita/Bacalisties Regular.ttf') format('truetype')}
+@font-face{font-family:'Back to Black Demo Regular';src:url('./KitFontes/Manuscrita/Back to Black Demo Regular.ttf') format('truetype')}
+@font-face{font-family:'Belove Regular';src:url('./KitFontes/Manuscrita/Belove Regular.otf') format('opentype')}
+@font-face{font-family:'Berlishanty Calligraphy Regular';src:url('./KitFontes/Manuscrita/Berlishanty Calligraphy Regular.otf') format('opentype')}
+@font-face{font-family:'Blacksword Regular';src:url('./KitFontes/Manuscrita/Blacksword Regular.otf') format('opentype')}
+@font-face{font-family:'Boutiera Regular';src:url('./KitFontes/Manuscrita/Boutiera Regular.otf') format('opentype')}
+@font-face{font-family:'Breathney Demo Regular';src:url('./KitFontes/Manuscrita/Breathney Demo Regular.ttf') format('truetype')}
+@font-face{font-family:'BrushScriptOpti Regular';src:url('./KitFontes/Manuscrita/BrushScriptOpti Regular.otf') format('opentype')}
+@font-face{font-family:'Buttercup Sample Regular';src:url('./KitFontes/Manuscrita/Buttercup Sample Regular.otf') format('opentype')}
+@font-face{font-family:'Buttercup Sample Regular';src:url('./KitFontes/Manuscrita/Buttercup Sample Regular.ttf') format('truetype')}
+@font-face{font-family:'Callisten Regular';src:url('./KitFontes/Manuscrita/Callisten Regular.otf') format('opentype')}
+@font-face{font-family:'Caroline Regular';src:url('./KitFontes/Manuscrita/Caroline Regular.ttf') format('truetype')}
+@font-face{font-family:'Cassandra Personal Use Regular';src:url('./KitFontes/Manuscrita/Cassandra Personal Use Regular.ttf') format('truetype')}
+@font-face{font-family:'Catalish Huntera Regular';src:url('./KitFontes/Manuscrita/Catalish Huntera Regular.ttf') format('truetype')}
+@font-face{font-family:'Cinta Monyett Regular';src:url('./KitFontes/Manuscrita/Cinta Monyett Regular.otf') format('opentype')}
+@font-face{font-family:'Contoursy Free Regular';src:url('./KitFontes/Manuscrita/Contoursy Free Regular.ttf') format('truetype')}
+@font-face{font-family:'Cream Cake Regular';src:url('./KitFontes/Manuscrita/Cream Cake Regular.otf') format('opentype')}
+@font-face{font-family:'Delight Sunset Regular';src:url('./KitFontes/Manuscrita/Delight Sunset Regular.ttf') format('truetype')}
+@font-face{font-family:'DK Combustible Regular';src:url('./KitFontes/Manuscrita/DK Combustible Regular.otf') format('opentype')}
+@font-face{font-family:'Embassy BT Regular';src:url('./KitFontes/Manuscrita/Embassy BT Regular.ttf') format('truetype')}
+@font-face{font-family:'Exmouth Regular';src:url('./KitFontes/Manuscrita/Exmouth Regular.ttf') format('truetype')}
+@font-face{font-family:'Gillian Rode Regular';src:url('./KitFontes/Manuscrita/Gillian Rode Regular.otf') format('opentype')}
+@font-face{font-family:'Golden Hopes PERSONAL USE ONLY Regular';src:url('./KitFontes/Manuscrita/Golden Hopes PERSONAL USE ONLY Regular.otf') format('opentype')}
+@font-face{font-family:'GoodVibrations  Script';src:url('./KitFontes/Manuscrita/GoodVibrations  Script.ttf') format('truetype')}
+@font-face{font-family:'Halimun Regular';src:url('./KitFontes/Manuscrita/Halimun Regular.ttf') format('truetype')}
+@font-face{font-family:'Halittany Badela Regular';src:url('./KitFontes/Manuscrita/Halittany Badela Regular.ttf') format('truetype')}
+@font-face{font-family:'Harlow Solid Std Regular';src:url('./KitFontes/Manuscrita/Harlow Solid Std Regular.otf') format('opentype')}
+@font-face{font-family:'Hello Regular';src:url('./KitFontes/Manuscrita/Hello Regular.otf') format('opentype')}
+@font-face{font-family:'Hello Regular';src:url('./KitFontes/Manuscrita/Hello Regular.ttf') format('truetype')}
+@font-face{font-family:'Hello Valentica Regular';src:url('./KitFontes/Manuscrita/Hello Valentica Regular.ttf') format('truetype')}
+@font-face{font-family:'Howell Rode Regular';src:url('./KitFontes/Manuscrita/Howell Rode Regular.otf') format('opentype')}
+@font-face{font-family:'Ink Free Regular';src:url('./KitFontes/Manuscrita/Ink Free Regular.ttf') format('truetype')}
+@font-face{font-family:'Jam Sessions Personal Use Regular';src:url('./KitFontes/Manuscrita/Jam Sessions Personal Use Regular.ttf') format('truetype')}
+@font-face{font-family:'josephsophia Regular';src:url('./KitFontes/Manuscrita/josephsophia Regular.otf') format('opentype')}
+@font-face{font-family:'josephsophia Regular';src:url('./KitFontes/Manuscrita/josephsophia Regular.ttf') format('truetype')}
+@font-face{font-family:'Kaufmann BT Regular';src:url('./KitFontes/Manuscrita/Kaufmann BT Regular.ttf') format('truetype')}
+@font-face{font-family:'Kingham Regular';src:url('./KitFontes/Manuscrita/Kingham Regular.otf') format('opentype')}
+@font-face{font-family:'Lil Johnny PERSONAL USE ONLY Regular';src:url('./KitFontes/Manuscrita/Lil Johnny PERSONAL USE ONLY Regular.otf') format('opentype')}
+@font-face{font-family:'Lil Stuart PERSONAL USE ONLY Regular';src:url('./KitFontes/Manuscrita/Lil Stuart PERSONAL USE ONLY Regular.otf') format('opentype')}
+@font-face{font-family:'Loki Cola Regular';src:url('./KitFontes/Manuscrita/Loki Cola Regular.ttf') format('truetype')}
+@font-face{font-family:'Madina Regular';src:url('./KitFontes/Manuscrita/Madina Regular.otf') format('opentype')}
+@font-face{font-family:'MamaeQueNosFaz Regular';src:url('./KitFontes/Manuscrita/MamaeQueNosFaz Regular.ttf') format('truetype')}
 @font-face{font-family:'Manly Signature Regular';src:url('./KitFontes/Manuscrita/Manly Signature Regular.ttf') format('truetype')}
-@font-face{font-family:'Maria Aishane Script';src:url('./KitFontes/Manuscrita/Maria Aishane Script.otf') format('opentype')}
-@font-face{font-family:'Maria Aishane Script';src:url('./KitFontes/Manuscrita/Maria Aishane Script.ttf') format('truetype')}
-@font-face{font-family:'Maria_lucia';src:url('./KitFontes/Manuscrita/Maria_lucia.ttf') format('truetype')}
-@font-face{font-family:'Pantherdam Signature';src:url('./KitFontes/Manuscrita/Pantherdam Signature.ttf') format('truetype')}
-@font-face{font-family:'Pinky Promise';src:url('./KitFontes/Manuscrita/Pinky Promise.otf') format('opentype')}
-@font-face{font-family:'PinkyPromise';src:url('./KitFontes/Manuscrita/PinkyPromise.ttf') format('truetype')}
-@font-face{font-family:'Ruthligos';src:url('./KitFontes/Manuscrita/Ruthligos.ttf') format('truetype')}
-@font-face{font-family:'Streamster';src:url('./KitFontes/Manuscrita/Streamster.ttf') format('truetype')}
-@font-face{font-family:'Summer Lightning Demo';src:url('./KitFontes/Manuscrita/Summer Lightning Demo.ttf') format('truetype')}
-@font-face{font-family:'The Golden Elephant';src:url('./KitFontes/Manuscrita/The Golden Elephant.ttf') format('truetype')}
-@font-face{font-family:'The Yoshi';src:url('./KitFontes/Manuscrita/The Yoshi.otf') format('opentype')}
-@font-face{font-family:'TypoUpright BT';src:url('./KitFontes/Manuscrita/TypoUpright BT.ttf') format('truetype')}
-@font-face{font-family:'Weather Sunday - Personal Use';src:url('./KitFontes/Manuscrita/Weather Sunday - Personal Use.otf') format('opentype')}
-@font-face{font-family:'Meatloaf Solid';src:url('./KitFontes/Meatloaf Solid.ttf') format('truetype')}
-@font-face{font-family:'PWYummyDonuts';src:url('./KitFontes/PWYummyDonuts.ttf') format('truetype')}
-@font-face{font-family:'Quark Cheese - Personal Use';src:url('./KitFontes/Quark Cheese - Personal Use.otf') format('opentype')}
-@font-face{font-family:'Quillain (DEMO)';src:url('./KitFontes/Quillain (DEMO).otf') format('opentype')}
-@font-face{font-family:'Quillain (DEMO)';src:url('./KitFontes/Quillain (DEMO).ttf') format('truetype')}
-@font-face{font-family:'RifficFree-Bold';src:url('./KitFontes/RifficFree-Bold.ttf') format('truetype')}
-@font-face{font-family:'Rightland';src:url('./KitFontes/Rightland.otf') format('opentype')}
-@font-face{font-family:'Run! Demo';src:url('./KitFontes/Run! Demo.otf') format('opentype')}
-@font-face{font-family:'aachen-bold';src:url('./KitFontes/Serifa/aachen-bold.otf') format('opentype')}
-@font-face{font-family:'AgreloyInT3';src:url('./KitFontes/Serifa/AgreloyInT3.otf') format('opentype')}
+@font-face{font-family:'Maria Aishane Script Regular';src:url('./KitFontes/Manuscrita/Maria Aishane Script Regular.otf') format('opentype')}
+@font-face{font-family:'Maria Aishane Script Regular';src:url('./KitFontes/Manuscrita/Maria Aishane Script Regular.ttf') format('truetype')}
+@font-face{font-family:'Melintyca Regular';src:url('./KitFontes/Manuscrita/Melintyca Regular.ttf') format('truetype')}
+@font-face{font-family:'Milestone Free Version Script Regular';src:url('./KitFontes/Manuscrita/Milestone Free Version Script Regular.otf') format('opentype')}
+@font-face{font-family:'Monotype Corsiva Italic';src:url('./KitFontes/Manuscrita/Monotype Corsiva Italic.otf') format('opentype')}
+@font-face{font-family:'MoonTime Regular';src:url('./KitFontes/Manuscrita/MoonTime Regular.ttf') format('truetype')}
+@font-face{font-family:'Onion Regular';src:url('./KitFontes/Manuscrita/Onion Regular.otf') format('opentype')}
+@font-face{font-family:'Pantherdam Signature Regular';src:url('./KitFontes/Manuscrita/Pantherdam Signature Regular.ttf') format('truetype')}
+@font-face{font-family:'Pinky Promise Regular';src:url('./KitFontes/Manuscrita/Pinky Promise Regular.otf') format('opentype')}
+@font-face{font-family:'Pinky Promise Regular';src:url('./KitFontes/Manuscrita/Pinky Promise Regular.ttf') format('truetype')}
+@font-face{font-family:'Procreate Signature Regular';src:url('./KitFontes/Manuscrita/Procreate Signature Regular.otf') format('opentype')}
+@font-face{font-family:'Quillain Regular';src:url('./KitFontes/Manuscrita/Quillain Regular.otf') format('opentype')}
+@font-face{font-family:'Quillain Regular';src:url('./KitFontes/Manuscrita/Quillain Regular.ttf') format('truetype')}
+@font-face{font-family:'Rationality Grateful Regular';src:url('./KitFontes/Manuscrita/Rationality Grateful Regular.ttf') format('truetype')}
+@font-face{font-family:'raustila Regular';src:url('./KitFontes/Manuscrita/raustila Regular.otf') format('opentype')}
+@font-face{font-family:'raustila Regular';src:url('./KitFontes/Manuscrita/raustila Regular.ttf') format('truetype')}
+@font-face{font-family:'Rightland Regular';src:url('./KitFontes/Manuscrita/Rightland Regular.otf') format('opentype')}
+@font-face{font-family:'ROOSTER PERSONAL USE Regular';src:url('./KitFontes/Manuscrita/ROOSTER PERSONAL USE Regular.ttf') format('truetype')}
+@font-face{font-family:'Rotherdam Signature Regular';src:url('./KitFontes/Manuscrita/Rotherdam Signature Regular.ttf') format('truetype')}
+@font-face{font-family:'Ruthligos Regular';src:url('./KitFontes/Manuscrita/Ruthligos Regular.ttf') format('truetype')}
+@font-face{font-family:'Salmon Regular';src:url('./KitFontes/Manuscrita/Salmon Regular.otf') format('opentype')}
+@font-face{font-family:'Salmon Regular';src:url('./KitFontes/Manuscrita/Salmon Regular.ttf') format('truetype')}
+@font-face{font-family:'script';src:url('./KitFontes/Manuscrita/script.fon') format('')}
+@font-face{font-family:'Southera Regular';src:url('./KitFontes/Manuscrita/Southera Regular.ttf') format('truetype')}
+@font-face{font-family:'Standlist Regular';src:url('./KitFontes/Manuscrita/Standlist Regular.otf') format('opentype')}
+@font-face{font-family:'Sticky Pops Regular';src:url('./KitFontes/Manuscrita/Sticky Pops Regular.otf') format('opentype')}
+@font-face{font-family:'Summer Lightning Demo Regular';src:url('./KitFontes/Manuscrita/Summer Lightning Demo Regular.ttf') format('truetype')}
+@font-face{font-family:'Taken by Vultures Alternates De Regular';src:url('./KitFontes/Manuscrita/Taken by Vultures Alternates De Regular.otf') format('opentype')}
+@font-face{font-family:'Taken by Vultures Demo Regular';src:url('./KitFontes/Manuscrita/Taken by Vultures Demo Regular.otf') format('opentype')}
+@font-face{font-family:'The Blacklist Regular';src:url('./KitFontes/Manuscrita/The Blacklist Regular.ttf') format('truetype')}
+@font-face{font-family:'The Brands Regular';src:url('./KitFontes/Manuscrita/The Brands Regular.ttf') format('truetype')}
+@font-face{font-family:'The Golden Elephant Regular';src:url('./KitFontes/Manuscrita/The Golden Elephant Regular.ttf') format('truetype')}
+@font-face{font-family:'The Yoshi Regular';src:url('./KitFontes/Manuscrita/The Yoshi Regular.otf') format('opentype')}
+@font-face{font-family:'TypoUpright BT Regular';src:url('./KitFontes/Manuscrita/TypoUpright BT Regular.ttf') format('truetype')}
+@font-face{font-family:'Valestine Reg';src:url('./KitFontes/Manuscrita/Valestine Reg.ttf') format('truetype')}
+@font-face{font-family:'Vervelle Script';src:url('./KitFontes/Manuscrita/Vervelle Script.otf') format('opentype')}
+@font-face{font-family:'Weather Sunday - Personal Use Regular';src:url('./KitFontes/Manuscrita/Weather Sunday - Personal Use Regular.otf') format('opentype')}
+@font-face{font-family:'CF Glitch City Regular';src:url('./KitFontes/Pezos/CF Glitch City Regular.ttf') format('truetype')}
+@font-face{font-family:'Depraved Regular';src:url('./KitFontes/Pezos/Depraved Regular.ttf') format('truetype')}
+@font-face{font-family:'Irresponsible Direction Regular';src:url('./KitFontes/Pezos/Irresponsible Direction Regular.ttf') format('truetype')}
+@font-face{font-family:'Knicknack Fuzzy Heavy Regular';src:url('./KitFontes/Pezos/Knicknack Fuzzy Heavy Regular.otf') format('opentype')}
+@font-face{font-family:'Knicknack Fuzzy Regular';src:url('./KitFontes/Pezos/Knicknack Fuzzy Regular.otf') format('opentype')}
+@font-face{font-family:'MetalblockUltra Regular';src:url('./KitFontes/Pezos/MetalblockUltra Regular.ttf') format('truetype')}
+@font-face{font-family:'Rock it Regular';src:url('./KitFontes/Pezos/Rock it Regular.ttf') format('truetype')}
+@font-face{font-family:'PKMNRSEU.FON';src:url('./KitFontes/Pixel/PKMNRSEU.FON') format('')}
+@font-face{font-family:'Power Clear Regular';src:url('./KitFontes/Pixel/Power Clear Regular.ttf') format('truetype')}
+@font-face{font-family:'VCRosdNEUE Medium';src:url('./KitFontes/Pixel/VCRosdNEUE Medium.ttf') format('truetype')}
+@font-face{font-family:'vga850';src:url('./KitFontes/Pixel/vga850.fon') format('')}
+@font-face{font-family:'vgafix';src:url('./KitFontes/Pixel/vgafix.fon') format('')}
+@font-face{font-family:'vgasys';src:url('./KitFontes/Pixel/vgasys.fon') format('')}
+@font-face{font-family:'Ballmonte Regular';src:url('./KitFontes/Rabisco/Ballmonte Regular.otf') format('opentype')}
+@font-face{font-family:'Edo SZ Regular';src:url('./KitFontes/Rabisco/Edo SZ Regular.ttf') format('truetype')}
+@font-face{font-family:'Empires Regular';src:url('./KitFontes/Rabisco/Empires Regular.otf') format('opentype')}
+@font-face{font-family:'Gloomy Things Regular';src:url('./KitFontes/Rabisco/Gloomy Things Regular.otf') format('opentype')}
+@font-face{font-family:'Heaters Regular';src:url('./KitFontes/Rabisco/Heaters Regular.otf') format('opentype')}
+@font-face{font-family:'Hey August Regular';src:url('./KitFontes/Rabisco/Hey August Regular.otf') format('opentype')}
+@font-face{font-family:'HIRO MISAKE Regular';src:url('./KitFontes/Rabisco/HIRO MISAKE Regular.ttf') format('truetype')}
+@font-face{font-family:'RUSTY ATTACK DEMO Regular';src:url('./KitFontes/Rabisco/RUSTY ATTACK DEMO Regular.otf') format('opentype')}
+@font-face{font-family:'Stranger back in the Night Regular';src:url('./KitFontes/Rabisco/Stranger back in the Night Regular.ttf') format('truetype')}
+@font-face{font-family:'Streamster Regular';src:url('./KitFontes/Rabisco/Streamster Regular.ttf') format('truetype')}
+@font-face{font-family:'True Lies Regular';src:url('./KitFontes/Rabisco/True Lies Regular.ttf') format('truetype')}
+@font-face{font-family:'Trushdex Regular';src:url('./KitFontes/Rabisco/Trushdex Regular.otf') format('opentype')}
+@font-face{font-family:'Young Frankenstein Regular';src:url('./KitFontes/Rabisco/Young Frankenstein Regular.ttf') format('truetype')}
+@font-face{font-family:'Young Frankenstein Rotalic Italic';src:url('./KitFontes/Rabisco/Young Frankenstein Rotalic Italic.ttf') format('truetype')}
+@font-face{font-family:'Aachen Bold';src:url('./KitFontes/Serifa/Aachen Bold.otf') format('opentype')}
+@font-face{font-family:'Agreloy Regular';src:url('./KitFontes/Serifa/Agreloy Regular.otf') format('opentype')}
+@font-face{font-family:'Amelaryas Personal use';src:url('./KitFontes/Serifa/Amelaryas Personal use.otf') format('opentype')}
+@font-face{font-family:'Amperzand Regular';src:url('./KitFontes/Serifa/Amperzand Regular.ttf') format('truetype')}
 @font-face{font-family:'Ancient Medium';src:url('./KitFontes/Serifa/Ancient Medium.ttf') format('truetype')}
-@font-face{font-family:'atwriter';src:url('./KitFontes/Serifa/atwriter.ttf') format('truetype')}
-@font-face{font-family:'belwe-std-condensed';src:url('./KitFontes/Serifa/belwe-std-condensed.otf') format('opentype')}
-@font-face{font-family:'BerkshireSwash-Regular';src:url('./KitFontes/Serifa/BerkshireSwash-Regular.ttf') format('truetype')}
-@font-face{font-family:'bernard-mt-std-condensed';src:url('./KitFontes/Serifa/bernard-mt-std-condensed.otf') format('opentype')}
+@font-face{font-family:'Another Typewriter Regular';src:url('./KitFontes/Serifa/Another Typewriter Regular.ttf') format('truetype')}
+@font-face{font-family:'Astonice Bold';src:url('./KitFontes/Serifa/Astonice Bold.otf') format('opentype')}
+@font-face{font-family:'Aviano Copper Black Regular';src:url('./KitFontes/Serifa/Aviano Copper Black Regular.ttf') format('truetype')}
+@font-face{font-family:'Bahij Nazanin Bold';src:url('./KitFontes/Serifa/Bahij Nazanin Bold.ttf') format('truetype')}
+@font-face{font-family:'Belwe Std Condensed Regular';src:url('./KitFontes/Serifa/Belwe Std Condensed Regular.otf') format('opentype')}
+@font-face{font-family:'Berkshire Swash Regular';src:url('./KitFontes/Serifa/Berkshire Swash Regular.ttf') format('truetype')}
+@font-face{font-family:'Bernard MT Std Condensed Regular';src:url('./KitFontes/Serifa/Bernard MT Std Condensed Regular.otf') format('opentype')}
 @font-face{font-family:'Bodoni Bd BT Bold';src:url('./KitFontes/Serifa/Bodoni Bd BT Bold.ttf') format('truetype')}
 @font-face{font-family:'Bodoni Bk BT Book';src:url('./KitFontes/Serifa/Bodoni Bk BT Book.ttf') format('truetype')}
+@font-face{font-family:'Bookman Old Style Bold';src:url('./KitFontes/Serifa/Bookman Old Style Bold.ttf') format('truetype')}
+@font-face{font-family:'Cambria Bold Italic';src:url('./KitFontes/Serifa/Cambria Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Cambria Bold';src:url('./KitFontes/Serifa/Cambria Bold.ttf') format('truetype')}
+@font-face{font-family:'Cambria Italic';src:url('./KitFontes/Serifa/Cambria Italic.ttf') format('truetype')}
+@font-face{font-family:'Carnivalee Freakshow Regular';src:url('./KitFontes/Serifa/Carnivalee Freakshow Regular.ttf') format('truetype')}
 @font-face{font-family:'CentSchbkCyrill BT Bold Italic';src:url('./KitFontes/Serifa/CentSchbkCyrill BT Bold Italic.ttf') format('truetype')}
 @font-face{font-family:'CentSchbkCyrill BT Bold';src:url('./KitFontes/Serifa/CentSchbkCyrill BT Bold.ttf') format('truetype')}
 @font-face{font-family:'CentSchbkCyrill BT Italic';src:url('./KitFontes/Serifa/CentSchbkCyrill BT Italic.ttf') format('truetype')}
@@ -184,7 +436,7 @@
 @font-face{font-family:'Century Oldstyle Bold';src:url('./KitFontes/Serifa/Century Oldstyle Bold.otf') format('opentype')}
 @font-face{font-family:'Century Oldstyle Italic';src:url('./KitFontes/Serifa/Century Oldstyle Italic.otf') format('opentype')}
 @font-face{font-family:'Century Oldstyle Regular';src:url('./KitFontes/Serifa/Century Oldstyle Regular.otf') format('opentype')}
-@font-face{font-family:'Century725 Cn BT';src:url('./KitFontes/Serifa/Century725 Cn BT.ttf') format('truetype')}
+@font-face{font-family:'Century725 Cn BT Regular';src:url('./KitFontes/Serifa/Century725 Cn BT Regular.ttf') format('truetype')}
 @font-face{font-family:'Century751 BT Italic';src:url('./KitFontes/Serifa/Century751 BT Italic.ttf') format('truetype')}
 @font-face{font-family:'Century751 BT Roman';src:url('./KitFontes/Serifa/Century751 BT Roman.ttf') format('truetype')}
 @font-face{font-family:'Century751 No2 BT Bold Italic';src:url('./KitFontes/Serifa/Century751 No2 BT Bold Italic.ttf') format('truetype')}
@@ -197,119 +449,177 @@
 @font-face{font-family:'Clarendon BT Bold';src:url('./KitFontes/Serifa/Clarendon BT Bold.ttf') format('truetype')}
 @font-face{font-family:'Clarendon BT Roman';src:url('./KitFontes/Serifa/Clarendon BT Roman.ttf') format('truetype')}
 @font-face{font-family:'Clarendon Lt BT Light';src:url('./KitFontes/Serifa/Clarendon Lt BT Light.ttf') format('truetype')}
+@font-face{font-family:'Cloister Black Light';src:url('./KitFontes/Serifa/Cloister Black Light.ttf') format('truetype')}
 @font-face{font-family:'Cloister Oldstyle Roman';src:url('./KitFontes/Serifa/Cloister Oldstyle Roman.otf') format('opentype')}
-@font-face{font-family:'CloisterBlack';src:url('./KitFontes/Serifa/CloisterBlack.ttf') format('truetype')}
-@font-face{font-family:'DeVinne Txt BT';src:url('./KitFontes/Serifa/DeVinne Txt BT.ttf') format('truetype')}
-@font-face{font-family:'Edensor-FREE';src:url('./KitFontes/Serifa/Edensor-FREE.otf') format('opentype')}
-@font-face{font-family:'FE-FONT';src:url('./KitFontes/Serifa/FE-FONT.TTF') format('truetype')}
-@font-face{font-family:'FONTLERO';src:url('./KitFontes/Serifa/FONTLERO.TTF') format('truetype')}
+@font-face{font-family:'Constantia Bold Italic';src:url('./KitFontes/Serifa/Constantia Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Constantia Bold';src:url('./KitFontes/Serifa/Constantia Bold.ttf') format('truetype')}
+@font-face{font-family:'Constantia Italic';src:url('./KitFontes/Serifa/Constantia Italic.ttf') format('truetype')}
+@font-face{font-family:'Constantia Regular';src:url('./KitFontes/Serifa/Constantia Regular.ttf') format('truetype')}
+@font-face{font-family:'Cooper Std Black Regular';src:url('./KitFontes/Serifa/Cooper Std Black Regular.otf') format('opentype')}
+@font-face{font-family:'Courier New Bold';src:url('./KitFontes/Serifa/Courier New Bold.ttf') format('truetype')}
+@font-face{font-family:'Courier New Italic';src:url('./KitFontes/Serifa/Courier New Italic.ttf') format('truetype')}
+@font-face{font-family:'Courier New Regular';src:url('./KitFontes/Serifa/Courier New Regular.ttf') format('truetype')}
+@font-face{font-family:'DeVinne Txt BT Regular';src:url('./KitFontes/Serifa/DeVinne Txt BT Regular.ttf') format('truetype')}
+@font-face{font-family:'Edensor FREE Regular';src:url('./KitFontes/Serifa/Edensor FREE Regular.otf') format('opentype')}
+@font-face{font-family:'FE-Font Normal';src:url('./KitFontes/Serifa/FE-Font Normal.ttf') format('truetype')}
+@font-face{font-family:'FontleroyBrown Regular';src:url('./KitFontes/Serifa/FontleroyBrown Regular.ttf') format('truetype')}
+@font-face{font-family:'Franklin Gothic Medium Regular';src:url('./KitFontes/Serifa/Franklin Gothic Medium Regular.ttf') format('truetype')}
+@font-face{font-family:'FTY SKRADJHUWN NCV 2 Regular';src:url('./KitFontes/Serifa/FTY SKRADJHUWN NCV 2 Regular.ttf') format('truetype')}
+@font-face{font-family:'Garbata Trial Extrabold Regular';src:url('./KitFontes/Serifa/Garbata Trial Extrabold Regular.ttf') format('truetype')}
+@font-face{font-family:'Georgia Bold Italic';src:url('./KitFontes/Serifa/Georgia Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Georgia Bold';src:url('./KitFontes/Serifa/Georgia Bold.ttf') format('truetype')}
+@font-face{font-family:'Georgia Italic';src:url('./KitFontes/Serifa/Georgia Italic.ttf') format('truetype')}
+@font-face{font-family:'Georgia Regular';src:url('./KitFontes/Serifa/Georgia Regular.ttf') format('truetype')}
 @font-face{font-family:'GeoSlab703 Md BT Bold';src:url('./KitFontes/Serifa/GeoSlab703 Md BT Bold.ttf') format('truetype')}
 @font-face{font-family:'GeoSlab703 Md BT Medium';src:url('./KitFontes/Serifa/GeoSlab703 Md BT Medium.ttf') format('truetype')}
 @font-face{font-family:'GeoSlab703 MdCn BT Bold';src:url('./KitFontes/Serifa/GeoSlab703 MdCn BT Bold.ttf') format('truetype')}
 @font-face{font-family:'GeoSlab703 MdCn BT Medium';src:url('./KitFontes/Serifa/GeoSlab703 MdCn BT Medium.ttf') format('truetype')}
-@font-face{font-family:'Home Christmas';src:url('./KitFontes/Serifa/Home Christmas.otf') format('opentype')}
-@font-face{font-family:'Hundo';src:url('./KitFontes/Serifa/Hundo.ttf') format('truetype')}
+@font-face{font-family:'Home Christmas Regular';src:url('./KitFontes/Serifa/Home Christmas Regular.otf') format('opentype')}
+@font-face{font-family:'Hundo Regular';src:url('./KitFontes/Serifa/Hundo Regular.ttf') format('truetype')}
 @font-face{font-family:'IFC INSANE RODEO BOLD Bold';src:url('./KitFontes/Serifa/IFC INSANE RODEO BOLD Bold.ttf') format('truetype')}
-@font-face{font-family:'IFC INSANE RODEO';src:url('./KitFontes/Serifa/IFC INSANE RODEO.ttf') format('truetype')}
-@font-face{font-family:'MADEAvenuePERSONALUSE-Regular';src:url('./KitFontes/Serifa/MADEAvenuePERSONALUSE-Regular.otf') format('opentype')}
-@font-face{font-family:'MAK-bold';src:url('./KitFontes/Serifa/MAK-bold.otf') format('opentype')}
-@font-face{font-family:'MAK';src:url('./KitFontes/Serifa/MAK.otf') format('opentype')}
+@font-face{font-family:'IFC INSANE RODEO Regular';src:url('./KitFontes/Serifa/IFC INSANE RODEO Regular.ttf') format('truetype')}
+@font-face{font-family:'ITC Benguiat Bold';src:url('./KitFontes/Serifa/ITC Benguiat Bold.otf') format('opentype')}
+@font-face{font-family:'Javanese Text Regular';src:url('./KitFontes/Serifa/Javanese Text Regular.ttf') format('truetype')}
+@font-face{font-family:'JMH Typewriter Regular';src:url('./KitFontes/Serifa/JMH Typewriter Regular.otf') format('opentype')}
+@font-face{font-family:'MADE Avenue PERSONAL USE Regular';src:url('./KitFontes/Serifa/MADE Avenue PERSONAL USE Regular.otf') format('opentype')}
+@font-face{font-family:'MADE Kenfolg v2 Regular';src:url('./KitFontes/Serifa/MADE Kenfolg v2 Regular.otf') format('opentype')}
+@font-face{font-family:'MADE Sunflower Regular';src:url('./KitFontes/Serifa/MADE Sunflower Regular.otf') format('opentype')}
+@font-face{font-family:'Mak Bold';src:url('./KitFontes/Serifa/Mak Bold.otf') format('opentype')}
+@font-face{font-family:'Mak Light Regular';src:url('./KitFontes/Serifa/Mak Light Regular.otf') format('opentype')}
+@font-face{font-family:'Microsoft Himalaya Regular';src:url('./KitFontes/Serifa/Microsoft Himalaya Regular.ttf') format('truetype')}
+@font-face{font-family:'modern';src:url('./KitFontes/Serifa/modern.fon') format('')}
+@font-face{font-family:'Mongolian Baiti Regular';src:url('./KitFontes/Serifa/Mongolian Baiti Regular.ttf') format('truetype')}
 @font-face{font-family:'News701 BT Bold';src:url('./KitFontes/Serifa/News701 BT Bold.ttf') format('truetype')}
 @font-face{font-family:'News701 BT Italic';src:url('./KitFontes/Serifa/News701 BT Italic.ttf') format('truetype')}
 @font-face{font-family:'News706 BT Bold';src:url('./KitFontes/Serifa/News706 BT Bold.ttf') format('truetype')}
-@font-face{font-family:'OCR-A BT';src:url('./KitFontes/Serifa/OCR-A BT.ttf') format('truetype')}
-@font-face{font-family:'Olondona';src:url('./KitFontes/Serifa/Olondona.otf') format('opentype')}
-@font-face{font-family:'PirataOne-Regular';src:url('./KitFontes/Serifa/PirataOne-Regular.ttf') format('truetype')}
-@font-face{font-family:'PlateGtFourMTStd-Bd';src:url('./KitFontes/Serifa/PlateGtFourMTStd-Bd.otf') format('opentype')}
-@font-face{font-family:'Qeilab';src:url('./KitFontes/Serifa/Qeilab.otf') format('opentype')}
-@font-face{font-family:'RalstedaBold-d9d56';src:url('./KitFontes/Serifa/RalstedaBold-d9d56.otf') format('opentype')}
-@font-face{font-family:'RalstedaExtralight-L3vAg';src:url('./KitFontes/Serifa/RalstedaExtralight-L3vAg.otf') format('opentype')}
-@font-face{font-family:'RalstedaHeavy-gxX2Y';src:url('./KitFontes/Serifa/RalstedaHeavy-gxX2Y.otf') format('opentype')}
-@font-face{font-family:'RalstedaLight-X3RXo';src:url('./KitFontes/Serifa/RalstedaLight-X3RXo.otf') format('opentype')}
-@font-face{font-family:'RalstedaMedium-owAxV';src:url('./KitFontes/Serifa/RalstedaMedium-owAxV.otf') format('opentype')}
-@font-face{font-family:'RalstedaRegular-4Bqy9';src:url('./KitFontes/Serifa/RalstedaRegular-4Bqy9.otf') format('opentype')}
-@font-face{font-family:'Saddlebag';src:url('./KitFontes/Serifa/Saddlebag.ttf') format('truetype')}
+@font-face{font-family:'OCR-A BT Regular';src:url('./KitFontes/Serifa/OCR-A BT Regular.ttf') format('truetype')}
+@font-face{font-family:'Palatino Linotype Bold Italic';src:url('./KitFontes/Serifa/Palatino Linotype Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Palatino Linotype Bold';src:url('./KitFontes/Serifa/Palatino Linotype Bold.ttf') format('truetype')}
+@font-face{font-family:'Palatino Linotype Italic';src:url('./KitFontes/Serifa/Palatino Linotype Italic.ttf') format('truetype')}
+@font-face{font-family:'Palatino Linotype Regular';src:url('./KitFontes/Serifa/Palatino Linotype Regular.ttf') format('truetype')}
+@font-face{font-family:'Pirata One Regular';src:url('./KitFontes/Serifa/Pirata One Regular.ttf') format('truetype')}
+@font-face{font-family:'Plate Gt Four MT Std Bold';src:url('./KitFontes/Serifa/Plate Gt Four MT Std Bold.otf') format('opentype')}
+@font-face{font-family:'Playfair Display Black Italic';src:url('./KitFontes/Serifa/Playfair Display Black Italic.ttf') format('truetype')}
+@font-face{font-family:'Playfair Display Black Regular';src:url('./KitFontes/Serifa/Playfair Display Black Regular.ttf') format('truetype')}
+@font-face{font-family:'Playfair Display Bold Italic';src:url('./KitFontes/Serifa/Playfair Display Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Playfair Display Bold';src:url('./KitFontes/Serifa/Playfair Display Bold.ttf') format('truetype')}
+@font-face{font-family:'Playfair Display Italic';src:url('./KitFontes/Serifa/Playfair Display Italic.ttf') format('truetype')}
+@font-face{font-family:'Playfair Display Regular';src:url('./KitFontes/Serifa/Playfair Display Regular.ttf') format('truetype')}
+@font-face{font-family:'Qeilab Regular';src:url('./KitFontes/Serifa/Qeilab Regular.otf') format('opentype')}
+@font-face{font-family:'Ralsteda Bold';src:url('./KitFontes/Serifa/Ralsteda Bold.otf') format('opentype')}
+@font-face{font-family:'Ralsteda ExtLt Regular';src:url('./KitFontes/Serifa/Ralsteda ExtLt Regular.otf') format('opentype')}
+@font-face{font-family:'Ralsteda Heavy Regular';src:url('./KitFontes/Serifa/Ralsteda Heavy Regular.otf') format('opentype')}
+@font-face{font-family:'Ralsteda Light Regular';src:url('./KitFontes/Serifa/Ralsteda Light Regular.otf') format('opentype')}
+@font-face{font-family:'Ralsteda Med Regular';src:url('./KitFontes/Serifa/Ralsteda Med Regular.otf') format('opentype')}
+@font-face{font-family:'Ralsteda Regular';src:url('./KitFontes/Serifa/Ralsteda Regular.otf') format('opentype')}
+@font-face{font-family:'roman';src:url('./KitFontes/Serifa/roman.fon') format('')}
+@font-face{font-family:'Rosica Regular';src:url('./KitFontes/Serifa/Rosica Regular.otf') format('opentype')}
+@font-face{font-family:'Saddlebag Regular';src:url('./KitFontes/Serifa/Saddlebag Regular.ttf') format('truetype')}
 @font-face{font-family:'Schadow BT Bold';src:url('./KitFontes/Serifa/Schadow BT Bold.ttf') format('truetype')}
 @font-face{font-family:'Schadow BT Roman';src:url('./KitFontes/Serifa/Schadow BT Roman.ttf') format('truetype')}
-@font-face{font-family:'Seagram tfb';src:url('./KitFontes/Serifa/Seagram tfb.ttf') format('truetype')}
-@font-face{font-family:'symbol';src:url('./KitFontes/Serifa/symbol.ttf') format('truetype')}
-@font-face{font-family:'TequilaSunrise-Regular';src:url('./KitFontes/Serifa/TequilaSunrise-Regular.otf') format('opentype')}
-@font-face{font-family:'TEXAT BOLD PERSONAL USE___';src:url('./KitFontes/Serifa/TEXAT BOLD PERSONAL USE___.otf') format('opentype')}
-@font-face{font-family:'TrajanPro-Bold';src:url('./KitFontes/Serifa/TrajanPro-Bold.otf') format('opentype')}
-@font-face{font-family:'TrajanPro-Regular';src:url('./KitFontes/Serifa/TrajanPro-Regular.otf') format('opentype')}
-@font-face{font-family:'VarsityTeam-Bold';src:url('./KitFontes/Serifa/VarsityTeam-Bold.otf') format('opentype')}
-@font-face{font-family:'VASTN___';src:url('./KitFontes/Serifa/VASTN___.TTF') format('truetype')}
-@font-face{font-family:'Smartphone Color Pro';src:url('./KitFontes/Smartphone Color Pro.ttf') format('truetype')}
-@font-face{font-family:'Social Logos';src:url('./KitFontes/Social Logos.ttf') format('truetype')}
-@font-face{font-family:'Splatch';src:url('./KitFontes/Splatch.ttf') format('truetype')}
-@font-face{font-family:'Stella Demo';src:url('./KitFontes/Stella Demo.otf') format('opentype')}
-@font-face{font-family:'Stella Demo';src:url('./KitFontes/Stella Demo.ttf') format('truetype')}
-@font-face{font-family:'airstrike';src:url('./KitFontes/Tech/airstrike.ttf') format('truetype')}
-@font-face{font-family:'airstrike3d';src:url('./KitFontes/Tech/airstrike3d.ttf') format('truetype')}
-@font-face{font-family:'airstrikeacad';src:url('./KitFontes/Tech/airstrikeacad.ttf') format('truetype')}
-@font-face{font-family:'airstrikeb3d';src:url('./KitFontes/Tech/airstrikeb3d.ttf') format('truetype')}
-@font-face{font-family:'airstrikebold';src:url('./KitFontes/Tech/airstrikebold.ttf') format('truetype')}
-@font-face{font-family:'airstrikebullet';src:url('./KitFontes/Tech/airstrikebullet.ttf') format('truetype')}
-@font-face{font-family:'airstrikecond';src:url('./KitFontes/Tech/airstrikecond.ttf') format('truetype')}
-@font-face{font-family:'airstrikeexpand';src:url('./KitFontes/Tech/airstrikeexpand.ttf') format('truetype')}
-@font-face{font-family:'airstrikegrad';src:url('./KitFontes/Tech/airstrikegrad.ttf') format('truetype')}
-@font-face{font-family:'airstrikehalf';src:url('./KitFontes/Tech/airstrikehalf.ttf') format('truetype')}
-@font-face{font-family:'airstrikelaser';src:url('./KitFontes/Tech/airstrikelaser.ttf') format('truetype')}
-@font-face{font-family:'airstrikeout';src:url('./KitFontes/Tech/airstrikeout.ttf') format('truetype')}
-@font-face{font-family:'Clark Bold Hollow';src:url('./KitFontes/Tech/Clark Bold Hollow.otf') format('opentype')}
+@font-face{font-family:'Seagram tfb Regular';src:url('./KitFontes/Serifa/Seagram tfb Regular.ttf') format('truetype')}
+@font-face{font-family:'serife';src:url('./KitFontes/Serifa/serife.fon') format('')}
+@font-face{font-family:'Serpentine-Bold Regular';src:url('./KitFontes/Serifa/Serpentine-Bold Regular.ttf') format('truetype')}
+@font-face{font-family:'Serpentine-BoldOblique Regular';src:url('./KitFontes/Serifa/Serpentine-BoldOblique Regular.ttf') format('truetype')}
+@font-face{font-family:'Serpentine-Light Regular';src:url('./KitFontes/Serifa/Serpentine-Light Regular.ttf') format('truetype')}
+@font-face{font-family:'Serpentine-LightOblique Regular';src:url('./KitFontes/Serifa/Serpentine-LightOblique Regular.ttf') format('truetype')}
+@font-face{font-family:'Serpentine-Medium Regular';src:url('./KitFontes/Serifa/Serpentine-Medium Regular.ttf') format('truetype')}
+@font-face{font-family:'Serpentine-MediumOblique Regular';src:url('./KitFontes/Serifa/Serpentine-MediumOblique Regular.ttf') format('truetype')}
+@font-face{font-family:'Sitka Text Italic';src:url('./KitFontes/Serifa/Sitka Text Italic.ttf') format('truetype')}
+@font-face{font-family:'Sitka Text Regular';src:url('./KitFontes/Serifa/Sitka Text Regular.ttf') format('truetype')}
+@font-face{font-family:'Stencil Std Regular';src:url('./KitFontes/Serifa/Stencil Std Regular.otf') format('opentype')}
+@font-face{font-family:'Sylfaen Regular';src:url('./KitFontes/Serifa/Sylfaen Regular.ttf') format('truetype')}
+@font-face{font-family:'Symbol Regular';src:url('./KitFontes/Serifa/Symbol Regular.ttf') format('truetype')}
+@font-face{font-family:'Tequila Sunrise Regular';src:url('./KitFontes/Serifa/Tequila Sunrise Regular.otf') format('opentype')}
+@font-face{font-family:'Texas Tango BOLD PERSONAL USE Regular';src:url('./KitFontes/Serifa/Texas Tango BOLD PERSONAL USE Regular.otf') format('opentype')}
+@font-face{font-family:'Times New Roman Bold Italic';src:url('./KitFontes/Serifa/Times New Roman Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Times New Roman Italic';src:url('./KitFontes/Serifa/Times New Roman Italic.ttf') format('truetype')}
+@font-face{font-family:'Trajan Pro Bold';src:url('./KitFontes/Serifa/Trajan Pro Bold.otf') format('opentype')}
+@font-face{font-family:'Trajan Pro Regular';src:url('./KitFontes/Serifa/Trajan Pro Regular.otf') format('opentype')}
+@font-face{font-family:'TT Rationalist Trl Black Regular';src:url('./KitFontes/Serifa/TT Rationalist Trl Black Regular.ttf') format('truetype')}
+@font-face{font-family:'TT Rationalist Trl Bold Italic';src:url('./KitFontes/Serifa/TT Rationalist Trl Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'TT Rationalist Trl DemiBold Italic';src:url('./KitFontes/Serifa/TT Rationalist Trl DemiBold Italic.ttf') format('truetype')}
+@font-face{font-family:'TT Rationalist Trl Italic';src:url('./KitFontes/Serifa/TT Rationalist Trl Italic.ttf') format('truetype')}
+@font-face{font-family:'TT Rationalist Trl Normal Italic';src:url('./KitFontes/Serifa/TT Rationalist Trl Normal Italic.ttf') format('truetype')}
+@font-face{font-family:'TT Rationalist Trl Regular';src:url('./KitFontes/Serifa/TT Rationalist Trl Regular.ttf') format('truetype')}
+@font-face{font-family:'TT Rationalist Trl Thin Regular';src:url('./KitFontes/Serifa/TT Rationalist Trl Thin Regular.ttf') format('truetype')}
+@font-face{font-family:'Varsity Regular Varsity Regular';src:url('./KitFontes/Serifa/Varsity Regular Varsity Regular.ttf') format('truetype')}
+@font-face{font-family:'Varsity Team Bold';src:url('./KitFontes/Serifa/Varsity Team Bold.otf') format('opentype')}
+@font-face{font-family:'VAST Naked';src:url('./KitFontes/Serifa/VAST Naked.ttf') format('truetype')}
+@font-face{font-family:'Young Heart Regular';src:url('./KitFontes/Serifa/Young Heart Regular.ttf') format('truetype')}
+@font-face{font-family:'Aeroblade DEMO Regular';src:url('./KitFontes/Tech/Aeroblade DEMO Regular.ttf') format('truetype')}
+@font-face{font-family:'Airstrike Bold Bold';src:url('./KitFontes/Tech/Airstrike Bold Bold.ttf') format('truetype')}
+@font-face{font-family:'Airstrike Condensed Condensed';src:url('./KitFontes/Tech/Airstrike Condensed Condensed.ttf') format('truetype')}
+@font-face{font-family:'Airstrike Expanded Expanded';src:url('./KitFontes/Tech/Airstrike Expanded Expanded.ttf') format('truetype')}
+@font-face{font-family:'Airstrike Regular';src:url('./KitFontes/Tech/Airstrike Regular.ttf') format('truetype')}
+@font-face{font-family:'AZN Knuckles Trial Bold';src:url('./KitFontes/Tech/AZN Knuckles Trial Bold.otf') format('opentype')}
+@font-face{font-family:'AZN Knuckles Trial Light Regular';src:url('./KitFontes/Tech/AZN Knuckles Trial Light Regular.otf') format('opentype')}
+@font-face{font-family:'AZN Knuckles Trial Regular';src:url('./KitFontes/Tech/AZN Knuckles Trial Regular.otf') format('opentype')}
+@font-face{font-family:'Brigends Expanded Regular';src:url('./KitFontes/Tech/Brigends Expanded Regular.otf') format('opentype')}
+@font-face{font-family:'BRIPOKUS Regular';src:url('./KitFontes/Tech/BRIPOKUS Regular.otf') format('opentype')}
 @font-face{font-family:'Clark Bold';src:url('./KitFontes/Tech/Clark Bold.otf') format('opentype')}
-@font-face{font-family:'Clark Hollow';src:url('./KitFontes/Tech/Clark Hollow.otf') format('opentype')}
-@font-face{font-family:'Clark';src:url('./KitFontes/Tech/Clark.otf') format('opentype')}
-@font-face{font-family:'DEADJIM';src:url('./KitFontes/Tech/DEADJIM.TTF') format('truetype')}
-@font-face{font-family:'Digital-Desolation-Plus';src:url('./KitFontes/Tech/Digital-Desolation-Plus.otf') format('opentype')}
-@font-face{font-family:'Dihil';src:url('./KitFontes/Tech/Dihil.ttf') format('truetype')}
+@font-face{font-family:'Conthrax Sb Regular';src:url('./KitFontes/Tech/Conthrax Sb Regular.otf') format('opentype')}
+@font-face{font-family:'Digital Desolation Plus Regular';src:url('./KitFontes/Tech/Digital Desolation Plus Regular.otf') format('opentype')}
+@font-face{font-family:'Dihil Regular';src:url('./KitFontes/Tech/Dihil Regular.ttf') format('truetype')}
+@font-face{font-family:'EA Font v1.5 by Ghettoshark Regular';src:url('./KitFontes/Tech/EA Font v1.5 by Ghettoshark Regular.ttf') format('truetype')}
 @font-face{font-family:'Elektronik Italic';src:url('./KitFontes/Tech/Elektronik Italic.ttf') format('truetype')}
-@font-face{font-family:'Elektronik';src:url('./KitFontes/Tech/Elektronik.ttf') format('truetype')}
-@font-face{font-family:'FontsFree-Net-Nura-ExtraLight';src:url('./KitFontes/Tech/FontsFree-Net-Nura-ExtraLight.ttf') format('truetype')}
-@font-face{font-family:'High Speed';src:url('./KitFontes/Tech/High Speed.otf') format('opentype')}
-@font-face{font-family:'Hindsight 2020';src:url('./KitFontes/Tech/Hindsight 2020.otf') format('opentype')}
-@font-face{font-family:'hyperspace-race-extended-heavy';src:url('./KitFontes/Tech/hyperspace-race-extended-heavy.otf') format('opentype')}
-@font-face{font-family:'Inlanders Demo';src:url('./KitFontes/Tech/Inlanders Demo.otf') format('opentype')}
-@font-face{font-family:'Kardust TS Condensed Bold Italic';src:url('./KitFontes/Tech/Kardust TS Condensed Bold Italic.ttf') format('truetype')}
-@font-face{font-family:'KITCHENPOLICE';src:url('./KitFontes/Tech/KITCHENPOLICE.TTF') format('truetype')}
-@font-face{font-family:'LinkStart';src:url('./KitFontes/Tech/LinkStart.ttf') format('truetype')}
-@font-face{font-family:'osaka-re';src:url('./KitFontes/Tech/osaka-re.ttf') format('truetype')}
-@font-face{font-family:'paladins';src:url('./KitFontes/Tech/paladins.ttf') format('truetype')}
-@font-face{font-family:'paladins3d';src:url('./KitFontes/Tech/paladins3d.ttf') format('truetype')}
-@font-face{font-family:'paladinsgrad';src:url('./KitFontes/Tech/paladinsgrad.ttf') format('truetype')}
-@font-face{font-family:'paladinslaser';src:url('./KitFontes/Tech/paladinslaser.ttf') format('truetype')}
-@font-face{font-family:'paladinsout';src:url('./KitFontes/Tech/paladinsout.ttf') format('truetype')}
-@font-face{font-family:'paladinsstraight';src:url('./KitFontes/Tech/paladinsstraight.ttf') format('truetype')}
-@font-face{font-family:'pricedown bl';src:url('./KitFontes/Tech/pricedown bl.otf') format('opentype')}
-@font-face{font-family:'Reckoner';src:url('./KitFontes/Tech/Reckoner.ttf') format('truetype')}
-@font-face{font-family:'Reckoner_Bold';src:url('./KitFontes/Tech/Reckoner_Bold.ttf') format('truetype')}
-@font-face{font-family:'Rektec';src:url('./KitFontes/Tech/Rektec.otf') format('opentype')}
-@font-face{font-family:'SOLVAST';src:url('./KitFontes/Tech/SOLVAST.otf') format('opentype')}
-@font-face{font-family:'Square';src:url('./KitFontes/Tech/Square.ttf') format('truetype')}
-@font-face{font-family:'SwipeRaceDemo';src:url('./KitFontes/Tech/SwipeRaceDemo.ttf') format('truetype')}
-@font-face{font-family:'techno_hideo';src:url('./KitFontes/Tech/techno_hideo.ttf') format('truetype')}
-@font-face{font-family:'Vudotronic';src:url('./KitFontes/Tech/Vudotronic.otf') format('opentype')}
-@font-face{font-family:'zrnic rg';src:url('./KitFontes/Tech/zrnic rg.ttf') format('truetype')}
-@font-face{font-family:'The Blacklist';src:url('./KitFontes/The Blacklist.ttf') format('truetype')}
-@font-face{font-family:'Type Icons';src:url('./KitFontes/Type Icons.ttf') format('truetype')}
-@font-face{font-family:'aAttackGraffiti';src:url('./KitFontes/Viagem/aAttackGraffiti.ttf') format('truetype')}
-@font-face{font-family:'Comix Loud';src:url('./KitFontes/Viagem/Comix Loud.ttf') format('truetype')}
-@font-face{font-family:'Dunkin Sans';src:url('./KitFontes/Viagem/Dunkin Sans.otf') format('opentype')}
-@font-face{font-family:'Dunkin';src:url('./KitFontes/Viagem/Dunkin.otf') format('opentype')}
-@font-face{font-family:'Gemstone';src:url('./KitFontes/Viagem/Gemstone.ttf') format('truetype')}
-@font-face{font-family:'GROBOLD';src:url('./KitFontes/Viagem/GROBOLD.ttf') format('truetype')}
-@font-face{font-family:'Irresponsible Direction';src:url('./KitFontes/Viagem/Irresponsible Direction.ttf') format('truetype')}
-@font-face{font-family:'Karate';src:url('./KitFontes/Viagem/Karate.ttf') format('truetype')}
-@font-face{font-family:'lastninja';src:url('./KitFontes/Viagem/lastninja.ttf') format('truetype')}
-@font-face{font-family:'Minnie';src:url('./KitFontes/Viagem/Minnie.TTF') format('truetype')}
-@font-face{font-family:'mvboli';src:url('./KitFontes/Viagem/mvboli.ttf') format('truetype')}
-@font-face{font-family:'Neonblitz';src:url('./KitFontes/Viagem/Neonblitz.ttf') format('truetype')}
-@font-face{font-family:'PlazaITC-Normal';src:url('./KitFontes/Viagem/PlazaITC-Normal.ttf') format('truetype')}
-@font-face{font-family:'Rockit';src:url('./KitFontes/Viagem/Rockit.ttf') format('truetype')}
-@font-face{font-family:'RUSTY ATTACK DEMO Regular';src:url('./KitFontes/Viagem/RUSTY ATTACK DEMO Regular.otf') format('opentype')}
-@font-face{font-family:'seasideresortnf.regular';src:url('./KitFontes/Viagem/seasideresortnf.regular.ttf') format('truetype')}
-@font-face{font-family:'shanghai';src:url('./KitFontes/Viagem/shanghai.ttf') format('truetype')}
-@font-face{font-family:'TheGeorgia';src:url('./KitFontes/Viagem/TheGeorgia.otf') format('opentype')}
-@font-face{font-family:'varsity_regular';src:url('./KitFontes/Viagem/varsity_regular.ttf') format('truetype')}
-@font-face{font-family:'Wicked Mouse Demo';src:url('./KitFontes/Viagem/Wicked Mouse Demo.otf') format('opentype')}
-@font-face{font-family:'xilosa';src:url('./KitFontes/Viagem/xilosa.ttf') format('truetype')}
+@font-face{font-family:'Elektronik Regular';src:url('./KitFontes/Tech/Elektronik Regular.ttf') format('truetype')}
+@font-face{font-family:'FE-Font Normal';src:url('./KitFontes/Tech/FE-Font Normal.ttf') format('truetype')}
+@font-face{font-family:'Gagarin Regular';src:url('./KitFontes/Tech/Gagarin Regular.ttf') format('truetype')}
+@font-face{font-family:'Gagarin Star Mix Regular';src:url('./KitFontes/Tech/Gagarin Star Mix Regular.ttf') format('truetype')}
+@font-face{font-family:'Gobold Blocky Regular';src:url('./KitFontes/Tech/Gobold Blocky Regular.otf') format('opentype')}
+@font-face{font-family:'Gunplay Regular';src:url('./KitFontes/Tech/Gunplay Regular.ttf') format('truetype')}
+@font-face{font-family:"He's Dead Jim Regular";src:url("./KitFontes/Tech/He's Dead Jim Regular.ttf") format('truetype')}
+@font-face{font-family:'High Speed Regular';src:url('./KitFontes/Tech/High Speed Regular.otf') format('opentype')}
+@font-face{font-family:'Hindsight 2020 Regular';src:url('./KitFontes/Tech/Hindsight 2020 Regular.otf') format('opentype')}
+@font-face{font-family:'Hyperspace Race Extend Heavy Bold';src:url('./KitFontes/Tech/Hyperspace Race Extend Heavy Bold.otf') format('opentype')}
+@font-face{font-family:'Incised901 NdIt BT Italic';src:url('./KitFontes/Tech/Incised901 NdIt BT Italic.ttf') format('truetype')}
+@font-face{font-family:'Inlanders Bold';src:url('./KitFontes/Tech/Inlanders Bold.otf') format('opentype')}
+@font-face{font-family:'Kardust TS Condensed Demo Versi Bold Italic';src:url('./KitFontes/Tech/Kardust TS Condensed Demo Versi Bold Italic.ttf') format('truetype')}
+@font-face{font-family:'Kitchen police Regular';src:url('./KitFontes/Tech/Kitchen police Regular.ttf') format('truetype')}
+@font-face{font-family:'Link Start Regular';src:url('./KitFontes/Tech/Link Start Regular.ttf') format('truetype')}
+@font-face{font-family:'NCS Radhiumz Regular';src:url('./KitFontes/Tech/NCS Radhiumz Regular.ttf') format('truetype')}
+@font-face{font-family:'Nitrous Oxide Regular';src:url('./KitFontes/Tech/Nitrous Oxide Regular.otf') format('opentype')}
+@font-face{font-family:'Nura Extra Light Regular';src:url('./KitFontes/Tech/Nura Extra Light Regular.ttf') format('truetype')}
+@font-face{font-family:'Osaka-Sans Serif Regular';src:url('./KitFontes/Tech/Osaka-Sans Serif Regular.ttf') format('truetype')}
+@font-face{font-family:'Paladins Regular';src:url('./KitFontes/Tech/Paladins Regular.ttf') format('truetype')}
+@font-face{font-family:'Paladins Straight Regular';src:url('./KitFontes/Tech/Paladins Straight Regular.ttf') format('truetype')}
+@font-face{font-family:'Pirulen Regular';src:url('./KitFontes/Tech/Pirulen Regular.otf') format('opentype')}
+@font-face{font-family:'Pricedown Bl Regular';src:url('./KitFontes/Tech/Pricedown Bl Regular.otf') format('opentype')}
+@font-face{font-family:'Reckoner Bold Condensed Bold';src:url('./KitFontes/Tech/Reckoner Bold Condensed Bold.ttf') format('truetype')}
+@font-face{font-family:'Reckoner Regular';src:url('./KitFontes/Tech/Reckoner Regular.ttf') format('truetype')}
+@font-face{font-family:'Rektec Regular';src:url('./KitFontes/Tech/Rektec Regular.otf') format('opentype')}
+@font-face{font-family:'Semakin Regular';src:url('./KitFontes/Tech/Semakin Regular.otf') format('opentype')}
+@font-face{font-family:'SerpentineEF Bold Italic';src:url('./KitFontes/Tech/SerpentineEF Bold Italic.otf') format('opentype')}
+@font-face{font-family:'smalle';src:url('./KitFontes/Tech/smalle.fon') format('')}
+@font-face{font-family:'SOLVAST Regular';src:url('./KitFontes/Tech/SOLVAST Regular.otf') format('opentype')}
+@font-face{font-family:'Square721 BT Bold';src:url('./KitFontes/Tech/Square721 BT Bold.ttf') format('truetype')}
+@font-face{font-family:'Square721 BT Roman';src:url('./KitFontes/Tech/Square721 BT Roman.ttf') format('truetype')}
+@font-face{font-family:'Square721 Cn BT Bold';src:url('./KitFontes/Tech/Square721 Cn BT Bold.ttf') format('truetype')}
+@font-face{font-family:'Square721 Cn BT Roman';src:url('./KitFontes/Tech/Square721 Cn BT Roman.ttf') format('truetype')}
+@font-face{font-family:'SquareFont Regular';src:url('./KitFontes/Tech/SquareFont Regular.ttf') format('truetype')}
+@font-face{font-family:'StereoGothic-100 Regular';src:url('./KitFontes/Tech/StereoGothic-100 Regular.ttf') format('truetype')}
+@font-face{font-family:'StereoGothic-200 Regular';src:url('./KitFontes/Tech/StereoGothic-200 Regular.ttf') format('truetype')}
+@font-face{font-family:'StereoGothic-300 Regular';src:url('./KitFontes/Tech/StereoGothic-300 Regular.ttf') format('truetype')}
+@font-face{font-family:'StereoGothic-700 Bold';src:url('./KitFontes/Tech/StereoGothic-700 Bold.ttf') format('truetype')}
+@font-face{font-family:'StereoGothic-900 Regular';src:url('./KitFontes/Tech/StereoGothic-900 Regular.ttf') format('truetype')}
+@font-face{font-family:'Swipe Race Demo Regular';src:url('./KitFontes/Tech/Swipe Race Demo Regular.ttf') format('truetype')}
+@font-face{font-family:'Techno Hideo Regular';src:url('./KitFontes/Tech/Techno Hideo Regular.ttf') format('truetype')}
+@font-face{font-family:'Univers Next Typewriter Pro Bold';src:url('./KitFontes/Tech/Univers Next Typewriter Pro Bold.ttf') format('truetype')}
+@font-face{font-family:'Vudotronic Regular';src:url('./KitFontes/Tech/Vudotronic Regular.otf') format('opentype')}
+@font-face{font-family:'Zrnic Rg Regular';src:url('./KitFontes/Tech/Zrnic Rg Regular.ttf') format('truetype')}
+@font-face{font-family:'Comix Loud Regular';src:url('./KitFontes/Viagem/Comix Loud Regular.ttf') format('truetype')}
+@font-face{font-family:'Gemstone Regular';src:url('./KitFontes/Viagem/Gemstone Regular.ttf') format('truetype')}
+@font-face{font-family:'GROBOLD Regular';src:url('./KitFontes/Viagem/GROBOLD Regular.ttf') format('truetype')}
+@font-face{font-family:'Minnie Regular';src:url('./KitFontes/Viagem/Minnie Regular.ttf') format('truetype')}
+@font-face{font-family:'Neonblitz Regular';src:url('./KitFontes/Viagem/Neonblitz Regular.ttf') format('truetype')}
+@font-face{font-family:'Pokemon Solid Normal';src:url('./KitFontes/Viagem/Pokemon Solid Normal.ttf') format('truetype')}
+@font-face{font-family:'Riffic Free Medium Bold';src:url('./KitFontes/Viagem/Riffic Free Medium Bold.ttf') format('truetype')}
+@font-face{font-family:'Seaside Resort NF Regular';src:url('./KitFontes/Viagem/Seaside Resort NF Regular.ttf') format('truetype')}
+@font-face{font-family:'Splatch Regular';src:url('./KitFontes/Viagem/Splatch Regular.ttf') format('truetype')}
+@font-face{font-family:'Stubby Heavy Regular';src:url('./KitFontes/Viagem/Stubby Heavy Regular.otf') format('opentype')}
+@font-face{font-family:'Sunset Boulevard Regular';src:url('./KitFontes/Viagem/Sunset Boulevard Regular.otf') format('opentype')}
+@font-face{font-family:'Super Boys Regular';src:url('./KitFontes/Viagem/Super Boys Regular.ttf') format('truetype')}
+@font-face{font-family:'The Georgia Regular';src:url('./KitFontes/Viagem/The Georgia Regular.otf') format('opentype')}
+@font-face{font-family:'Varsity Regular Varsity Regular';src:url('./KitFontes/Viagem/Varsity Regular Varsity Regular.ttf') format('truetype')}
+@font-face{font-family:'Wicked Mouse Regular';src:url('./KitFontes/Viagem/Wicked Mouse Regular.otf') format('opentype')}
