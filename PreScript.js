@@ -371,20 +371,19 @@ function MyAlert(msg){
 }
 
 function SelectFiles(Inpt,Call){if(Inpt.files.length > 0 && typeof Call === "function"){Call(Inpt)}} // usar isso no InputFiles abaixo (Garante que tudo entrou bem antes de Continuar)
-let VarDropImg = {} // uma Váriavel Global q talvez possa ficar dentro do PreScript Destinada a Receber os Files pra serem usados Depois
-function PrepDrop(Eu,nome,Call=null){
-    Inn(Eu,'<a>Adicionar Imagem</a><input type="file" accept="image/*" class="NONE">')
-    const f=$('input',Eu),d=$('a',Eu)
-    const Import=F=>{if (!F) return
-        const ext  = F.name.split('.').pop()
-        const Nome = `${nome}.${ext}`
-        Inn(d,`<img Name="${Nome}" src="${URL.createObjectURL(F)}">`)
-        VarDropImg[Nome]=F
-    }
-    Eu.onclick    =()=> f.click(),f.onchange=e=>Import(e.target.files[0]),
-    Eu.ondragover =e=>(Prvn2(e),Add(Eu,'hover')),
-    Eu.ondragleave=_=> Rmv(Eu,'hover'),
-    Eu.ondrop     =e=>(Prvn2(e),Rmv(Eu,'hover'),Import(e.dataTransfer.files[0]))
+
+function PrepDrop(Eu,m=0){
+    Inn(Eu,`<div class="P Ct gap"></div><a>+ Adicionar Imagem</a><input type=file accept=image/* ${m?'multiple':''} class=NONE>`)
+    let f=$('input',Eu),a=$('a',Eu),p=$('.P',Eu),
+    add=F=>{if(!F)return;let b=document.createElement('div'),u=URL.createObjectURL(F)
+        b.innerHTML=`<img src="${u}"><i>X</i>`,$('i',b).onclick=_=>b.remove()
+        if(!m)p.innerHTML='' ; p.appendChild(b)}
+    imp=fs=>[...fs].map(add)
+    a.onclick=_=>f.click()
+    f.onchange=e=>(imp(e.target.files),f.value='')
+    Eu.ondragover=e=>(Prvn2(e),Add(Eu,'hover'))
+    Eu.ondragleave=_=>Rmv(Eu,'hover')
+    Eu.ondrop=e=>(Prvn2(e),Rmv(Eu,'hover'),imp(e.dataTransfer.files))
 }
 
 function Calendario(i,c){
