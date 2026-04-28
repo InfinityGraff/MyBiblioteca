@@ -372,12 +372,12 @@ function MyAlert(msg){
 
 function SelectFiles(Inpt,Call){if(Inpt.files.length > 0 && typeof Call === "function"){Call(Inpt)}} // usar isso no InputFiles abaixo (Garante que tudo entrou bem antes de Continuar)
 
-function PrepDrop(Eu,m=0){
+function PrepDrop2(Eu,m=0){
     Inn(Eu,`<div class="P Ct gap"></div><a>+ Adicionar Imagem</a><input type=file accept=image/* ${m?'multiple':''} class=NONE>`)
     let f=$('input',Eu),a=$('a',Eu),p=$('.P',Eu),
     add=F=>{if(!F)return;let b=document.createElement('div'),u=URL.createObjectURL(F)
         b.innerHTML=`<img src="${u}"><i>X</i>`,$('i',b).onclick=_=>b.remove()
-        if(!m)p.innerHTML='' ; p.appendChild(b)}
+        if(!m)p.replaceChildren();p.appendChild(b)},
     imp=fs=>[...fs].map(add)
     a.onclick=_=>f.click()
     f.onchange=e=>(imp(e.target.files),f.value='')
