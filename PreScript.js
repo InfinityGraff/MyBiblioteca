@@ -380,7 +380,7 @@ function PrepDrop2(Eu,m=0){
         if(!m)p.replaceChildren();p.appendChild(b)},
     imp=fs=>[...fs].map(add)
     a.onclick=_=>f.click()
-    f.onchange=e=>(imp(e.target.files),f.value='')
+    f.onchange=e=>(imp(e.target.files)/*,f.value=''*/)
     Eu.ondragover=e=>(Prvn2(e),Add(Eu,'hover'))
     Eu.ondragleave=_=>Rmv(Eu,'hover')
     Eu.ondrop=e=>(Prvn2(e),Rmv(Eu,'hover'),imp(e.dataTransfer.files))
