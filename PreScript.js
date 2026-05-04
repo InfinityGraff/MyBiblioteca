@@ -459,6 +459,7 @@ function ShowBrother(e,pai){var Fi = Filh(pai) ; var x = e===0?0:IdxDe(e);Fi.for
 
 function MODAL(DOM){document.body.insertAdjacentHTML("beforeend", `<div class="FModal Ct" onclick="this.remove()"><div class="Rd Rltv" onclick="event.stopPropagation()"><div class="XX Ct" onclick="XModal(this)">X</div>${DOM}</div></div>`)}
 function XModal(Eu){Eu.closest('.FModal').remove()}
+const XModal2=_=>$('.FModal')?.remove()
 
 
 // isso é pra Esperar a função terminar pra poder dar o Alert
