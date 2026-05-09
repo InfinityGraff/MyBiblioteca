@@ -92,6 +92,7 @@ textarea{overflow:hidden;resize:none}
 .noDrg{user-select: none;-webkit-user-select: none;-ms-user-select :none} /*bloquear o Drag*/
 .PT,button,.Close{cursor:pointer;user-select: none;-webkit-user-select: none;-moz-user-select: none;}
 
+
 .hov{cursor: pointer;transition: all 0.2s ease-in-out;}.hov:hover{transform: scale(1.05)}.hov:active{transform: scale(1.02)}
 .Hov{cursor: pointer;transition: all 0.2s ease-in-out;}.Hov:hover{transform: scale(1.05)}.Hov:active{transform: scale(1.02)}
 .HOV{cursor: pointer;transition: all 0.1s ease-in-out;}.HOV:hover{transform: scale(1.08)}.HOV:active{transform: scale(1.04)}
