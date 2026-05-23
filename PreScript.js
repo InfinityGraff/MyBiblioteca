@@ -1,12 +1,5 @@
-// Dia 22/03/2025
-// Dia 28/06/2025 (HexRGB)
-// Dia 13/07/2025 (UpperCase) (Novas Funcs) (ExtraClass)
-// Dia 03/08/2025 (Trazendo o templates.js) (SVG's)
-// Dia 16/10/2025 (Inner Correção)
-// Mask
-// Dia 31/12/2025
+// Dia 23/05/2026
 
-// tem q da uma Ajeitadinha pra melhorar, e ter certeza se tudo Funciona
 const Insert=e=>({ // Como Chamar a função: Insert('#onde botar').Befor ou .After('o que botar String ou Div','#depois de quem')
   Befor:(Stg,Stg2=null)=>{const r = $(Stg2,$(e)) ; typeof Stg === 'string'
     ? r ? $(e).insertBefore(document.createRange().createContextualFragment(Stg),r) : $(e).insertAdjacentHTML('beforeend',Stg)
@@ -25,6 +18,7 @@ const    $$ = (Stg,e=document)=>(typeof Stg==='string'?Array.from(e.querySelecto
 const   Inn = (e,Stg=null)=>{const el=$(e);return el?(Stg===null?el.innerHTML:(el.innerHTML=Stg)):undefined}
 const   Vll = (e,Stg=null)=>{const el=$(e);return el?(Stg===null?el.value    :(el.value    =Stg)):undefined}
 const    Nm = (e,stg=null)=>e?stg===null?e.getAttribute('name'):e.setAttribute('name',stg):undefined
+const   InM = (e,Val)=>{Nm(e,Val);Inn(e,Val)}
 const   $Tx = (Stg,e=document)=>$(Stg,e).textContent
 const   $Vl = (Stg,e=document)=>$(Stg,e).value
 const   VLl = e=>e.tagName === 'INPUT' ? (e.type === 'checkbox' ? e.checked : e.value) : e.innerText.trim()
@@ -43,57 +37,72 @@ const getClss   =(e,Stg)=>[...e.classList].find(c=>c.includes(Stg))   || null //
 const getClssIN =(e,Stg)=>[...e.classList].find(e=>e.startsWith(Stg)) || null // pegar uma Element q a Class inicia com a String
 
 //Retornos DOM Parentes_______________________________________________________________________________________________________
-const Parent=(e,n)=>Array(n).fill(0).reduce(p=>p.parentNode,e)
-const Pai=e=>Parent(e,1), Avo=e=>Parent(e,2), Bzv=e=>Parent(e,3), Ttv=e=>Parent(e,4), Vo5=e=>Parent(e,5)
+const Parent =(e,n)=>Array(n).fill(0).reduce(p=>p.parentNode,e)
+const Pai    =e=>Parent(e,1), Avo=e=>Parent(e,2), Bzv=e=>Parent(e,3), Ttv=e=>Parent(e,4), Vo5=e=>Parent(e,5)
 const SibNxt = e=>e?.nextElementSibling || null                                             // Retorna o próximo elemento irmão de 'e' (ou null se não houver)
 const SibPrv = e=>e?.previousElementSibling || null                                         // Retorna o elemento irmão anterior de 'e' (ou null se não houver)
 const SibIdx = (e,x)=>[...e?.parentElement?.children || []][x] || null                      // Retorna o irmão na posição 'x' dentro do mesmo pai de 'e' (ou null se não existir)
-const SibQSl = (e,Q)=> [...e?.parentElement?.children || []].find(s=>s.matches(Q)) || null  // Retorna o primeiro irmão de 'e' que corresponde ao seletor CSS 'Q' (ou null se nenhum corresponder)
+const SibQSl = (e,Q)=>[...e?.parentElement?.children || []].find(s=>s.matches(Q)) || null   // Retorna o primeiro irmão de 'e' que corresponde ao seletor CSS 'Q' (ou null se nenhum corresponder)
 const SibAll = e=>[...e?.parentElement?.children || []].filter(s=>s!==e)                    // Retorna todos os irmãos de 'e', exceto o próprio 'e'
+const Sib    = e=>$(e,Pai(event.target))
 
 // Ações DOM___________________________________________________________________________________________________________________
-const Onloads=e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})} // Pega todas '*' com Onload de uma Div especifica, e Roda o Onload de cada
-const Befor  =(e,Stg,Stg2)=>typeof Stg === 'string' ? $(e).insertAdjacentHTML('beforeend',Stg):$(e).insertBefore(Stg,$(Stg2,$(e)))
-const After  =(e,Stg)=>$(e).insertAdjacentHTML('afterbegin',Stg)
-const Dlt    =e=>FazArry(e).forEach(E=>E.remove())
-const DltAll =e=>$$(e).forEach(e=>e.remove())
-const InnAll =(Stg,e)=>$$(Stg).forEach(E=>E.innerHTML = e)
-const NewTag =e=>document.createElement(e)
-const NewImg =Src=>Object.assign(new Image(),{src:Src})
-const NewDiv =Cls=>Object.assign(NewTag('div'),{className:Cls})
-const Zindx  =e=>e.forEach((e,x,obj) => e.style.zIndex = obj.length-x) // acho q n funciona mais
-const InnTogg=(e,Stg,Stg2)=>$(e).innerHTML = $(e).innerHTML===Stg?Stg2:Stg
-const ValTogg=(e,Stg,Stg2)=>$(e).value     = $(e).value    ===Stg?Stg2:Stg
+const Onloads  =e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})} // Pega todas '*' com Onload de uma Div especifica, e Roda o Onload de cada
+const Befor    =(e,Stg,Stg2)=>typeof Stg === 'string' ? $(e).insertAdjacentHTML('beforeend',Stg):$(e).insertBefore(Stg,$(Stg2,$(e)))
+const After    =(e,Stg)=>$(e).insertAdjacentHTML('afterbegin',Stg)
+const Dlt      =e=>FazArry(e).forEach(E=>E.remove())
+const DltAll   =e=>$$(e).forEach(e=>e.remove())
+const InnAll   =(Stg,e)=>$$(Stg).forEach(E=>E.innerHTML = e)
+const NewTag   =e=>document.createElement(e)
+const NewImg   =Src=>Object.assign(new Image(),{src:Src})
+const NewDiv   =Cls=>Object.assign(NewTag('div'),{className:Cls})
+const Zindx    =e=>e.forEach((e,x,obj) => e.style.zIndex = obj.length-x) // acho q n funciona mais
+const InnTogg  =(e,Stg,Stg2)=>$(e).innerHTML = $(e).innerHTML===Stg?Stg2:Stg
+const ValTogg  =(e,Stg,Stg2)=>$(e).value     = $(e).value    ===Stg?Stg2:Stg
 const Clen_Ipts=e=>$$('input', e).forEach(I=>I.value='')
 const Clen_Slct=e=>$$('select',e).forEach(S=>S.selectedIndex=0)
 const Clen_Alls=e=>{Clen_Ipts(e);Clen_Slct(e)}
-const Foco   =e=>$(e).focus()
-const FocoCh0=e=>$(e).children[0].focus()
-const FocoIn =e=>e.focus()
-const FocoOut=e=>{e.focus();e.setSelectionRange(e.value.length,e.value.length)}
-const EntBlr=e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
-const Prvn=()=>event.preventDefault()
-const Prvn2 = ev=>(ev||event).preventDefault() // Acho q esse é melhor q o de cima
-
+const Foco     =e=>$(e).focus()
+const FocoCh0  =e=>$(e).children[0].focus()
+const FocoIn   =e=>e.focus()
+const FocoOut  =e=>{e.focus();e.setSelectionRange(e.value.length,e.value.length)}
+const EntBlr   =e=>KeyEntr(()=>e.blur()) // fazer Blur caso enter seja pressionado
+const Prvn     =_=>event.preventDefault()
+const Prvn2    =e=>(e||event).preventDefault() // Acho q esse é melhor q o de cima
 
 // Funções de Validações_______________________________________________________________________________________________________
-const isDOM   = v => v instanceof Element;
-const Is      =(e,stg)=>stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
-const Is_View = (e,total=false)=>{if(!e) return false;const r = e.getBoundingClientRect();return total ? (r.top >= 0 && r.left >= 0 && r.bottom <= innerHeight && r.right <= innerWidth) : (r.bottom >= 0 && r.right >= 0 && r.top <= innerHeight && r.left <= innerWidth)}
-const View_Vid=e=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].isIntersecting?'play':'pause']()).observe(v)})}
-const IsImgLod=img=>img.complete && img.naturalWidth !== 0
-const UndfNull=e=>e===undefined||e===null
-const NoVazi  =v=>v!=='' && v!==false && v!==undefined && v!==null // Não está vazio
-const IsInp   =e=>'value' in e
-const IsNum   =e=>typeof e==='number'
-const IsCnv   =e=>e.tagName === 'CANVAS'
-const KeyEntr =Call=>{if(event.code === 'Enter' || event.keyCode === 13){event.preventDefault();Call()}}
-const KeyCtrl =e=>e.button == 0 && e.ctrlKey ? true : false
-const Tecla   =k=>{const event = window.event;const keys  = {ctrl:event.ctrlKey,shift:event.shiftKey,alt:event.altKey};return keys[k]}
-const isArr   =e=>Array.isArray(e)
-const l0      =e=>e.length===0
-const Bool    =e=>typeof e === 'boolean' ? e : e=='true'
-const IsObj=e=>(typeof e === "object" && e !== null && !Array.isArray(e) && e.constructor === Object)
+const TagVoid  = new Set(["AREA","BASE","BR","COL","EMBED","HR","IMG","INPUT","LINK","META","PARAM","SOURCE","TRACK","WBR","SELECT"])
+const isDOM    = v=> v instanceof Element
+const isArr    = e=>Array.isArray(e)
+const IsInp    = e=>'value' in e
+const IsNum    = e=> typeof e === 'number'
+const Bool     = e=> typeof e === 'boolean' ? e : e=='true'
+const IsObj    = e=>(typeof e === "object" && e !== null && !Array.isArray(e) && e.constructor === Object)
+const IsCnv    = e=>e.tagName === 'CANVAS'
+const Is       = (e,stg)=>stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
+const Is_View  = (e,total=false)=>{if(!e) return false;const r = e.getBoundingClientRect();return total ? (r.top >= 0 && r.left >= 0 && r.bottom <= innerHeight && r.right <= innerWidth) : (r.bottom >= 0 && r.right >= 0 && r.top <= innerHeight && r.left <= innerWidth)}
+const View_Vid = e=>{FazArry(e).forEach(v=>{new IntersectionObserver(es=>v[es[0].isIntersecting?'play':'pause']()).observe(v)})}
+const IsImgLod = img=>img.complete && img.naturalWidth !== 0
+const l0       = e=>e.length===0
+const UndfNull = e=>e===undefined||e===null
+const NoVazi   = v=>        v!=='' && v!==false && v!==undefined && v!==null // Não está vazio
+const Vazi2    = v=>v=='-'||v =='' || v ==false || v ==undefined || v ==null // esta vazio?
+const NoVazio  = e=>(e.tagName=='INPUT' && e.value.trim()) || (e.tagName=='SELECT' && e.selectedIndex)
+const Tecla    = k=>{const event = window.event;const keys  = {ctrl:event.ctrlKey,shift:event.shiftKey,alt:event.altKey};return keys[k]}
+const KeyEntr  = Call=>{if(event.code === 'Enter' || event.keyCode === 13){event.preventDefault();Call()}}
+const KeyCtrl  = e=>e.button == 0 && e.ctrlKey ? true : false
+const Coten    = (e,Clss)=> FazArry(Clss).some(E=>e.classList.contains(E))
+const Noten    = (e,Clss)=>!FazArry(Clss).some(E=>e.classList.contains(E))
+const isJSON   = e=>typeof e=="string" && e.length > 1 && (e[0]=="{"||e[0]=="[") // é um Json em String
+const NAN      = e=>isNaN(e) ? 0 : e
+const Includ   = (e,arr)=>arr.some(v=>e.includes(v)) // como usar Includ(e,['BPrint','Grafit'])
+const TemKey   = (Obj,Key)=>Object.hasOwn(Obj,Key)
+const ObjTem   = (Obj,Stg)=>Obj?Obj[Stg]:null                    // se o Objeto Existir então Chama uma Propiredade dele
+const OBJtem   = Obj=>Obj?Obj:null
+const Acnto    = (s,Tru)=>Tru && s ? `${s}`.normalize("NFD").replace(/[\u0300-\u036f]/g,"") : s
+const Acnto2   = (t,_C)=>!_C ? t : t.replace(/a/gi,'[aáàâã]').replace(/e/gi,'[eéèê]').replace(/i/gi,'[iíìî]').replace(/o/gi,'[oóòôõ]').replace(/u/gi,'[uúùû]')
+const todosIguais = arr => arr.every(v => v === arr[0])
+
 //Funções Check
 const IsChkTru   =e=>e.checked==true
 const IsChkFal   =e=>e.checked==false
@@ -101,12 +110,10 @@ const ChkTru     =e=>e.checked=true
 const ChkFal     =e=>e.checked=false
 const ChkTru_Clik=e=>{ChkTru(e) ; DispClick(e)}
 const ChkFal_Clik=e=>{ChkFal(e) ; DispClick(e)}
-const AddReqr=e=>e.forEach(e=>{$(e).required = true })
-const EscReqr=e=>e.forEach(e=>{$(e).required = false})
-const Coten =(e,Clss)=> FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
-const Noten =(e,Clss)=>!FazArry(Clss).some(E=>e.classList.contains(E)) // NEXBEE
-const TestPass = (e,ignore=[]) => ["Não pode estar vazio","Ter pelo menos 8 caracteres","Ter pelo menos uma letra maiúscula","Ter pelo menos um caractere especial"].map((l,i)=>(!ignore.includes(i) && ![+!!e,+!!(e.length>=8),+(/[A-Z]/.test(e)&&e.length>1),+(/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)][i] ? l : null)).filter(Boolean) // no segundo argumento posso iguinorar alguma condição
-const TestEmail=e=>["@gmail.com","@yahoo.com","@yahoo.co.uk","@outlook.com","@hotmail.com","@live.com","@icloud.com","@me.com","@aol.com","@protonmail.com","@zoho.com","@mail.com","@gmx.com","@yandex.com"].some(E=>e.endsWith(E))
+const AddReqr    =e=>e.forEach(e=>{$(e).required = true })
+const EscReqr    =e=>e.forEach(e=>{$(e).required = false})
+const TestPass   =(e,ignore=[]) => ["Não pode estar vazio","Ter pelo menos 8 caracteres","Ter pelo menos uma letra maiúscula","Ter pelo menos um caractere especial"].map((l,i)=>(!ignore.includes(i) && ![+!!e,+!!(e.length>=8),+(/[A-Z]/.test(e)&&e.length>1),+(/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)][i] ? l : null)).filter(Boolean) // no segundo argumento posso iguinorar alguma condição
+const TestEmail  =e=>["@gmail.com","@yahoo.com","@yahoo.co.uk","@outlook.com","@hotmail.com","@live.com","@icloud.com","@me.com","@aol.com","@protonmail.com","@zoho.com","@mail.com","@gmx.com","@yandex.com"].some(E=>e.endsWith(E))
 
 //Display Show None________________________________________________________________________________________________________________
 function FazArry(e){return Array.isArray(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
@@ -144,34 +151,43 @@ const ATVtrue=(Div    ,Valid)=>Valid ? ATV(Div)     : DTV(Div)
 const N_Tru=(e,Tru)=>Tru ? Rmv_N(e) : Add_N(e)
 const N_Fal=(e,Fal)=>Fal ? Add_N(e) : Rmv_N(e)
 
-
 //Funções de Objeto e Array____________________________________________________________________________________________________
-const ObjKey =e=>Object.keys(e)                              // Converte todos Keys de Objetos em um array
-const ObjVal =e=>Object.values(e)                            // Converte todos value de Objetos em um array
-const ObjEtr =e=>Object.entries(e)                           // Converte um objeto em um array de pares [key,val]
-const For    =e=>Array.from({length:e},(_,x)=>x)             // Converte 'number' em um array de 0 até 'number'
-const Fbj    =obj=>For(ObjKey(obj).length)                   // Faz a Mesma coisa só que com a Chave do Objeto
-const IdxDe  =e=>Array.from(Pai(e).children).indexOf(e)      // Passo (div) Retorna o Index dela
-const Filh   =e=>Array.from($(e).children)                   
-const FIdx   =(Arr,Stg)=>Arr.findIndex(e=>e===Stg)           // Retorna o Index de um item em um array baseado na String
-const ObjOrdn=(obj,Arr)=>Arr.map(k=>obj[k]).filter(v=>v!==undefined) // Ordena key de Objeto de acordo com um array
-const MAX=(arry,K)=>arry.reduce((max,e)=>Math.max(max,e[K]),0) // Retorna o Maior numero de uma determinada Posição de um Objeto
-const UniqArry=(arr,chk)=>chk?arr.filter((e,x,eu)=>eu.findIndex(a=>a[0]===e[0])===x):Array.from(new Set(arr.map(JSON.stringify)),JSON.parse)
-const Uniq=arr=>[...new Set(arr)]                            // cria um array com valores Unicos
-const ObjTem=(obj,Stg)=>obj?obj[Stg]:null                    // se o Objeto Existir então Chama uma Propiredade dele
-const OBJtem=obj=>obj?obj:null
-const MaxNum=e=>e.reduce((a,b)=>(Number(a)>Number(b)?Number(a):Number(b)))
-const SOMA=(Arry,Call)=>Arry.reduce((sum,e)=>sum+(Call?Number(Call(e)):Number(e)),0)
-const SOMA_Obj=(ArrObj,Key)=>ArrObj.reduce((soma,obj)=>Number(soma)+Number(obj[Key]||0),0) // somar todos os valores de um determinado key [CRIEI UMA NOVA Q TÁ NO LIBGRAFF]
-const Angrm=arr=>arr.length===0?[[]]:arr.flatMap((e,x)=>Angrm([...arr.slice(0,x),...arr.slice(x+1)]).map(i=>[e,...i]))
-const ArrObj_ArrArr=(obj)=>{const keys = ObjKey(obj[0]);const sortedObj = obj.map(e=>ObjEtr(e).sort((a,b)=>keys.indexOf(a[0]) - keys.indexOf(b[0])).map(entry=>entry[1]));return [keys,...sortedObj]}
-const cRepet  =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc},{}) // Conta quantas vezes cada item aparece no array
-const cRepetID=arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
-const OrdnCol=(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
-const zipObj=(Key,Val)=>Object.fromEntries(Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
-const NULL__=a=>a.map(o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k,v??""])))
-const SOMA_Obj2 = (ArrObj, Key) => Array.isArray(ArrObj) ? ArrObj.reduce((soma, obj) => Number(soma) + Number(obj[Key] || 0), 0) : 0;  // ESSA JÁ TAVA LÁ ANTES
-const ContFreq = (ArrObj,k)=>ArrObj.reduce((a,e)=>(e[k]?.trim()&&(a[e[k].trim()]=(a[e[k].trim()]||0)+1),a),{}) // Contagem de frequência só recebe um array de Objetos
+const ObjKey   =e=>Object.keys(e)                              // Converte todos Keys de Objetos em um array
+const ObjVal   =e=>Object.values(e)                            // Converte todos value de Objetos em um array
+const ObjEtr   =e=>Object.entries(e)                           // Converte um objeto em um array de pares [key,val]
+const For      =e=>Array.from({length:e},(_,x)=>x)             // Converte 'number' em um array de 0 até 'number'
+const Fbj      =obj=>For(ObjKey(obj).length)                   // Faz a Mesma coisa só que com a Chave do Objeto
+const IdxDe    =e=>Array.from(Pai(e).children).indexOf(e)      // Passo (div) Retorna o Index dela
+const Filh     =e=>Array.from($(e).children)                   
+const getArr   =v=>Array.isArray(v) ? v : []
+const FIdx     =(Arr,Stg)=>Arr.findIndex(e=>e===Stg)           // Retorna o Index de um item em um array baseado na String
+const ObjOrdn  =(obj,Arr)=>Arr.map(k=>obj[k]).filter(v=>v!==undefined) // Ordena key de Objeto de acordo com um array
+const Uniq     =arr=>[...new Set(arr)]                            // cria um array com valores Unicos REPETIDOS com o deBAIXO
+const MAX      =(arry,K)=>arry.reduce((max,e)=>Math.max(max,e[K]),0) // Retorna o Maior numero de uma determinada Posição de um Objeto
+const SOMA     =(Arry,Call)=>Arry.reduce((sum,e)=>sum+(Call?Number(Call(e)):Number(e)),0)
+const MaxNum   =e=>e.reduce((a,b)=>(Number(a)>Number(b)?Number(a):Number(b)))
+const SOMA_Obj =(Objs,Key)=>Array.isArray(Objs) ? Objs.reduce((soma,obj)=>Number(soma)+Number(obj[Key]||0),0) : 0  // Soma todas as Keys de um Array de Objetos
+const Angrm    =arr=>arr.length===0?[[]]:arr.flatMap((e,x)=>Angrm([...arr.slice(0,x),...arr.slice(x+1)]).map(i=>[e,...i]))
+const UniqAvnc =Arr=>ObjEtr(Arr.reduce((a,v)=>(a[v]=(a[v]||0)+1,a),{})).map(([val,qnt])=>({qnt,val})).sort((a,b)=>b.qnt-a.qnt) // fazer Unique retornando um objeto com a quantidade
+const cRepet   =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc},{}) // Conta quantas vezes cada item aparece no array
+const cRepetID =arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
+const NULL__   =a=>a.map(o=>Object.fromEntries(ObjEtr(o).map(([k,v])=>[k,v??""])))
+const ContFreq =(Objs,k)=>Objs.reduce((a,e)=>(e[k]?.trim()&&(a[e[k].trim()]=(a[e[k].trim()]||0)+1),a),{}) // Contagem de frequência só recebe um array de Objetos
+const ArrtoOBJ =(arr,col)=>{return arr.reduce((acc, el) => {acc[el[col]] = el;return acc;}, {})}
+const NormlOBJ =(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if (isJSON(v)) {try { v = JSON.parse(v) } catch {}} if (Array.isArray(v)){(Colet[k] ??= []).push(...v)} obj[k] = v};return obj}
+const CleanObj        = Obj=>{return Object.fromEntries(ObjEtr(Obj).filter(([_,v]) => v !== "" && v !== undefined && v !== null))}
+const FiltrarR =(Arr,Cols)=>Arr.map(o=>Object.fromEntries(Cols.map(c=>[c,o[c]]))) // filtrar a tabela, para as colunas que foi passada no argumento
+const ArrObj_ArrArr   =(obj)=>{const keys = ObjKey(obj[0]);const sortedObj = obj.map(e=>ObjEtr(e).sort((a,b)=>keys.indexOf(a[0]) - keys.indexOf(b[0])).map(entry=>entry[1]));return [keys,...sortedObj]}
+/*🧩*/const OrdnCol         =(arar,ord)=>arar.map(row=>ord.map(col=>row[arar[0].indexOf(col)])) // Reordena as Colunas de uma Tabela (a Ordem das colunas futuramente vai ser Definida pelo Usuário)
+/*🧩*/const ArrObj_OrdnCol  =(Obj,Ordn)=>{const K = ObjKey(Obj[0]) ; const x = Ordn.map   (col=>K.indexOf( col)) ; return [Ordn,...Obj.map(obj=>x.map(i => obj[K[i]]))]} // USO uma vez só
+/*🧩*/const ArrObj_OrdnCol2 =(Obj,Ordn)=>{const K = ObjKey(Obj[0]) ; const x = Ordn.filter(col=>K.includes(col)) ; return [x   ,...Obj.map(obj=>x.map(col=>obj[col ]))]} // USO uma vez só // Cria uma tabela ordenada a partir de um array de objetos
+const ObjValToArr     = o =>Object.fromEntries(ObjEtr(o).map(([k,v]) => [k, [].concat(v)])) // Transforma todos os valores do objeto em array (ex: {a:1} → {a:[1]})
+const is_ArrStg       = v =>{if (typeof v !== 'string' || !v.trim()) return null ; try {const v = JSON.parse(decodeURIComponent(v)) ; return Array.isArray(v) ? v : null} catch {return null}}
+//*⛔🧩*/const ArrToObj =(arr,keys)=>Object.fromEntries(keys.map((k,i)=>[k,arr[i]])) // acho que REPETIDAS
+//*⛔🧩*/const zipObj   =(Key,Val )=>Object.fromEntries( Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
+//*⛔🧩*/const UniqArry =(arr,chk)=>chk?arr.filter((e,x,eu)=>eu.findIndex(a=>a[0]===e[0])===x):Array.from(new Set(arr.map(JSON.stringify)),JSON.parse) // talvez repetido com Uniq()
+
+
 
 //FuncStorage________________________________________________________________________________________________________________
 const StogeGet=e=>localStorage.getItem(e)
@@ -179,7 +195,7 @@ const StogeRmv=e=>localStorage.removeItem(e)
 const StogeSet=(e,val)=>localStorage.setItem(e,val)
 
 // Funções de Rects________________________________________________________________________________________________________________
-const Rect=e=>e.getBoundingClientRect()
+const Rect =e=>e.getBoundingClientRect()
 const RectL=e=>Rect(e).left
 const RectT=e=>Rect(e).top
 const RectW=e=>Rect(e).width
@@ -195,7 +211,8 @@ const Dispinput=e=>e.dispatchEvent(new Event('input',{bubbles:true}))
 //Funções Conversor de Valores_________________________________________________________________________________________________
 const    Ared = e=> Math.floor(e)
 const      Cm = e=> parseFloat(e).toFixed(2).replace('.',',')
-const      RS_= e=>'R$ '+e.toLocaleString('pt-BR',{minimumFractionDigits:2})
+const     RS_ = e=>'R$ '+e.toLocaleString('pt-BR',{minimumFractionDigits:2})
+const    NUMM = e=>parseFloat(e).toFixed(2)
 const      RS = e=> `R$ ${Cm(e)}`
 const   Tm_RS = e=>`<div class="Ct"><p class="RS">R$</p><a>${Cm(e)}</a></div>`
 const  Tm_RS2 = e=>`<div class="RS Ct"><i class="rs">R$</i><b class="rs">${Cm(e).split(',')[0]}</b><i class="rs">,${Cm(e).split(',')[1]}</i></div>`
@@ -461,33 +478,10 @@ function MODAL(DOM){document.body.insertAdjacentHTML("beforeend", `<div class="F
 function XModal(Eu){Eu.closest('.FModal').remove()}
 const XModal2=_=>$('.FModal')?.remove()
 
-
 // isso é pra Esperar a função terminar pra poder dar o Alert
 const ShowTime2=(e,sec)=>{Show(e);requestAnimationFrame(()=>{Add($(e),"show")});setTimeout(()=>{Rmv($(e),"show");setTimeout(()=>{None(e)},400)}, sec*1000)}
-
-
 const Seguro=v=>(isFinite(v) && !Number.isNaN(v)) ? v : 0  // Provavelmente oq eu Faço aqui já tem em Num() talvez n o Infinity mas é só adicionar lá
 const MSRX = stg => Number(stg.replace('ms','').trim())    // isso também só Converte em Numero, eu Poderia testar isso usando Num e provavelmente esse ms, poderia trocar pra remover todas as letras, isso tbm removeria R$ depois eu vejo lá
-
-
-
-
-// Pra analizar_______________________________________________________________________________________________________
-  function Delay(sec){return new Promise(r => setTimeout(r, sec*1000))} //NEXBEE
-  async function Dellay(Sec,Call){await new Promise(r=>setTimeout(r, Sec* 1000));Call()} //NEXBEE
-  function ResizeArea(e){e.style.height = e.scrollHeight + 'px';e.style.width = e.scrollWidth + 'px'} //GABARITO
-  function InptsVazio(e){$$(e).forEach(e=>{if(e.value.trim()===""){Add(e,'Error') ; return true}else{Rmv(e,'Error') ; return false}})} //GABARITO
-  function CssFont(e,Stg){$(e).style.fontFamily=Stg} //GABARITO
-  const Bkg = (e,bg,txt,rd) =>{(e.style.backgroundColor = bg, txt && (e.style.color = txt), rd && (e.style.borderColor = rd))}
-  const ArrtoOBJ=(arr,col)=>{return arr.reduce((acc, el) => {acc[el[col]] = el;return acc;}, {})}
-  const ArrObj_OrdnCol=(Obj,Ordn)=>{const K = Object.keys(Obj[0]) ; const x = Ordn.map(col=>K.indexOf(col)) ; return [Ordn,...Obj.map(obj => x.map(i => obj[K[i]]))]}
-  const Sib     =e=>$(e,Pai(event.target))
-  const RxExt   =e=>e.split(".").pop().toLowerCase() // pegar a Extensão do nome de um arquivo tipo .webp
-  const Includ=(e,arr)=>arr.some(v=>e.includes(v)) // como usar Includ(e,['BPrint','Grafit'])
-  const todosIguais = arr => arr.every(v => v === arr[0])
-  const sum=arr=>arr.reduce((acc,el)=>acc+el,0)
-  const NAN=e=>isNaN(e) ? 0 : e
-  const RmvLinByID=(arr,id)=>{const x = arr.findIndex(e => e.Id === id);if (x !== -1) arr.splice(x, 1)}
 
 // evita erro de XSS
 function XSS(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;")}
@@ -505,7 +499,6 @@ function baixarJSON(dados, nomeArquivo){ // baixa arrays e objetos e converte em
   URL.revokeObjectURL(url)
 }
 
-
 const InptImg = cb => {
     const i = document.createElement('input');
     i.type = 'file'; i.accept = 'image/*';
@@ -520,11 +513,26 @@ const InptImg = cb => {
     i.click();
 };
 
+const TempoResta =d=> {
+  if(!d) return ''
+  const n = new Date(), a = new Date(d.length == 10 ? d + 'T23:59:59' : d), ms = a - n;
+  if (ms <= 0) return 'Expirado';
+  const h = ms / 36e5, dInt = h / 24 | 0;
+  return h >= 24 ? `${dInt} Dia${dInt-1?'s':''}`
+       : h >= 1  ? `${h|0} Hora${(h|0)-1?'s':''}`
+                 : `${(ms/6e4|0)||1} Minuto${((ms/6e4|0)||1)-1?'s':''}`;
+};
 
 
-const getArr  =v=>Array.isArray(v) ? v : []
-const ArrToObj=(arr,keys)=>Object.fromEntries(keys.map((k,i)=>[k, arr[i]]))
-const NUMM    =e=>parseFloat(e).toFixed(2)
-const isJSON  =e=>typeof e=="string" && e.length > 1 && (e[0]=="{"||e[0]=="[")
-
-
+// Pra analizar_______________________________________________________________________________________________________
+  function Delay(sec){return new Promise(r => setTimeout(r, sec*1000))} //NEXBEE
+  async function Dellay(Sec,Call){await new Promise(r=>setTimeout(r, Sec* 1000));Call()} //NEXBEE
+  function ResizeArea(e){e.style.height = e.scrollHeight + 'px';e.style.width = e.scrollWidth + 'px'} //GABARITO
+  function InptsVazio(e){$$(e).forEach(e=>{if(e.value.trim()===""){Add(e,'Error') ; return true}else{Rmv(e,'Error') ; return false}})} //GABARITO
+  function CssFont(e,Stg){$(e).style.fontFamily=Stg} //GABARITO
+  const Bkg     =(e,bg,txt,rd) =>{(e.style.backgroundColor = bg, txt && (e.style.color = txt), rd && (e.style.borderColor = rd))}
+  const RxExt   =e=>e.split(".").pop().toLowerCase() // pegar a Extensão do nome de um arquivo tipo .webp
+  const RangeDat=(arr,In,Out)=> isArr(arr) ? arr.filter(o=>o.Data>=In&&o.Data<=Out) : arr>=In&&arr<=Out
+  const RangeMes=(arr,Mes)=>{if(!Mes){return arr} ; return isArr(arr) ? arr.filter(o=>o.Data?.slice(5,7)==Mes):arr?.Data?.slice(5,7)==Mes}
+  //const RmvLinByID=(arr,id)=>{const x = arr.findIndex(e => e.Id === id);if (x !== -1) arr.splice(x, 1)} // OBSAOLETO
+  
