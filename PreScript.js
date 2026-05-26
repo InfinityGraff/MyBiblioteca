@@ -12,6 +12,12 @@ const LOG=(...stg)=>console.log(...stg)
 const ERR=(...stg)=>console.error(...stg)
 const MS=IN=>{const ms = (performance.now()-IN) ; if(ms<0.5) ; if(ms<1000){return ms.toFixed(2)+'ms'} ; return (ms/1000).toFixed(2)+'s'}
 
+// Strings________________________________________________________________________________________________________________
+const ABC     ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const Emails  = ["@gmail.com","@yahoo.com","@yahoo.co.uk","@outlook.com","@hotmail.com","@live.com","@icloud.com","@me.com","@aol.com","@protonmail.com","@zoho.com","@mail.com","@gmx.com","@yandex.com"]
+const ErrPass = ["Não pode estar vazio","Ter pelo menos 8 caracteres","Ter pelo menos uma letra maiúscula","Ter pelo menos um caractere especial"]
+const TagVoid = new Set(["AREA","BASE","BR","COL","EMBED","HR","IMG","INPUT","LINK","META","PARAM","SOURCE","TRACK","WBR","SELECT"])
+
 //Retornos DOM________________________________________________________________________________________________________________
 const     $ = (Stg,e=document)=>(typeof Stg==='string'?e.querySelector(Stg):Stg)
 const    $$ = (Stg,e=document)=>(typeof Stg==='string'?Array.from(e.querySelectorAll(Stg)):Stg)
@@ -71,7 +77,6 @@ const Prvn     =_=>event.preventDefault()
 const Prvn2    =e=>(e||event).preventDefault() // Acho q esse é melhor q o de cima
 
 // Funções de Validações_______________________________________________________________________________________________________
-const TagVoid  = new Set(["AREA","BASE","BR","COL","EMBED","HR","IMG","INPUT","LINK","META","PARAM","SOURCE","TRACK","WBR","SELECT"])
 const isDOM    = v=> v instanceof Element
 const isArr    = e=>Array.isArray(e)
 const IsInp    = e=>'value' in e
@@ -101,6 +106,7 @@ const ObjTem   = (Obj,Stg)=>Obj?Obj[Stg]:null                    // se o Objeto 
 const OBJtem   = Obj=>Obj?Obj:null
 const Acnto    = (s,Tru)=>Tru && s ? `${s}`.normalize("NFD").replace(/[\u0300-\u036f]/g,"") : s
 const Acnto2   = (t,_C)=>!_C ? t : t.replace(/a/gi,'[aáàâã]').replace(/e/gi,'[eéèê]').replace(/i/gi,'[iíìî]').replace(/o/gi,'[oóòôõ]').replace(/u/gi,'[uúùû]')
+const Acnto3   = t=>               t.replace(/a/gi,'[aáàâã]').replace(/e/gi,'[eéèê]').replace(/i/gi,'[iíìî]').replace(/o/gi,'[oóòôõ]').replace(/u/gi,'[uúùû]')
 const todosIguais = arr => arr.every(v => v === arr[0])
 
 //Funções Check
@@ -112,8 +118,8 @@ const ChkTru_Clik=e=>{ChkTru(e) ; DispClick(e)}
 const ChkFal_Clik=e=>{ChkFal(e) ; DispClick(e)}
 const AddReqr    =e=>e.forEach(e=>{$(e).required = true })
 const EscReqr    =e=>e.forEach(e=>{$(e).required = false})
-const TestPass   =(e,ignore=[]) => ["Não pode estar vazio","Ter pelo menos 8 caracteres","Ter pelo menos uma letra maiúscula","Ter pelo menos um caractere especial"].map((l,i)=>(!ignore.includes(i) && ![+!!e,+!!(e.length>=8),+(/[A-Z]/.test(e)&&e.length>1),+(/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)][i] ? l : null)).filter(Boolean) // no segundo argumento posso iguinorar alguma condição
-const TestEmail  =e=>["@gmail.com","@yahoo.com","@yahoo.co.uk","@outlook.com","@hotmail.com","@live.com","@icloud.com","@me.com","@aol.com","@protonmail.com","@zoho.com","@mail.com","@gmx.com","@yandex.com"].some(E=>e.endsWith(E))
+const TestPass   =(e,ignore=[])=>ErrPass.map((l,i)=>(!ignore.includes(i) && ![+!!e,+!!(e.length>=8),+(/[A-Z]/.test(e)&&e.length>1),+(/[!@#$%^&*(),.?":{}|<>]/.test(e)&&e.length>1)][i] ? l : null)).filter(Boolean) // no segundo argumento posso iguinorar alguma condição
+const TestEmail  =e=>Emails.some(E=>e.endsWith(E))
 
 //Display Show None________________________________________________________________________________________________________________
 function FazArry(e){return Array.isArray(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
@@ -162,6 +168,7 @@ const Filh     =e=>Array.from($(e).children)
 const getArr   =v=>Array.isArray(v) ? v : []
 const FIdx     =(Arr,Stg)=>Arr.findIndex(e=>e===Stg)           // Retorna o Index de um item em um array baseado na String
 const ObjOrdn  =(obj,Arr)=>Arr.map(k=>obj[k]).filter(v=>v!==undefined) // Ordena key de Objeto de acordo com um array
+const OrdCols=(obj,Ordn)=>ObjEtr(obj).filter(([k])=>Ordn.includes(k)).sort(([a],[b])=>Ordn.indexOf(a)-Ordn.indexOf(b))
 const Uniq     =arr=>[...new Set(arr)]                            // cria um array com valores Unicos REPETIDOS com o deBAIXO
 const MAX      =(arry,K)=>arry.reduce((max,e)=>Math.max(max,e[K]),0) // Retorna o Maior numero de uma determinada Posição de um Objeto
 const SOMA     =(Arry,Call)=>Arry.reduce((sum,e)=>sum+(Call?Number(Call(e)):Number(e)),0)
@@ -174,7 +181,8 @@ const cRepetID =arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) 
 const NULL__   =a=>a.map(o=>Object.fromEntries(ObjEtr(o).map(([k,v])=>[k,v??""])))
 const ContFreq =(Objs,k)=>Objs.reduce((a,e)=>(e[k]?.trim()&&(a[e[k].trim()]=(a[e[k].trim()]||0)+1),a),{}) // Contagem de frequência só recebe um array de Objetos
 const ArrtoOBJ =(arr,col)=>{return arr.reduce((acc, el) => {acc[el[col]] = el;return acc;}, {})}
-const NormlOBJ =(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if (isJSON(v)) {try { v = JSON.parse(v) } catch {}} if (Array.isArray(v)){(Colet[k] ??= []).push(...v)} obj[k] = v};return obj}
+const NormlOBJ =(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if(isJSON(v)){try{v=JSON.parse(v)}catch{}};if(Array.isArray(v)){(Colet[k] ??= []).push(...v)} obj[k] = v};return obj}
+const NormlOBJ2=(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if(isJSON(v)){try{v=JSON.parse(v)}catch{}};if(v&&typeof v=='object'&&!Array.isArray(v))v=[v];if(Array.isArray(v))(Colet[k]??=[]).push(...v);obj[k]=v}return obj}
 const CleanObj        = Obj=>{return Object.fromEntries(ObjEtr(Obj).filter(([_,v]) => v !== "" && v !== undefined && v !== null))}
 const FiltrarR =(Arr,Cols)=>Arr.map(o=>Object.fromEntries(Cols.map(c=>[c,o[c]]))) // filtrar a tabela, para as colunas que foi passada no argumento
 const ArrObj_ArrArr   =(obj)=>{const keys = ObjKey(obj[0]);const sortedObj = obj.map(e=>ObjEtr(e).sort((a,b)=>keys.indexOf(a[0]) - keys.indexOf(b[0])).map(entry=>entry[1]));return [keys,...sortedObj]}
@@ -186,8 +194,6 @@ const is_ArrStg       = v =>{if (typeof v !== 'string' || !v.trim()) return null
 //*⛔🧩*/const ArrToObj =(arr,keys)=>Object.fromEntries(keys.map((k,i)=>[k,arr[i]])) // acho que REPETIDAS
 //*⛔🧩*/const zipObj   =(Key,Val )=>Object.fromEntries( Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
 //*⛔🧩*/const UniqArry =(arr,chk)=>chk?arr.filter((e,x,eu)=>eu.findIndex(a=>a[0]===e[0])===x):Array.from(new Set(arr.map(JSON.stringify)),JSON.parse) // talvez repetido com Uniq()
-
-
 
 //FuncStorage________________________________________________________________________________________________________________
 const StogeGet=e=>localStorage.getItem(e)
@@ -372,6 +378,7 @@ const Tm_Switch =(e,l=[],tg,p,px)=>{
     e._tg=tg
 }
 function MyAlert(msg){
+    LOG(msg)
     if(!document.querySelector('#alertCSS')){
         const css = `.MyAlert{position:fixed;bottom:20px;right:20px;font-size:14px;opacity:0;transform:translateY(20px);transition:all 0.4s ease;z-index:99999}.MyAlert.Atv{opacity:1;transform:translateY(0)}`
         const style = document.createElement('style')
@@ -536,3 +543,7 @@ const TempoResta =d=> {
   const RangeMes=(arr,Mes)=>{if(!Mes){return arr} ; return isArr(arr) ? arr.filter(o=>o.Data?.slice(5,7)==Mes):arr?.Data?.slice(5,7)==Mes}
   //const RmvLinByID=(arr,id)=>{const x = arr.findIndex(e => e.Id === id);if (x !== -1) arr.splice(x, 1)} // OBSAOLETO
   
+const ClrObj    =obj=>Object.fromEntries(ObjKey(obj).map(k=>[k,''])) // Biblioteca
+const RmvExt    =e=>e.replace(/\.[^/.]+$/,'') // Biblioteca
+const safeS     =e=>encodeURIComponent(JSON.stringify(e)) // Biblioteca
+const ArrBolean = v =>Array.isArray(v) && v.length > 0 // Biblioteca
