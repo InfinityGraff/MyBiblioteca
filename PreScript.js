@@ -82,7 +82,7 @@ const isArr    = e=>Array.isArray(e)
 const IsInp    = e=>'value' in e
 const IsNum    = e=> typeof e === 'number'
 const Bool     = e=> typeof e === 'boolean' ? e : e=='true'
-const IsObj    = e=>(typeof e === "object" && e !== null && !Array.isArray(e) && e.constructor === Object)
+const IsObj    = e=>(typeof e === "object" && e !== null && !isArr(e) && e.constructor === Object)
 const IsCnv    = e=>e.tagName === 'CANVAS'
 const Is       = (e,stg)=>stg[0]==='.' ? Coten(e,stg.slice(1)) : stg[0]==='#' ? e.id===stg.slice(1) : e.tagName===stg.toUpperCase()
 const Is_View  = (e,total=false)=>{if(!e) return false;const r = e.getBoundingClientRect();return total ? (r.top >= 0 && r.left >= 0 && r.bottom <= innerHeight && r.right <= innerWidth) : (r.bottom >= 0 && r.right >= 0 && r.top <= innerHeight && r.left <= innerWidth)}
@@ -122,7 +122,7 @@ const TestPass   =(e,ignore=[])=>ErrPass.map((l,i)=>(!ignore.includes(i) && ![+!
 const TestEmail  =e=>Emails.some(E=>e.endsWith(E))
 
 //Display Show None________________________________________________________________________________________________________________
-function FazArry(e){return Array.isArray(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
+function FazArry(e){return isArr(e)?e:e instanceof HTMLCollection||e instanceof NodeList?Array.from(e):/^\./.test(e)?$$(e):[e]}
 function None(e,b){if(b){Show(b)};FazArry(e).forEach(E=>{if(typeof E==='string'){const EE=$(E);EE.style.display='none'}else{E.style.display='none'}})}
 function Show(e,b){if(b){None(b)};FazArry(e).forEach(E=>{if(typeof E==='string'){const EE=$(E);EE.style.display='flex'}else{E.style.display='flex'}})}
 function ShowTrue(e,Valid,b=null){if(Valid){Show(e);if(b!==null){None(b)}}else{None(e);if(b!==null){Show(b)}}}
@@ -165,7 +165,7 @@ const For      =e=>Array.from({length:e},(_,x)=>x)             // Converte 'numb
 const Fbj      =obj=>For(ObjKey(obj).length)                   // Faz a Mesma coisa só que com a Chave do Objeto
 const IdxDe    =e=>Array.from(Pai(e).children).indexOf(e)      // Passo (div) Retorna o Index dela
 const Filh     =e=>Array.from($(e).children)                   
-const getArr   =v=>Array.isArray(v) ? v : []
+const getArr   =v=>isArr(v) ? v : []
 const FIdx     =(Arr,Stg)=>Arr.findIndex(e=>e===Stg)           // Retorna o Index de um item em um array baseado na String
 const ObjOrdn  =(obj,Arr)=>Arr.map(k=>obj[k]).filter(v=>v!==undefined) // Ordena key de Objeto de acordo com um array
 const OrdCols=(obj,Ordn)=>ObjEtr(obj).filter(([k])=>Ordn.includes(k)).sort(([a],[b])=>Ordn.indexOf(a)-Ordn.indexOf(b))
@@ -173,7 +173,7 @@ const Uniq     =arr=>[...new Set(arr)]                            // cria um arr
 const MAX      =(arry,K)=>arry.reduce((max,e)=>Math.max(max,e[K]),0) // Retorna o Maior numero de uma determinada Posição de um Objeto
 const SOMA     =(Arry,Call)=>Arry.reduce((sum,e)=>sum+(Call?Number(Call(e)):Number(e)),0)
 const MaxNum   =e=>e.reduce((a,b)=>(Number(a)>Number(b)?Number(a):Number(b)))
-const SOMA_Obj =(Objs,Key)=>Array.isArray(Objs) ? Objs.reduce((soma,obj)=>Number(soma)+Number(obj[Key]||0),0) : 0  // Soma todas as Keys de um Array de Objetos
+const SOMA_Obj =(Objs,Key)=>isArr(Objs) ? Objs.reduce((soma,obj)=>Number(soma)+Number(obj[Key]||0),0) : 0  // Soma todas as Keys de um Array de Objetos
 const Angrm    =arr=>arr.length===0?[[]]:arr.flatMap((e,x)=>Angrm([...arr.slice(0,x),...arr.slice(x+1)]).map(i=>[e,...i]))
 const UniqAvnc =Arr=>ObjEtr(Arr.reduce((a,v)=>(a[v]=(a[v]||0)+1,a),{})).map(([val,qnt])=>({qnt,val})).sort((a,b)=>b.qnt-a.qnt) // fazer Unique retornando um objeto com a quantidade
 const cRepet   =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc},{}) // Conta quantas vezes cada item aparece no array
@@ -181,8 +181,8 @@ const cRepetID =arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) 
 const NULL__   =a=>a.map(o=>Object.fromEntries(ObjEtr(o).map(([k,v])=>[k,v??""])))
 const ContFreq =(Objs,k)=>Objs.reduce((a,e)=>(e[k]?.trim()&&(a[e[k].trim()]=(a[e[k].trim()]||0)+1),a),{}) // Contagem de frequência só recebe um array de Objetos
 const ArrtoOBJ =(arr,col)=>{return arr.reduce((acc, el) => {acc[el[col]] = el;return acc;}, {})}
-const NormlOBJ =(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if(isJSON(v)){try{v=JSON.parse(v)}catch{}};if(Array.isArray(v)){(Colet[k] ??= []).push(...v)} obj[k] = v};return obj}
-const NormlOBJ2=(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if(isJSON(v)){try{v=JSON.parse(v)}catch{}};if(v&&typeof v=='object'&&!Array.isArray(v))v=[v];if(Array.isArray(v))(Colet[k]??=[]).push(...v);obj[k]=v}return obj}
+const NormlOBJ =(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if(isJSON(v)){try{v=JSON.parse(v)}catch{}};if(isArr(v)){(Colet[k] ??= []).push(...v)} obj[k] = v};return obj}
+const NormlOBJ2=(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if(isJSON(v)){try{v=JSON.parse(v)}catch{}};if(v&&typeof v=='object'&&!isArr(v))v=[v];if(isArr(v))(Colet[k]??=[]).push(...v);obj[k]=v}return obj}
 const CleanObj        = Obj=>{return Object.fromEntries(ObjEtr(Obj).filter(([_,v]) => v !== "" && v !== undefined && v !== null))}
 const FiltrarR =(Arr,Cols)=>Arr.map(o=>Object.fromEntries(Cols.map(c=>[c,o[c]]))) // filtrar a tabela, para as colunas que foi passada no argumento
 const ArrObj_ArrArr   =(obj)=>{const keys = ObjKey(obj[0]);const sortedObj = obj.map(e=>ObjEtr(e).sort((a,b)=>keys.indexOf(a[0]) - keys.indexOf(b[0])).map(entry=>entry[1]));return [keys,...sortedObj]}
@@ -190,7 +190,7 @@ const ArrObj_ArrArr   =(obj)=>{const keys = ObjKey(obj[0]);const sortedObj = obj
 /*🧩*/const ArrObj_OrdnCol  =(Obj,Ordn)=>{const K = ObjKey(Obj[0]) ; const x = Ordn.map   (col=>K.indexOf( col)) ; return [Ordn,...Obj.map(obj=>x.map(i => obj[K[i]]))]} // USO uma vez só
 /*🧩*/const ArrObj_OrdnCol2 =(Obj,Ordn)=>{const K = ObjKey(Obj[0]) ; const x = Ordn.filter(col=>K.includes(col)) ; return [x   ,...Obj.map(obj=>x.map(col=>obj[col ]))]} // USO uma vez só // Cria uma tabela ordenada a partir de um array de objetos
 const ObjValToArr     = o =>Object.fromEntries(ObjEtr(o).map(([k,v]) => [k, [].concat(v)])) // Transforma todos os valores do objeto em array (ex: {a:1} → {a:[1]})
-const is_ArrStg       = v =>{if (typeof v !== 'string' || !v.trim()) return null ; try {const v = JSON.parse(decodeURIComponent(v)) ; return Array.isArray(v) ? v : null} catch {return null}}
+const is_ArrStg       = v =>{if (typeof v !== 'string' || !v.trim()) return null ; try {const v = JSON.parse(decodeURIComponent(v)) ; return isArr(v) ? v : null} catch {return null}}
 //*⛔🧩*/const ArrToObj =(arr,keys)=>Object.fromEntries(keys.map((k,i)=>[k,arr[i]])) // acho que REPETIDAS
 //*⛔🧩*/const zipObj   =(Key,Val )=>Object.fromEntries( Key.map((k,x)=>[k,Val[x]])) // Cria um obj a partir de dois array: um de chaves (keys) e outro de valores (values). // Exemplo: zipObj(['a','b'], [1,2]) => { a: 1, b: 2 }
 //*⛔🧩*/const UniqArry =(arr,chk)=>chk?arr.filter((e,x,eu)=>eu.findIndex(a=>a[0]===e[0])===x):Array.from(new Set(arr.map(JSON.stringify)),JSON.parse) // talvez repetido com Uniq()
@@ -278,7 +278,7 @@ const RmvInpt=(e,Call)=>FazArry(e).forEach(e=>e.removeEventListener('input' ,Cal
 const RmvClik=(e,Call)=>FazArry(e).forEach(e=>e.removeEventListener('click' ,Call))
 const Copy   =(area,stg)=>{area.value = stg ; area.select() ; document.execCommand('copy') ; console.log('Copiado')}
 const ClickFora=(e,Call)=>{const H=(E)=>!e.contains(E.target) && (Call(),RmvClik(document,H));EvtClik(document,H)}
-const OBS    =(e,Call,p=null)=>new MutationObserver(()=>Call()).observe(e,{attributes: true,attributeFilter: p && Array.isArray(p) ? p : undefined})
+const OBS    =(e,Call,p=null)=>new MutationObserver(()=>Call()).observe(e,{attributes: true,attributeFilter: p && isArr(p) ? p : undefined})
 
 //Funções Geradores____________________________________________________________________________________________________________
 const Rndn    =e=>Math.floor(Math.random()*e)
@@ -546,4 +546,4 @@ const TempoResta =d=> {
 const ClrObj    =obj=>Object.fromEntries(ObjKey(obj).map(k=>[k,''])) // Biblioteca
 const RmvExt    =e=>e.replace(/\.[^/.]+$/,'') // Biblioteca
 const safeS     =e=>encodeURIComponent(JSON.stringify(e)) // Biblioteca
-const ArrBolean = v =>Array.isArray(v) && v.length > 0 // Biblioteca
+const ArrBolean = v =>isArr(v) && v.length > 0 // Biblioteca
