@@ -180,7 +180,7 @@ const cRepet   =arr=>arr.reduce((acc,e)=>{acc[e]=(acc[e] || 0) + 1 ; return acc}
 const cRepetID =arr=>arr.reduce((acc,e)=>{const k=e.Id ; acc[k] = (acc[k] || 0) + 1 ; return acc;},{}) // Conta quantas vezes cada Id aparece no array de objetos
 const NULL__   =a=>a.map(o=>Object.fromEntries(ObjEtr(o).map(([k,v])=>[k,v??""])))
 const ContFreq =(Objs,k)=>Objs.reduce((a,e)=>(e[k]?.trim()&&(a[e[k].trim()]=(a[e[k].trim()]||0)+1),a),{}) // Contagem de frequência só recebe um array de Objetos
-const ArrtoOBJ =(arr,col)=>{return arr.reduce((acc, el) => {acc[el[col]] = el;return acc;}, {})}
+
 const NormlOBJ =(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if(isJSON(v)){try{v=JSON.parse(v)}catch{}};if(isArr(v)){(Colet[k] ??= []).push(...v)} obj[k] = v};return obj}
 const NormlOBJ2=(obj,Colet={})=>{for (const k in obj) {let v = obj[k] ?? "" ; if(isJSON(v)){try{v=JSON.parse(v)}catch{}};if(v&&typeof v=='object'&&!isArr(v))v=[v];if(isArr(v))(Colet[k]??=[]).push(...v);obj[k]=v}return obj}
 const CleanObj        = Obj=>{return Object.fromEntries(ObjEtr(Obj).filter(([_,v]) => v !== "" && v !== undefined && v !== null))}
