@@ -52,6 +52,7 @@ const SibQSl = (e,Q)=>[...e?.parentElement?.children || []].find(s=>s.matches(Q)
 const SibAll = e=>[...e?.parentElement?.children || []].filter(s=>s!==e)                    // Retorna todos os irmãos de 'e', exceto o próprio 'e'
 const Sib    = e=>$(e,Pai(event.target))
 
+
 // Ações DOM___________________________________________________________________________________________________________________
 const Onloads  =e=>{$$('[onload]',$(e)).forEach(E=>{const on=E.getAttribute('onload').replace(/this/g,`$(E)`);eval(on)})} // Pega todas '*' com Onload de uma Div especifica, e Roda o Onload de cada
 const Befor    =(e,Stg,Stg2)=>typeof Stg === 'string' ? $(e).insertAdjacentHTML('beforeend',Stg):$(e).insertBefore(Stg,$(Stg2,$(e)))
